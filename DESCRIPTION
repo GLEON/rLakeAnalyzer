@@ -1,0 +1,10 @@
+Package: rLakeAnalyzer
+Title: Package for analyzing physical indices of lakes
+Maintainer: Luke Winslow <lawinslow@wisc.edu>
+Version: 1.6.6
+Author:
+Description: 
+License: GPL (>= 2)
+Packaged: 2013-08-01 09:09:24 UTC; Luke
+Repository: CRAN
+Date/Publication: 2013-08-01 09:09:24
