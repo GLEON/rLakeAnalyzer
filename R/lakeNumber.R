@@ -25,6 +25,7 @@ lakeNumber <- function(bthA,bthD,uStar,St,metaT,metaB,averageHypoDense){
 	St_uC = St*Ao/g
 	# Calculates the Lake Number according to the formula provided
 	Ln = g*St_uC*(metaT+metaB)/(2*averageHypoDense*uStar^2*Ao^(3/2)*Zcv)
+	return(Ln)
 }
 
 # -- References:
