@@ -1,8 +1,8 @@
-# T is in 캜
+# T is in ?C
 # S is in Pratical Salinity Scale units (dimensionless)
 # waterDensity is in grams/Liter
 
-# <<--- Effective range of function: 0-40캜, 0.5-43 Salinity--->>
+# <<--- Effective range of function: 0-40?C, 0.5-43 Salinity--->>
 
 # -- Author: R. Iestyn. Woolway ----
 
@@ -13,7 +13,7 @@ waterDensity <- function(wtr,S){
 
   # If number of input arguments is equal to 1, assume salinity is 0.
   if (nargin == 1){
-   S <- temp*0  
+   S <- wtr*0  
   }
   
   
@@ -70,10 +70,10 @@ waterDensity <- function(wtr,S){
 }
 
 # -- References
-# 같 Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and Transport 같
-# 같 for Water Quality Modeling. Lewis Publications, Boca              같
-# 같 Raton, FL, 794pp. >>
+# ?? Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and Transport ??
+# ?? for Water Quality Modeling. Lewis Publications, Boca              ??
+# ?? Raton, FL, 794pp. >>
 #
-#같 Millero, F.J., Poisson, A., 1981. International one-atmosphere    같
-#같 equation of state of seawater. UNESCO Technical Papers in Marine  같
-#같 Science. No. 36. >>
+#?? Millero, F.J., Poisson, A., 1981. International one-atmosphere    ??
+#?? equation of state of seawater. UNESCO Technical Papers in Marine  ??
+#?? Science. No. 36. >>
