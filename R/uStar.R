@@ -10,7 +10,7 @@ uStar <- function(wndSpeed,wndHeight,averageEpiDense){
   rhoAir <- 1.2 # density of air
   vonK <- 0.4 # von Karman constant
 
-  # -- calculate drag coefficient (Hicks, 1972)
+  # -- calculate drag coefficient (from Hicks, 1972)
   if (wndSpeed < 5){
     Cd <- 0.001
   } else{
