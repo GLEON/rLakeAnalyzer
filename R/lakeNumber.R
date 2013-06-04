@@ -1,7 +1,7 @@
 #----Author: Jordan S Read 2009 ----
 #----converted to R 2013-04-21 ----
 
-lakeNumber <- function(bthA,bthD,uStar,St,metaT,metaB,averageHypoDense){
+lake.number <- function(bthA,bthD,uStar,St,metaT,metaB,averageHypoDense){
 	g	<-	9.81
 	dz	<-	0.1
 	# if bathymetry has negative values, remove.

@@ -1,8 +1,8 @@
 # ---Author: Jake Zwart, 2013-04-21 --- 
 #translated from Matlab Script - Author Jordan Read, 2009 
-## from layerDensity.m in https://github.com/jread-usgs/Lake-Analyzer/
+## from wedderburnNumber.m in https://github.com/jread-usgs/Lake-Analyzer/
 
-wedderburnNumber <- function(delta_rho,metaT,uSt,Ao,AvHyp_rho){
+wedderburn.number <- function(delta_rho,metaT,uSt,Ao,AvHyp_rho){
   
   # Calculates the Wedderburn number for a particular system using the following equation:
   #

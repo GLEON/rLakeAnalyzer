@@ -1,9 +1,9 @@
-\name{waterDensity}
-\alias{waterDensity}
+\name{water.density}
+\alias{water.density}
 \title{Estimate Water Density}
 \description{Density of water from temperature and salinity}
 \usage{
-waterDensity(wtr, sal)
+water.density(wtr, sal)
 }
 \arguments{
 \item{wtr}{ a numeric vector of water temperature in °C}

@@ -4,11 +4,10 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Translated from FindMetaBot.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-
-findMetaTopBot= function(wtr, thermoD, depths, slope){
+meta.depths = function(wtr, thermoD, depths, slope){
 	#require(stats)
 	 #We need water density, not temperature to do this
-	rhoVar = waterDensity(wtr)
+	rhoVar = water.density(wtr)
 
 	dRhoPerc = 0.15; #in percentage max for unique thermocline step
 	numDepths = length(depths);

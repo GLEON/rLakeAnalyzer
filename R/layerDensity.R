@@ -12,7 +12,7 @@
 #
 # OUTPUT: returns the average average water density of lake layer (i.e. average epilimnion density)
 
-layerDensity <- function(top,bottom,wtr,depths,bthA,bthD,sal){
+layer.density <- function(top,bottom,wtr,depths,bthA,bthD,sal){
   
   # find the number of input arguments
   nargin <- length(as.list(match.call())) -1  
@@ -73,7 +73,7 @@ layerDensity <- function(top,bottom,wtr,depths,bthA,bthD,sal){
   layerT <- approx(depths,wtr,layerD)$y
   layerS <- approx(depths,sal,layerD)$y
   layerA <- approx(bthD,bthA,layerD)$y
-  layerP <- waterDensity(layerT,layerS)
+  layerP <- water.density(layerT,layerS)
   
   mass <- layerA*layerP*dz
   aveDensity <- sum(mass)/(sum(layerA))/dz

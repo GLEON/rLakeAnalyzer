@@ -9,12 +9,11 @@
 #A0 = surface area
 #z = depth
 #zm = max. depth
-#zp = mean density - uses Richard's function waterDensity.R
+#zp = mean density - uses Richard's function water.density.R
 #pz = observed denisty at depth z
 #Az = area at depth z  
 
-#source('waterDensity.R')
-schmidtStability = function(wtr, depths, bthA, bthD, sal = wtr*0){
+schmidt.stability = function(wtr, depths, bthA, bthD, sal = wtr*0){
 
 if(length(wtr) != length(depths)){
 	stop('water temperature array must be the same length as the depth array')
@@ -71,7 +70,7 @@ if(Ao == 0){
 }
 
 #Calculate water density 
-rhoL = waterDensity(wtr, sal)
+rhoL = water.density(wtr, sal)
 
 #The approx (interp1 in matlab) just does linear interpolation
 layerD = seq(min(depths), max(depths), by=dz)

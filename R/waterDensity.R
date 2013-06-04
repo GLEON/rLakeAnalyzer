@@ -1,12 +1,12 @@
 # T is in ?C
 # S is in Pratical Salinity Scale units (dimensionless)
-# waterDensity is in grams/Liter
+# water.density is in grams/Liter
 
 # <<--- Effective range of function: 0-40?C, 0.5-43 Salinity--->>
 
 # -- Author: R. Iestyn. Woolway ----
 
-waterDensity <- function(wtr,sal){
+water.density <- function(wtr,sal){
   
   # find the number of input arguments
   nargin <- length(as.list(match.call())) -1  
@@ -62,7 +62,7 @@ waterDensity <- function(wtr,sal){
   if (MM == FALSE && UN == FALSE){
     rho <- wtr*0
     for (j in 1:length(rho)){
-      rho[j] <- waterDensity(wtr[j],sal[j])
+      rho[j] <- water.density(wtr[j],sal[j])
     }    
     dim(rho) <- dim(wtr) # ensure same dimension as input array 
   }  

@@ -1,3 +1,3 @@
 
-export(wedderburnNumber, layerDensity, lakeNumber, uStar, waterDensity, 
-       findThermoDepth, findMetaTopBot, schmidtStability)
+export(wedderburn.number, layer.density, lake.number, uStar, water.density, 
+       thermo.depth, meta.depths, schmidt.stability)
