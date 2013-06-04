@@ -76,31 +76,3 @@ findMetaTopBot= function(wtr, thermoD, depths, slope){
 }
 
 
-
-# Calculates water density with supplied temperature data
-# wtr is in degC
-# waterDensity is in grams/Liter
-
-# <<--- Effective range of function: 0-40캜 --->>
-
-# -- Author: R. Iestyn. Woolway ----
-# -- Modified by : Luke Winslow <lawinslow@gmail.com>
-
-waterDensity <- function(wtr){
-  
-  if(!is.numeric(wtr)){
-    stop("waterDensity input must be in numeric form (vector or matrix).")
-  }
-  
-  # calculate density
-  rho <- 1000*(1-(wtr+288.9414)*
-              (wtr-3.9863)^2/(508929.2*(wtr+68.12963)))
-  
-  # << equation provided by:
-  # 같 Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and Transport 같
-  # 같 for Water Quality Modeling. Lewis Publications, Boca              같
-  # 같 Raton, FL, 794pp. >>
-  
-  return(rho)
-  
-}
