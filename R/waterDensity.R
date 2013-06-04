@@ -6,14 +6,14 @@
 
 # -- Author: R. Iestyn. Woolway ----
 
-waterDensity <- function(wtr,S){
+waterDensity <- function(wtr,sal){
   
   # find the number of input arguments
   nargin <- length(as.list(match.call())) -1  
 
   # If number of input arguments is equal to 1, assume salinity is 0.
   if (nargin == 1){
-   S <- wtr*0  
+   sal <- wtr*0  
   }
   
   
@@ -28,9 +28,9 @@ waterDensity <- function(wtr,S){
   
   
   # check to see if all values lie within the ranges specified
-  if (isTRUE(all(S<Srng[1]))){
+  if (isTRUE(all(sal<Srng[1]))){
     MM <- TRUE # use Martin & McCutcheon
-    } else if(!(sum(wtr<Trng[1])||sum(wtr>Trng[2])) && !(sum(S<Srng[1]))||sum(S>Srng[2])){
+    } else if(!(sum(wtr<Trng[1])||sum(wtr>Trng[2])) && !(sum(sal<Srng[1]))||sum(sal>Srng[2])){
       UN <- TRUE # use UNESCO
     }
   
@@ -55,14 +55,14 @@ waterDensity <- function(wtr,S){
     C <- 4.8314*10^(-4)
     
     # -- equation 5:
-    rho <- rho_0 + A*S + B*S^(3/2) + C*S  
+    rho <- rho_0 + A*sal + B*sal^(3/2) + C*sal
   } 
   
   # if there is a combination of fresh and saline water we need to use a combination of MM and UN
   if (MM == FALSE && UN == FALSE){
     rho <- wtr*0
     for (j in 1:length(rho)){
-      rho[j] <- waterDensity(wtr[j],S[j])
+      rho[j] <- waterDensity(wtr[j],sal[j])
     }    
     dim(rho) <- dim(wtr) # ensure same dimension as input array 
   }  

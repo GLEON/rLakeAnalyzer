@@ -1,28 +1,30 @@
 \name{waterDensity}
 \alias{waterDensity}
-\title{Water Density}
+\title{Estimate Water Density}
 \description{Density of water from temperature and salinity}
 \usage{
-waterDensity(temp, ...)
-\method{waterDensity}{default}(temp, sal, ...)
+waterDensity(wtr, sal)
 }
 \arguments{
-\item{temp}{ a numeric design matrix for the model. }
-\item{sal}{ a numeric vector of responses. }
-\item{\dots}{ not used. }
+\item{wtr}{ a numeric vector of water temperature in °C}
+\item{sal}{ a numeric vector of salinity in Practical Salinity Scale units}
 }
 \value{
-An object of class \code{logreg}, basically a list including elements
-\item{coefficients}{ a named vector of coefficients }
-\item{vcov}{ covariance matrix of coefficients }
-\item{fitted.values}{ fitted values }
-\item{residuals}{ residuals }
+A numeric vector of water densities in kg/m^3.
 }
-\author{Friedrich Leisch}
+\author{
+R. Iestyn. Woolway, Luke Winslow
+}
 \examples{
-data(cats, package="MASS")
-mod1 <- linmod(Hwt~Bwt*Sex, data=cats)
-mod1
-summary(mod1)
+#Plot water density for water between 1 and 30 deg C
+dens = waterDensity(1:30)
+plot(1:30, dens, xlab="Temp(deg C)", ylab="Density(kg/m^3)")
 }
-\keyword{regression}
+
+\references{
+Martin, J.L., McCutcheon, S.C., 1999. \emph{Hydrodynamics and Transport for Water Quality Modeling.} Lewis Publications, Boca Raton, FL, 794pp.
+
+Millero, F.J., Poisson, A., 1981. \emph{International one-atmosphere equation of state of seawater.} UNESCO Technical Papers in Marine Science. No. 36.
+}
+
+\keyword{limnology}
