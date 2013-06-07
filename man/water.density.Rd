@@ -3,11 +3,14 @@
 \title{Estimate Water Density}
 \description{Density of water from temperature and salinity}
 \usage{
-water.density(wtr, sal)
+water.density(wtr, sal = wtr*0)
 }
 \arguments{
 \item{wtr}{ a numeric vector of water temperature in °C}
 \item{sal}{ a numeric vector of salinity in Practical Salinity Scale units}
+}
+\details{
+
 }
 \value{
 A numeric vector of water densities in kg/m^3.
