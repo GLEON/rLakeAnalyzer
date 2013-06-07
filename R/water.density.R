@@ -8,6 +8,10 @@
 
 water.density <- function(wtr, sal = wtr*0){
   
+  if(length(wtr) != length(sal)){
+    stop('water temperature array must be the same length as the salinity array')
+  }
+  
   # Determine which method we want to use, initially set both methods to false
   MM = FALSE; # Martin & McCutcheon
   UN = FALSE; # UNESCO
