@@ -6,16 +6,7 @@
 
 # -- Author: R. Iestyn. Woolway ----
 
-water.density <- function(wtr,sal){
-  
-  # find the number of input arguments
-  nargin <- length(as.list(match.call())) -1  
-
-  # If number of input arguments is equal to 1, assume salinity is 0.
-  if (nargin == 1){
-   sal <- wtr*0  
-  }
-  
+water.density <- function(wtr, sal = wtr*0){
   
   # Determine which method we want to use, initially set both methods to false
   MM = FALSE; # Martin & McCutcheon
@@ -28,11 +19,11 @@ water.density <- function(wtr,sal){
   
   
   # check to see if all values lie within the ranges specified
-  if (isTRUE(all(sal<Srng[1]))){
+  if ( all(sal < Srng[1]) ){
     MM <- TRUE # use Martin & McCutcheon
-    } else if(!(sum(wtr<Trng[1])||sum(wtr>Trng[2])) && !(sum(sal<Srng[1]))||sum(sal>Srng[2])){
-      UN <- TRUE # use UNESCO
-    }
+  }else if (!(sum(wtr<Trng[1]) || sum(wtr>Trng[2])) && !(sum(sal<Srng[1])) || sum(sal>Srng[2])){
+    UN <- TRUE # use UNESCO
+  }
   
   
   # if MM is true we use method of Martin and McCutcheon (1999)
