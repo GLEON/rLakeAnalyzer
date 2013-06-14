@@ -1,76 +1,45 @@
 \name{uStar}
 \alias{uStar}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Calculates uStar from wind speed and epilimnion density.
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Calculates the water friction velocity, uStar}
+\description{uStar is the water friction velocity due to wind stress at the lake surface, it is calculated following the methods of Imberger (1985) as a function of the shear stress of air (Fischer et al., 1979), drag coefficient for momentum (Hicks, 1972), and a dimensionless constant (von Karman constant) that decribes the logarithmic velocity profile at the air-water interface}
 \usage{
 uStar(wndSpeed, wndHeight, averageEpiDense)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{wndSpeed}{
-%%     ~~Describe \code{wndSpeed} here~~
-}
-  \item{wndHeight}{
-%%     ~~Describe \code{wndHeight} here~~
-}
-  \item{averageEpiDense}{
-%%     ~~Describe \code{averageEpiDense} here~~
-}
+  \item{wndSpeed}{a numeric vector of wind speed in m s-1}
+  \item{wndHeight}{a numeric vector of wind measurement height in m}
+  \item{averageEpiDense}{a numeric vector of epilimnion density in kg m-3}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
+\value{a numeric vector of uStar}
 \references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+  
+  Hicks, B.B., 1972. \emph{A procedure for the formulation of bulk transfer coefficients over water bodies of different sizes}. Boundary-Layer Meterology 3: 201-213.
+  
+  Amorocho, J., DeVries, J.J., 1980. \emph{A new evaluation of the wind stress coefficient over water surfaces}. Journal of Geophysical Research 85: 433-442.
+  
+  Fischer, H.B., List, E.J., Koh, R.C.Y., Imberger, J., Brooks, N.H., 1979. \emph{Mixing in inland and coastal waters}. Academic Press.
+  
+  Imberger, J., 1985. \emph{The diurnal mixed layer}. Limnology and Oceanography 30: 737-770.
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\author{R. Iestyn. Woolway}
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+\seealso{layer.density}
+
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (wndSpeed, wndHeight, averageEpiDense) 
-{
-    rhoAir <- 1.2
-    vonK <- 0.4
-    if (wndSpeed < 5) {
-        Cd <- 0.001
-    }
-    else {
-        Cd <- 0.0015
-    }
-    if (wndHeight != 10) {
-        wndSpeed <- wndSpeed/(1 - sqrt(Cd)/vonK * log(10/wndHeight))
-    }
-    tau <- Cd * rhoAir * wndSpeed^2
-    uStar <- sqrt(tau/averageEpiDense)
-  }
+  wndSpeed  <- c(5.1,6.3,6.3,5.2,7,7.2)
+  wndHeight	<-	2
+  averageEpiDense	<- c(14,15,14.2,13,12,12)
+
+  cat('uStar for input vector is: ')
+  cat(uStar(wndSpeed,wndHeight,averageEpiDense))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+\keyword{uStar}
+\keyword{friction}
