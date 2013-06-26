@@ -1,11 +1,13 @@
 \name{thermo.depth}
 \alias{thermo.depth}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Returns the depth of the thermocline from a temperature profile.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This function calculates the location of the thermocline from a temperature profile. 
+It uses a special technique to estimate where the thermocline lies even between two temperature measurement depths, 
+giving a potentially finer-scale estimate than usual techniques.
 }
 \usage{
 thermo.depth(wtr, depths, Smin = 0.1)
@@ -13,30 +15,26 @@ thermo.depth(wtr, depths, Smin = 0.1)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{wtr}{
-%%     ~~Describe \code{wtr} here~~
+Numeric vector of water temperature in °C
 }
   \item{depths}{
-%%     ~~Describe \code{depths} here~~
+Numeric vector of depths. Must be the same length as the wtr parameter
 }
   \item{Smin}{
-%%     ~~Describe \code{Smin} here~~
+Optional paramter defining minimum density gradient for thermocline
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Depth of thermocline. If no thermocline found, value is max(depths).
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Luke Winslow
 }
 \note{
 %%  ~~further notes~~
@@ -45,7 +43,7 @@ thermo.depth(wtr, depths, Smin = 0.1)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{water.density}
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

@@ -4,23 +4,30 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Translated from FindMetaBot.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-meta.depths = function(wtr, thermoD, depths, slope){
-	#require(stats)
+meta.depths = function(wtr, depths, slope=0.1){
+  
+  if(any(is.na(wtr))){
+    return(rep(NaN, 2))
+  }
+  
+  thermoD=thermo.depth(wtr, depths, seasonal=TRUE)
+  
 	 #We need water density, not temperature to do this
 	rhoVar = water.density(wtr)
 
 	dRhoPerc = 0.15; #in percentage max for unique thermocline step
-	numDepths = length(depths);
-	drho_dz = vector(mode="double", length=numDepths-1);
+	numDepths = length(depths)
+	drho_dz = vector(mode="double", length=numDepths-1)
 
 	#Calculate the first derivative of density
 	for(i in 1:numDepths-1){
-		drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] );
+		drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] )
 	}
 	
 	#initiate metalimnion bottom as last depth, this is returned if we can't
 	# find a bottom
-	metaBot_depth = depths[numDepths]; 
+	metaBot_depth = depths[numDepths]
+  metaTop_depth = 0
 	Tdepth = vector(mode="double", length=numDepths-1)*NaN
 	
 	for(i in 1:numDepths-1){
@@ -71,7 +78,7 @@ meta.depths = function(wtr, thermoD, depths, slope){
 		metaTop_depth = metaTop_depth$y
 	}
 	
-	list(botDepth = metaBot_depth, topDepth = metaTop_depth)
+	return(c(metaTop_depth, metaBot_depth))
 }
 
 

@@ -5,9 +5,13 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Adapted from FindThermoDepth.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-thermo.depth <- function(wtr, depths, Smin = 0.1){
+thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE){
   #argh, data structures in R!
   #lets just do this the hard way to start.
+  
+  if(any(is.na(wtr))){
+    return(NaN)
+  }
   
   #We need water density, not temperature to do this
   rhoVar = water.density(wtr)
@@ -18,7 +22,7 @@ thermo.depth <- function(wtr, depths, Smin = 0.1){
   
   #Calculate the first derivative of density
   for(i in 1:numDepths-1){
-	drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] );
+	  drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] );
   }
   
   #look for two distinct maximum slopes, lower one assumed to be seasonal
@@ -27,17 +31,17 @@ thermo.depth <- function(wtr, depths, Smin = 0.1){
   thermoD = mean( depths[thermoInd:(thermoInd+1)] )
   
   if(thermoInd > 1 && thermoInd < numDepths-1){  #if within range
-	Sdn = -(depths[thermoInd+1] - depths[thermoInd])/
-		(drho_dz[thermoInd+1] - drho_dz[thermoInd])
-		
-	Sup = (depths[thermoInd]-depths[thermoInd-1])/
-		(drho_dz[thermoInd]-drho_dz[thermoInd-1])
-		
-	upD  = depths[thermoInd];
-	dnD  = depths[thermoInd+1];
-	if( !is.infinite(Sup) & !is.infinite(Sdn) ){
-		thermoD = dnD*(Sdn/(Sdn+Sup))+upD*(Sup/(Sdn+Sup));
-	}
+		Sdn = -(depths[thermoInd+1] - depths[thermoInd])/
+  		(drho_dz[thermoInd+1] - drho_dz[thermoInd])
+  		
+		Sup = (depths[thermoInd]-depths[thermoInd-1])/
+ 			(drho_dz[thermoInd]-drho_dz[thermoInd-1])
+  		
+  	upD  = depths[thermoInd];
+  	dnD  = depths[thermoInd+1];
+  	if( !is.infinite(Sup) & !is.infinite(Sdn) ){
+  		thermoD = dnD*(Sdn/(Sdn+Sup))+upD*(Sup/(Sdn+Sup));
+  	}
   }
   
   dRhoCut = max( c(dRhoPerc*mDrhoZ, Smin) )
@@ -58,8 +62,8 @@ thermo.depth <- function(wtr, depths, Smin = 0.1){
 				Sdn = -(depths[SthermoInd+1] - depths[SthermoInd])/
 					(drho_dz[SthermoInd+1] - drho_dz[SthermoInd])
 					
-				Sup = (depths[SthermoInd]-depths[SthermoInd-1])/
-					(drho_dz[SthermoInd]-drho_dz[SthermoInd-1])
+				Sup = (depths[SthermoInd] - depths[SthermoInd-1])/
+					(drho_dz[SthermoInd] - drho_dz[SthermoInd-1])
 					
 				upD  = depths[SthermoInd]
 				dnD  = depths[SthermoInd+1]
@@ -75,11 +79,16 @@ thermo.depth <- function(wtr, depths, Smin = 0.1){
 	}
   
   if(SthermoD < thermoD){
-	SthermoD = thermoD
-	SthermoInd = thermoInd
+	  SthermoD = thermoD
+	  SthermoInd = thermoInd
+  }
+  if(seasonal){
+    return(SthermoD)
+  }else{
+    return(thermoD)
   }
   
-  list( thermoD,thermoInd,drho_dz,SthermoD,SthermoInd )
+  #list( thermoD, thermoInd, drho_dz, SthermoD, SthermoInd )
 }
 
 # Finds the local peaks in a vector. Checks the optionally supplied threshold 
