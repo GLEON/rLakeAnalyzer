@@ -1,4 +1,4 @@
-Lake-Analyzer-R
+rLakeAnalyzer
 ===============
 
 An R version of Lake Analyzer
