@@ -12,22 +12,14 @@
 #
 # OUTPUT: returns the average average water density of lake layer (i.e. average epilimnion density)
 
-layer.density <- function(top,bottom,wtr,depths,bthA,bthD,sal){
-  
-  # find the number of input arguments
-  nargin <- length(as.list(match.call())) -1  
-  
-  # If number of input arguments is equal to 6, assume salinity is 0.
-  if (nargin<7){
-    sal <- wtr*0
-  }
+layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
   
   # checking input quality 
   if(top>bottom){
     stop('bottom depth must be greater than top')
   }else if(length(wtr)!=length(depths)){
     stop('water temperature vector must be same length as depth vector')
-  }else if(nargin<4){
+  }else if(length(as.list(match.call()))<4){
     stop('not enough input arguments')
   }else if(any(is.na(wtr),is.na(depths),is.na(bthA),is.na(bthD))){
     stop('input arguments must be numbers')

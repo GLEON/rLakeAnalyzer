@@ -2,7 +2,7 @@
 \alias{thermo.depth}
 
 \title{
-Returns the depth of the thermocline from a temperature profile.
+Calculate depth of the thermocline from a temperature profile.
 }
 \description{
 This function calculates the location of the thermocline from a temperature profile. 
@@ -10,7 +10,7 @@ It uses a special technique to estimate where the thermocline lies even between 
 giving a potentially finer-scale estimate than usual techniques.
 }
 \usage{
-thermo.depth(wtr, depths, Smin = 0.1)
+thermo.depth(wtr, depths, Smin = 0.1, seasonal=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,6 +22,10 @@ Numeric vector of depths. Must be the same length as the wtr parameter
 }
   \item{Smin}{
 Optional paramter defining minimum density gradient for thermocline
+}
+  \item{seasonal}{
+a logical value indicating whether the seasonal thermocline should be returned. The seasonal thermocline 
+is defined as the deepest density gradient found in the profile. If FALSE, the depth of the maximum density gradient is returned.
 }
 }
 \details{
@@ -50,69 +54,14 @@ Luke Winslow
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (wtr, depths, Smin = 0.1) 
-{
-    rhoVar = water.density(wtr)
-    dRhoPerc = 0.15
-    numDepths = length(depths)
-    drho_dz = vector(mode = "double", length = numDepths - 1)
-    for (i in 1:numDepths - 1) {
-        drho_dz[i] = (rhoVar[i + 1] - rhoVar[i])/(depths[i + 
-            1] - depths[i])
-    }
-    thermoInd = which.max(drho_dz)
-    mDrhoZ = drho_dz[thermoInd]
-    thermoD = mean(depths[thermoInd:(thermoInd + 1)])
-    if (thermoInd > 1 && thermoInd < numDepths - 1) {
-        Sdn = -(depths[thermoInd + 1] - depths[thermoInd])/(drho_dz[thermoInd + 
-            1] - drho_dz[thermoInd])
-        Sup = (depths[thermoInd] - depths[thermoInd - 1])/(drho_dz[thermoInd] - 
-            drho_dz[thermoInd - 1])
-        upD = depths[thermoInd]
-        dnD = depths[thermoInd + 1]
-        if (!is.infinite(Sup) & !is.infinite(Sdn)) {
-            thermoD = dnD * (Sdn/(Sdn + Sup)) + upD * (Sup/(Sdn + 
-                Sup))
-        }
-    }
-    dRhoCut = max(c(dRhoPerc * mDrhoZ, Smin))
-    locs = findPeaks(drho_dz, dRhoCut)
-    pks = drho_dz[locs]
-    if (length(pks) == 0) {
-        SthermoD = thermoD
-        SthermoInd = thermoInd
-    }
-    else {
-        mDrhoZ = pks[length(pks)]
-        SthermoInd = locs[length(pks)]
-        if (SthermoInd > thermoInd + 1) {
-            SthermoD = mean(depths[SthermoInd:(SthermoInd + 1)])
-            if (SthermoInd > 1 && SthermoInd < numDepths - 1) {
-                Sdn = -(depths[SthermoInd + 1] - depths[SthermoInd])/(drho_dz[SthermoInd + 
-                  1] - drho_dz[SthermoInd])
-                Sup = (depths[SthermoInd] - depths[SthermoInd - 
-                  1])/(drho_dz[SthermoInd] - drho_dz[SthermoInd - 
-                  1])
-                upD = depths[SthermoInd]
-                dnD = depths[SthermoInd + 1]
-                if (!is.infinite(Sup) & !is.infinite(Sdn)) {
-                  SthermoD = dnD * (Sdn/(Sdn + Sup)) + upD * 
-                    (Sup/(Sdn + Sup))
-                }
-            }
-        }
-        else {
-            SthermoD = thermoD
-            SthermoInd = thermoInd
-        }
-    }
-    if (SthermoD < thermoD) {
-        SthermoD = thermoD
-        SthermoInd = thermoInd
-    }
-    list(thermoD, thermoInd, drho_dz, SthermoD, SthermoInd)
-  }
+wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+		15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+		
+depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+
+t.d = thermo.depth(wtr, depths, seasonal=FALSE)
+cat('The thermocline depth is:', t.d)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -4,29 +4,18 @@
 \title{
 Calculates Wedderburn Number for a lake.
 }
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\description{ Wedderburn Number is a dimensionless parameter measuring the effect of wind stress 
+on the lake surface. }
 \usage{
 wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{delta_rho}{
-%%     ~~Describe \code{delta_rho} here~~
-}
-  \item{metaT}{
-%%     ~~Describe \code{metaT} here~~
-}
-  \item{uSt}{
-%%     ~~Describe \code{uSt} here~~
-}
-  \item{Ao}{
-%%     ~~Describe \code{Ao} here~~
-}
-  \item{AvHyp_rho}{
-%%     ~~Describe \code{AvHyp_rho} here~~
-}
+  \item{delta_rho}{ Numeric value for the water density difference between the epilimnion and hypolimnion (kg/m^3)}
+  \item{metaT}{ Numeric value for the thickness of the water body's surface layer (m)}
+  \item{uSt}{ Numeric value for the water friction velocity due to wind stress (m/s)}
+  \item{Ao}{ Numeric value for the water body surface area (m^2) at zero meters depth}
+  \item{AvHyp_rho}{ Numeric value for the average water density of the hypolimnion layer (kg/m^3)}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -41,9 +30,7 @@ wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 \references{
 %% ~put references to the literature/web site here ~
 }
-\author{
-%%  ~~who you are~~
-}
+\author{ Jake Zwart}
 \note{
 %%  ~~further notes~~
 }
@@ -58,15 +45,6 @@ wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (delta_rho, metaT, uSt, Ao, AvHyp_rho) 
-{
-    g = 9.81
-    Lo = 2 * sqrt(Ao/pi)
-    go = g * delta_rho/AvHyp_rho
-    W = go * metaT^2/(uSt^2 * Lo)
-    return(W)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

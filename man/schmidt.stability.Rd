@@ -1,5 +1,5 @@
 \name{schmidt.stability}
-\alias{schmidt.stability}
+\alias{schmidt.stability}	
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Calculate the Schmidt stability}
 \description{Schmidt stability, or the resistance to mechanical mixing due to the potential energy inherent in the stratification of the water column.
@@ -11,14 +11,14 @@ schmidt.stability(wtr, depths, bthA, bthD, sal = wtr * 0)
 \arguments{
   \item{wtr}{ a numeric vector of water temperature in °C}
   \item{depths}{ a numeric vector corresponding to the depths (in m) of the wtr measurements}
-  \item{bthA}{ a numeric vector of cross sectional areas (m2) corresponding to bthD depths}
+  \item{bthA}{ a numeric vector of cross sectional areas (m^2) corresponding to bthD depths}
   \item{bthD}{ a numeric vector of depths (m) which correspond to areal measures in bthA}
   \item{sal}{ a numeric vector of salinity in Practical Salinity Scale units}
 }
 \details{
 Schmidt stability was first defined by Schmidt (1928) and later modified by Hutchinson (1957). This stability index was formalized by Idso (1973) to reduce the effects of lake volume on the calculation (resulting in a mixing energy requirement per unit area).
 }
-\value{ a numeric vector of Schmidt stability (J/m2)}
+\value{ a numeric vector of Schmidt stability (J/m^2)}
 \references{
 Schmidt, W., 1928. \emph{Über Temperatur and Stabilitätsverhaltnisse von Seen}. Geo- graphiska Annaler 10, 145-177.
 

@@ -9,18 +9,21 @@ lake.number(bthA, bthD, uStar, St, metaT, metaB, averageHypoDense)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{bthA}{ a numeric vector of cross sectional areas (m2) corresponding to bthD depths}
-  \item{bthD}{ a numeric vector of depths (m) which correspond to areal measures in bthA}
+  \item{bthA}{ a numeric vector of cross sectional areas (m2) corresponding to bthD depths, hypsographic areas}
+  \item{bthD}{ a numeric vector of depths (m) which correspond to areal measures in bthA, hypsographic depths}
   \item{uStar}{ a numeric array of u* (m/s), water friction velocity due to wind stress}
   \item{St}{ a numeric array of Schmidt stability (J/m2), as defined by Idso 1973}
   \item{metaT}{ a numeric array of the top of the metalimnion depth (m from the surface)}
   \item{metaB}{ a numeric array of the bottom of the metalimnion depth (m from the surface)}
   \item{averageHypoDense}{ a numeric array of the average density of the hypolimnion (kg/m3)}
 }
-\details{Lake Number has been used, for example, to estimate the flux of oxygen across the thermocline in a small lake (Robertson and Imberger, 1994), and to explain the magnitude of the vertical flux of ammonium in a lake (Romero et al., 1998).}
+\details{
+Lake Number has been used, for example, to estimate the flux of oxygen across the thermocline in a small lake (Robertson and Imberger, 1994), and to explain the magnitude of the vertical flux of ammonium in a lake (Romero et al., 1998).
+}
 \value{
 A numeric vector of Lake Number [dimensionless]
 }
+
 \references{Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}. Advances in Applied
 Mechanics 27, 303-475.
 

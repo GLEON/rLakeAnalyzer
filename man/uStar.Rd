@@ -29,7 +29,7 @@ uStar(wndSpeed, wndHeight, averageEpiDense)
 
 \author{R. Iestyn. Woolway}
 
-\seealso{layer.density}
+\seealso{\code{layer.density}}
 
 \examples{
 

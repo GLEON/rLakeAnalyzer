@@ -4,14 +4,14 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Translated from FindMetaBot.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-meta.depths = function(wtr, depths, slope=0.1){
+meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
   
-  if(any(is.na(wtr))){
-    return(rep(NaN, 2))
-  }
-  
-  thermoD=thermo.depth(wtr, depths, seasonal=TRUE)
-  
+	if(any(is.na(wtr))){
+		return(rep(NaN, 2))
+	}
+	
+	thermoD=thermo.depth(wtr, depths, seasonal=seasonal)
+	
 	 #We need water density, not temperature to do this
 	rhoVar = water.density(wtr)
 
@@ -27,7 +27,7 @@ meta.depths = function(wtr, depths, slope=0.1){
 	#initiate metalimnion bottom as last depth, this is returned if we can't
 	# find a bottom
 	metaBot_depth = depths[numDepths]
-  metaTop_depth = 0
+	metaTop_depth = 0
 	Tdepth = vector(mode="double", length=numDepths-1)*NaN
 	
 	for(i in 1:numDepths-1){

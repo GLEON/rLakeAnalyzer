@@ -2,44 +2,48 @@
 \alias{meta.depths}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Calculates the top and bottom depth of the metalimnion.
+Calculate the Top and Bottom Depths of the Metalimnion
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Calculates the top and bottom depths of the metalimnion in a stratified lake. The metalimnion is defined as the water stratum in a stratified lake with the steepest thermal gradient and is demarcated by the bottom of the epilimnion and top of the hypolimnion.
 }
 \usage{
-meta.depths(wtr, thermoD, depths, slope)
+	meta.depths(wtr, depths, slope=0.1, seasonal=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{wtr}{
-%%     ~~Describe \code{wtr} here~~
-}
-  \item{thermoD}{
-%%     ~~Describe \code{thermoD} here~~
-}
-  \item{depths}{
-%%     ~~Describe \code{depths} here~~
-}
-  \item{slope}{
-%%     ~~Describe \code{slope} here~~
-}
-}
+	  \item{wtr}{
+	a numeric vector of water temperature in °C
+	}
+	  \item{depths}{
+	a numeric vector corresponding to the depths (in m) of the wtr measurements
+	}
+	  \item{slope}{
+	a numeric vector corresponding to the minimum slope
+	}
+	  \item{seasonal}{
+	a logical value indicating whether the seasonal thermocline should be returned. This is fed to thermo.depth, which is used as the starting point. The seasonal thermocline is defined as the deepest density gradient found in the profile. If FALSE, the depth of the maximum density gradient is used as the starting point
+	}
+} %/arguments
+
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
+A numeric vector of the top and bottom metalimnion depths in meters
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-}
+} %details
+
 \references{
+Wetzel, R. G. 2001. Limnology: Lake and River Ecosystems, 3rd ed. Academic Press.
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Jennifer Brentrup, Luke Winslow
 }
 \note{
 %%  ~~further notes~~
@@ -48,72 +52,24 @@ meta.depths(wtr, thermoD, depths, slope)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+schmidt.stability, lake.number, wedderburn.number, thermo.depth
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+		15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+		
+depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
 
-## The function is currently defined as
-function (wtr, thermoD, depths, slope) 
-{
-    rhoVar = water.density(wtr)
-    dRhoPerc = 0.15
-    numDepths = length(depths)
-    drho_dz = vector(mode = "double", length = numDepths - 1)
-    for (i in 1:numDepths - 1) {
-        drho_dz[i] = (rhoVar[i + 1] - rhoVar[i])/(depths[i + 
-            1] - depths[i])
-    }
-    metaBot_depth = depths[numDepths]
-    Tdepth = vector(mode = "double", length = numDepths - 1) * 
-        NaN
-    for (i in 1:numDepths - 1) {
-        Tdepth[i] = mean(depths[i:(i + 1)])
-    }
-    tmp = sort.int(c(Tdepth, thermoD + 1e-06), index.return = TRUE)
-    sortDepth = tmp$x
-    sortInd = tmp$ix
-    drho_dz = approx(Tdepth, drho_dz, sortDepth)
-    drho_dz = drho_dz$y
-    thermo_index = 1
-    thermoId = numDepths
-    for (i in 1:numDepths) {
-        if (thermoId == sortInd[i]) {
-            thermo_index = i
-            break
-        }
-    }
-    for (i in thermo_index:numDepths) {
-        if (drho_dz[i] < slope) {
-            metaBot_depth = sortDepth[i]
-            break
-        }
-    }
-    if (i - thermo_index > 1 && drho_dz[thermo_index] > slope) {
-        metaBot_depth = approx(drho_dz[thermo_index:i], sortDepth[thermo_index:i], 
-            slope)
-        metaBot_depth = metaBot_depth$y
-    }
-    if (is.na(metaBot_depth)) {
-        metaBot_depth = depths[numDepths]
-    }
-    for (i in seq(thermo_index, 1)) {
-        if (drho_dz[i] < slope) {
-            metaTop_depth = sortDepth[i]
-            break
-        }
-    }
-    if (thermo_index - i > 1 && drho_dz[thermo_index] > slope) {
-        metaTop_depth = approx(drho_dz[i:thermo_index], sortDepth[i:thermo_index], 
-            slope)
-        metaTop_depth = metaTop_depth$y
-    }
-    list(botDepth = metaBot_depth, topDepth = metaTop_depth)
-  }
+m.d = meta.depths(wtr, depths, slope=0.1, seasonal=FALSE)
+cat('The top depth of the metalimnion is:', m.d[1])
+cat('The bottom depth of the metalimnion is:', m.d[2])
+
+
+
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{limnology}
+\keyword{thermocline}% __ONLY ONE__ keyword per line
