@@ -34,12 +34,37 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE){
       next
     }
     #thermo.depth <- function(wtr, depths, Smin = 0.1){\
-    t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal)
+    t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal)
   }
 
   output = data.frame(datetime=wtr$datetime, thermo.depth=t.d)
   
   return(output)
+}
+
+ts.schmidt.stability <- function(wtr, bathy){
+	
+	depths = get.offsets(wtr)
+	
+	n = nrow(wtr)
+	s.s = rep(NA, n)
+	
+	wtr.mat = as.matrix(wtr[,-1])
+	dimnames(wtr.mat) <- NULL
+	
+	for(i in 1:n){
+		if(any(is.na(wtr.mat[i,]))){
+			s.s[i] = NA
+			next
+		}
+		#thermo.depth <- function(wtr, depths, Smin = 0.1){\
+		s.s[i] = schmidt.stability(wtr.mat[i,], depths, bathy$areas, bathy$depths)
+	}
+	
+	output = data.frame(datetime=wtr$datetime, schmidt.stability=s.s)
+	
+	return(output)
+	
 }
 
 
