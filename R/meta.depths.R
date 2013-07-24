@@ -28,7 +28,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 	# find a bottom
 	metaBot_depth = depths[numDepths]
 	metaTop_depth = 0
-	Tdepth = vector(mode="double", length=numDepths-1)*NaN
+	Tdepth = rep(NaN, numDepths-1)
 	
 	for(i in 1:numDepths-1){
 		Tdepth[i] = mean(depths[ i:(i+1) ]);
@@ -50,7 +50,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 	}
 	
 	for (i in thermo_index:numDepths){ # moving down from thermocline index
-		if (drho_dz[i] < slope){ #top of metalimnion
+		if (!is.na(drho_dz[i]) && drho_dz[i] < slope){ #top of metalimnion
 			metaBot_depth = sortDepth[i];
 			break
 		}
@@ -67,7 +67,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 	}
 	
 	for(i in seq(thermo_index,1)){
-		if(drho_dz[i] < slope){
+		if(!is.na(drho_dz[i]) && drho_dz[i] < slope){
 			metaTop_depth = sortDepth[i];
 			break;
 		}
