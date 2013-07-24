@@ -2,7 +2,15 @@
 
 load.bathy <- function(fPath){
   
-  d = read.table(fPath, sep=c('\t', ','), header=TRUE)
+  d = read.table(fPath, sep=c(','), header=TRUE)
+  if(ncol(d) < 2){
+  	d = read.table(fPath, sep=c('\t'), header=TRUE)
+  }
+  
+  if(ncol(d) < 2){
+  	stop('Error loading bathymetry file, check that it is a tab delimited file two columns.')
+  }
+  
   headNames = tolower(names(d))
   #names(d) = tolower(d)
   
