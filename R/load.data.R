@@ -2,11 +2,12 @@
 
 load.bathy <- function(fPath){
   
-  d = read.table(fPath, sep='\t', header=TRUE)
-  names(d) = tolower(d)
+  d = read.table(fPath, sep=c('\t', ','), header=TRUE)
+  headNames = tolower(names(d))
+  #names(d) = tolower(d)
   
-  dI = grep("depths", names(d))
-  aI = grep("areas", names(d))
+  dI = grep("depths", headNames)
+  aI = grep("areas", headNames)
   
   if(length(aI) < 1 || length(dI) < 1){
     stop('Bathymetry header must be labeled with "areas" and "depths".')
