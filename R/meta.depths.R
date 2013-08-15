@@ -10,6 +10,10 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 		return(rep(NaN, 2))
 	}
 	
+	depths = sort.int(depths, index.return=TRUE)
+  wtr = wtr[depths$ix]
+  depths = depths$x
+  
 	thermoD=thermo.depth(wtr, depths, seasonal=seasonal)
 	
 	 #We need water density, not temperature to do this
@@ -63,7 +67,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 	}
 	
 	if(is.na(metaBot_depth)){
-		metaBot_depth = max(depths)
+		metaBot_depth = depths[numDepths]
 	}
 	
 	for(i in seq(thermo_index,1)){
@@ -79,7 +83,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 	}
 	
   if(is.na(metaTop_depth)){
-    metaTop_depth = min(depths)
+    metaTop_depth = depths[i]
   }
   
 	return(c(metaTop_depth, metaBot_depth))
