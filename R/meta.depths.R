@@ -63,7 +63,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 	}
 	
 	if(is.na(metaBot_depth)){
-		metaBot_depth = depths[numDepths]
+		metaBot_depth = max(depths)
 	}
 	
 	for(i in seq(thermo_index,1)){
@@ -78,6 +78,10 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
 		metaTop_depth = metaTop_depth$y
 	}
 	
+  if(is.na(metaTop_depth)){
+    metaTop_depth = min(depths)
+  }
+  
 	return(c(metaTop_depth, metaBot_depth))
 }
 
