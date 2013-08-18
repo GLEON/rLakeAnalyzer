@@ -2,53 +2,49 @@
 \alias{load.ts}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+  Load time series data
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Loads tab delimited time series data file into R session. DateTime information must be provided in first column with the corresponding data in the remaining columns. 
 }
 \usage{
-load.ts(fPath)
+  load.ts(fPath)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fPath}{
-%%     ~~Describe \code{fPath} here~~
-}
+    User provides the file path (fPath) where the data file is stored
+  }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ 
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  data.frame of DateTime and corresponding data for given lake. 
 }
 \references{
-%% ~put references to the literature/web site here ~
+  %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+  %%  ~~who you are~~
 }
 \note{
-%%  ~~further notes~~
+  %%  ~~further notes~~
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+  
+  \seealso{
+    %% ~~objects to See Also as \code{\link{help}}, ~~~
+  }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (fPath) 
-{
+  
+  fPath <- "Sparkling.wtr"
+  load.bathy(fPath)
+  
+  ## The function is currently defined as
+  function (fPath) 
+  {
     d = read.table(fPath, sep = "\t", header = TRUE)
     names(d) = tolower(names(d))
     d$datetime = as.POSIXct(d$datetime)
@@ -57,5 +53,4 @@ function (fPath)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{time_series}
