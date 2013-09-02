@@ -35,6 +35,9 @@ load.ts <- function(fPath){
   #Just standardize all headers as lowercase
   names(d) = tolower(names(d))
   
+  if( !any('datetime' %in% names(d)) ){
+    stop('Timeseries file must be tab delimited and contain a column labeled \'datetime\'');
+  }
   #convert column to a real date/time format
   d$datetime = as.POSIXct(d$datetime)
   
