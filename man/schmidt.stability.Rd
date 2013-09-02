@@ -46,6 +46,5 @@ Luke Winslow
 	cat(schmidt.stability(wtr, depths, bthA, bthD))
 }
 
-\keyword{stability}
-\keyword{Schmidt}
-\keyword{Idso}
+\keyword{arith}
+

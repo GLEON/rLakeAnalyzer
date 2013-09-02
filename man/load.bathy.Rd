@@ -5,7 +5,9 @@
   Import lake bathmynetry data.
 }
 \description{
-  Imports lake bathymetry data. Bathymetric data file must be a 2 column array where depth and area information are provided in column 1 and 2 respectively.
+  Imports lake bathymetry data. Bathymetric data file must be a 2 column array 
+  where depth (in meters) and area (in meters^2) information are provided in columns 
+  with headers containing the words "depth" and "area" respectively.
 }
 \usage{
   load.bathy(fPath)
@@ -13,14 +15,14 @@
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fPath}{
-    User provides the file path (fPath) where the bathymetric data file is stored
+    File path to the bathymetry file.
   }
 }
 \details{
-  %%  ~~ If necessary, more details than the description above ~~
+  
 }
 \value{
-  data.frame of depth and area for given lake. 
+  data.frame of depth and area for given lake.
 }
 \references{
   %% ~put references to the literature/web site here ~
@@ -28,42 +30,24 @@
 \author{
   Luke Winslow
 }
-\note{
-  %%  ~~further notes~~
-}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
   
   \seealso{
-    load.ts
-    %% ~~objects to See Also as \code{\link{help}}, ~~~
+    \code{\link{load.ts}}
+    
   }
 \examples{
-  fPath <- "Sparkling.bth"
-  load.bathy(fPath)
+  #Get the path for the package example file included
+  exampleFilePath <- system.file('extdata', 'Sparkling.bth', package="rLakeAnalyzer")
   
-  ## The function is currently defined as
-  function (fPath) 
-  {
-    d = read.table(fPath, sep = c(","), header = TRUE)
-    if (ncol(d) < 2) {
-      d = read.table(fPath, sep = c("\t"), header = TRUE)
-    }
-    if (ncol(d) < 2) {
-      stop("Error loading bathymetry file, check that it is a tab delimited file two columns.")
-    }
-    headNames = tolower(names(d))
-    dI = grep("depths", headNames)
-    aI = grep("areas", headNames)
-    if (length(aI) < 1 || length(dI) < 1) {
-      stop("Bathymetry header must be labeled with \"areas\" and \"depths\".")
-    }
-    names(d)[dI] = "depths"
-    names(d)[aI] = "areas"
-    return(d)
-  }
+  #Load and plot the hypsometric curve
+  sparkling.bathy = load.bathy(exampleFilePath)
+  
+  #If successful, there will be two colums. "depths", and "areas".
+  plot(sparkling.bathy$areas, sparkling.bathy$depths, type='l', ylim=c(20,0), ylab='Depths (m)', xlab='Areas (m^2)')
+  
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{limnology}
-\keyword{bathymetry}% __ONLY ONE__ keyword per line
+  
+\keyword{file}
+

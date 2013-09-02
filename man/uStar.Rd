@@ -1,20 +1,22 @@
 \name{uStar}
 \alias{uStar}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{Calculates the water friction velocity, uStar}
 \description{uStar is the water friction velocity due to wind stress at the lake surface, it is calculated following the methods of Imberger (1985) as a function of the shear stress of air (Fischer et al., 1979), drag coefficient for momentum (Hicks, 1972), and a dimensionless constant (von Karman constant) that decribes the logarithmic velocity profile at the air-water interface}
 \usage{
 uStar(wndSpeed, wndHeight, averageEpiDense)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{wndSpeed}{a numeric vector of wind speed in m s-1}
   \item{wndHeight}{a numeric vector of wind measurement height in m}
   \item{averageEpiDense}{a numeric vector of epilimnion density in kg m-3}
 }
+
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
+
 \value{a numeric vector of uStar}
 \references{
   
@@ -41,5 +43,4 @@ uStar(wndSpeed, wndHeight, averageEpiDense)
   cat(uStar(wndSpeed,wndHeight,averageEpiDense))
 }
 
-\keyword{uStar}
-\keyword{friction}
+\keyword{manip}

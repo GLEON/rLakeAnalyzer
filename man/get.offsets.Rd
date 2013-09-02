@@ -1,67 +1,52 @@
 \name{get.offsets}
 \alias{get.offsets}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+	Gets depths from data frame containing profile info.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+	Extracts the depth information from a data frame containing multi-depth observation data.
+	Relies on the format of the header to get information and may fail if your file format is incorrect.
 }
 \usage{
-get.offsets(data)
+	get.offsets(data)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
-%%     ~~Describe \code{data} here~~
-}
+     Data frame returned from \code{\link{load.ts}}.
+  }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+	A numeric vector of depth values. Should be the \code{ncol(data) - 1} 
+	in length as the first column contains date/time data.
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\author{
+Luke Winslow
+}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+	\code{\link{load.ts}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (data) 
-{
-    header = names(data)
-    header = header[header != "datetime"]
-    matches = regexpr("(\\d+\\.?\\d*)", header)
-    lengths = attr(matches, "match.length")
-    offsets = vector(mode = "numeric", length = length(matches))
-    for (i in 1:length(matches)) {
-        offsets[i] = as.numeric(substr(header[i], matches[i], 
-            matches[i] + lengths[i]))
-    }
-    return(offsets)
-  }
+\examples{
+	#Get the path for the package example file included
+	exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+	
+	#Load
+	sparkling.temp = load.ts(exampleFilePath)
+	
+	#get the lake depths associated with each column
+	depths = get.offsets(sparkling.temp)
+	
+	print(depths)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{manip}
+

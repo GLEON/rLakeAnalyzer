@@ -1,11 +1,11 @@
 \name{load.ts}
 \alias{load.ts}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+	Load timeseries from properly formatted text file.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+	A convenience function to load timeseries data into R based on the standardized format used by Lake Analyzer.
 }
 \usage{
 load.ts(fPath)
@@ -13,49 +13,44 @@ load.ts(fPath)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fPath}{
-%%     ~~Describe \code{fPath} here~~
+	The file path as a string.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+	Timeseries files must follow a common format. The first column must have the label 'datetime' and 
+	be of the format \emph{yyyy-mm-dd HH:MM:SS} (ISO 8601 without the "T" delimiter). The second can be skipped 
+	if not using sub-minute data.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+	A data frame in the required format for use with other rLakeAnalyzer timeseries functions.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
+ Luke Winslow <lawinslow@wisc.edu>
 }
 \note{
 %%  ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+For dataloading \code{\link{ts.meta.depths}}, \cr
+For analyzing timeseries data, see \code{\link{ts.meta.depths}}, \code{\link{ts.thermo.depth}}, \code{\link{ts.schmidt.stability}},
+\code{\link{ts.lake.number}}.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (fPath) 
-{
-    d = read.table(fPath, sep = "\t", header = TRUE)
-    names(d) = tolower(names(d))
-    d$datetime = as.POSIXct(d$datetime)
-    return(d)
-  }
+	#Get the path for the package example file included
+	exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+	
+	#Load
+	sparkling.temp = load.ts(exampleFilePath)
+	
+	#calculate and plot the thermocline depth
+	t.d = ts.thermo.depth(sparkling.temp)
+	
+	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+
+\keyword{file}
+

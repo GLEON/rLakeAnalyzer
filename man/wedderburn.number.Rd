@@ -1,15 +1,16 @@
 \name{wedderburn.number}
 \alias{wedderburn.number}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Calculates Wedderburn Number for a lake.
 }
-\description{ Wedderburn Number is a dimensionless parameter measuring the effect of wind stress 
-on the lake surface. }
+\description{ Wedderburn Number (Wn) is a dimensionless parameter measuring the balance between 
+wind stress and bouyancy force and is used to estimate the amount of upwelling occuring in a lake. 
+When Wn is much greater than 1, the bouyancy force is much greater than the wind stress and therefore there is a strong vertical stratification with little horizontal variation in the stratification. When Wn is much less than 1, the wind stress is much greater than the bouyancy force and upwelling is likely occuring at the upwind end of the lake. When Wn is near 1, the bouyance force and wind stress are nearly equal and horizontal mixing is considered important}
 \usage{
 wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{delta_rho}{ Numeric value for the water density difference between the epilimnion and hypolimnion (kg/m^3)}
   \item{metaT}{ Numeric value for the thickness of the water body's surface layer (m)}
@@ -17,18 +18,11 @@ wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
   \item{Ao}{ Numeric value for the water body surface area (m^2) at zero meters depth}
   \item{AvHyp_rho}{ Numeric value for the average water density of the hypolimnion layer (kg/m^3)}
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
+
+\value{ The dimensionless numeric value of Wedderburn Number}
 \references{
-%% ~put references to the literature/web site here ~
+Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}. Advances in Applied
+Mechanics 27, 353-370.
 }
 \author{ Jake Zwart}
 \note{
@@ -37,16 +31,16 @@ wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\seealso{\code{lake.number}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
+delta_rho <- c(3.1,1.5)
+metaT <- c(5.5,2.4)
+uSt <- c(0.0028,0.0032)
+Ao <- c(80300,120000)
+AvHyp_rho <- c(999.31,999.1)
+wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{arith}

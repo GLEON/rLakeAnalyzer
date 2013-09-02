@@ -49,5 +49,4 @@ bthD    <- c(0,1,2,3,4,5,6,7)
 layer.density(top,bottom,wtr,depths,bthA,bthD)
 }
 
-\keyword{limnology}
-\keyword{GLEON}
+\keyword{manip}

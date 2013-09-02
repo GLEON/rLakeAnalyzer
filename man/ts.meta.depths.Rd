@@ -1,8 +1,8 @@
 \name{ts.meta.depths}
 \alias{ts.meta.depths}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+Calculate physical indices for a full timeseries.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -42,28 +42,22 @@ ts.meta.depths(wtr, slope = 0.1)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{load.ts}}, \code{\link{ts.thermo.depth}}.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (wtr, slope = 0.1) 
-{
-    depths = get.offsets(wtr)
-    n = nrow(wtr)
-    wtr.mat = as.matrix(wtr[, -1])
-    m.d = matrix(NA, nrow = n, ncol = 2)
-    for (i in 1:n) {
-        m.d[i, ] = meta.depths(wtr.mat[i, ], depths, slope)
-    }
-    return(data.frame(datetime = wtr$datetime, top = m.d[, 1], 
-        bottom = m.d[, 2]))
-  }
+	#Get the path for the package example file included
+	exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+	
+	#Load
+	sparkling.temp = load.ts(exampleFilePath)
+	
+	#calculate and plot the metalimnion depths
+	m.d = ts.meta.depths(sparkling.temp)
+	
+	plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
+	lines(m.d$datetime, m.d$bottom, col='red')
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{manip}
+

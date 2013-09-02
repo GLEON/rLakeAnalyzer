@@ -1,6 +1,6 @@
 \name{meta.depths}
 \alias{meta.depths}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Calculate the Top and Bottom Depths of the Metalimnion
 }
@@ -26,17 +26,10 @@ Calculates the top and bottom depths of the metalimnion in a stratified lake. Th
 	}
 } %/arguments
 
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-A numeric vector of the top and bottom metalimnion depths in meters
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-} %details
+A numeric vector of the top and bottom metalimnion depths in meters. Returns the bottom depth if no distinct metalimion top and bottom found.
+} 
 
 \references{
 Wetzel, R. G. 2001. Limnology: Lake and River Ecosystems, 3rd ed. Academic Press.
@@ -45,31 +38,24 @@ Wetzel, R. G. 2001. Limnology: Lake and River Ecosystems, 3rd ed. Academic Press
 \author{
 Jennifer Brentrup, Luke Winslow
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-schmidt.stability, lake.number, wedderburn.number, thermo.depth
+\code{\link{schmidt.stability}}, \code{\link{lake.number}}, \code{\link{wedderburn.number}}, \code{\link{thermo.depth}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+	wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
 		15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
 		
-depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+	depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
 
-m.d = meta.depths(wtr, depths, slope=0.1, seasonal=FALSE)
-cat('The top depth of the metalimnion is:', m.d[1])
-cat('The bottom depth of the metalimnion is:', m.d[2])
-
-
-
+	m.d = meta.depths(wtr, depths, slope=0.1, seasonal=FALSE)
+	cat('The top depth of the metalimnion is:', m.d[1])
+	cat('The bottom depth of the metalimnion is:', m.d[2])
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{limnology}
-\keyword{thermocline}% __ONLY ONE__ keyword per line
+\keyword{manip}
+
