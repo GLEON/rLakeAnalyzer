@@ -4,10 +4,16 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Translated from FindMetaBot.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE){
+meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
   
 	if(any(is.na(wtr))){
 		return(rep(NaN, 2))
+	}
+  
+	#We can't determine anything with less than 3 measurements
+	# just return lake bottom
+	if(length(wtr) < 3){
+	  return(c(max(depths), max(depths)))
 	}
 	
 	depths = sort.int(depths, index.return=TRUE)
