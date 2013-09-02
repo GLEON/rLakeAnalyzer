@@ -12,6 +12,13 @@ thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE){
   if(any(is.na(wtr))){
     return(NaN)
   }
+  
+  #We can't determine anything with less than 3 measurements
+  # just return lake bottom
+  if(length(wtr) < 3){
+    return(NaN)
+  }
+  
   #We need water density, not temperature to do this
   rhoVar = water.density(wtr)
   
