@@ -15,7 +15,7 @@ thermo.depth(wtr, depths, Smin = 0.1, seasonal=TRUE)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{wtr}{
-Numeric vector of water temperature in °C
+Numeric vector of water temperature in degrees Celsius
 }
   \item{depths}{
 Numeric vector of depths. Must be the same length as the wtr parameter
