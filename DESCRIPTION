@@ -1,10 +1,10 @@
 Package: rLakeAnalyzer
 Title: Package for analyzing lake physics
 Maintainer: Luke Winslow <lawinslow@wisc.edu>, Jordan Read <jread@usgs.gov>
-Version: 0.5
+Version: 1.0
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Jake Zwart
 Description: 
 License: GPL (>= 2)
 Packaged: 2013-08-01 09:09:24 UTC; Luke
-Repository: CRAN
+Repository: http://lakeanalyzer.gleon.org/
 Date/Publication: 2013-08-01 09:09:24
