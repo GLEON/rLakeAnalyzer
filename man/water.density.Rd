@@ -6,7 +6,7 @@
 water.density(wtr, sal = wtr*0)
 }
 \arguments{
-\item{wtr}{ a numeric vector of water temperature in °C}
+\item{wtr}{ a numeric vector of water temperature in degrees Celsius}
 \item{sal}{ a numeric vector of salinity in Practical Salinity Scale units}
 }
 \details{
