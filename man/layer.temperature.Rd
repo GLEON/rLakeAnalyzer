@@ -7,7 +7,7 @@
 This function calculates the average temperature of a layer of water between two depths.
 }
 \usage{
-layer.density(top, bottom, wtr, depths, bthA, bthD)
+layer.temperature(top, bottom, wtr, depths, bthA, bthD)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
