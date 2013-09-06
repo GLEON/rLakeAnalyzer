@@ -26,7 +26,7 @@ load.ts(fPath)
 }
 
 \author{
- Luke Winslow <lawinslow@wisc.edu>
+ Luke Winslow
 }
 
 \seealso{

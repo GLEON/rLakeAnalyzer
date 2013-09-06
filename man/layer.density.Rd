@@ -27,10 +27,6 @@ Numeric value of average water density for bounded layer in kg/m^3
 \author{
 Jake Zwart
 }
-\note{
-water.density function is required to run the layer.density function
-}
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{water.density}

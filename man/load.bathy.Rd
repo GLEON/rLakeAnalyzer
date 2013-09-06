@@ -40,9 +40,10 @@
   sparkling.bathy = load.bathy(exampleFilePath)
   
   #If successful, there will be two colums. "depths", and "areas".
-  plot(sparkling.bathy$areas, sparkling.bathy$depths, type='l', ylim=c(20,0), ylab='Depths (m)', xlab='Areas (m^2)')
+  plot(sparkling.bathy$areas, sparkling.bathy$depths, type='l', ylim=c(20,0), 
+    ylab='Depths (m)', xlab='Areas (m^2)')
   
 }
-  
+
 \keyword{file}
 
