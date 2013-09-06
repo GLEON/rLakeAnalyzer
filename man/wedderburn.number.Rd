@@ -24,10 +24,8 @@ wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}. Advances in Applied
 Mechanics 27, 353-370.
 }
-\author{ Jake Zwart}
-\note{
-%%  ~~further notes~~
-}
+\author{Jake Zwart}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

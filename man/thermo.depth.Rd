@@ -14,37 +14,28 @@ thermo.depth(wtr, depths, Smin = 0.1, seasonal=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{wtr}{
-Numeric vector of water temperature in degrees Celsius
-}
-  \item{depths}{
-Numeric vector of depths. Must be the same length as the wtr parameter
-}
-  \item{Smin}{
-Optional paramter defining minimum density gradient for thermocline
-}
+	\item{wtr}{
+		Numeric vector of water temperature in degrees Celsius
+	}
+	\item{depths}{
+		Numeric vector of depths. Must be the same length as the wtr parameter
+	}
+	\item{Smin}{
+		Optional paramter defining minimum density gradient for thermocline
+	}
   \item{seasonal}{
-a logical value indicating whether the seasonal thermocline should be returned. The seasonal thermocline 
-is defined as the deepest density gradient found in the profile. If FALSE, the depth of the maximum density gradient is returned.
+		a logical value indicating whether the seasonal thermocline should be returned. The seasonal thermocline 
+		is defined as the deepest density gradient found in the profile. If FALSE, the depth of the maximum density gradient is returned.
+	}
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 Depth of thermocline. If no thermocline found, value is max(depths).
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
 Luke Winslow
 }
-\note{
-%%  ~~further notes~~
-}
-
-
 
 \seealso{
 \code{water.density}
@@ -65,5 +56,5 @@ Luke Winslow
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ manip}
+\keyword{manip}
 

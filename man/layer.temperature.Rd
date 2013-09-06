@@ -4,7 +4,7 @@
   Returns the average temperature of a layer between two depths.
 }
 \description{ 
-This function calculates the average temperature of a layer of water between two depths.
+	This function calculates the average temperature of a layer of water between two depths.
 }
 \usage{
 layer.temperature(top, bottom, wtr, depths, bthA, bthD)
@@ -13,20 +13,16 @@ layer.temperature(top, bottom, wtr, depths, bthA, bthD)
 \arguments{
   \item{top}{ Numeric value of the depth (m) of the top of the layer from the water surface}
   \item{bottom}{ Numeric value of the depth (m) of the bottom of the layer from the water surface}
-  \item{wtr}{ Numeric vector of water temperature in °C}
+  \item{wtr}{ Numeric vector of water temperature in degrees C}
   \item{depths}{ Numeric vector of depths (m) corresponding to water temperature vector}
   \item{bthA}{ Numeric vector of water body cross sectional area (m2) corresponding to bthD depths}
   \item{bthD}{ Numeric vector of water body bathymetric depths (m) corresponding to areal bthA values}
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 Numeric value of average water temperature
 }
-\references{
-  %% ~put references to the literature/web site here ~
-}
+
 \author{
 Jordan Read
 }

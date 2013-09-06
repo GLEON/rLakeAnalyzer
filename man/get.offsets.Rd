@@ -17,9 +17,7 @@
      Data frame returned from \code{\link{load.ts}}.
   }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 	A numeric vector of depth values. Should be the \code{ncol(data) - 1} 
 	in length as the first column contains date/time data.

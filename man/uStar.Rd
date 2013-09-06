@@ -13,10 +13,6 @@ uStar(wndSpeed, wndHeight, averageEpiDense)
   \item{averageEpiDense}{a numeric vector of epilimnion density in kg m-3}
 }
 
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-
 \value{a numeric vector of uStar}
 \references{
   

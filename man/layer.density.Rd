@@ -13,21 +13,17 @@ layer.density(top, bottom, wtr, depths, bthA, bthD, sal)
 \arguments{
   \item{top}{ Numeric value of the depth (m) of the top of the layer from the water surface}
   \item{bottom}{ Numeric value of the depth (m) of the bottom of the layer from the water surface}
-  \item{wtr}{ Numeric vector of water temperature in °C}
+  \item{wtr}{ Numeric vector of water temperature in degrees C}
   \item{depths}{ Numeric vector of depths (m) corresponding to water temperature vector}
   \item{bthA}{ Numeric vector of water body cross sectional area (m2) corresponding to bthD depths}
   \item{bthD}{ Numeric vector of water body bathymetric depths (m) corresponding to areal bthA values}
   \item{sal}{ Optional numeric vector of salinity in Practical Salinity Units corresponding to water temperature vector. If left blank, salinity is set to be zero}
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 Numeric value of average water density for bounded layer in kg/m^3
 }
-\references{
-  %% ~put references to the literature/web site here ~
-}
+
 \author{
 Jake Zwart
 }

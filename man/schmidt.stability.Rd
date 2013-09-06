@@ -9,7 +9,7 @@ schmidt.stability(wtr, depths, bthA, bthD, sal = wtr * 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{wtr}{ a numeric vector of water temperature in °C}
+  \item{wtr}{ a numeric vector of water temperature in degrees C}
   \item{depths}{ a numeric vector corresponding to the depths (in m) of the wtr measurements}
   \item{bthA}{ a numeric vector of cross sectional areas (m^2) corresponding to bthD depths}
   \item{bthD}{ a numeric vector of depths (m) which correspond to areal measures in bthA}
@@ -20,7 +20,7 @@ Schmidt stability was first defined by Schmidt (1928) and later modified by Hutc
 }
 \value{ a numeric vector of Schmidt stability (J/m^2)}
 \references{
-Schmidt, W., 1928. \emph{Über Temperatur and Stabilitätsverhaltnisse von Seen}. Geo- graphiska Annaler 10, 145-177.
+Schmidt, W., 1928. \emph{Ueber Temperatur and Stabilitaetsverhaltnisse von Seen}. Geo- graphiska Annaler 10, 145-177.
 
 Hutchinson, G.E., 1957. \emph{A Treatise on Limnology}, vol. 1. John Wiley & Sons, Inc., New York. 
 

@@ -38,7 +38,7 @@ if(min(bthD) < 0){
 	if(any(bthD == 0)){
 		depT = bthD[useI]
 	}else{
-		depT = c(0, bathD[useI])
+		depT = c(0, bthD[useI])
 	}
 	
 	bthA = approx(bthD, bthA, depT)$y

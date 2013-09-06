@@ -28,10 +28,6 @@ load.ts(fPath)
 \author{
  Luke Winslow <lawinslow@wisc.edu>
 }
-\note{
-%%  ~~further notes~~
-}
-
 
 \seealso{
 For dataloading \code{\link{ts.meta.depths}}, \cr

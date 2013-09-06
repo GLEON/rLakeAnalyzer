@@ -8,12 +8,12 @@ Calculate the Top and Bottom Depths of the Metalimnion
 Calculates the top and bottom depths of the metalimnion in a stratified lake. The metalimnion is defined as the water stratum in a stratified lake with the steepest thermal gradient and is demarcated by the bottom of the epilimnion and top of the hypolimnion.
 }
 \usage{
-	meta.depths(wtr, depths, slope=0.1, seasonal=TRUE)
+	meta.depths(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 	  \item{wtr}{
-	a numeric vector of water temperature in °C
+	a numeric vector of water temperature in degrees C
 	}
 	  \item{depths}{
 	a numeric vector corresponding to the depths (in m) of the wtr measurements
@@ -23,6 +23,9 @@ Calculates the top and bottom depths of the metalimnion in a stratified lake. Th
 	}
 	  \item{seasonal}{
 	a logical value indicating whether the seasonal thermocline should be returned. This is fed to thermo.depth, which is used as the starting point. The seasonal thermocline is defined as the deepest density gradient found in the profile. If FALSE, the depth of the maximum density gradient is used as the starting point
+	}
+	  \item{unstrat.val}{
+	the value to be returned when the function is unable to calculate the metalimnion depths
 	}
 } %/arguments
 

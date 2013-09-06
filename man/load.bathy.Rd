@@ -18,25 +18,20 @@
     File path to the bathymetry file.
   }
 }
-\details{
-  
-}
+
 \value{
   data.frame of depth and area for given lake.
 }
-\references{
-  %% ~put references to the literature/web site here ~
-}
+
 \author{
   Luke Winslow
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
   
-  \seealso{
-    \code{\link{load.ts}}
-    
-  }
+\seealso{
+	\code{\link{load.ts}}
+}
 \examples{
   #Get the path for the package example file included
   exampleFilePath <- system.file('extdata', 'Sparkling.bth', package="rLakeAnalyzer")
