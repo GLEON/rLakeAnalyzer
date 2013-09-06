@@ -37,7 +37,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
 	#initiate metalimnion bottom as last depth, this is returned if we can't
 	# find a bottom
 	metaBot_depth = depths[numDepths]
-	metaTop_depth = 0
+	metaTop_depth = depths[1]
 	Tdepth = rep(NaN, numDepths-1)
 	
 	for(i in 1:numDepths-1){

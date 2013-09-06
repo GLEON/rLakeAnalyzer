@@ -6,5 +6,5 @@ Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Jake Zwar
 Description: A package for the analysis lake physics. Provides standardized methods for calculating common important derived physical features of lakes including thermal layers, thermocline, lake number, wedderburn number, schmidt stability and others.
 License: GPL (>= 2)
 Packaged: 2013-08-01 09:09:24 UTC; Luke
-Repository: CRAN
+Repository: http://lakeanalyzer.gleon.org/
 Date/Publication: 2013-08-01 09:09:24
