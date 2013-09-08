@@ -1,9 +1,9 @@
 Package: rLakeAnalyzer
-Title: Package for analyzing lake physics
+Title: Package for the analysis of lake physics
 Maintainer: Luke Winslow <lawinslow@gmail.com>
 Version: 1.0
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Jake Zwart
-Description: A package for the analysis lake physics. Provides standardized methods for calculating common important derived physical features of lakes including thermal layers, thermocline, lake number, wedderburn number, schmidt stability and others.
+Description: Provides standardized methods for calculating common important derived physical features of lakes including water density based based on temperature, thermal layers, thermocline depth, lake number, Wedderburn number, Schmidt stability and others.
 License: GPL (>= 2)
 Packaged: 2013-08-01 09:09:24 UTC; Luke
 Repository: http://lakeanalyzer.gleon.org/
