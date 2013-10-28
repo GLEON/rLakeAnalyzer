@@ -23,9 +23,10 @@ water.density <- function(wtr, sal = wtr*0){
   
   
   # check to see if all values lie within the ranges specified
-  if ( all(sal < Srng[1]) ){
+  if ( all(sal < Srng[1], na.rm=TRUE) ){
     MM <- TRUE # use Martin & McCutcheon
-  }else if (!(sum(wtr<Trng[1]) || sum(wtr>Trng[2])) && !(sum(sal<Srng[1])) || sum(sal>Srng[2])){
+  }else if (!(sum(wtr<Trng[1], na.rm=TRUE) || sum(wtr>Trng[2], na.rm=TRUE)) &&
+              !(sum(sal<Srng[1], na.rm=TRUE)) || sum(sal>Srng[2], na.rm=TRUE)){
     UN <- TRUE # use UNESCO
   }
   
