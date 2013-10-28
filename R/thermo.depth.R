@@ -27,7 +27,7 @@ thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE){
   drho_dz = rep(NaN, numDepths-1);
   
   #Calculate the first derivative of density
-  for(i in 1:numDepths-1){
+  for(i in 1:(numDepths-1)){
 	  drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] );
   }
   

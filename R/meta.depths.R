@@ -30,7 +30,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
 	drho_dz = vector(mode="double", length=numDepths-1)
 
 	#Calculate the first derivative of density
-	for(i in 1:numDepths-1){
+	for(i in 1:(numDepths-1)){
 		drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] )
 	}
 	
@@ -40,7 +40,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
 	metaTop_depth = depths[1]
 	Tdepth = rep(NaN, numDepths-1)
 	
-	for(i in 1:numDepths-1){
+	for(i in 1:(numDepths-1)){
 		Tdepth[i] = mean(depths[ i:(i+1) ]);
 	}
 	
