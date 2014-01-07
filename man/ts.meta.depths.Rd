@@ -3,6 +3,8 @@
 \alias{ts.thermo.depth}
 \alias{ts.schmidt.stability}
 \alias{ts.lake.number}
+\alias{ts.uStar}
+
 
 \title{
   Calculate physical indices for a timeseries.
@@ -20,6 +22,8 @@
   ts.schmidt.stability(wtr, bathy)
 
   ts.lake.number(wtr, wnd, wnd.height, bathy)
+  
+  ts.uStar(wtr, wnd, wnd.height, bathy)
 
 }
 %- maybe also 'usage' for other objects documented here.

@@ -111,3 +111,44 @@ ts.lake.number <- function(wtr, wnd, wnd.height, bathy){
 	
 	return(output)
 }
+
+
+ts.uStar <- function(wtr, wnd, wnd.height, bathy){
+	
+	depths = get.offsets(wtr)
+	
+	# Make sure data frames match by date/time. 
+	all.data = merge(wtr, wnd, by='datetime')
+	
+	cols = ncol(all.data)
+	wtr = all.data[,-cols]
+	wnd = all.data[,c(1, cols)]
+	
+	n = nrow(wtr)
+	uStar = rep(NA, n)
+	
+	wtr.mat = as.matrix(wtr[,-1])
+	dimnames(wtr.mat) <- NULL
+	
+	for(i in 1:n){
+		if(any(is.na(wtr.mat[i,])) || is.na(wnd[i,2])){
+			
+			next
+		}
+		
+		m.d = meta.depths(wtr.mat[i,], depths)
+		if(any(is.na(m.d))){
+			next
+		}
+		
+		epi.dens = layer.density(0, m.d[1], wtr.mat[i,], depths, bathy$areas, bathy$depths)
+		hypo.dens = layer.density(m.d[2], max(depths), wtr.mat[i,], depths, bathy$areas, bathy$depths)
+		
+		
+		uStar[i] = uStar(wnd[i,2], wnd.height, epi.dens)
+	}
+	
+	output = data.frame(datetime=wtr$datetime, uStar=uStar)
+	
+	return(output)
+}
