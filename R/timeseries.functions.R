@@ -142,7 +142,6 @@ ts.uStar <- function(wtr, wnd, wnd.height, bathy){
 		}
 		
 		epi.dens = layer.density(0, m.d[1], wtr.mat[i,], depths, bathy$areas, bathy$depths)
-		hypo.dens = layer.density(m.d[2], max(depths), wtr.mat[i,], depths, bathy$areas, bathy$depths)
 		
 		
 		uStar[i] = uStar(wnd[i,2], wnd.height, epi.dens)
@@ -152,3 +151,4 @@ ts.uStar <- function(wtr, wnd, wnd.height, bathy){
 	
 	return(output)
 }
+
