@@ -1,6 +1,6 @@
 #Timeseries functions for r Lake Analyzer
 
-ts.meta.depths <- function(wtr, slope=0.1){
+ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE){
   
   depths = get.offsets(wtr)
   
@@ -11,7 +11,7 @@ ts.meta.depths <- function(wtr, slope=0.1){
   m.d = matrix(NA, nrow=n, ncol=2)
   
   for(i in 1:n){
-    m.d[i,] = meta.depths(wtr.mat[i,], depths, slope) # Assume seasonal thermoD start
+    m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, seasonal=seasonal) # Assume seasonal thermoD start
   }
   
   return(data.frame(datetime=wtr$datetime, top=m.d[,1], bottom=m.d[,2]))
@@ -67,7 +67,7 @@ ts.schmidt.stability <- function(wtr, bathy){
 	
 }
 
-ts.lake.number <- function(wtr, wnd, wnd.height, bathy){
+ts.lake.number <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 	
 	depths = get.offsets(wtr)
 	
@@ -90,7 +90,7 @@ ts.lake.number <- function(wtr, wnd, wnd.height, bathy){
 			next
 		}
 		
-		m.d = meta.depths(wtr.mat[i,], depths)
+		m.d = meta.depths(wtr.mat[i,], depths, seasonal=seasonal)
 		if(any(is.na(m.d))){
 			next
 		}
@@ -113,7 +113,7 @@ ts.lake.number <- function(wtr, wnd, wnd.height, bathy){
 }
 
 
-ts.uStar <- function(wtr, wnd, wnd.height, bathy){
+ts.uStar <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 	
 	depths = get.offsets(wtr)
 	
@@ -136,7 +136,7 @@ ts.uStar <- function(wtr, wnd, wnd.height, bathy){
 			next
 		}
 		
-		m.d = meta.depths(wtr.mat[i,], depths)
+		m.d = meta.depths(wtr.mat[i,], depths, seasonal=seasonal)
 		if(any(is.na(m.d))){
 			next
 		}
@@ -153,7 +153,7 @@ ts.uStar <- function(wtr, wnd, wnd.height, bathy){
 }
 
 
-ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao){
+ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao, seasonal=TRUE){
   
   depths = get.offsets(wtr)
   
@@ -176,7 +176,7 @@ ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao){
       next
     }
     
-    m.d = meta.depths(wtr.mat[i,], depths)
+    m.d = meta.depths(wtr.mat[i,], depths, seasonal=seasonal)
     if(any(is.na(m.d))){
       next
     }

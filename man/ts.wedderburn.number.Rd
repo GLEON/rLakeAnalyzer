@@ -11,7 +11,7 @@ Function for simplifying the calculation of Wedderburn Number. Can usually be ca
 
 
 \usage{
-ts.wedderburn.number(wtr, wnd, wnd.height, bathy, Ao)
+ts.wedderburn.number(wtr, wnd, wnd.height, bathy, Ao, seasonal=TRUE)
 }
 
 \arguments{
@@ -29,6 +29,9 @@ ts.wedderburn.number(wtr, wnd, wnd.height, bathy, Ao)
   }
   \item{Ao}{ 
     Numeric value for the water body surface area (m^2) at zero meters depth
+  }
+  \item{seasonal}{
+    Boolean indicating if seasonal thermocline should be used in calculation.
   }
   
 }
