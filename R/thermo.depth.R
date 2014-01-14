@@ -6,8 +6,6 @@
 # Adapted from FindThermoDepth.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
 thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE){
-  #argh, data structures in R!
-  #lets just do this the hard way to start.
   
   if(any(is.na(wtr))){
     return(NaN)
