@@ -5,7 +5,7 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Adapted from FindThermoDepth.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE){
+thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE, index=FALSE){
   
   if(any(is.na(wtr))){
     return(NaN)
@@ -89,10 +89,20 @@ thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE){
 	  SthermoInd = thermoInd
   }
   
-  if(seasonal){
-    return(SthermoD)
+  #Ok, which output was requested. Index or value
+  # seasonal or non-seasonal
+  if(index){
+    if(seasonal){
+      return(SthermoInd)
+    }else{
+      return(thermoInd)
+    }
   }else{
-  	return(thermoD)
+    if(seasonal){
+      return(SthermoD)
+    }else{
+    	return(thermoD)
+    }
   }
   
   #list( thermoD, thermoInd, drho_dz, SthermoD, SthermoInd )
