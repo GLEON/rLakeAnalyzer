@@ -43,7 +43,7 @@ ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, ...){
         n2[i] = tmp.n2[thermo.indx]
       }
     }
-    n2 = data.frame(sp.wtr[,'datetime', drop=F], n2)
+    n2 = data.frame(wtr[,'datetime', drop=F], n2)
     
   }else{ #If N2 is requested for the entire water column, output full data.frame
     
@@ -57,7 +57,7 @@ ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, ...){
     attr(n2, 'depths') = attr(tmp, 'depths')
     n2 = as.data.frame(n2)
     names(n2) = paste('N2_', as.character(attr(tmp,'depth')), sep='')
-    n2 = cbind(sp.wtr[,'datetime', drop=F], n2)
+    n2 = cbind(wtr[,'datetime', drop=F], n2)
   }
   
   return(n2)
