@@ -73,7 +73,7 @@
 
 \examples{
 	#Get the path for the package example file included
-	exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+	exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
 	
 	#Load
 	sparkling.temp = load.ts(exampleFilePath)

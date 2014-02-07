@@ -55,8 +55,8 @@ Mechanics 27, 353-370.
 \examples{
 
 	#Get the path for the package example file included
-	wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
-	wnd.path <- system.file('extdata', 'Sparkling.wnd', package="rLakeAnalyzer")
+	wtr.path <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+	wnd.path <- system.file('extdata', 'Sparkling.daily.wnd', package="rLakeAnalyzer")
 	bathy.path <- system.file('extdata', 'Sparkling.bth', package="rLakeAnalyzer")
 	
 	#Load data for example lake, Sparkilng lake, in Wisconsin.
