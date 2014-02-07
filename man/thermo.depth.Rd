@@ -27,6 +27,9 @@ thermo.depth(wtr, depths, Smin = 0.1, seasonal=TRUE)
 		a logical value indicating whether the seasonal thermocline should be returned. The seasonal thermocline 
 		is defined as the deepest density gradient found in the profile. If FALSE, the depth of the maximum density gradient is returned.
 	}
+	\item{index}{
+		Boolean value indicated if index of the thermocline depth, instead of the depth value, should be returned.
+	}
 }
 
 \value{
