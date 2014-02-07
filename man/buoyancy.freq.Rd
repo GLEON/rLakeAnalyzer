@@ -27,9 +27,6 @@
 	differ from supplied depths).
 }
   
-\references{
-
-}
 \author{
 	Luke Winslow
 }

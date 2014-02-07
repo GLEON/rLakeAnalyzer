@@ -10,7 +10,7 @@ It uses a special technique to estimate where the thermocline lies even between 
 giving a potentially finer-scale estimate than usual techniques.
 }
 \usage{
-thermo.depth(wtr, depths, Smin = 0.1, seasonal=TRUE)
+thermo.depth(wtr, depths, Smin = 0.1, seasonal=TRUE, index=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
