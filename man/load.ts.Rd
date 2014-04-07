@@ -8,13 +8,17 @@
 	A convenience function to load timeseries data into R based on the standardized format used by Lake Analyzer.
 }
 \usage{
-load.ts(fPath)
+load.ts(fPath, tz="GMT")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fPath}{
 	The file path as a string.
 }
+	\item{tz}{
+		Timezone string to be supplied to \code{\link{as.POSIXct}}. Defaults to GMT (UTC-0). This often can
+		be left to the default unless timezone support is specifically required.
+	}
 }
 \details{
 	Timeseries files must follow a common format. The first column must have the label 'datetime' and 

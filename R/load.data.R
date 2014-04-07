@@ -28,9 +28,9 @@ load.bathy <- function(fPath){
   return(d)
 }
 
-load.ts <- function(fPath){
+load.ts <- function(fPath, tz='GMT'){
   #Load data
-  d = read.table(fPath, sep='\t', header=TRUE)
+  d = read.table(fPath, sep='\t', header=TRUE, as.is=TRUE)
   
   #Just standardize all headers as lowercase
   names(d) = tolower(names(d))
@@ -39,7 +39,7 @@ load.ts <- function(fPath){
     stop('Timeseries file must be tab delimited and contain a column labeled \'datetime\'');
   }
   #convert column to a real date/time format
-  d$datetime = as.POSIXct(d$datetime)
+  d$datetime = as.POSIXct(d$datetime, tz)
   
   return(d)
 }
