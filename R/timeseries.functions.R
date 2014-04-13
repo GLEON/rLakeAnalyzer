@@ -256,7 +256,11 @@ ts.layer.temperature <- function(wtr, top, bottom, bathy, na.rm=FALSE){
       if(na.rm){
         temps = wtr.mat[i,]
         notNA = !is.na(temps)
-        l.t[i] = layer.temperature(top[i], bottom[i], temps[notNA], depths[notNA], bathy$areas, bathy$depths)
+        if(any(notNA)){
+          l.t[i] = layer.temperature(top[i], bottom[i], temps[notNA], depths[notNA], bathy$areas, bathy$depths)
+        }else{
+          l.t[i] = NA
+        }
       }else{
     	  l.t[i] = layer.temperature(top[i], bottom[i], wtr.mat[i,], depths, bathy$areas, bathy$depths)
       }
