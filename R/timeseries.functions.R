@@ -1,6 +1,6 @@
 #Timeseries functions for r Lake Analyzer
 
-ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE){
+ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
   
   depths = get.offsets(wtr)
   
@@ -11,14 +11,20 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE){
   m.d = matrix(NA, nrow=n, ncol=2)
   
   for(i in 1:n){
-    m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, seasonal=seasonal) # Assume seasonal thermoD start
+    if(na.rm){
+      temps = wtr.mat[i,]
+      notNA = !is.na(temps)
+      m.d[i,] = meta.depths(temps[notNA], depths[notNA], slope, seasonal=seasonal, na.rm=na.rm) # Assume seasonal thermoD start
+    }else{
+      m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, seasonal=seasonal, na.rm=na.rm) # Assume seasonal thermoD start
+    }
   }
   
   return(data.frame(datetime=wtr$datetime, top=m.d[,1], bottom=m.d[,2]))
 
 }
 
-ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE){
+ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE){
   
   depths = get.offsets(wtr)
   
@@ -29,12 +35,18 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE){
   dimnames(wtr.mat) <- NULL
   
   for(i in 1:n){
-    if(any(is.na(wtr.mat[i,]))){
-      t.d[i] = NA
-      next
+    if(na.rm){
+      temps = wtr.mat[i,]
+      notNA = !is.na(temps)
+      t.d[i] = thermo.depth(temps[notNA], depths[notNA], seasonal=seasonal)
+    }else{
+      if(any(is.na(wtr.mat[i,]))){
+        t.d[i] = NA
+        next
+      }
+      #thermo.depth <- function(wtr, depths, Smin = 0.1){\
+      t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal)
     }
-    #thermo.depth <- function(wtr, depths, Smin = 0.1){\
-    t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal)
   }
 
   output = data.frame(datetime=wtr$datetime, thermo.depth=t.d)
@@ -42,7 +54,7 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE){
   return(output)
 }
 
-ts.schmidt.stability <- function(wtr, bathy){
+ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
 	
 	depths = get.offsets(wtr)
 	
@@ -53,12 +65,18 @@ ts.schmidt.stability <- function(wtr, bathy){
 	dimnames(wtr.mat) <- NULL
 	
 	for(i in 1:n){
-		if(any(is.na(wtr.mat[i,]))){
-			s.s[i] = NA
-			next
-		}
-		#thermo.depth <- function(wtr, depths, Smin = 0.1){\
-		s.s[i] = schmidt.stability(wtr.mat[i,], depths, bathy$areas, bathy$depths)
+    if(na.rm){
+      temps = wtr.mat[i,]
+      notNA = !is.na(temps)
+      s.s[i] = schmidt.stability(temps[notNA], depths[notNA], bathy$areas, bathy$depths)
+    }else{
+  		if(any(is.na(wtr.mat[i,]))){
+  			s.s[i] = NA
+  			next
+  		}
+  		#thermo.depth <- function(wtr, depths, Smin = 0.1){\
+  		s.s[i] = schmidt.stability(wtr.mat[i,], depths, bathy$areas, bathy$depths)
+    }
 	}
 	
 	output = data.frame(datetime=wtr$datetime, schmidt.stability=s.s)
@@ -203,7 +221,7 @@ ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao, seasonal=TRUE)
 }
 
 
-ts.layer.temperature <- function(wtr, top, bottom, bathy){
+ts.layer.temperature <- function(wtr, top, bottom, bathy, na.rm=FALSE){
   
   depths = get.offsets(wtr)
   
@@ -233,9 +251,15 @@ ts.layer.temperature <- function(wtr, top, bottom, bathy){
   
   for(i in 1:n){
     if(is.na(top[i]) || is.na(bottom[i])){
-    	l.t[i] = NA #propagate NA's
+    	l.t[i] = NA #nothing we can do with NA bottom or top depths
     }else{
-    	l.t[i] = layer.temperature(top[i], bottom[i], wtr.mat[i,], depths, bathy$areas, bathy$depths)
+      if(na.rm){
+        temps = wtr.mat[i,]
+        notNA = !is.na(temps)
+        l.t[i] = layer.temperature(top[i], bottom[i], temps[notNA], depths[notNA], bathy$areas, bathy$depths)
+      }else{
+    	  l.t[i] = layer.temperature(top[i], bottom[i], wtr.mat[i,], depths, bathy$areas, bathy$depths)
+      }
     }
   }
   

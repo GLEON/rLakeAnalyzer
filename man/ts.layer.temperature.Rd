@@ -31,7 +31,10 @@ Function for simplifying the calculation of Wedderburn Number. Can usually be ca
   \item{bathy}{
     A data frame containing hypsometric data. Loaded using \code{\link{load.bathy}}
   }
-  
+  \item{na.rm}{
+	Boolean indicated if step-by-step removal of NA's should be tried. If false, a timestep with any NA values 
+	will return an NA value. If true, best effort will be made to calculate indices despite NA values.
+  }
 }
 
 \value{Returns a data frame with the timeseries of the average layer temperature. Includes 

@@ -15,9 +15,9 @@
   \code{\link{load.bathy}}.
 }
 \usage{
-  ts.meta.depths(wtr, slope = 0.1, seasonal=TRUE)
+  ts.meta.depths(wtr, slope = 0.1, seasonal=TRUE, na.rm=FALSE)
 
-  ts.thermo.depth(wtr, Smin = 0.1, seasonal=TRUE)
+  ts.thermo.depth(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE)
 
   ts.schmidt.stability(wtr, bathy)
 
@@ -48,6 +48,10 @@
   }
   \item{seasonal}{
     Boolean indicating if seasonal thermocline should be used in calculation.
+  }
+  \item{na.rm}{
+	Boolean indicated if step-by-step removal of NA's should be tried. If false, a timestep with any NA values 
+	will return an NA value. If true, best effort will be made to calculate indices despite NA values.
   }
 }
 \details{
