@@ -203,3 +203,42 @@ ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao, seasonal=TRUE)
 }
 
 
+ts.layer.temperature <- function(wtr, top, bottom, bathy){
+  
+  depths = get.offsets(wtr)
+  
+  n = nrow(wtr)
+  
+  #We can repeat one depth across the whole timeseries, or accept a vector
+  # the same length as the timeseries (useful for epi and meta depths for example)
+  if(length(top) == 1){
+	  top = rep(top, n)
+  } else if(length(top) == n){
+	  #Do nothing
+  } else {
+	  stop('top depth must be of either length one or the same length as the timeseries')
+  }
+  
+  if(length(bottom) == 1){
+	  bottom = rep(bottom, n)
+  } else if(length(bottom) == n){
+	  #Do nothing
+  } else {
+	  stop('bottom depth must be of either length one or the same length as the timeseries')
+  }
+  
+  wtr.mat = as.matrix(wtr[,-1])
+  
+  l.t = rep(NA, n)
+  
+  for(i in 1:n){
+    if(is.na(top[i]) || is.na(bottom[i])){
+    	l.t[i] = NA #propagate NA's
+    }else{
+    	l.t[i] = layer.temperature(top[i], bottom[i], wtr.mat[i,], depths, bathy$areas, bathy$depths)
+    }
+  }
+  
+  return(data.frame(datetime=wtr$datetime, layer.temp=l.t))
+}
+

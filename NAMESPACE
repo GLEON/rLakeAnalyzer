@@ -2,6 +2,6 @@
 export(wedderburn.number, layer.density, lake.number, uStar, water.density, 
        thermo.depth, meta.depths, schmidt.stability, ts.meta.depths, 
 	   ts.thermo.depth, load.bathy, load.ts, get.offsets, ts.schmidt.stability,
-	   ts.meta.depths, ts.thermo.depth, ts.lake.number, ts.uStar, 
+	   ts.meta.depths, ts.thermo.depth, ts.lake.number, ts.uStar, ts.layer.temperature,
 	   ts.wedderburn.number, ts.buoyancy.freq, buoyancy.freq, layer.temperature, wtr.heat.map)
 
