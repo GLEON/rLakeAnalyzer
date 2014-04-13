@@ -19,7 +19,7 @@
 
   ts.thermo.depth(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE)
 
-  ts.schmidt.stability(wtr, bathy)
+  ts.schmidt.stability(wtr, bathy, na.rm=FALSE)
 
   ts.lake.number(wtr, wnd, wnd.height, bathy, seasonal=TRUE)
   

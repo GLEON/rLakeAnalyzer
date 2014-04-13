@@ -14,9 +14,9 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
     if(na.rm){
       temps = wtr.mat[i,]
       notNA = !is.na(temps)
-      m.d[i,] = meta.depths(temps[notNA], depths[notNA], slope, seasonal=seasonal, na.rm=na.rm) # Assume seasonal thermoD start
+      m.d[i,] = meta.depths(temps[notNA], depths[notNA], slope, seasonal=seasonal) # Assume seasonal thermoD start
     }else{
-      m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, seasonal=seasonal, na.rm=na.rm) # Assume seasonal thermoD start
+      m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, seasonal=seasonal) # Assume seasonal thermoD start
     }
   }
   

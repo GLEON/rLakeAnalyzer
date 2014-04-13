@@ -11,7 +11,7 @@ Function for simplifying the calculation of Wedderburn Number. Can usually be ca
 
 
 \usage{
-	ts.layer.temperature(wtr, top, bottom, bathy)
+	ts.layer.temperature(wtr, top, bottom, bathy, na.rm=FALSE)
 }
 
 \arguments{
