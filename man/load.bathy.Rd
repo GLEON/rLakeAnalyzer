@@ -7,7 +7,7 @@
 \description{
   Imports lake bathymetry data. Bathymetric data file must be a 2 column array 
   where depth (in meters) and area (in meters^2) information are provided in columns 
-  with headers containing the words "depth" and "area" respectively.
+  with headers containing the words "depths" and "areas" respectively.
 }
 \usage{
   load.bathy(fPath)
