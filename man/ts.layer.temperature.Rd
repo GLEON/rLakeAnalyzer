@@ -60,7 +60,8 @@ Function for simplifying the calculation of Wedderburn Number. Can usually be ca
 	
 	
     l.t = ts.layer.temperature(sp.wtr, 0, 18, sp.bathy)
-	plot(l.t$datetime, l.t$layer.temp, type='l', ylab='Volumetrically averaged lake temperature', xlab='Date')
+	plot(l.t$datetime, l.t$layer.temp, type='l', 
+        ylab='Volumetrically averaged lake temperature', xlab='Date')
 	
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
