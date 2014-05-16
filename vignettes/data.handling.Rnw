@@ -1,0 +1,67 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{gensymb}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{Introduction to file and data formats in rLakeAnalyzer}
+\author{Luke Winslow}
+\maketitle
+
+
+
+\section{Introduction}
+
+This vignette is an introduction to handling the type of data typically used in rLakeAnalyzer. It will hopefully give the reader enough information to be able to quickly and effectively format your own data to take advantage of the more powerful features.
+
+\section{File Format}
+
+We have tried to use a simple but standard file format that eases import and parsing of data while still being easy to generate and edit using commonly used tools like Microsoft Excel. Below is a very simple example of how the files are structured.
+
+\begin{center}
+
+\begin{tabular}{ l c }
+	\textbf{datetime} & \textbf{doobs\_0.5} \\
+\hline
+	2008-07-01 01:00 & 8.3 \\
+  2008-07-01 02:00 & 8.2 \\
+  2008-07-01 03:00 & 8.2 \\
+  2008-07-01 04:00 & 8.1 \\
+
+\end{tabular}
+\end{center}
+
+There are a few key aspects to these files that, if you understand and use them, will help you be far more efficient in managing and using your data for use in rLakeAnalyzer.
+
+\subsection{DateTime Format}
+
+
+
+\subsection{Header Format}
+
+\begin{center}
+\begin{tabular}{ l l l }
+
+\textbf{Abbreviation} & \textbf{Variable} & \textbf{Assumed Units} \\
+\hline
+doobs 			 & Dissolved Oxygen Concentration & mg/L \\
+wtr	 			 	&  Water Temperature              & \degree C \\
+wnd         &  Wind Speed                     & m/s  \\
+airT         &  Air Temperature               & \degree C  \\
+rh           &  Relative Humidity             & \%  \\
+
+
+\end{tabular}
+\end{center}
+
+
+\subsection{File Format}
+
+
+
+\section{Creation}
+
+
+\end{document}
