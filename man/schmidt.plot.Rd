@@ -20,7 +20,7 @@ schmidt.plot(wtr, bth, ylab = " ")
 }
 
 \references{
-	See \code{\link{schmidt.stability}
+	See \code{\link{schmidt.stability}}
 }
 
 \author{ 
