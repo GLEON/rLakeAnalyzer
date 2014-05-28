@@ -4,6 +4,7 @@ Maintainer: Luke Winslow <lawinslow@gmail.com>
 Version: 1.3.3
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Jake Zwart
 Description: Standardized methods for calculating common important derived physical features of lakes including water density based based on temperature, thermal layers, thermocline depth, lake number, Wedderburn number, Schmidt stability and others.
+Depends: plyr
 License: GPL (>= 2)
 Packaged: 2013-08-01 09:09:24 UTC; Luke
 Repository: http://lakeanalyzer.gleon.org/
