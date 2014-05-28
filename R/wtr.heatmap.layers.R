@@ -1,6 +1,7 @@
 #heat map with lines for thermocline, meta top and bottom depths
 wtr.heatmap.layers <- function(wtr, ...){
   
+  library(plyr)
   td = ts.thermo.depth(wtr)
   md = ts.meta.depths(wtr)
   
@@ -46,7 +47,6 @@ wtr.heatmap.layers <- function(wtr, ...){
     xxlab <- " "
   }
   
-  library(plyr)
   df = list(wtr,td,md) ##Create list of data frame to join
   wtr.all = join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
   nn = ncol(wtr.all) -3
