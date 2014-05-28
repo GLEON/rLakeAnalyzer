@@ -71,7 +71,7 @@ wtr.heatmap.layers <- function(wtr, ...){
                                                   , bias = 1
                                                   , space = "rgb")
                  , ylab="Depth (m)"
-                 , key.title=title((main="Temperature (°C)")
+                 , key.title=title((main="Temperature (\u00B0C)")
                                    ,adj=0.2, cex.main=1)
                  ,plot.axes = {lines(x=wtr.dates,y=wtr.all$thermo.depth,col="black",lwd = 2)
                                lines(x=wtr.dates,y=wtr.all$top, col="gray50", lwd = 2)
