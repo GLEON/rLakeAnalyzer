@@ -26,7 +26,7 @@
   ts.uStar(wtr, wnd, wnd.height, bathy, seasonal=TRUE)
 
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{wtr}{
     A data frame of water temperatures (in Celsius). Loaded using \code{\link{load.ts}}
