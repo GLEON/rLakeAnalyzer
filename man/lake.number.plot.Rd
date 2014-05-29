@@ -5,7 +5,8 @@
 	Plots time series of Lake Number
 }
 \description{ 
-	Generates a time series plot of lake number for appropriately formatted data
+	Generates a time series plot of Lake Number for appropriately formatted data. 
+  See \code{\link{lake.number}} for more details on Lake Number and reference. 
 }
 \usage{
 	lake.number.plot(wtr, wnd, wh, bth)
@@ -18,7 +19,8 @@
 		A data frame containing hypsometric data. Loaded using \code{\link{load.bathy}}
 	}
 	\item{wh}{
-		A value indicating the height of the anemometer above lake surface 
+		A value indicating the height of the anemometer above lake surface in meters. 
+    This value must be specified, there is no default.  
 	}
 	\item{bth}{
 		A data frame containing hypsometric data. Loaded using \code{\link{load.bathy}}
@@ -40,8 +42,9 @@
 	wtr = load.ts(wtr.path)
 	wnd = load.ts(wnd.path)
 	bth = load.bathy(bth.path)
-	wh = 1 ##Wind height for height of anemometer above lake surface in meters user specified, here as 1 m.
-
+	wh = 1 # user specified, here as 1 m.
+  
+  #generate default plot
 	lake.number.plot(wtr,wnd,wh,bth)
 }
 

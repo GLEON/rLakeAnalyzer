@@ -1,53 +1,51 @@
 \name{wtr.heatmap.layers}
 \alias{wtr.heatmap.layers}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Plots water temp heatmap with major layers highlighted
+  Plots water temperature heatmap with major limnetic layers indicated
 }
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+\description{ 
+  This creates a heat map of water temperature similar to \code{\link{wtr.heat.map}} 
+  with additional lines drawn to denote the thermocline, and the top and bottom of 
+  the metalimnion as calculated using \code{\link{load.ts.meta.depths}} 
+  and \code{\link{thermo.depth}}.
 }
 \usage{
 wtr.heatmap.layers(wtr, ...)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{wtr}{
-%%     ~~Describe \code{wtr} here~~
-}
+    Data frame of water temperature loaded with \code{\link{load.ts}}.
+    }
   \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+    Additional parameters supplied to \code{\link{filled.contour}} to modify defaults.
+    Common examples include \code{zlim} and \code{plot.title}.
+    }
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\author{ 
+  Jennifer Brentrup, Luke Winslow and Taylor Leach
+}
+
+\note{
+  This plot cannot be used in customized multi-panel figures using\code{\link{layout}} as layout is       
+  already used in the filled.contour plotting function. 
+}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{wtr.heat.map}}
+  \code{\link{load.ts}}
+  \code{\link{ts.meta.depths}}
+  \code{\link{thermo.depths}}
 }
 \examples{
+  #Get the path for the package example file included 
+  wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
 
+  #Load data for example lake, Sparkilng Lake, Wisconsin.
+  wtr = load.ts(wtr.path)
+  
+  # generate default plot
+  wtr.heatmap.layers(wtr)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ hplot }

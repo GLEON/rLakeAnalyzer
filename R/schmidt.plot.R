@@ -1,5 +1,5 @@
 # time series plot of Schmidt's stability
-schmidt.plot = function(wtr,bth, ylab = " "){
+schmidt.plot = function(wtr,bth){
 
   ss = ts.schmidt.stability(wtr,bth)
   
@@ -53,7 +53,7 @@ schmidt.plot = function(wtr,bth, ylab = " "){
        type='l',
        lwd = 2,
        col="black",
-       ylab="Schmidt Stability (J/m^2)",
+       ylab=expression("Schmidt's Stability"~(J~m^-2)),
        xlab=xxlab,
        bty="n",
        xlim=c(starttime,endtime),
