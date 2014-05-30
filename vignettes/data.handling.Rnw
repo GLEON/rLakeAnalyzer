@@ -66,7 +66,7 @@ The data columns must be identified with a variable type and optionally, a depth
 \end{tabular}
 \end{center}
 
-While any text can be used to describe a variable, the table below lists the current "standard" variables that are used by rLakeAnalyzer and other toolboxes for identifying commonly collected data in the most common units. If these standards are adhered to, many of the more helpful funcitons will work natively. For example, water.density expects temperature to be supplied in celsius, the default unit used for the "wtr" abbreviation.
+While any text can be used to describe a variable, the table below lists the current "standard" variables that are used by rLakeAnalyzer and other toolboxes for identifying commonly collected data in the most common units. If these standards are adhered to, many of the more helpful functions will work natively. For example, water.density expects temperature to be supplied in celsius, the default unit used for the "wtr" abbreviation.
 
 \begin{center}
 \begin{tabular}{ l l l }
