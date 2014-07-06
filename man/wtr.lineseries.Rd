@@ -35,7 +35,9 @@ Taylor Leach, Luke Winslow
 \examples{
 exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
 wtr= load.ts(exampleFilePath)
+\dontrun{
 wtr.lineseries(wtr, ylab = "Temperature C")
+}
 
 }
 

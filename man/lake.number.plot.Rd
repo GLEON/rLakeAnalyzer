@@ -43,9 +43,10 @@
 	wnd = load.ts(wnd.path)
 	bth = load.bathy(bth.path)
 	wh = 1 # user specified, here as 1 m.
-  
+  \dontrun{
   #generate default plot
 	lake.number.plot(wtr,wnd,wh,bth)
+	}
 }
 
 \keyword{ hplot }

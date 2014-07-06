@@ -35,7 +35,9 @@ schmidt.plot(wtr, bth)
 	wtr = load.ts(wtr.path)
 	bth = load.bathy(bth.path)
 	
+	\dontrun{
   # Generate default plot
   schmidt.plot(wtr,bth)
+  }
 }
 \keyword{ hplot }

@@ -28,8 +28,9 @@ wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
 
 #Load data for example lake, Sparkilng Lake, Wisconsin.
 wtr = load.ts(wtr.path)
-
+\dontrun{
 wtr.plot.temp(wtr)
+}
 
 }
 \keyword{ hplot }
