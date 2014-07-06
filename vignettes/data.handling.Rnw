@@ -1,6 +1,5 @@
 % !Rnw weave = Sweave
 \documentclass{article}
-
 \usepackage[margin=1in]{geometry}
 \usepackage{gensymb}
 \usepackage[noae]{Sweave}
@@ -9,6 +8,7 @@
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
+%% \VignetteIndexEntry{Introduction to file formats and data handling}
 
 \title{Introduction to file and data formats in rLakeAnalyzer}
 \author{Luke Winslow}
