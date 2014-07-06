@@ -1,6 +1,5 @@
 # time series plot of thermocline, metalimnion top and bottom depths
 wtr.plot.temp = function(wtr, ylab = " "){
-  require(plyr)
   
   depths = get.offsets(wtr[,-1])
   td = ts.thermo.depth(wtr)

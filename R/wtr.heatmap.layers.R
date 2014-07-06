@@ -1,7 +1,6 @@
 #heat map with lines for thermocline, meta top and bottom depths
 wtr.heatmap.layers <- function(wtr, ...){
   
-  library(plyr)
   td = ts.thermo.depth(wtr)
   md = ts.meta.depths(wtr)
   
