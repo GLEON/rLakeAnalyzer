@@ -6,7 +6,7 @@
 \description{ 
   This creates a heat map of water temperature similar to \code{\link{wtr.heat.map}} 
   with additional lines drawn to denote the thermocline, and the top and bottom of 
-  the metalimnion as calculated using \code{\link{load.ts.meta.depths}} 
+  the metalimnion as calculated using \code{\link{ts.meta.depths}} 
   and \code{\link{thermo.depth}}.
 }
 \usage{
@@ -36,7 +36,7 @@ wtr.heatmap.layers(wtr, ...)
   \code{\link{wtr.heat.map}}
   \code{\link{load.ts}}
   \code{\link{ts.meta.depths}}
-  \code{\link{thermo.depths}}
+  \code{\link{ts.thermo.depth}}
 }
 \examples{
   #Get the path for the package example file included 
