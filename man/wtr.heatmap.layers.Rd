@@ -46,6 +46,8 @@ wtr.heatmap.layers(wtr, ...)
   wtr = load.ts(wtr.path)
   
   # generate default plot
+  \dontrun{
   wtr.heatmap.layers(wtr)
+  }
 }
 \keyword{ hplot }
