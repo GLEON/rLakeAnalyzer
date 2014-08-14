@@ -12,7 +12,7 @@ buoyancy.freq <- function(wtr, depths){
   
   #Calculate the first derivative of density
   for(i in 1:(numDepths-1)){
-    n2[i] = 9.84/rhoVar[i]*( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] )
+    n2[i] = 9.81/rhoVar[i]*( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] )
     n2depths[i] = (depths[i+1] + depths[i])/2
   }
   
