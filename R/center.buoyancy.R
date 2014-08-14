@@ -16,9 +16,9 @@ center.buoyancy <- function(wtr, depths){
     cent.depths[i] <- mean(depths[i:(i+1)])
   }
   
-  areas[areas < 0] <- NA
+  areas[areas < 0] <- 0
   cent.buoyancy <- sum(cent.depths*areas)/sum(areas)
-  
+  cent.buoyancy[cent.buoyancy == Inf] <- NA # division by zero
   return(cent.buoyancy)
 }
 
