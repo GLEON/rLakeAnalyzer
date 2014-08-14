@@ -16,6 +16,7 @@ center.buoyancy <- function(wtr, depths){
     cent.depths[i] <- mean(depths[i:(i+1)])
   }
   
+  areas[areas < 0] <- NA
   cent.buoyancy <- sum(cent.depths*areas)/sum(areas)
   
   return(cent.buoyancy)
@@ -32,7 +33,7 @@ ts.center.buoyancy <- function(wtr){
   cent.n2 = rep(NA, n)
     
   for(i in 1:n){
-    cent.n2 <- center.buoyancy(wtr.mat[i, ], depths)
+    cent.n2[i] <- center.buoyancy(wtr.mat[i, ], depths)
   }
   
   cent.buoyancy = data.frame(wtr[,'datetime', drop=F], cent.n2)
