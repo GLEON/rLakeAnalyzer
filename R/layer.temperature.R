@@ -39,21 +39,23 @@ layer.temperature <- function(top, bottom, wtr, depths, bthA, bthD){
   dz <- 0.1 #(meters)
   
   numD <- length(wtr)
-  if(max(bthD)>depths[numD]){
+  if(depths[numD] < bottom){
     wtr[numD+1] <- wtr[numD]
-    depths[numD+1] <- max(bthD)
-  }else if(max(bthD)<depths[numD]){
-    bthD <- c(bthD,depths[numD])
+    depths[numD+1] <- bottom
+    numD = numD+1
+  }
+  if(max(bthD) < bottom){
+    bthD <- c(bthD,bottom)
     bthA <- c(bthA,0)
   }
-  if(min(bthD)<depths[1]){
+  if(min(bthD) < depths[1]){
     wtr <- c(wtr[1],wtr)
     depths <- c(min(bthD),depths)
   }
   
-  Io <- grep(min(depths),depths)
+  Io <- which.min(depths)
   Ao <- bthA[Io]
-  if(Ao[1]==0){
+  if(Ao==0){
     stop('surface area cannot be zero, check bathymetry file')
   }
   
