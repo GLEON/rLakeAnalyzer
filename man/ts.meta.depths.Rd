@@ -17,7 +17,7 @@
 \usage{
   ts.meta.depths(wtr, slope = 0.1, seasonal=TRUE, na.rm=FALSE)
 
-  ts.thermo.depth(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE)
+  ts.thermo.depth(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...)
 
   ts.schmidt.stability(wtr, bathy, na.rm=FALSE)
 
@@ -52,6 +52,9 @@
   \item{na.rm}{
 	Boolean indicated if step-by-step removal of NA's should be tried. If false, a timestep with any NA values 
 	will return an NA value. If true, best effort will be made to calculate indices despite NA values.
+  }
+  \item{...}{
+	Additional parameters passed to underlying base function (e.g., index=TRUE for thermo.depth)
   }
 }
 \details{
