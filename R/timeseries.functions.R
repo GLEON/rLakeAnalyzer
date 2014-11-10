@@ -45,7 +45,7 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...){
         next
       }
       #thermo.depth <- function(wtr, depths, Smin = 0.1){\
-      t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal)
+      t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal, ...)
     }
   }
 
