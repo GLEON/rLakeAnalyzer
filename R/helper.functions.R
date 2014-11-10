@@ -4,7 +4,11 @@ get.offsets <- function(data){
   
   header = names(data)
   
-  header = header[-grep(pattern= "datetime", x= header, ignore.case= TRUE)] #Drop datetime
+  #check for existence of datetime header and drop if there
+  dt_indx = grep(pattern= "datetime", x= header, ignore.case= TRUE)
+  if(length(dt_indx) > 0){
+  	header = header[-dt_indx] #Drop datetime
+  }
   
   matches = regexpr("(\\d+\\.?\\d*)" ,header)
   
