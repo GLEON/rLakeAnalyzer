@@ -41,7 +41,7 @@ Luke Winslow
 }
 
 \seealso{
-\code{water.density}
+\code{\link{ts.thermo.depth}}, \code{water.density}
 }
 \examples{
 

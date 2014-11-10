@@ -29,7 +29,7 @@
 
 \arguments{
   \item{wtr}{
-    A data frame of water temperatures (in Celsius). Loaded using \code{\link{load.ts}}
+    A data frame of water temperatures (in Celsius). Loaded using \code{\link{load.ts}}. Must have columns \code{datetime}, \code{wtr_##.#} where ##.# is depth in meters.
   }
   \item{slope}{
     The minimum density gradient (kg/m^3/m) that can be called the thermocline
