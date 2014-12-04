@@ -67,6 +67,9 @@ ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
 	for(i in 1:n){
     if(na.rm){
       temps = wtr.mat[i,]
+      if(all(is.na(temps))){
+      	next
+      }
       notNA = !is.na(temps)
       s.s[i] = schmidt.stability(temps[notNA], depths[notNA], bathy$areas, bathy$depths)
     }else{
