@@ -31,8 +31,9 @@ Luke Winslow
 }
 
 \seealso{
-\code{lake.number}
-\code{wedderburn.number}
+\code{\link{ts.schmidt.stability}}
+\code{\link{lake.number}}
+\code{\link{wedderburn.number}}
 }
 \examples{
 

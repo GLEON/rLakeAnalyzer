@@ -17,6 +17,10 @@ thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE, index=FALSE){
     return(NaN)
   }
   
+  if(length(depths) != length(unique(depths))){
+    stop('Depths all must be unique')
+  }
+  
   #We need water density, not temperature to do this
   rhoVar = water.density(wtr)
   

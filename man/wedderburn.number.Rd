@@ -29,8 +29,11 @@ Mechanics 27, 353-370.
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{\code{lake.number}
+\seealso{
+	\code{\link{ts.wedderburn.number}}
+	\code{\link{lake.number}}
 }
+
 \examples{
 delta_rho <- c(3.1,1.5)
 metaT <- c(5.5,2.4)
@@ -39,6 +42,5 @@ Ao <- c(80300,120000)
 AvHyp_rho <- c(999.31,999.1)
 wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
 \keyword{arith}

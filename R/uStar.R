@@ -11,11 +11,8 @@ uStar <- function(wndSpeed,wndHeight,averageEpiDense){
   vonK <- 0.4 # von Karman constant
 
   # -- calculate drag coefficient (from Hicks, 1972)
-  if (wndSpeed < 5){
-    Cd <- 0.001
-  } else{
-    Cd <- 0.0015
-  }
+  Cd <- rep(0.0015, length(wndSpeed))
+  Cd[wndSpeed < 5] <- 0.001
 
   # -- correct for wind measurement height if < 10 m (Amorocho and DeVries, 1980)
   if (wndHeight != 10){
@@ -27,7 +24,7 @@ uStar <- function(wndSpeed,wndHeight,averageEpiDense){
   
   # -- calculate uStar following Imberger (1985)
   uStar <- sqrt(tau/averageEpiDense)
-   
+  return(uStar)
 }
 
 # -- References
