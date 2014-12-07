@@ -30,9 +30,12 @@ Mechanics 27, 303-475.
 Idso, S.B., 1973. \emph{On the concept of lake stability}. Limnology and Oceanography 18, 681-683.}
 
 \author{
-Jordan S. Read
+Jordan S. Read, Luke Winslow
 }
-\seealso{\code{wedderburn.number}}
+\seealso{
+	\code{\link{ts.lake.number}}
+	\code{\link{wedderburn.number}}
+}
 \examples{
 	bthA	<-	c(1000,900,864,820,200,10)
 	bthD	<-	c(0,2.3,2.5,4.2,5.8,7)

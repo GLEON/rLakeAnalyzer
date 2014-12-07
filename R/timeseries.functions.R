@@ -24,7 +24,7 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
 
 }
 
-ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE){
+ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...){
   
   depths = get.offsets(wtr)
   
@@ -38,14 +38,14 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE){
     if(na.rm){
       temps = wtr.mat[i,]
       notNA = !is.na(temps)
-      t.d[i] = thermo.depth(temps[notNA], depths[notNA], seasonal=seasonal)
+      t.d[i] = thermo.depth(temps[notNA], depths[notNA], seasonal=seasonal, ...)
     }else{
       if(any(is.na(wtr.mat[i,]))){
         t.d[i] = NA
         next
       }
       #thermo.depth <- function(wtr, depths, Smin = 0.1){\
-      t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal)
+      t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal, ...)
     }
   }
 
@@ -67,6 +67,9 @@ ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
 	for(i in 1:n){
     if(na.rm){
       temps = wtr.mat[i,]
+      if(all(is.na(temps))){
+      	next
+      }
       notNA = !is.na(temps)
       s.s[i] = schmidt.stability(temps[notNA], depths[notNA], bathy$areas, bathy$depths)
     }else{
