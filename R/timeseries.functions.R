@@ -273,3 +273,35 @@ ts.layer.temperature <- function(wtr, top, bottom, bathy, na.rm=FALSE){
   return(data.frame(datetime=wtr$datetime, layer.temp=l.t))
 }
 
+ts.internal.energy <- function(wtr, bathy, na.rm=FALSE){
+	
+	depths = get.offsets(wtr)
+	
+	n = nrow(wtr)
+	i.e = rep(NA, n)
+	
+	wtr.mat = as.matrix(wtr[,-1])
+	dimnames(wtr.mat) <- NULL
+	
+	for(i in 1:n){
+		if(na.rm){
+			temps = wtr.mat[i,]
+			if(all(is.na(temps))){
+				next
+			}
+			notNA = !is.na(temps)
+		  i.e[i] = internal.energy(temps[notNA], depths[notNA], bathy$areas, bathy$depths)
+		}else{
+			if(any(is.na(wtr.mat[i,]))){
+				i.e[i] = NA
+				next
+			}
+			i.e[i] = internal.energy(wtr.mat[i,], depths, bathy$areas, bathy$depths)
+		}
+	}
+	
+	output = data.frame(datetime=wtr$datetime, internal.energy=i.e)
+	
+	return(output)
+}
+
