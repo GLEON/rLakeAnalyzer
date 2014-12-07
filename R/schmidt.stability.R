@@ -77,17 +77,8 @@ layerD = seq(min(depths), max(depths), by=dz)
 layerP = approx(depths, rhoL, layerD)$y
 layerA = approx(bthD, bthA, layerD)$y
 
-Zv = layerD * layerA * dz
-Zcv = sum(Zv)/sum(layerA)/dz
-
-numInt = length(layerA)
-st = layerA * NaN
-for (i in 1:numInt){
-	z = layerD[i]
-	A = layerA[i]
-	st[i] = -(Zcv-z)*layerP[i]*A*dz
-}
-St = g/Ao*sum(st)
+Zcv <- layerD %*% layerA / sum(layerA)
+St <- layerP %*% ((layerD - Zcv) * layerA) * dz * g / Ao
 
 return(St)
 
