@@ -1,3 +1,29 @@
+#'@title internal energy function (Joules)
+#'@description calculates the internal energy of the water column with temperature and hypsography
+#'
+#'@details Internal energy is the thermal energy in the water column, which is calculated by 
+#'multiplying the specific heat of water (J kg-1 degK-1) by the temperature and mass of the water 
+#'in the lake. 
+#'
+#'@param wtr a numeric vector of water temperature in degrees C
+#'@param depths a numeric vector corresponding to the depths (in m) of the wtr measurements
+#'@param bthA a numeric vector of cross sectional areas (m^2) corresponding to bthD depths
+#'@param bthD a numeric vector of depths (m) which correspond to areal measures in bthA
+#'
+#'@return internal energy in Joules. (Currently not vectorized..)
+#'@author Jordan S. Read
+#'
+#'@examples
+#'bthA  <-	c(1000,900,864,820,200,10)
+#'bthD	<-	c(0,2.3,2.5,4.2,5.8,7)
+#'
+#'wtr	<-	c(28,27,26.4,26,25.4,24,23.3)
+#'depths	<-	c(0,1,2,3,4,5,6)
+#'
+#'cat('Internal Energy for input is: ')
+#'cat(internal.energy(wtr, depths, bthA, bthD))
+#'@export
+
 internal.energy = function(wtr, depths, bthA, bthD){
   
   
