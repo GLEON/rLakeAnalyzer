@@ -1,8 +1,8 @@
-#'@title internal energy function (Joules)
-#'@description calculates the internal energy of the water column with temperature and hypsography
+#'@title Internal energy function (Joules)
+#'@description Calculates the internal energy of the water column with temperature and hypsography
 #'
 #'@details Internal energy is the thermal energy in the water column, which is calculated by 
-#'multiplying the specific heat of water (J kg-1 degK-1) by the temperature and mass of the water 
+#'multiplying the specific heat of water (J kg-1 K-1) by the temperature and mass of the water 
 #'in the lake. 
 #'
 #'@param wtr a numeric vector of water temperature in degrees C
