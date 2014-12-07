@@ -4,7 +4,8 @@ export(wedderburn.number, layer.density, lake.number, uStar, water.density,
 	   ts.meta.depths, ts.thermo.depth, ts.lake.number, ts.uStar, ts.layer.temperature,
 	   ts.wedderburn.number, ts.buoyancy.freq, buoyancy.freq, layer.temperature, 
 	   wtr.heat.map, wtr.lineseries, wtr.heatmap.layers, wtr.plot.temp, lake.number.plot, 
-	   schmidt.plot, center.buoyancy, ts.center.buoyancy, internal.energy)
+	   schmidt.plot, center.buoyancy, ts.center.buoyancy, internal.energy, 
+			 ts.internal.energy)
 
 import(plyr)
 

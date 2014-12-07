@@ -4,7 +4,7 @@
 \alias{ts.schmidt.stability}
 \alias{ts.lake.number}
 \alias{ts.uStar}
-
+\alias{ts.internal.energy}
 
 \title{
   Calculate physical indices for a timeseries.
@@ -25,6 +25,7 @@
   
   ts.uStar(wtr, wnd, wnd.height, bathy, seasonal=TRUE)
 
+	ts.internal.energy(wtr, bathy, na.rm=FALSE)
 }
 
 \arguments{
@@ -75,7 +76,7 @@
   For loading input data \code{\link{load.ts}}, \code{\link{load.bathy}}.
   
   For the underlying functions operating at each timestep \code{\link{meta.depths}}, 
-  \code{\link{thermo.depth}}, \code{\link{schmidt.stability}}, \code{\link{lake.number}}.
+  \code{\link{thermo.depth}}, \code{\link{schmidt.stability}}, \code{\link{lake.number}}, \code{\link{internal.energy}}.
 }
 
 \examples{
