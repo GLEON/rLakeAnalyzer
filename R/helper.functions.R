@@ -1,5 +1,7 @@
 ## Helper functions for Lake Analyzer R
 
+datetime.pattern = "(datetime|timestamp|time|date)"
+
 get.offsets <- function(data){
   
   header = names(data)
@@ -35,4 +37,56 @@ get.drho_dz <- function(wtr, depths){
 		drho_dz[i] = ( rhoVar[i+1]-rhoVar[i] )/( depths[i+1] - depths[i] );
 	}
 	drho_dz
+}
+
+
+#'@title Find and drop the datetime column from the datatable
+#'
+#'@description Liberally looks for a datetime column and drops it, 
+#'returning a data.frame with only water temperature. Errors if datetime column is 
+#'ambiguous. Warns if 
+#'
+#'@return A data.frame with only the data, after datetime has been dropped
+#'
+drop.datetime = function(data, error=FALSE){
+	
+	header = names(data)
+	dt_indx = grep(datetime.pattern, header, ignore.case=TRUE)
+	
+	if(length(dt_indx) < 1){
+		if(error){
+			stop('Unable to find a datetime column. Datetime column was supplied.')
+		}else{
+			warning('Unable to find a datetime column. Assuming no datetime column was supplied.')
+			return(data)
+		}
+		
+	}else if(length(dt_indx) > 1){
+		stop('datetime column ambiguity. You can only have one column of datetime.')
+	}
+	
+	return(data[,-dt_indx])
+}
+
+#'@title Search for and return the datetime column from a ts data.frame
+#'
+#'
+#'
+get.datetime = function(data, error=FALSE){
+	
+	header = names(data)
+	dt_indx = grep(datetime.pattern, header, ignore.case=TRUE)
+	
+	if(length(dt_indx) < 1){
+		if(error){
+			stop('Unable to find a datetime column.')
+		}else{
+			warning('Unable to find a datetime column, attempting to ignore.')
+			return(NULL)
+		}
+	}else if(length(dt_indx) > 1){
+		stop('datetime column ambiguity. You can only have one column of datetime.')
+	}
+	
+	return(data[,dt_indx])
 }
