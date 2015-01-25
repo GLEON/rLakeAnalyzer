@@ -6,7 +6,8 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
   
   n = nrow(wtr)
   
-  wtr.mat = as.matrix(wtr[,-1])
+  #drop the datetime column
+  wtr.mat = as.matrix(drop.datetime(wtr))
   
   m.d = matrix(NA, nrow=n, ncol=2)
   
@@ -20,7 +21,7 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
     }
   }
   
-  return(data.frame(datetime=wtr$datetime, top=m.d[,1], bottom=m.d[,2]))
+  return(data.frame(datetime=get.datetime(wtr), top=m.d[,1], bottom=m.d[,2]))
 
 }
 
@@ -31,7 +32,9 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...){
   n = nrow(wtr)
   t.d = rep(NA, n)
   
-  wtr.mat = as.matrix(wtr[,-1])
+  #drop the datetime column
+  wtr.mat = as.matrix(drop.datetime(wtr))
+  
   dimnames(wtr.mat) <- NULL
   
   for(i in 1:n){
@@ -49,7 +52,7 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...){
     }
   }
 
-  output = data.frame(datetime=wtr$datetime, thermo.depth=t.d)
+  output = data.frame(datetime=get.datetime(wtr), thermo.depth=t.d)
   
   return(output)
 }
@@ -61,7 +64,9 @@ ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
 	n = nrow(wtr)
 	s.s = rep(NA, n)
 	
-	wtr.mat = as.matrix(wtr[,-1])
+	#drop the datetime column
+	wtr.mat = as.matrix(drop.datetime(wtr))
+	
 	dimnames(wtr.mat) <- NULL
 	
 	for(i in 1:n){
@@ -82,7 +87,7 @@ ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
     }
 	}
 	
-	output = data.frame(datetime=wtr$datetime, schmidt.stability=s.s)
+	output = data.frame(datetime=get.datetime(wtr), schmidt.stability=s.s)
 	
 	return(output)
 	
@@ -128,7 +133,7 @@ ts.lake.number <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 		l.n[i] = lake.number(bathy$areas, bathy$depths, uS, St, m.d[1], m.d[2], hypo.dens)
 	}
 	
-	output = data.frame(datetime=wtr$datetime, lake.number=l.n)
+	output = data.frame(datetime=get.datetime(wtr), lake.number=l.n)
 	
 	return(output)
 }
@@ -168,7 +173,7 @@ ts.uStar <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 		uStar[i] = uStar(wnd[i,2], wnd.height, epi.dens)
 	}
 	
-	output = data.frame(datetime=wtr$datetime, uStar=uStar)
+	output = data.frame(datetime=get.datetime(wtr), uStar=uStar)
 	
 	return(output)
 }
@@ -218,7 +223,7 @@ ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao, seasonal=TRUE)
     
   }
   
-  output = data.frame(datetime=wtr$datetime, wedderburn.number=w.n)
+  output = data.frame(datetime=get.datetime(wtr), wedderburn.number=w.n)
   
   return(output)
 }
@@ -270,7 +275,7 @@ ts.layer.temperature <- function(wtr, top, bottom, bathy, na.rm=FALSE){
     }
   }
   
-  return(data.frame(datetime=wtr$datetime, layer.temp=l.t))
+  return(data.frame(datetime=get.datetime(wtr), layer.temp=l.t))
 }
 
 ts.internal.energy <- function(wtr, bathy, na.rm=FALSE){
@@ -300,7 +305,7 @@ ts.internal.energy <- function(wtr, bathy, na.rm=FALSE){
 		}
 	}
 	
-	output = data.frame(datetime=wtr$datetime, internal.energy=i.e)
+	output = data.frame(datetime=get.datetime(wtr), internal.energy=i.e)
 	
 	return(output)
 }

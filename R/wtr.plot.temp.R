@@ -1,9 +1,9 @@
 # time series plot of thermocline, metalimnion top and bottom depths
-wtr.plot.temp = function(wtr, ylab = " "){
+wtr.plot.temp = function(wtr, ylab = " ", seasonal=TRUE){
   
   depths = get.offsets(wtr[,-1])
-  td = ts.thermo.depth(wtr)
-  md = ts.meta.depths(wtr)
+  td = ts.thermo.depth(wtr, seasonal=seasonal)
+  md = ts.meta.depths(wtr, seasonal=seasonal)
   
   df = list(wtr,td,md) ##Create list of data frame to join
   wtr.all = join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
@@ -31,9 +31,9 @@ wtr.plot.temp = function(wtr, ylab = " "){
     ttformat <- "%d %b %H"
   } else if (tt < 60*60*24*7*8.9) {# if time is less than 2 months units are ex. Jul 25 10:15
     ttformat <- "%d %b %H:%M"
-  } else if (tt < 60*60*24*7*4.4*12) { # if time is less than 12 months units are Jun, Jul, Aug  
+  } else if (tt <= 60*60*24*365) { # if time is less than 12 months units are Jun, Jul, Aug  
     ttformat <- "%b"
-  } else if (tt < 60*60*24*7*4.4*12*1.1){ # if time is more than 12.1 years units are Jul 2013
+  } else if (tt > 60*60*24*365){ # if time is more than 12 months units are Jul 2013
     ttformat <- "%b %Y"
   }
   
@@ -49,9 +49,9 @@ wtr.plot.temp = function(wtr, ylab = " "){
     xxlab <- " "
   } else if (tt < 60*60*24*7*8.9) {# if time is less than 2 months units are ex. Jul 25 
     xxlab <- " "
-  } else if (tt < 60*60*24*7*4.4*12) { # if time is less than 12 months units are Jun, Jul, Aug  
+  } else if (tt <= 60*60*24*365) { # if time is less than 12 months units are Jun, Jul, Aug
     xxlab <- " "
-  } else if (tt < 60*60*24*7*4.4*12*1.1){ # if time is more than 12.1 years units are Jul 2013
+  } else if (tt > 60*60*24*365){ # if time is more than 12 months units are Jul 2013
     xxlab <- " "
   }
   
