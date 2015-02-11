@@ -10,7 +10,7 @@ wtr.plot.temp(wtr, ...)
 \arguments{
 \item{wtr}{Data frame of water temperature loaded with \code{\link{load.ts}}.}
 
-\item{...}{Additional paramters supplied to \code{\link{ts.meta.depths}} and \code{\link{ts.hypo.depth}}}
+\item{...}{Additional paramters supplied to \code{\link{ts.meta.depths}} and \code{\link{ts.thermo.depth}}}
 }
 \description{
 A line based plot of calculated depths of the thermocline, and

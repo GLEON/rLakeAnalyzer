@@ -8,7 +8,7 @@
 #' top and bottom of the metalimnion from a temperature profile time series.
 #'
 #'@param wtr Data frame of water temperature loaded with \code{\link{load.ts}}.
-#'@param ... Additional paramters supplied to \code{\link{ts.meta.depths}} and \code{\link{ts.hypo.depth}}
+#'@param ... Additional paramters supplied to \code{\link{ts.meta.depths}} and \code{\link{ts.thermo.depth}}
 #'
 #'@author Jennifer Brentrup, Taylor Leach, Luke Winslow
 #'
