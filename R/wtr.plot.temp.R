@@ -1,4 +1,5 @@
 # time series plot of thermocline, metalimnion top and bottom depths
+<<<<<<< HEAD
 wtr.plot.temp = function(wtr, ylab = " ", ...){
   
   depths = get.offsets(wtr[,-1])
@@ -31,9 +32,9 @@ wtr.plot.temp = function(wtr, ylab = " ", ...){
     ttformat <- "%d %b %H"
   } else if (tt < 60*60*24*7*8.9) {# if time is less than 2 months units are ex. Jul 25 10:15
     ttformat <- "%d %b %H:%M"
-  } else if (tt < 60*60*24*365) { # if time is less than 12 months units are Jun, Jul, Aug  
+  } else if (tt <= 60*60*24*365) { # if time is less than 12 months units are Jun, Jul, Aug  
     ttformat <- "%b"
-  } else if (tt > 60*60*24*365.25){ # if time is more than 12 months units are Jul 2013
+  } else if (tt > 60*60*24*365){ # if time is more than 12 months units are Jul 2013
     ttformat <- "%b %Y"
   }
   
@@ -49,9 +50,9 @@ wtr.plot.temp = function(wtr, ylab = " ", ...){
     xxlab <- " "
   } else if (tt < 60*60*24*7*8.9) {# if time is less than 2 months units are ex. Jul 25 
     xxlab <- " "
-  } else if (tt < 60*60*24*365) { # if time is less than 12 months units are Jun, Jul, Aug
+  } else if (tt <= 60*60*24*365) { # if time is less than 12 months units are Jun, Jul, Aug
     xxlab <- " "
-  } else if (tt > 60*60*24*365.25){ # if time is more than 12 months units are Jul 2013
+  } else if (tt > 60*60*24*365){ # if time is more than 12 months units are Jul 2013
     xxlab <- " "
   }
   
