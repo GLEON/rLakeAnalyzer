@@ -1,9 +1,9 @@
 # time series plot of thermocline, metalimnion top and bottom depths
-wtr.plot.temp = function(wtr, ylab = " "){
+wtr.plot.temp = function(wtr, ylab = " ", ...){
   
   depths = get.offsets(wtr[,-1])
-  td = ts.thermo.depth(wtr)
-  md = ts.meta.depths(wtr)
+  td = ts.thermo.depth(wtr, ...)
+  md = ts.meta.depths(wtr, ...)
   
   df = list(wtr,td,md) ##Create list of data frame to join
   wtr.all = join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
