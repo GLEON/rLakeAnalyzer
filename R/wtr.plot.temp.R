@@ -1,5 +1,34 @@
-# time series plot of thermocline, metalimnion top and bottom depths
-wtr.plot.temp = function(wtr, ylab = " ", ...){
+#'
+#'@title 
+#'Creates a time series plot of the thermocline and top and 
+#'bottom of the metalimnion
+#'
+#'@description
+#' A line based plot of calculated depths of the thermocline, and 
+#' top and bottom of the metalimnion from a temperature profile time series.
+#'
+#'@param wtr Data frame of water temperature loaded with \code{\link{load.ts}}.
+#'@param ... Additional paramters supplied to \code{\link{ts.meta.depths}} and \code{\link{ts.hypo.depth}}
+#'
+#'@author Jennifer Brentrup, Taylor Leach, Luke Winslow
+#'
+#'@seealso \code{\link{load.ts}} and \code{\link{wtr.lineseries}}
+#'
+#'@keywords hplot 
+#'
+#'@examples
+#'
+#'wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+#'
+#'#Load data for example lake, Sparkilng Lake, Wisconsin.
+#'wtr = load.ts(wtr.path)
+#'
+#'\dontrun{
+#'wtr.plot.temp(wtr)
+#'}
+#'
+#'@export
+wtr.plot.temp = function(wtr, ...){
   
   depths = get.offsets(wtr[,-1])
   td = ts.thermo.depth(wtr, ...)
