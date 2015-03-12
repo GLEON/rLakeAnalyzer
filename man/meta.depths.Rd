@@ -21,6 +21,9 @@ as the starting point.}
 
 \item{unstrat.val}{the value to be returned when the function is unable to calculate
 the metalimnion depths (Default: \code{NA})}
+
+\item{mixed.cutoff}{A cutoff (deg C) where below this threshold, thermo.depth and meta.depths
+are not calculated (NaN is returned). Defaults to 1 deg C.}
 }
 \value{
 A numeric vector of the top and bottom metalimnion depths in meters.
