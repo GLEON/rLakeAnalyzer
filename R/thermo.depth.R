@@ -5,10 +5,14 @@
 # Author: Luke Winslow <lawinslow@gmail.com>
 # Adapted from FindThermoDepth.m in https://github.com/jread-usgs/Lake-Analyzer/
 #
-thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE, index=FALSE){
+thermo.depth <- function(wtr, depths, Smin = 0.1, seasonal=TRUE, index=FALSE, mixed.cutoff=1){
   
   if(any(is.na(wtr))){
     return(NaN)
+  }
+  
+  if(diff(range(wtr, na.rm=TRUE)) < mixed.cutoff){
+  	return(NaN)
   }
   
   #We can't determine anything with less than 3 measurements

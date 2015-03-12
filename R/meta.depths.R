@@ -52,7 +52,7 @@
 #'
 #'@keywords manip
 #'@export
-meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
+meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA, mixed.cutoff=1){
   
 	if(any(is.na(wtr))){
 		return(rep(NaN, 2))
@@ -68,7 +68,12 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
   wtr = wtr[depths$ix]
   depths = depths$x
   
-	thermoD=thermo.depth(wtr, depths, seasonal=seasonal)
+	thermoD=thermo.depth(wtr, depths, seasonal=seasonal, mixed.cutoff=mixed.cutoff)
+	
+	# if no thermo depth, then there can be no meta depths
+	if(is.na(thermoD)){
+		return(c(NaN, NaN))
+	}
 	
 	 #We need water density, not temperature to do this
 	rhoVar = water.density(wtr)
