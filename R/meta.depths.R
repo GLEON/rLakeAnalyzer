@@ -7,8 +7,6 @@
 #' gradient and is demarcated by the bottom of the epilimnion and top 
 #' of the hypolimnion.
 #'
-#'@usage
-#'meta.depths(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA)
 #'
 #'@param wtr
 #'a numeric vector of water temperature in degrees C
@@ -25,6 +23,9 @@
 #'@param unstrat.val
 #'the value to be returned when the function is unable to calculate 
 #'the metalimnion depths (Default: \code{NA})
+#'@param mixed.cutoff
+#'A cutoff (deg C) where below this threshold, thermo.depth and meta.depths 
+#'are not calculated (NaN is returned). Defaults to 1 deg C.
 #'
 #'@return
 #'A numeric vector of the top and bottom metalimnion depths in meters. 
@@ -52,7 +53,7 @@
 #'
 #'@keywords manip
 #'@export
-meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
+meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA, mixed.cutoff=1){
   
 	if(any(is.na(wtr))){
 		return(rep(NaN, 2))
@@ -68,7 +69,12 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA){
   wtr = wtr[depths$ix]
   depths = depths$x
   
-	thermoD=thermo.depth(wtr, depths, seasonal=seasonal)
+	thermoD=thermo.depth(wtr, depths, seasonal=seasonal, mixed.cutoff=mixed.cutoff)
+	
+	# if no thermo depth, then there can be no meta depths
+	if(is.na(thermoD)){
+		return(c(NaN, NaN))
+	}
 	
 	 #We need water density, not temperature to do this
 	rhoVar = water.density(wtr)
