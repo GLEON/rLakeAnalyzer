@@ -4,7 +4,8 @@
 \alias{meta.depths}
 \title{Calculate the Top and Bottom Depths of the Metalimnion}
 \usage{
-meta.depths(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA)
+meta.depths(wtr, depths, slope = 0.1, seasonal = TRUE, unstrat.val = NA,
+  mixed.cutoff = 1)
 }
 \arguments{
 \item{wtr}{a numeric vector of water temperature in degrees C}

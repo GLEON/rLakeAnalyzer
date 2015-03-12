@@ -7,8 +7,6 @@
 #' gradient and is demarcated by the bottom of the epilimnion and top 
 #' of the hypolimnion.
 #'
-#'@usage
-#'meta.depths(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA)
 #'
 #'@param wtr
 #'a numeric vector of water temperature in degrees C
