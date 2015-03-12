@@ -15,9 +15,9 @@
   \code{\link{load.bathy}}.
 }
 \usage{
-  ts.meta.depths(wtr, slope = 0.1, seasonal=TRUE, na.rm=FALSE)
+  ts.meta.depths(wtr, slope = 0.1, na.rm=FALSE, ...)
 
-  ts.thermo.depth(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...)
+  ts.thermo.depth(wtr, Smin = 0.1, na.rm=FALSE, ...)
 
   ts.schmidt.stability(wtr, bathy, na.rm=FALSE)
 

@@ -1,6 +1,6 @@
 #Timeseries functions for r Lake Analyzer
 
-ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
+ts.meta.depths <- function(wtr, slope=0.1, na.rm=FALSE, ...){
   
   depths = get.offsets(wtr)
   
@@ -15,9 +15,9 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
     if(na.rm){
       temps = wtr.mat[i,]
       notNA = !is.na(temps)
-      m.d[i,] = meta.depths(temps[notNA], depths[notNA], slope, seasonal=seasonal) # Assume seasonal thermoD start
+      m.d[i,] = meta.depths(temps[notNA], depths[notNA], slope, ...) # Assume seasonal thermoD start
     }else{
-      m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, seasonal=seasonal) # Assume seasonal thermoD start
+      m.d[i,] = meta.depths(wtr.mat[i,], depths, slope, ...) # Assume seasonal thermoD start
     }
   }
   
@@ -25,7 +25,7 @@ ts.meta.depths <- function(wtr, slope=0.1, seasonal=TRUE, na.rm=FALSE){
 
 }
 
-ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...){
+ts.thermo.depth <- function(wtr, Smin = 0.1, na.rm=FALSE, ...){
   
   depths = get.offsets(wtr)
   
@@ -41,14 +41,14 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, seasonal=TRUE, na.rm=FALSE, ...){
     if(na.rm){
       temps = wtr.mat[i,]
       notNA = !is.na(temps)
-      t.d[i] = thermo.depth(temps[notNA], depths[notNA], seasonal=seasonal, ...)
+      t.d[i] = thermo.depth(temps[notNA], depths[notNA], ...)
     }else{
       if(any(is.na(wtr.mat[i,]))){
         t.d[i] = NA
         next
       }
       #thermo.depth <- function(wtr, depths, Smin = 0.1){\
-      t.d[i] = thermo.depth(wtr.mat[i,], depths, seasonal=seasonal, ...)
+      t.d[i] = thermo.depth(wtr.mat[i,], depths, ...)
     }
   }
 
