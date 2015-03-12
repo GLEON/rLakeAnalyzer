@@ -20,9 +20,6 @@
 #'The seasonal thermocline is defined as the deepest density gradient found 
 #'in the profile. If \code{FALSE}, the depth of the maximum density gradient is used 
 #'as the starting point.
-#'@param unstrat.val
-#'the value to be returned when the function is unable to calculate 
-#'the metalimnion depths (Default: \code{NA})
 #'@param mixed.cutoff
 #'A cutoff (deg C) where below this threshold, thermo.depth and meta.depths 
 #'are not calculated (NaN is returned). Defaults to 1 deg C.
@@ -53,7 +50,7 @@
 #'
 #'@keywords manip
 #'@export
-meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, unstrat.val=NA, mixed.cutoff=1){
+meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, mixed.cutoff=1){
   
 	if(any(is.na(wtr))){
 		return(rep(NaN, 2))

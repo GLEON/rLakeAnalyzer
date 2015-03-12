@@ -4,8 +4,7 @@
 \alias{meta.depths}
 \title{Calculate the Top and Bottom Depths of the Metalimnion}
 \usage{
-meta.depths(wtr, depths, slope = 0.1, seasonal = TRUE, unstrat.val = NA,
-  mixed.cutoff = 1)
+meta.depths(wtr, depths, slope = 0.1, seasonal = TRUE, mixed.cutoff = 1)
 }
 \arguments{
 \item{wtr}{a numeric vector of water temperature in degrees C}
@@ -19,9 +18,6 @@ returned. This is fed to thermo.depth, which is used as the starting point.
 The seasonal thermocline is defined as the deepest density gradient found
 in the profile. If \code{FALSE}, the depth of the maximum density gradient is used
 as the starting point.}
-
-\item{unstrat.val}{the value to be returned when the function is unable to calculate
-the metalimnion depths (Default: \code{NA})}
 
 \item{mixed.cutoff}{A cutoff (deg C) where below this threshold, thermo.depth and meta.depths
 are not calculated (NaN is returned). Defaults to 1 deg C.}
