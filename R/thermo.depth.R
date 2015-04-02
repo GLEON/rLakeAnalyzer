@@ -1,4 +1,4 @@
-#'
+
 #'@title Calculate depth of the thermocline from a temperature profile.
 #'
 #'@param wtr
@@ -18,14 +18,14 @@
 #'@param mixed.cutoff
 #'A cutoff (deg C) where below this threshold, thermo.depth and meta.depths 
 #'are not calculated (NaN is returned). Defaults to 1 deg C.
-#'
 #'@return 
-#'Depth of thermocline. If no thermocline found, value is max(depths).
+#'Depth of thermocline. If no thermocline found, value is NaN.
 #'
 #'@description
 #'This function calculates the location of the thermocline from a temperature profile. 
 #'It uses a special technique to estimate where the thermocline lies even between two 
 #'temperature measurement depths, giving a potentially finer-scale estimate than usual techniques.
+#'
 #'
 #'@author
 #'Luke Winslow
