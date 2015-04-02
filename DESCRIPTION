@@ -12,5 +12,5 @@ Imports:
     plyr
 License: GPL (>= 2)
 Packaged: 2014-07-06 09:09:24 UTC; Luke
-Repository: http://lakeanalyzer.gleon.org/
+Repository: https://github.com/GLEON/rLakeAnalyzer
 Date/Publication: 2014-07-06 09:09:24
