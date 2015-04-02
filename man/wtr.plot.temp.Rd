@@ -16,9 +16,6 @@ wtr.plot.temp(wtr, ...)
 A line based plot of calculated depths of the thermocline, and
 top and bottom of the metalimnion from a temperature profile time series.
 }
-\details{
-
-}
 \examples{
 wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
 

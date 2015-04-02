@@ -40,14 +40,14 @@ get.drho_dz <- function(wtr, depths){
 }
 
 
-#'@title Find and drop the datetime column from the datatable
-#'
-#'@description Liberally looks for a datetime column and drops it, 
-#'returning a data.frame with only water temperature. Errors if datetime column is 
-#'ambiguous. Warns if 
-#'
-#'@return A data.frame with only the data, after datetime has been dropped
-#'
+#@title Find and drop the datetime column from the datatable
+#
+#description Liberally looks for a datetime column and drops it, 
+#returning a data.frame with only water temperature. Errors if datetime column is 
+#ambiguous. Warns if there is no match.
+#
+#@return A data.frame with only the data, after datetime has been dropped
+#
 drop.datetime = function(data, error=FALSE){
 	
 	header = names(data)
@@ -68,10 +68,10 @@ drop.datetime = function(data, error=FALSE){
 	return(data[,-dt_indx])
 }
 
-#'@title Search for and return the datetime column from a ts data.frame
-#'
-#'
-#'
+#@title Search for and return the datetime column from a ts data.frame
+#
+#Warns if unavailable then returns NULL.
+#
 get.datetime = function(data, error=FALSE){
 	
 	header = names(data)

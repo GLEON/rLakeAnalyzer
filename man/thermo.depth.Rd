@@ -26,15 +26,12 @@ as the starting point.}
 are not calculated (NaN is returned). Defaults to 1 deg C.}
 }
 \value{
-Depth of thermocline. If no thermocline found, value is max(depths).
+Depth of thermocline. If no thermocline found, value is NaN.
 }
 \description{
 This function calculates the location of the thermocline from a temperature profile.
 It uses a special technique to estimate where the thermocline lies even between two
 temperature measurement depths, giving a potentially finer-scale estimate than usual techniques.
-}
-\details{
-
 }
 \examples{
 # A vector of water temperatures
