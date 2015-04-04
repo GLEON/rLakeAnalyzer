@@ -26,18 +26,3 @@ uStar <- function(wndSpeed,wndHeight,averageEpiDense){
   uStar <- sqrt(tau/averageEpiDense)
   return(uStar)
 }
-
-# -- References
-#같 Hicks, B.B., 1972. A procedure for the formulation of bulk transfer
-#같 coefficients over water bodies of different sizes. Boundary-Layer
-#같 Meterology 3: 201-213
-
-#같 Amorocho, J., DeVries, J.J., 1980. A new evaluation of the wind 같
-#같 stress coefficient over water surfaces. Journal of Geophysical  같
-#같 Research 85: 433-442.
-
-#같 Fischer, H.B., List, E.J., Koh, R.C.Y., Imberger, J., Brooks, N.H.,
-#같 1979. Mixing in inland and coastal waters. Academic Press.
-
-#같 Imberger, J., 1985. The diurnal mixed layer. Limnology and Oceanography
-#같 30: 737-770.
