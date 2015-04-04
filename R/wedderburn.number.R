@@ -15,9 +15,6 @@ wedderburn.number <- function(delta_rho,metaT,uSt,Ao,AvHyp_rho){
   #   uSt = water friction velocity due to wind stress 
   #   Lo = fetch length in the direction of the wind.
   #
-  #Reference:
-  #°° Imberger, Jorg, and John C. Patterson. "Physical Limnology." Advances 
-  #°° in Applied Mechanics 27 (1990): 314-317.
   
   #Constants
   g = 9.81                   #force of gravity

@@ -28,6 +28,3 @@ lake.number <- function(bthA,bthD,uStar,St,metaT,metaB,averageHypoDense){
 	return(Ln)
 }
 
-# -- References:
-#°° Imberger, Jorg, and John C. Patterson. "Physical Limnology." Advances in °°
-#°° Applied Mechanics 27 (1990): 314-317.
