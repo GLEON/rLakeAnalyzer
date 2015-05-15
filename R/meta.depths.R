@@ -95,9 +95,10 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, mixed.cutoff=1){
 		Tdepth[i] = mean(depths[ i:(i+1) ]);
 	}
 	
-	tmp = sort.int(c(Tdepth, thermoD+1e-6), index.return = TRUE)
+	tmp = sort.int(unique(c(Tdepth, thermoD)), index.return = TRUE)
 	sortDepth = tmp$x
 	sortInd = tmp$ix
+	numDepths = length(sortDepth) #set numDepths again, it could have changed above
 	drho_dz = approx(Tdepth, drho_dz, sortDepth)
 	drho_dz = drho_dz$y
 	
