@@ -102,14 +102,9 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, mixed.cutoff=1){
 	drho_dz = approx(Tdepth, drho_dz, sortDepth)
 	drho_dz = drho_dz$y
 	
-	thermo_index = 1
-	thermoId = numDepths;
-	for(i in 1:numDepths){
-		if(thermoId == sortInd[i]){
-			thermo_index = i
-			break;
-		}
-	}
+	#find the thermocline index
+	# this is where we will start our search for meta depths
+	thermo_index = which(sortDepth == thermoD)
 	
 	for (i in thermo_index:numDepths){ # moving down from thermocline index
 		if (!is.na(drho_dz[i]) && drho_dz[i] < slope){ #top of metalimnion
