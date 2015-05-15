@@ -118,7 +118,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, mixed.cutoff=1){
 		}
 	}
 	
-	if (i-thermo_index > 1 && (!is.na(drho_dz[thermo_index]) && drho_dz[thermo_index] > slope)){
+	if (i-thermo_index >= 1 && (!is.na(drho_dz[thermo_index]) && drho_dz[thermo_index] > slope)){
 		metaBot_depth = approx(drho_dz[thermo_index:i],
 			sortDepth[thermo_index:i],slope)
 		metaBot_depth = metaBot_depth$y
@@ -135,7 +135,7 @@ meta.depths = function(wtr, depths, slope=0.1, seasonal=TRUE, mixed.cutoff=1){
 		}
 	}
 	
-	if(thermo_index - i > 1 && (!is.na(drho_dz[thermo_index]) && drho_dz[thermo_index] > slope)){
+	if(thermo_index - i >= 1 && (!is.na(drho_dz[thermo_index]) && drho_dz[thermo_index] > slope)){
 		metaTop_depth = approx(drho_dz[i:thermo_index], sortDepth[i:thermo_index], slope);
 		metaTop_depth = metaTop_depth$y
 	}
