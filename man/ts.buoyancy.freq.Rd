@@ -21,13 +21,17 @@ ts.buoyancy.freq(wtr, at.thermo=TRUE, ...)
   \item{at.thermo}{
     Boolean indicating if only buoyancy frequency at the thermocline should be returned. If false, full profile is returned. 
   }
+  \item{na.rm}{
+  	Boolean indicated if step-by-step removal of NA's should be tried. If false, a timestep with any NA values 
+		will likely return an NA value. If true, best effort will be made to calculate indices despite NA values.
+  }
   \item{...}{
     Additional parameters will be passed on to \code{thermo.depth} function when extracting buoyancy frequency at only the thermocline. 
     Common parameters to supply would be \code{seasonal} and \code{slope}.
   }
 }
 
-\value{Returns a data frame with the timeseries of buoyancy frequency. Includes a \sQuote{datetime} column.}
+\value{Returns a data frame with the timeseries of buoyancy frequency in units \code{sec^-2}. Includes a \sQuote{datetime} column.}
   
 \references{
 Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}. Advances in Applied

@@ -22,7 +22,7 @@
 }
 
 \value{
-	Returns a vector of buoyancy frequency. Return value 
+	Returns a vector of buoyancy frequency in units \code{sec^-2}. Return value 
 	has attribute "depths" which define buoyancy frequency depths (which 
 	differ from supplied depths).
 }
