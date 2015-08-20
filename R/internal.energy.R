@@ -10,7 +10,7 @@
 #'@param bthA a numeric vector of cross sectional areas (m^2) corresponding to bthD depths
 #'@param bthD a numeric vector of depths (m) which correspond to areal measures in bthA
 #'
-#'@return internal energy in Joules. (Currently not vectorized..)
+#'@return internal energy in Joules m-2. (Currently not vectorized..)
 #'@author Jordan S. Read
 #'
 #'@examples

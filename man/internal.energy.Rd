@@ -16,7 +16,7 @@ internal.energy(wtr, depths, bthA, bthD)
 \item{bthD}{a numeric vector of depths (m) which correspond to areal measures in bthA}
 }
 \value{
-internal energy in Joules. (Currently not vectorized..)
+internal energy in Joules m-2. (Currently not vectorized..)
 }
 \description{
 Calculates the internal energy of the water column with temperature and hypsography
