@@ -22,7 +22,7 @@ buoyancy.freq <- function(wtr, depths){
   
 }
 
-ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, ...){
+ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, na.rm=FALSE, ...){
 
   depths = get.offsets(wtr)
   
@@ -31,15 +31,27 @@ ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, ...){
   #drop the datetime column
   wtr.mat = as.matrix(drop.datetime(wtr))
   
+  if(na.rm & !at.thermo){
+  	warning('rLakeAnalyzer::ts.buoyancy.freq: na.rm is ignored if full buoyancy frequency profile is calculated')
+  }
+  
   #If just N2 at the thermocline is requested, pull out just those values
   if(at.thermo){
   
     n2 = rep(NA, n)
     
     for(i in 1:n){
-      thermo.indx = thermo.depth(wtr.mat[i,], depths, index=TRUE, ...)
-      tmp.n2 = buoyancy.freq(wtr.mat[i,], depths)
-      
+    	if(na.rm){
+    		temps = wtr.mat[i,]
+    		notNA = !is.na(temps)
+    		
+    		thermo.indx = thermo.depth(temps[notNA], depths[notNA], index=TRUE, ...)
+    		tmp.n2 = buoyancy.freq(temps[notNA], depths[notNA])
+    		
+    	}else{
+      	thermo.indx = thermo.depth(wtr.mat[i,], depths, index=TRUE, ...)
+      	tmp.n2 = buoyancy.freq(wtr.mat[i,], depths)
+    	}
       if(!is.na(thermo.indx)){
         n2[i] = tmp.n2[thermo.indx]
       }
