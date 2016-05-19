@@ -1,7 +1,7 @@
 rLakeAnalyzer
 ===============
 [![Build Status](https://travis-ci.org/GLEON/rLakeAnalyzer.svg?branch=master)](https://travis-ci.org/GLEON/rLakeAnalyzer)
-[![Download Count](http://cranlogs.r-pkg.org/badges/rLakeAnalyzer)](https://cran.rstudio.com/web/packages/rLakeAnalyzer/index.html)
+[![Download Count](http://cranlogs.r-pkg.org/badges/rLakeAnalyzer)]( https://cran.r-project.org/web/packages/rLakeAnalyzer/index.html)
 
 
 An R version of Lake Analyzer
