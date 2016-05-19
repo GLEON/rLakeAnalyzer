@@ -6,7 +6,7 @@ test_that("thermo.depth returns correct values",{
 	example_data = system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
 	
 	wtr               = load.ts(example_data, tz='UTC')
-	expected          = load.ts(system.file('extdata', 'Sparkling.thermod.tsv', package="rLakeAnalyzer"), tz='UTC')
+	expected          = load.ts(system.file('extdata', 'sparkling.thermod.tsv', package="rLakeAnalyzer"), tz='UTC')
 	seasonal_expected = load.ts(system.file('extdata', 'Sparkling.sthermod.tsv', package="rLakeAnalyzer"), tz='UTC')
 	
 	m.d = ts.thermo.depth(wtr, seasonal=FALSE)
