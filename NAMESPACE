@@ -7,5 +7,9 @@ export(wedderburn.number, layer.density, lake.number, uStar, water.density,
 	   schmidt.plot, center.buoyancy, ts.center.buoyancy, internal.energy, 
 			 ts.internal.energy)
 
-import(plyr)
-
+import("plyr")
+importFrom("grDevices", "colorRampPalette")
+importFrom("graphics", "abline", "axis", "filled.contour", "legend",
+           "lines", "plot", "segments", "title")
+importFrom("stats", "approx")
+importFrom("utils", "read.table")
