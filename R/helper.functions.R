@@ -12,13 +12,14 @@ get.offsets <- function(data){
   	header = header[-dt_indx] #Drop datetime
   }
   
-  matches = regexpr("(\\d+\\.?\\d*)" ,header)
+  #match anything digits after the last _ (at the end of the line)
+  matches = regexpr("_\\d+\\.?\\d*$" ,header)
   
   lengths = attr(matches,'match.length')
   offsets = vector(mode="numeric", length=length(matches))
   
   for(i in 1:length(matches)){
-    offsets[i] = as.numeric(substr(header[i], matches[i], matches[i] + lengths[i]))
+    offsets[i] = as.numeric(substr(header[i], matches[i]+1, matches[i] + lengths[i]))
   }
   
   return(offsets)

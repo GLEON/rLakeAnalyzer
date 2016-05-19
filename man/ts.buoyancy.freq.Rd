@@ -11,7 +11,7 @@ Function for simplifying the calculation of buoyancy frequency. Can usually be c
 
 
 \usage{
-ts.buoyancy.freq(wtr, at.thermo=TRUE, ...)
+ts.buoyancy.freq(wtr, at.thermo=TRUE, na.rm=FALSE, ...)
 }
 
 \arguments{
