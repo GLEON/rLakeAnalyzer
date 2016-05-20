@@ -3,3 +3,4 @@ changelog.txt
 .travis.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$
+README.md
