@@ -1,5 +1,5 @@
 Package: rLakeAnalyzer
-Title: Package for the Analysis of Lake Physics
+Title: Lake physics tools
 Maintainer: Luke Winslow <lawinslow@gmail.com>
 Version: 1.8.3
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Taylor
