@@ -7,7 +7,13 @@
 epi.temperature(wtr, depths, bthA, bthD)
 }
 \arguments{
-\item{wtr}{a water temperature vector}
+\item{wtr}{a numeric vector of water temperature in degrees C.}
+
+\item{depths}{a numeric vector corresponding to the depths (in m) of the wtr measurements}
+
+\item{bthA}{a numeric vector of cross sectional areas (m^2) corresponding to bthD depths}
+
+\item{bthD}{a numeric vector of depths (m) which correspond to areal measures in bthA}
 }
 \details{
 Calculates volumetrically weighted average epilimnetic temperature using
