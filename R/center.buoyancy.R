@@ -23,7 +23,7 @@ center.buoyancy <- function(wtr, depths){
 }
 
 
-ts.center.buoyancy <- function(wtr){
+ts.center.buoyancy <- function(wtr, na.rm=FALSE){
   
   depths = get.offsets(wtr)
   
@@ -33,10 +33,16 @@ ts.center.buoyancy <- function(wtr){
   cent.n2 = rep(NA, n)
     
   for(i in 1:n){
-    cent.n2[i] <- center.buoyancy(wtr.mat[i, ], depths)
+    if(na.rm){
+      temps = wtr.mat[i,]
+      notNA = !is.na(temps)
+      cent.n2[i] <- center.buoyancy(temps[notNA], depths[notNA])
+    }else{
+      cent.n2[i] <- center.buoyancy(wtr.mat[i, ], depths)
+    }
   }
   
-  cent.buoyancy = data.frame(wtr[,'datetime', drop=F], cent.n2)
+  cent.buoyancy = data.frame(wtr[,'datetime', drop=FALSE], cent.n2)
   
   return(cent.buoyancy)
 }

@@ -10,12 +10,16 @@ Function for simplifying the calculation of the center of buoyancy. Can usually 
 }
 
 \usage{
-ts.center.buoyancy(wtr)
+ts.center.buoyancy(wtr, na.rm=FALSE)
 }
 
 \arguments{
   \item{wtr}{
     A data frame of water temperatures (in Celsius). Loaded using \code{\link{load.ts}}
+  }
+  \item{na.rm}{
+  	Boolean indicated if step-by-step removal of NA's should be tried. If false, a timestep with any NA values 
+	  will return an NA value. If true, best effort will be made to calculate indices despite NA values.
   }
 }
 
