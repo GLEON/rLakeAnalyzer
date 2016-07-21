@@ -11,12 +11,17 @@
 #zm = max. depth
 #zp = mean density - uses Richard's function water.density.R
 #pz = observed denisty at depth z
-#Az = area at depth z  
+#Az = area at depth z
 
-schmidt.stability = function(wtr, depths, bthA, bthD, sal = wtr*0){
+schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
 
 if(length(wtr) != length(depths)){
 	stop('water temperature array must be the same length as the depth array')
+}
+
+#having some weird issues with wtr and sal lengths, trying to fix with this
+if(length(sal) == 1){
+	sal = rep(sal, length(wtr))
 }
 
 #Constants
