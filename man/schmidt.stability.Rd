@@ -5,7 +5,7 @@
 \description{Schmidt stability, or the resistance to mechanical mixing due to the potential energy inherent in the stratification of the water column.
 }
 \usage{
-schmidt.stability(wtr, depths, bthA, bthD, sal = wtr * 0)
+schmidt.stability(wtr, depths, bthA, bthD, sal = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
