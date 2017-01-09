@@ -2,11 +2,12 @@
 
 
 #' @title computing a norm value for the segment from point k1 to k2-1
-#' @param K1 -[INTEGER] start point
-#' @param K2 -[INTEGER] end point+1
-#' @param X -[REAL(?)] input x-axis array
-#' @param Y -[REAL(?)] input y-axis array
+#' @param k1 [INTEGER] start point
+#' @param k2 [INTEGER] end point+1
+#' @param x [REAL(?)] input x-axis array
+#' @param y [REAL(?)] input y-axis array
 #' @return A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REAL] coefficient of linear regression, R2B -[REAL] norm of the segment (maximum "distance" measured perpendicular to the regression line)
+#' @description  A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REAL] coefficient of linear regression, R2B -[REAL] norm of the segment (maximum "distance" measured perpendicular to the regression line)
 
 
 
@@ -26,8 +27,8 @@ r2b = function(k1,k2,x,y) {
     #  sxy=0
     #  eps=0
     i = k1:(k2-1)
-    ssx = sum(df$x[i]^2)
-    sxy = sum(df$x[i]*df$y[i])
+    sxx = sum(x[i]^2)
+    sxy = sum(x[i]*y[i])
     sy = sum(y[i])
     sx = sum(x[i])
     #  for (i in k1:k2-1){

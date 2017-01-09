@@ -3,13 +3,13 @@
 #'
 #' @title Interpolate and normalize a vector of samples.
 #' @param x0 [REAL] start point along the x-axis
-#' @param X [REAL(N)] input x-axis array (should be in "chronological" order)
-#' @param Y [REAL(N)] input y-axis array
+#' @param x [REAL(N)] input x-axis array (should be in "chronological" order)
+#' @param y [REAL(N)] input y-axis array
 #'
 #' @return Output is a data.frame with: anormx, the normalization value used to make the last x == 1. anormy, the normalization value used to make the last y == 1. xx,yy  vectors of x,y values interpolated to be the same length as x0.
 
 
-getxxnorm <- function(x,y, x0) {
+getxxnorm <- function(x,y,x0) {
   y0 <- rep(0,length(x0))  # Reserve space for y values.
   j <- 1
   for (i in 1:length(x0) ) {

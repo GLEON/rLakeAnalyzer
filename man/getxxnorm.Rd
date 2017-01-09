@@ -7,11 +7,11 @@
 getxxnorm(x, y, x0)
 }
 \arguments{
+\item{x}{[REAL(N)] input x-axis array (should be in "chronological" order)}
+
+\item{y}{[REAL(N)] input y-axis array}
+
 \item{x0}{[REAL] start point along the x-axis}
-
-\item{X}{[REAL(N)] input x-axis array (should be in "chronological" order)}
-
-\item{Y}{[REAL(N)] input y-axis array}
 }
 \value{
 Output is a data.frame with: anormx, the normalization value used to make the last x == 1. anormy, the normalization value used to make the last y == 1. xx,yy  vectors of x,y values interpolated to be the same length as x0.

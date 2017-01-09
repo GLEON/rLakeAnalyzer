@@ -3,8 +3,8 @@
 #' @description Linear interpolation of the Input Data Series
 #'
 #' @param x0 [REAL] start point along the x-axis
-#' @param X [REAL(N)] input x-axis array (should be in "chronological" order)
-#' @param Y [REAL(N)] input y-axis array
+#' @param x [REAL(N)] input x-axis array (should be in "chronological" order)
+#' @param y [REAL(N)] input y-axis array
 #'
 #' @return Interpolation of both x and y
 

@@ -7,11 +7,11 @@
 getxx(x, y, x0)
 }
 \arguments{
+\item{x}{[REAL(N)] input x-axis array (should be in "chronological" order)}
+
+\item{y}{[REAL(N)] input y-axis array}
+
 \item{x0}{[REAL] start point along the x-axis}
-
-\item{X}{[REAL(N)] input x-axis array (should be in "chronological" order)}
-
-\item{Y}{[REAL(N)] input y-axis array}
 }
 \value{
 Interpolation of both x and y

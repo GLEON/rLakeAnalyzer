@@ -7,15 +7,18 @@
 r2b(k1, k2, x, y)
 }
 \arguments{
-\item{K1}{-[INTEGER] start point}
+\item{k1}{[INTEGER] start point}
 
-\item{K2}{-[INTEGER] end point+1}
+\item{k2}{[INTEGER] end point+1}
 
-\item{X}{-[REAL(?)] input x-axis array}
+\item{x}{[REAL(?)] input x-axis array}
 
-\item{Y}{-[REAL(?)] input y-axis array}
+\item{y}{[REAL(?)] input y-axis array}
 }
 \value{
+A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REAL] coefficient of linear regression, R2B -[REAL] norm of the segment (maximum "distance" measured perpendicular to the regression line)
+}
+\description{
 A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REAL] coefficient of linear regression, R2B -[REAL] norm of the segment (maximum "distance" measured perpendicular to the regression line)
 }
 

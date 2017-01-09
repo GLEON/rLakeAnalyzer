@@ -7,13 +7,16 @@
 spl(ni, i, nr)
 }
 \arguments{
+\item{ni}{[INTEGER(NR)] current array with interval start point number}
+
 \item{i}{[INTEGER] interval number, should be less than NR+1}
 
-\item{nr-}{[INTEGER] current maximum of interval number}
-
-\item{ni-}{[INTEGER(NR)] current array with interval start point number}
+\item{nr}{[INTEGER] current maximum of interval number}
 }
 \value{
 nn- [INTEGER(NR)] new array with interval start point number
+}
+\description{
+spliting interval i into 2 pieces
 }
 

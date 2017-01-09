@@ -4,10 +4,11 @@
 #
 #' @title spliting interval i into 2 pieces
 #' @param i [INTEGER] interval number, should be less than NR+1
-#' @param nr- [INTEGER] current maximum of interval number
-#' @param ni- [INTEGER(NR)] current array with interval start point number
+#' @param nr [INTEGER] current maximum of interval number
+#' @param ni [INTEGER(NR)] current array with interval start point number
 #'
 #' @return nn- [INTEGER(NR)] new array with interval start point number
+#' @description spliting interval i into 2 pieces
 
 
 spl <- function(ni, i, nr) {
