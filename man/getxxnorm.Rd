@@ -19,4 +19,8 @@ Output is a data.frame with: anormx, the normalization value used to make the la
 \description{
 Interpolate and normalize a vector of samples. X and Y will be linearly interpolated to match the length of X0 and will be normalized so that the first point is (0,0) and the last point is (1,1). Vector x are the input x values, must be in ascending order.
 }
+\examples{
+x0 <- c(0,1,2,3,4,5)
+getxxnorm(y=t11$depth,x=t11$temper, x0=x0)
+}
 
