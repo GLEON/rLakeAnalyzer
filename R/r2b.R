@@ -40,6 +40,7 @@ r2b = function(k1,k2,x,y) {
 
     n = k2-k1
     a = 0.0
+
     if(k1 > 1) {
       a = (n*sxy-sy*sx)/(n*sxx-sx*sx)
     }
