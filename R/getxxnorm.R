@@ -1,4 +1,4 @@
-
+#' @export
 #' @description Interpolate and normalize a vector of samples. X and Y will be linearly interpolated to match the length of X0 and will be normalized so that the first point is (0,0) and the last point is (1,1). Vector x are the input x values, must be in ascending order.
 #'
 #' @title Interpolate and normalize a vector of samples.

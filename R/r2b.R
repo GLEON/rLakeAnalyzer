@@ -1,6 +1,4 @@
-
-
-
+#' @export
 #' @title computing a norm value for the segment from point k1 to k2-1
 #' @param k1 [INTEGER] start point
 #' @param k2 [INTEGER] end point+1

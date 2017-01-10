@@ -1,4 +1,4 @@
-
+#' @export
 #' @title mixmerge (was called zerge)
 #' @description merge interval i and i+1
 #' @param i [INTEGER] interval number of the first segment to merge

@@ -1,4 +1,4 @@
-
+#' @export
 #' @title Linear interpolation of the Input Data Series
 #' @description Linear interpolation of the Input Data Series
 #'

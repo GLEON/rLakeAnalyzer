@@ -2,6 +2,7 @@
 #SUBROUTINE spl(i,Nr,Ni)
 #INTEGER NR,NI(nr+2)
 #
+#' @export
 #' @title spliting interval i into 2 pieces
 #' @param i [INTEGER] interval number, should be less than NR+1
 #' @param nr [INTEGER] current maximum of interval number
