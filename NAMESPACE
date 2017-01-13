@@ -2,6 +2,6 @@
 
 export(getxx)
 export(getxxnorm)
-export(mixmerge)
 export(r2b)
 export(spl)
+export(zerge)
