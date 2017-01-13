@@ -10,6 +10,8 @@
 zerge = function(i,nr,ni) {
   nn = ni
   nn[i:nr] = ni[(i+1):(nr+1)]
+  nn
+  ## Suggestion
   ## Eliminate doubled up index entries by using unique
-  unique(nn)
+  #unique(nn)
 }
