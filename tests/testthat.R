@@ -1,4 +1,4 @@
 library(testthat)
-library(limnotools)
+#library(limnotools)
 
 test_check("limnotools")
