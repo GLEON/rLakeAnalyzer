@@ -45,11 +45,12 @@
 #}
 
 spl <- function(ni,i) {
-  stopifnot(i<length(ni))
+  stopifnot(i < length(ni)) # Otherwise ni[i+1] would fail.
   k1 = ni[i]
   k2 = ni[i+1]
   jsplit = floor((k1+k2)/2) # Is an index, must be an integer.
   stopifnot(k1<jsplit & jsplit<k2) 
+  # Create a new vector with jsplit at position i
   c( ni[1:i], jsplit, ni[(i+1):length(ni)] )
 }
 
