@@ -35,16 +35,5 @@ ni = spl(ni,i=length(ni)-1)
 ni
 ni = spl(ni,i=length(ni)-1)
 ni
-## Interval too small
-ni =  c(10, 20)
-i = 2
-
-spl(ni, i)
-
-## i too small
-ni =  c(10, 20, 30)
-i = 3
-
-spl(ni, i)
 }
 

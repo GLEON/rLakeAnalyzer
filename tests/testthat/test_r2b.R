@@ -1,6 +1,10 @@
 # Testing r2b.R
 
-source("../../R/r2b.R")
+library(devtools) #load devtools
+
+#load_all will reload all R code in R/ that have changed since it was last run
+load_all()
+#source("../../R/r2b.R")
 
 context("Testing the r2b() function.")
 
