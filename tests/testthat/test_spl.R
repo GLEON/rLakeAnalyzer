@@ -1,7 +1,9 @@
 # Testing spl.R
 
-#library(limnotools)
-#source("../../R/spl.R")
+library(devtools) #load devtools
+
+#load_all will reload all R code in R/ that have changed since it was last run
+load_all()
 
 context("Testing the spl() function.")
 

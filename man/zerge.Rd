@@ -4,17 +4,12 @@
 \alias{zerge}
 \title{zerge (was called zerge)}
 \usage{
-zerge(i, nr, ni)
+zerge(i, ni)
 }
 \arguments{
 \item{i}{[INTEGER] interval number of the first segment to merge}
 
-\item{nr}{[INTEGER] current maximum of the interval number}
-
 \item{ni}{[INTEGER(NR)] current array with interval start point numbers}
-}
-\value{
-'nn- [INTEGER(NR)] new array with interval start point numbers
 }
 \description{
 merge interval i and i+1
