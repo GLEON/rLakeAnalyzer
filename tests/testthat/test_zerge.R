@@ -1,6 +1,6 @@
 # Testing zerge.R
 
-source("../../R/zerge.R")
+#source("../../R/zerge.R")
 
 context("Testing the zerge() function.")
 

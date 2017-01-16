@@ -1,7 +1,7 @@
 # Testing spl.R
 
 #library(limnotools)
-source("../../R/spl.R")
+#source("../../R/spl.R")
 
 context("Testing the spl() function.")
 
