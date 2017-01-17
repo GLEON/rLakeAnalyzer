@@ -49,7 +49,14 @@ spl <- function(ni,i) {
   k1 = ni[i]
   k2 = ni[i+1]
   jsplit = floor((k1+k2)/2) # Is an index, must be an integer.
-  stopifnot(k1<jsplit & jsplit<k2) 
+
+  # The following lines are taken from the original code but actually
+  # are in error. They are included simply to make the tests produce the
+  # identical answers in every case.
+  if (jsplit>=k2-1) jsplit=k2-2
+  if (jsplit<=k1+1) jsplit=k1+2
+
+  stopifnot(k1<jsplit & jsplit<k2) # Verify that the interval has actually been split.
   # Create a new vector with jsplit at position i
   c( ni[1:i], jsplit, ni[(i+1):length(ni)] )
 }
