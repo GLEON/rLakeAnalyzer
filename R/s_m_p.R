@@ -41,6 +41,8 @@ library(devtools)
 
 s_m_p = function(eps,x,y) {
 
+#  #DEBUG print(c("X:",x))
+#  #DEBUG print(c("y:",y))
   # Extremely mysterious original code:
   #  Nr=2
   #      m=NINT(FLOAT(N)/FLOAT(Nr))
@@ -56,59 +58,65 @@ s_m_p = function(eps,x,y) {
   # Nr is now fixed to 2 so we will short-circuit it instead:
 
   ni = c( 1, round(length(x)/2)+1, length(x)+1 )
+#DEBUG print(c("Initial ni:",format(ni)))
 
-  changed = TRUE   # Keep track of whether any intervals were split or merged...
+  # If any interval does not meet the r2b<eps test then split it into two with spl().
+  # Note that ni will grow in length as this process proceeds.
+  i = 1
+  while( i<length(ni) ) {   # Rinse, repeat over all intervals in ni.
+    k1=ni[i]
+    k2=ni[i+1]
+    if(r2b(k1,k2,x,y) > eps ) {
+      # N.B. We split an interval here so ni gets one element longer
+      # N.B. If an interval is added we will have to test the first
+      # of the two new intervals so we don't increment i.
+      ni = spl(ni,i)
+      changed = TRUE
+#DEBUG print(c("Split at:",i," ni:",ni)) #DEBUG
+    }
+    else {
+      # Prior intervals all meet eps test, go to next one.
+      i = i + 1
+    }
+  }
+
+  changed = TRUE   # Keep track of whether any intervals were altered...
   while(changed) {  # ... because we are not finished until none were.
     changed = FALSE  # Continue the loop only if something changed.
 
-    # If any interval does not meet the r2b<eps test then split it into two with spl().
-    # Note that ni will grow in length as this process proceeds.
-    i = 1
-    while( i<length(x) ) {   # Rinse, repeat over all intervals in ni.
-      k1=ni[i]
-      k2=ni[i+1]
-      if(r2b(k1,k2,x,y) > eps ) {
-        # N.B. We split an interval here so ni gets one element longer
-        # N.B. If an interval is added we will have to test the first
-        # of the two new intervals so we don't increment i.
-print(c("Split at:",i))
-        ni = spl(ni,i)
-        changed = TRUE
-      }
-      else {
-        # Prior intervals all meet eps test, go to next one.
-        i = i + 1
-      }
-    }
-
     # All intervals now meet the test but it is possible that there are too many
-    # in the sense that there may be adjacent intervals, which if merged into one,
+    # in the sense that there may now be adjacent intervals, which if merged into one,
     # will then still meet the test.
     # Scan for such interval pairs and merge them.
 
     # Loop i over all possible "middle" intervals, which we may remove.
     # Note that ni potentially changes inside the loop.
-    for( i in 2:(length(ni)-2) ) {
-      k1=ni[i-1]
-      k2=ni[i+1]
-      eps1=r2b( k1=k1, k2=k2, x=x, y=y )
-      if( eps1<eps ) {
-        if( length(ni)-1 > 2 ) { # Are there two or more intervals in the entire set?
-          # Yes, so merge the interval we are looking at.
-          ni <- zerge(i, ni)
-          changed = TRUE
-          break # exit the for loop
-        } else {
-          # We are here because the last two intervals tested out to merge.
-          # So we can just adjust the intervals and bail out entirely because,
-          # apparently the entire data set lies on a line within eps!
-          # TODO: The original code doesn't seem to do this correctly. It should
-          # adjust ni[2] = ni[3] and nr = 1. I think this branch has never been
-          # taken in actual operation. Obviously the data set is invalid if it lies
-          # entirely on a straight line, right?
+    if( 2 <= length(ni)-2 ) {
+      # This branch had to be added because the Fortran DO loop will not execute
+      # if the start value is greater than the limit value but R runs backward.
+      for( i in 2:(length(ni)-2) ) {
+        k1=ni[i-1]
+        k2=ni[i+1]
+        eps1=r2b( k1=k1, k2=k2, x=x, y=y )
+        if( eps1<eps ) {
+          if( length(ni)-1 > 2 ) { # Are there two or more intervals in the entire set?
+            # Yes, so merge the interval we are looking at.
+            ni <- zerge(i, ni)
+            changed = TRUE
+  #DEBUG print(c("Merged at:",i," ni:",ni)) #DEBUG
+            break # exit the for loop
+          } else {
+            # We are here because the last two intervals tested out to merge.
+            # So we can just adjust the intervals and bail out entirely because,
+            # apparently the entire data set lies on a line within eps!
+            # TODO: The original code doesn't seem to do this correctly. It should
+            # adjust ni[2] = ni[3] and nr = 1. I think this branch has never been
+            # taken in actual operation. Obviously the data set is invalid if it lies
+            # entirely on a straight line, right?
 
-          ni[1]=1  # TODO: Original code, but this should already be the case.
-          return(ni)
+            ni[1]=1  # TODO: Original code, but this should already be the case.
+            return(ni)
+          }
         }
       }
     }
@@ -137,6 +145,7 @@ print(c("Split at:",i))
       if( ni[i+1] - ni[i] == 1 ) {
         ni[i+1] = ni[i+1] + 1
         changed = TRUE
+#DEBUG print(c("Decoupled at:",i," ni:",ni)) #DEBUG
       }
     }
 
@@ -151,12 +160,14 @@ print(c("Split at:",i))
       k1 = ni[i-1]
       kmid = ni[i]
       k2 = ni[i+1]
-      epsm = max( r2b(k1,mid,x,y), r2b(mid,k2,x,x) )
+      epsm = max( r2b(k1,kmid,x,y), r2b(kmid,k2,x,y) )
+#DEBUG print(c("epsm:",epsm))
 
       j1 = ni[i]
-      for( j in (k1+2):(k1-2) ) {
+#DEBUG print(c("Bounds: ",k1+1,k2-2)) #DEBUG
+      for( j in (k1+2):(k2-2) ) {
         epsr = max( r2b(k1,j,x,y), r2b(j,k2,x,y) )
-        if( epsr > epsm ) {
+        if( epsr < epsm ) {
           epsm = epsr
           j1 = j
         }
@@ -165,6 +176,7 @@ print(c("Split at:",i))
       if( j1 != ni[i] ) {
         ni[i] = j1
         changed = TRUE
+#DEBUG print(c("Ralged at:",i," ni:",ni)) #DEBUG
       }
 
       # Here in the original code stands "if (i.eq.2) epsm1=epsm"
