@@ -1,6 +1,7 @@
 # Testing spl.R
 
 library(devtools) #load devtools
+library(testthat)
 
 #load_all will reload all R code in R/ that have changed since it was last run
 load_all()
@@ -32,6 +33,11 @@ test_that("spl divides odd,even intervals.", {
 test_that("spl divides odd,odd intervals.", {
   expect_equal(spl(c(1,3,7,10),2),c(1,3,5,7,10))
 })
+
+test_that("interval number is less than length(ni)", {
+  expect_error(spl(c(1,3,6,10),5))
+})
+
 
 # The following test does not work though an error is thrown.
 #test_that("Should fail on too-narrow intervals.", {
