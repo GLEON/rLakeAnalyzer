@@ -22,7 +22,7 @@ r2b = function(k1,k2,x,y) {
   } else {
     is = k1:(k2-1)
     sxx = sum(x[is]^2)
-    sxy = sum(x[is]*y[k1:(k2-1)])
+    sxy = sum(x[is]*y[is])
     sy = sum(y[is])
     sx = sum(x[is])
 
