@@ -1,6 +1,7 @@
 # Testing r2b.R
 
 library(devtools) #load devtools
+library(testthat)
 
 #load_all will reload all R code in R/ that have changed since it was last run
 load_all()
