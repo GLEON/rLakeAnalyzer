@@ -2,11 +2,11 @@
 ## Load in the data
 ## small_df <- read.csv("./data/testdata1.txt", header=FALSE, col.names = c("x","y"))
 ## large_df <- read.csv("./data/testdata2.txt", header=FALSE, col.names = c("x","y"))
-## t11 <- read.table("./data/97130187.t11", col.names = c("depth","temper","salinity","unk-var1","unk-var2","unk-var3"))
+## t11 <- read.table("Z:/GitHub_Repos/alt_get_mixed/data/97130187.t11", col.names = c("depth","temper","salinity","oxygen.sat","oxygen","density"))
 
 ## devtools::use_data(small_df)
 ## devtools::use_data(large_df)
-## devtools::use_data(t11)
+## devtools::use_data(t11, overwrite=TRUE)
 
 #' Small df
 #'
@@ -45,9 +45,9 @@
 #'   \item{depth}{depth}
 #'   \item{temper}{temperature}
 #'   \item{salinity}{salinity}
-#'   \item{unk.var1}{Unknown variable}
-#'   \item{unk.var2}{Unknown variable}
-#'   \item{unk.var3}{Unknown variable}
+#'   \item{oxygen}{oxygen}
+#'   \item{oxygen.sat}{oxygen saturation}
+#'   \item{density}{Density}
 #'   ...
 #' }
 #' @source Supplied by R Thomson

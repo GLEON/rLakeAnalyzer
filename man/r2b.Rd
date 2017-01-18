@@ -23,9 +23,9 @@ A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REA
 }
 \examples{
 ni <- c( 1, 201, 402 )
-i=1
-k1=ni[i]
-k2=ni[i+1]
+i <- 1
+k1 <- ni[i]
+k2 <- ni[i+1]
 
 
 r2b(k1, k2, y=t11$temper, x=t11$depth)
