@@ -40,6 +40,7 @@ library(devtools)
 
 
 s_m_p = function(eps,x,y) {
+  if(is.unsorted(x)==TRUE) stop("x is not an increasing vector")
 
 #  #DEBUG print(c("X:",x))
 #  #DEBUG print(c("y:",y))
