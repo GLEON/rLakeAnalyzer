@@ -29,8 +29,8 @@ getxxnorm2 <- function(x, y, dx, nn) {
   linear_df$xx=(linear_df$x - min(linear_df$x)) / (max(linear_df$x) - min(linear_df$x))
   linear_df$yy=(linear_df$y - min(linear_df$y)) / (max(linear_df$y) - min(linear_df$y))
 
-  linear_df$anormx=tail(linear_df$x, n=1) - head(linear_df$x, n=1)
-  linear_df$anormy=tail(linear_df$y, n=1) - head(linear_df$y, n=1)
+  linear_df$anormx=tail(linear_df$xx, n=1) - head(linear_df$xx, n=1)
+  linear_df$anormy=tail(linear_df$yy, n=1) - head(linear_df$yy, n=1)
 
   ## I don't know is this ever be true; will eventually be a test
   if( nrow(linear_df)!=nn ) stop("nn is not equal to number of dimensions outputted")
