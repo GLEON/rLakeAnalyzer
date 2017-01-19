@@ -2,6 +2,7 @@
 
 export(getxx)
 export(getxxnorm)
+export(getxxnorm2)
 export(r2b)
 export(s_m_p)
 export(spl)

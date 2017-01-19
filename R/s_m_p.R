@@ -32,7 +32,7 @@
 ########################
 ## May need to install devtools
 ## install.packages(devtools)
-library(devtools)
+#library(devtools)
 ## this allows us to call all the functions we've created.
 #install_github("boshek/limnotools")
 

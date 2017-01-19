@@ -9,9 +9,9 @@
   \item{depth}{depth}
   \item{temper}{temperature}
   \item{salinity}{salinity}
-  \item{unk.var1}{Unknown variable}
-  \item{unk.var2}{Unknown variable}
-  \item{unk.var3}{Unknown variable}
+  \item{oxygen}{oxygen}
+  \item{oxygen.sat}{oxygen saturation}
+  \item{density}{Density}
   ...
 }}
 \source{
