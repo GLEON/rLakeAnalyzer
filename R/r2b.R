@@ -47,6 +47,6 @@ r2b = function(k1,k2,x,y) {
   #  may eventually need this as a dataframe to utilize all of lm()
   # only relevant when k1 > 1
   #data.frame(r2b=r2b,a=a,b=b)
-  print(r2b)
+  return(r2b)
 }
 
