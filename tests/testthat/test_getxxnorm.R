@@ -1,5 +1,3 @@
-# Testing getxxnorm.R
-
 context("Testing the getxxnorm() function.")
 
 test_that("getxxnorm agrees with Fortran.", {
@@ -25,4 +23,3 @@ test_that("zerge merges the first interval.", {
 test_that("zerge merges the second-to-last interval.", {
   expect_equal( zerge(3,c(1,5,10,20)), c(1,5,20) )
 })
-

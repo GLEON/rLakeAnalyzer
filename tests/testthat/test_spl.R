@@ -1,11 +1,3 @@
-# Testing spl.R
-
-library(devtools) #load devtools
-library(testthat)
-
-#load_all will reload all R code in R/ that have changed since it was last run
-load_all()
-
 context("Testing the spl() function.")
 
 test_that("spl divides wide intervals.", {
