@@ -9,10 +9,7 @@
 #' @param dx [REAL] step value for xx; i.e., dx = xx[i+1]-xx[i] for all i<nn
 #' @return Output is a data.frame with: anormx, the normalization value used to make the last x == 1. anormy, the normalization value used to make the last y == 1. xx,yy  vectors of x,y values interpolated to be the same length as x0.
 #'
-#' @examples
-#' x0 <- c(0,1,2,3,4,5)
-#' getxxnorm(y=t11$depth,x=t11$temper, x0=x0)
-
+# @examples
 
 getxxnorm <- function(x,y,nn,x0,dx) {
   xx = x0 + dx*(0:(nn-1))    # Spread xx out linearly.

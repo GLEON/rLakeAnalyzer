@@ -9,7 +9,7 @@
 #'
 #' @return new array with interval start point number
 #' @description spliting interval i into 2 pieces
-#' @examples
+# @examples
 #' ni = c(1,5,10,15,20)
 #' nr = 4
 #' ni

@@ -3,41 +3,29 @@
 #' @param eps [real] error norm
 #' @param x [real] input x-axis array, should be an increasing function of index
 #' @param y [real] input y-axis array
-#' @return [integer] array A of indices giving data segments. A[i] start of interval; A[i+1] end of interval, for any i<length(A)
-#' @description Segments the data in x,y into the intervals given in the output array A. The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
-
-
-# Comments from original Fortran code.
-#SUBROUTINE s_m_p(n,eps,x,y,Nr,Ni)
-#C     Main subroutine for determining LINEAR SEGMENTS for a SPECIFIED ERROR NORM VALUE
-#c     (This subroutine determines the linear fit to the data for a specified error norm)
-#C     Input:
-#C          N   -[INTEGER] number of data points;
-#C          EPS -[REAL]    error norm;
-#C          X   -[REAL(N)] input x-axis data array, should be increasing function of index
-#C          Y   -[REAL(N)] input y-axis data array
-#C       Output:
-#C          NR  -[INTEGER] final number of segments;
-#C          NI  -[INTEGER] final array with segment start points
-#C
-#INTEGER NR, NI(n)
-#REAL X(n),Y(n)
+#' @return [integer] array A of indices giving data segments.
+#' A[i] start of interval; A[i+1] end of interval, for any i<length(A)
+#' @description Segments the data in x,y into the intervals given in the output array A.
+#' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
+#' Comments from original Fortran code.
+#' SUBROUTINE s_m_p(n,eps,x,y,Nr,Ni)
+#' C     Main subroutine for determining LINEAR SEGMENTS for a SPECIFIED ERROR NORM VALUE
+#' c     (This subroutine determines the linear fit to the data for a specified error norm)
+#' C     Input:
+#' C          N   -[INTEGER] number of data points;
+#' C          EPS -[REAL]    error norm;
+#' C          X   -[REAL(N)] input x-axis data array, should be increasing function of index
+#' C          Y   -[REAL(N)] input y-axis data array
+#' C       Output:
+#' C          NR  -[INTEGER] final number of segments;
+#' C          NI  -[INTEGER] final array with segment start points
+#' C
+#' INTEGER NR, NI(n)
+#' REAL X(n),Y(n)
 
 # The dynamic arrays in R remove the need to know the number of data points, n, which is just
-# the length of x and y. Similarly Nr is no longer needed and is length(Ni), the output array.
-
-
-########################
-### Using limnotools ###
-########################
-## May need to install devtools
-## install.packages(devtools)
-library(devtools)
-## this allows us to call all the functions we've created.
-#install_github("boshek/limnotools")
-
-#library(limnotools)
-
+# the length of x and y. Similarly Nr is no longer needed and is length(Ni)-1, one less than the length
+# of the output array.
 
 s_m_p = function(eps,x,y) {
 
@@ -192,7 +180,7 @@ s_m_p = function(eps,x,y) {
   # author added it to solve a problem! TODO: maybe take it out and test sometime.
   ni[length(ni)] = length(x)
 
-  ni # Q.E.D.
+  return(ni) # Q.E.D.
 }
 
 ##################################

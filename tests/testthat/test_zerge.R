@@ -1,7 +1,3 @@
-# Testing zerge.R
-
-#source("../../R/zerge.R")
-
 context("Testing the zerge() function.")
 
 test_that("zerge merges in the middle.", {
