@@ -42,5 +42,5 @@ getxxnorm <- function(x,y,nn,x0,dx) {
   xx = (xx - xx[1])/anormx
   yy = (yy - yy[1])/anormy
 
-  data.frame(anormx,anormy,xx,yy)
+  list(anormx=anormx,anormy=anormy,xx=xx,yy=yy)
 }
