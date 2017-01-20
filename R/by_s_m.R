@@ -6,7 +6,12 @@
 #' @param z input x data array, should be increasing function of index
 #' @param sigma input y data array
 #'
-#' @return Buncha stuff
+#' @return data.frame(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
+#' nimax: number of segments
+#' smz: final z array of segmented data
+#' sms: final sigma array of segmented data
+#' by_s_m: position of MLD = smz(2); or -99 if something is not right
+#'
 #' @export
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #' # c     (This subroutine calls the S_M_P subroutine)
