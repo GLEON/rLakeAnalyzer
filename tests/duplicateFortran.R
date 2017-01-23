@@ -1,6 +1,6 @@
 # Duplicate the output of the Fortran program to make it easy to compare.
 
-duplicateFortran = function() {
+duplicateFortran = function(dataname="97130187") {
   hyphenspacer = "------------------------------------------------------\n"
   equalsspacer = "======================================================\n"
 
@@ -20,12 +20,12 @@ duplicateFortran = function() {
     cat(equalsspacer,file=file)
   }
 
-  dataname = "97130187"
+
+  # dataname = "97130187"
   filename =paste(dataname,".t11",sep="")
-  load("data/t11.rda")   # Same data as Fortran test
-
+  # load("data/t11.rda")   # Same data as Fortran test
+  t11 = as.data.frame( scan(file=filename,what=list(depth=0,temper=0,salinity=0,oxygen.sat=0,oxygen=0,density=0)))
   thres=.005; z0=2.5; zmax=140
-
 
   ofile <- file(paste(dataname,"-R.txt",sep=""), "w")
   # by_s_m = function(thres,z0,zmax,z,sigma)
