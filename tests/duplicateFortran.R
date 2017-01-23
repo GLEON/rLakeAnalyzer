@@ -39,5 +39,17 @@ duplicateFortran = function(dataname="97130187") {
   results = by_s_m( thres=thres, z0=z0,zmax=zmax, z=t11$depth, sigma=t11$salinity)
   reporter(ofile,filename,"SALINITY",thres,results$by_s_m,results$nimax,results$smz,results$sms)
 
+  nimax = 5  # Number of segments fixed.
+
+  results = by_s_m3( nimax=nimax, z0=z0,zmax=zmax, z=t11$depth, sigma=t11$density)
+  # results = list(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
+  reporter(ofile,filename,"DENSITY",thres,results$by_s_m,results$nimax,results$smz,results$sms)
+
+  results = by_s_m3( nimax=nimax, z0=z0,zmax=zmax, z=t11$depth, sigma=t11$temper)
+  reporter(ofile,filename,"TEMPERATURE",thres,results$by_s_m,results$nimax,results$smz,results$sms)
+
+  results = by_s_m3( nimax=nimax, z0=z0,zmax=zmax, z=t11$depth, sigma=t11$salinity)
+  reporter(ofile,filename,"SALINITY",thres,results$by_s_m,results$nimax,results$smz,results$sms)
+
   close(ofile)
 }
