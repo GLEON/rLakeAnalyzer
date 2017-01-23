@@ -7,7 +7,9 @@
 #' @param nn [INTEGER] input, desired dimension of output xx,yy vectors
 #' @param x0 [REAL] start point along the x-axis; i.e., xx[1] = x0
 #' @param dx [REAL] step value for xx; i.e., dx = xx[i+1]-xx[i] for all i<nn
-#' @return Output is a data.frame with: anormx, the normalization value used to make the last x == 1. anormy, the normalization value used to make the last y == 1. xx,yy  vectors of x,y values interpolated to be the same length as x0.
+#' @return Output is a data.frame with: anormx, the normalization value used to make the last x == 1.
+#' anormy, the normalization value used to make the last y == 1.
+#' xx,yy  vectors of x,y values interpolated to be the same length as x0.
 #'
 # @examples
 
@@ -40,5 +42,5 @@ getxxnorm <- function(x,y,nn,x0,dx) {
   xx = (xx - xx[1])/anormx
   yy = (yy - yy[1])/anormy
 
-  data.frame(anormx,anormy,xx,yy)
+  list(anormx=anormx,anormy=anormy,xx=xx,yy=yy)
 }

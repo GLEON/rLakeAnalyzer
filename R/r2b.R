@@ -24,26 +24,51 @@ r2b = function(k1,k2,x,y) {
 
   if(k2-k1<=2) {
     r2b=0
-    a = 0  # original code does not produce a or b?
-    b = 0
+    #    a = 0  # original code does not produce a or b?
+    #    b = 0
   } else {
     is = k1:(k2-1)
+    sxx = sum(x[is]^2)
+    sxy = sum(x[is]*y[is])
+    sy = sum(y[is])
+    sx = sum(x[is])
 
-    lmResult <- lm(y[is] ~ x[is])
     n = k2-k1
 
-
+    a = 0.0
     if(k1 > 1) {
-      a = as.numeric(coef(lmResult)["x[is]"])
-      b = as.numeric(coef(lmResult)["(Intercept)"])
-    } else {
-      a = 0.0
-      b = (sum(y[is]) - a * sum(x[is]))/n
+      a = (n*sxy-sy*sx)/(n*sxx-sx*sx)
     }
-
-
+    b = (sy-a*sx)/n
     r2b = max( abs( y[is] - a*x[is] - b )/sqrt(a^2 + 1) )
   }
+
+  # Experimentally replaced this code because profiling shows a great deal of cpu time consumed in ~ and lm.
+  # Yes, a massive improvement in speed. ~ and lm() must be doing something gross in there...
+
+  # if(k2-k1<=2) {
+  #   r2b=0
+  #   a = 0  # original code does not produce a or b?
+  #   b = 0
+  # } else {
+  #   is = k1:(k2-1)
+  #
+  #   lmResult <- lm(y[is] ~ x[is])
+  #   n = k2-k1
+  #
+  #
+  #   if(k1 > 1) {
+  #     a = as.numeric(coef(lmResult)["x[is]"])
+  #     b = as.numeric(coef(lmResult)["(Intercept)"])
+  #   } else {
+  #     a = 0.0
+  #     b = (sum(y[is]) - a * sum(x[is]))/n
+  #   }
+  #
+  #
+  #   r2b = max( abs( y[is] - a*x[is] - b )/sqrt(a^2 + 1) )
+  # }
+
   #  may eventually need this as a dataframe to utilize all of lm()
   # only relevant when k1 > 1
   #data.frame(r2b=r2b,a=a,b=b)
