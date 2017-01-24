@@ -29,7 +29,7 @@
 # The dynamic arrays in R remove the need to know the number of data points, n, which is just
 # the length of x and y.
 
-s_m_p = function(nr,x,y) {
+s_mN = function(nr,x,y) {
 
   #  #DEBUG print(c("X:",x))
   #  #DEBUG print(c("y:",y))
@@ -38,7 +38,7 @@ s_m_p = function(nr,x,y) {
   # taking care that the last interval includes the last point,
   # which otherwise might be lost due to the rounding error.
   ni = rep(0,nr+1)
-  m = round(length(x)/2)
+  m = round(length(x)/nr)
   ni = c( m*(0:(nr-1))+1, length(x)+1 )
 
   #TODO: A more accurate formula might be:

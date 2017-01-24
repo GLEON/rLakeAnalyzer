@@ -31,8 +31,8 @@
 #' C                      return -99 if something is not right.
 #' C
 #'
-by_s_m = function(thres,z0,zmax,z,sigma) {
-  by_s_m=-99.0 # TODO: why?
+by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
+  by_s_m=-99.0 # TODO: this is for an error return, crash instead.
   nn=800 # TODO: why?
 
   # finding initial s-level

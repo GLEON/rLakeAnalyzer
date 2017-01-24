@@ -5,8 +5,8 @@
 #' @param z input x data array, should be increasing function of index
 #' @param sigma input y data array
 #'
-#' @return list(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
-#' nimax: number of segments
+#' @return list(eps,smz=smz,sms=sms,by_s_m=ss)
+#' eps: the maximum error over all intervals.
 #' smz: final z array of segmented data
 #' sms: final sigma array of segmented data
 #' by_s_m: position of MLD = smz(2); or -99 if something is not right
@@ -25,7 +25,7 @@
 #' C       Output:
 #' C          NI  -[INTEGER] final array with segment start points
 
-by_s_m = function(nr,z0,zmax,z,sigma) {
+by_s_m3 = function(nr,z0,zmax,z,sigma) {
   by_s_m=-99.0 # TODO: why?
   nn=800 # TODO: why?
 
@@ -44,23 +44,25 @@ by_s_m = function(nr,z0,zmax,z,sigma) {
   # call GET_XX_norm(      ax,    ay,    i2-i1+1, nn, z(i1), dz, z(i1), sigma(i1), XX,YY)
   results = getxxnorm(z[i1:i2],sigma[i1:i2],nn,z[i1],dz)
 
-  ni = s_mN(nn,results$xx,results$yy)
+  s_mNresults = s_mN(nr,results$xx,results$yy)
+  ni = s_mNresults$ni
+
   k=ni[2]
   ax = results$anormx
   ay = results$anormy
   ss=0.5*( results$xx[k]+results$xx[k-1] )*ax + z[i1]
 
-  # nimax = min( 100, length(ni)-1 ) #TODO: why 100? 
-  smz = rep(0,nimax)  # Reserve space
-  sms = rep(0,nimax)  # Reserve space
+  # nimax = min( 100, length(ni)-1 ) #TODO: why 100?
+  smz = rep(0,nr)  # Reserve space
+  sms = rep(0,nr)  # Reserve space
   smz[1] = z[i1]
   sms[1] = sigma[i1]
-  i = 2:(nimax+1)
+  i = 2:(nr+1)
   k = ni[i]
   smz[i] = 0.5*(results$xx[k]+results$xx[k-1])*ax + z[i1]
   sms[i] = 0.5*(results$yy[k]+results$yy[k-1])*ay + sigma[i1]
 
-  list(by_s_m=ss,smz=smz,sms=sms)
+  list(eps=s_mNresults$eps,by_s_m=ss,smz=smz,sms=sms)
 }
 
 # real FUNCTION BY_s_m3(n,nimax,thres,z0,z,zmax,sigma,smz,sms)
