@@ -125,7 +125,7 @@ s_m_p = function(eps,x,y) {
     # code I infer:
     #
     # If the end index of any interval is only 1 greater than the start index
-    # (i.e., ni[i+1] == ni[i]) then bump the end index up by one. Due to the
+    # (i.e., ni[i+1] == 1 + ni[i]) then bump the end index up by one. Due to the
     # loop this change propagates up to the last interval so we can't easily
     # replace the loop with nice vectorized R code.
 
@@ -144,25 +144,31 @@ s_m_p = function(eps,x,y) {
     # I don't know what the "R algorithm" is so I'm just going to have to wing
     # comments.
 
+    # Scan all adjacent interval pairs.
     for( i in 2:(length(ni)-1) ) {
+      # First of pair (ni[i-1],ni[i]), second (ni[i],ni[i+1])
       k1 = ni[i-1]
       kmid = ni[i]
       k2 = ni[i+1]
-      epsm = max( r2b(k1,kmid,x,y), r2b(kmid,k2,x,y) )
+      # Find the error on both intervals and take the max.
+      epsm = max( r2b(k1,kmid,x,y), r2b(kmid,k2,x,y) ) # TODO: I don't think this is necessary. We'll find it below anyway.
 #DEBUG print(c("epsm:",epsm))
 
-      j1 = ni[i]
+      # We are going to move the midpoint and find the split that gives the
+      # best error.
+      j1 = ni[i]    # Keep track of best splitpoint so far.
 #DEBUG print(c("Bounds: ",k1+1,k2-2)) #DEBUG
+      # Scan all alternative splitpoints between these two enpoints.
       for( j in (k1+2):(k2-2) ) {
-        epsr = max( r2b(k1,j,x,y), r2b(j,k2,x,y) )
+        epsr = max( r2b(k1,j,x,y), r2b(j,k2,x,y) )  # Calculate max error
         if( epsr < epsm ) {
-          epsm = epsr
-          j1 = j
+          epsm = epsr  # This split is the best so far
+          j1 = j # Keep track of which index it is at.
         }
       }
 
-      if( j1 != ni[i] ) {
-        ni[i] = j1
+      if( j1 != ni[i] ) {  # Did we find a better splitpoint?
+        ni[i] = j1  # Yes, change the split.
         changed = TRUE
 #DEBUG print(c("Ralged at:",i," ni:",ni)) #DEBUG
       }
