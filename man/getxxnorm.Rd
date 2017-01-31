@@ -18,7 +18,10 @@ getxxnorm(x, y, nn, x0, dx)
 \item{dx}{[REAL] step value for xx; i.e., dx = xx[i+1]-xx[i] for all i<nn}
 }
 \value{
-Output is a data.frame with: anormx, the normalization value used to make the last x == 1. anormy, the normalization value used to make the last y == 1. xx,yy  vectors of x,y values interpolated to be the same length as x0.
+Output is a list with:
+anormx, the normalization value used to make the last x == 1.
+anormy, the normalization value used to make the last y == 1.
+xx,yy  vectors of x,y values interpolated to be the same length as x0.
 }
 \description{
 Interpolate and normalize a vector of samples. X and Y will be linearly interpolated to match the length of X0 and will be normalized so that the first point is (0,0) and the last point is (1,1). Vector x are the input x values, must be in ascending order.
