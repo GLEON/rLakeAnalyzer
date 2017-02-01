@@ -1,0 +1,79 @@
+---
+title: "Limnotools Usage"
+author: "Sam Albers and Doug Collinge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Limnotools Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Package loading
+These packages are only need for this vignette and not for the limnotools package itself.
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+## Development version of limnotools
+Currently using sam_exp branch
+```{r, message=FALSE}
+devtools::install_github("boshek/limnotools", ref="sam_exp")
+
+library(limnotools)
+```
+
+## Split and merge algorithm
+Implementation of the split-and-merge algorithm result in two parts:
+
+- water_layers function 
+- water_segments function
+- Then plotting for visual verification
+
+## Combine data
+Combine all the internal dataframes to illustrate mix layer estimation for many casts. Do this for both temperature and salinity
+```{r}
+## rbind all the dataframes together
+earlyspring$group <- 'earlyspring'
+latesummer$group <- 'latesummer'
+rbind_df <- rbind(earlyspring, latesummer)
+```
+
+Utilize the power of a dplyr pipe
+```{r}
+## Convert data into grouped format
+wtrprof_df <- rbind_df %>%
+  select(depth, temper, salinity, group) %>% ## only keep desired columns
+  gather(variable, value, -depth, -group)  ## convert data to long format
+```
+
+## Use the water_layers function
+```{r}
+wl_df <- wtrprof_df %>%  
+  group_by(variable, group) %>% ## group by variable and group
+  do(water_layers(thres=0.1,z0=2.5,zmax=150,z=.$depth,sigma=.$value)) ##do a water_layer calc
+wl_df
+```
+
+## Use the water_segments function
+```{r}
+s_df <- wtrprof_df %>%  
+  group_by(variable, group) %>% ## group by variable and group
+  do(water_segments(thres=0.1,z0=2.5,zmax=150,z=.$depth,sigma=.$value)) ##do a water_layer calc
+s_df
+```
+
+## Plot the mix layer depths and segments over the water profiles
+```{r, fig.show = "hold", fig.width = 6, fig.height = 6}
+wtrprof_df %>%
+  #filter(depth<50) %>%
+  ggplot(aes(y=value,x=depth, colour=group)) +
+  geom_path() +
+  geom_path(data=s_df, aes(y=sms, x=smz), colour='black') +
+  geom_vline(data=wl_df, aes(xintercept=by_s_m), colour='orange') +
+  geom_vline(data=wl_df, aes(xintercept=thermodepth), colour='forestgreen') +
+  facet_wrap(group~variable, scales = "free", ncol=2) +
+  labs(y="Sigma (sms)", x="Depth (m; smz)", caption="Orange lines represent mix layer depth \n Black lines represent split-and-merge segments \n Green lines represent thermocline depth")
+```
+
+
