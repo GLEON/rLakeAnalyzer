@@ -9,6 +9,7 @@
 #' @return data.frame(nimax=nimax,by_s_m=ss)
 #' nimax: number of segments
 #' by_s_m: position of MLD = smz(2); or -99 if something is not right
+#' thermodepth: plane of maximum rate of decrease of temperature with respect to depth
 #'
 #' @export
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
@@ -63,6 +64,9 @@ water_layers = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
   smz[i] = 0.5*(results$xx[k]+results$xx[k-1])*ax + z[i1]
   sms[i] = 0.5*(results$yy[k]+results$yy[k-1])*ay + sigma[i1]
   
+  ##Thermocline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope (–dT/dz). Fielder 2010
+  thermodepth <- mean(smz[c(which.max(diff(smz)/diff(sms)),which.max(diff(smz)/diff(sms))+1)])
+  
   #list(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
-  return(data.frame(nimax=nimax, by_s_m=ss))
+  return(data.frame(nimax=nimax, by_s_m=ss,thermodepth=thermodepth))
 }

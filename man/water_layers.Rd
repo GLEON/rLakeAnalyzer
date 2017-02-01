@@ -22,6 +22,7 @@ water_layers(thres = thres, z0 = z0, zmax = zmax, z = z,
 data.frame(nimax=nimax,by_s_m=ss)
 nimax: number of segments
 by_s_m: position of MLD = smz(2); or -99 if something is not right
+thermodepth: plane of maximum rate of decrease of temperature with respect to depth
 }
 \description{
 Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
