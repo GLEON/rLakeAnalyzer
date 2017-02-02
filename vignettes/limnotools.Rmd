@@ -2,7 +2,9 @@
 title: "Limnotools Usage"
 author: "Sam Albers and Doug Collinge"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+#output: rmarkdown::html_vignette
+output: github_document
+
 vignette: >
   %\VignetteIndexEntry{Limnotools Usage}
   %\VignetteEngine{knitr::rmarkdown}
