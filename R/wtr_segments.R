@@ -5,7 +5,7 @@
 #' @param zmax maximum depth in metres: default to 150m
 #' @param depth depth in metres; should be an increasing vector
 #' @param measure parameter measured in the water column profile
-#' @param optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
+#' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
 #' @return a dataframe of nseg (number of segments) and the x and y coordinates of the segments produced by the split and merge approach.
 #' @description  Extract water column segments of a given parameter from a profile using the split-and-merge algorithm.
 #' @references Thomson & Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
