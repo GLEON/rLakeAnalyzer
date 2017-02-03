@@ -12,26 +12,29 @@ wtr_layer(thres = 0.1, z0 = 2.5, zmax = 150, depth = depth,
 
 \item{z0}{initial depth in metres; defaults to 2.5m}
 
-\item{zmax}{maximum depth in metres: default to 150m}
+\item{zmax}{maximum depth in metres: defaults to 150m}
 
 \item{depth}{depth in metres; should be an increasing vector}
 
 \item{measure}{parameter measured in the water column profile}
 
-\item{optional}{parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
+\item{nseg}{optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
 }
 \value{
-a dataframe of nseg (number of segments), mld (mix layer depth), maxbd (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures)
+a dataframe of nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures)
 }
 \description{
-Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm.
+Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm. The cline is defined as the midpoint of the layer of water where the physical property change in the greatest over a small difference. The exact cline depends on the specification of measure. For example if temperature is specified,  then we can expect cline to output the thermocline.
 }
 \examples{
+Estimation using by_s_m() and an unspecified number of segments
 wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
-wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=3)
+
+Estimation using by_s_m3() and a fixed number of segments
+wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 
 }
 \references{
-Thomson & Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
+Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
 }
 

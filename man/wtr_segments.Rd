@@ -18,7 +18,7 @@ wtr_segments(thres = 0.1, z0 = 2.5, zmax = 150, depth = depth,
 
 \item{measure}{parameter measured in the water column profile}
 
-\item{optional}{parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
+\item{nseg}{optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
 }
 \value{
 a dataframe of nseg (number of segments) and the x and y coordinates of the segments produced by the split and merge approach.
@@ -28,7 +28,7 @@ Extract water column segments of a given parameter from a profile using the spli
 }
 \examples{
 wtr_segments(depth=latesummer$depth, measure = latesummer$temper)
-wtr_segments(depth=latesummer$depth, measure = latesummer$temper, nseg=3)
+wtr_segments(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 
 }
 \references{

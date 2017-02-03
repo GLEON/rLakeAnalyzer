@@ -32,10 +32,11 @@ r2b = function(k1,k2,x,y) {
     ## Keeping in other parameters for future considerations
     simplelm <- function (x, y) {
       ## number of data
-      #n <- length(x)
       ## centring
-      y0 <- .Internal(mean(y)); yc <- y - y0
-      x0 <- .Internal(mean(x)); xc <- x - x0
+      #y0 <- .Internal(mean(y)); yc <- y - y0
+      #x0 <- .Internal(mean(x)); xc <- x - x0
+      x0 <- sum(x)/length(x); xc <- x - x0
+      y0 <- sum(y)/length(y); yc <- y - y0
       ## fitting an intercept-free model: yc ~ xc + 0
       xty <- drop(crossprod(xc, yc))
       xtx <- drop(crossprod(xc))
