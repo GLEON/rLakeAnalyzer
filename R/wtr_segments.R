@@ -15,6 +15,7 @@
 #' 
 
 ## Need to add +1 to nimax to get actual number of segments
+## Problem! Unconstrained and nseg specify not matching.
 wtr_segments <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, nseg="unconstrained"){
   
   if (nseg=="unconstrained"){
@@ -23,6 +24,6 @@ wtr_segments <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, 
   }
   else {
     sam_list = by_s_m3(nr=nseg,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(nseg=nseg+1, depth=sam_list[["smz"]], measure=sam_list[["sms"]]))
+    return(data.frame(nseg=nseg, depth=sam_list[["smz"]], measure=sam_list[["sms"]]))
   }
 }
