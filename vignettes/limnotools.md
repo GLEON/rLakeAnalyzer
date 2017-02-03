@@ -17,7 +17,7 @@ library(tidyverse)
 Currently using sam\_exp branch
 
 ``` r
-devtools::install_github("boshek/limnotools", ref="sam_exp")
+devtools::install_github("boshek/limnotools", ref = "sam_exp")
 
 library(limnotools)
 ```
@@ -37,21 +37,21 @@ Simple application of the split and merge algorithm
 Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. Most users will only use two functions that are part of the split-and-merge algorithm. Thermocline depth and mix layer depth are calculated using the wtr\_layers() function. Segments of the water profile are calculated using wtr\_segments. The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt the convention of a minimum depth of 2.5 m, a maximum depth of 150 m and a error threshold of 0.1.
 
 ``` r
-wldf <- wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
+wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
 wldf
 ```
 
     ##   nseg      mld    maxbd
-    ## 1    4 6.718292 16.33231
+    ## 1    3 6.718292 16.33231
 
 Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays.
 
 ``` r
-plot(y=latesummer$depth, x=latesummer$temper, ylim = rev(range(latesummer$depth)))
-abline(h=wldf$maxbd, col='blue')
-abline(h=wldf$mld, col='red')
-text(16, wldf$maxbd+3, "Thermocline", col='blue')
-text(16, wldf$mld+3, "Mix Layer Depth", col='red')
+plot(y = latesummer$depth, x = latesummer$temper, ylim = rev(range(latesummer$depth)))
+abline(h = wldf$maxbd, col='blue')
+abline(h = wldf$mld, col='red')
+text(16, wldf$maxbd+3, "Thermocline", col = 'blue')
+text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
 ```
 
 ![](limnotools_files/figure-markdown_github/unnamed-chunk-4-1.png)
@@ -107,7 +107,7 @@ The same applies to wtr\_segments()
 ``` r
 s_df <- wtrprof_df %>%  
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_segments(depth=.$depth,measure=.$value)) ##do a water_layer calc
+  do(wtr_segments(depth = .$depth, measure = .$value)) ##do a water_layer calc
 s_df
 ```
 
@@ -132,13 +132,14 @@ Lastly we plot the mix layer depths and segments over the water profiles using t
 
 ``` r
 wtrprof_df %>%
-  ggplot(aes(x=value,y=depth)) +
-  geom_path(colour='purple') +
-  geom_path(data=s_df, aes(x=measure, y=depth), colour='black') +
-  geom_hline(data=wl_df, aes(yintercept=value, colour=Layer)) +
+  ggplot(aes(x = value,y = depth)) +
+  geom_path(colour = 'purple') +
+  geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
+  geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
   scale_y_reverse() +
-  facet_wrap(group~variable, scales = "free", ncol=2) +
-  labs(y="Temperature/Salinity", x="Depth (m)", caption="Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=maxbd")
+  facet_wrap(group~variable, scales = "free", ncol = 2) +
+  labs(y = "Temperature/Salinity", x = "Depth (m)", 
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=maxbd")
 ```
 
 ![](limnotools_files/figure-markdown_github/unnamed-chunk-9-1.png)
