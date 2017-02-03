@@ -33,3 +33,6 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 .Rproj.user
+
+# vi at work
+*.swp
