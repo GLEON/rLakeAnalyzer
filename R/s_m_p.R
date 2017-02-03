@@ -29,6 +29,7 @@
 
 s_m_p = function(eps,x,y) {
   # This code generates Nr intervals in vector Ni
+  if(is.unsorted(x)==TRUE) stop("x is not an increasing vector")
   #  Nr=2
   #      m=NINT(FLOAT(N)/FLOAT(Nr))
   #        ni(1)=1

@@ -64,8 +64,11 @@ by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
   k = ni[i]
   smz[i] = 0.5*(results$xx[k]+results$xx[k-1])*ax + z[i1]
   sms[i] = 0.5*(results$yy[k]+results$yy[k-1])*ay + sigma[i1]
+  
+  ##Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope (–dT/dz). Fielder 2010
+  cline <- mean(smz[c(which.max(diff(smz)/diff(sms)),which.max(diff(smz)/diff(sms))+1)])
 
-  list(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
+  list(nimax=nimax,by_s_m=ss, cline=cline,smz=smz,sms=sms)
 }
 
 # Original Fortran code follows.

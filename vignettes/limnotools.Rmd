@@ -1,0 +1,100 @@
+---
+title: "Limnotools Usage"
+author: "Sam Albers and Doug Collinge"
+date: "`r Sys.Date()`"
+#output: rmarkdown::html_vignette
+output: github_document
+
+vignette: >
+  %\VignetteIndexEntry{Limnotools Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Package loading
+These packages are only need for this vignette and not for the limnotools package itself.
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+### Development version of limnotools
+Currently using sam_exp branch
+```{r, message=FALSE}
+devtools::install_github("boshek/limnotools", ref = "sam_exp")
+
+library(limnotools)
+```
+
+## Split and merge algorithm
+Implementation of the split-and-merge algorithm result in two parts:
+
+- wtr_layer function 
+- wtr_segments function
+- Then plotting for visual verification
+
+
+## Simple application of the split and merge algorithm
+Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. Most users will only use two functions that are part of the split-and-merge algorithm. Thermocline depth and mix layer depth are calculated using the wtr_layers() function. Segments of the water profile are calculated using wtr_segments. The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt the convention of a minimum depth of 2.5 m, a maximum depth of 150 m and a error threshold of 0.1. 
+```{r}
+wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
+wldf
+```
+
+Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays. 
+```{r, fig.show = "hold", fig.width = 8, fig.height = 6}
+plot(y = latesummer$depth, x = latesummer$temper, ylim = rev(range(latesummer$depth)))
+abline(h = wldf$maxbd, col='blue')
+abline(h = wldf$mld, col='red')
+text(16, wldf$maxbd+3, "Thermocline", col = 'blue')
+text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
+```
+
+## More complicated example using many datafiles
+Many users will face situations where they have multiple profiles and would like to evaluate layers and/or segments on many files. There are several approaches to this type of 'grouping' problem in R. We will use the most popular approach - dplyr - which is part of the [tidyverse](https://CRAN.R-project.org/package=tidyverse). To generate data for this example we first need to combine all the internal dataframes from limnotools to illustrate mix layer estimation for many casts. To simplify and decrease runtime we will only do this for temperature and salinity. 
+```{r}
+## rbind all the dataframes together
+earlyspring$group <- 'earlyspring'
+latesummer$group <- 'latesummer'
+rbind_df <- rbind(earlyspring, latesummer)
+```
+
+We can utilize the power of a dplyr pipe (%>%) and gather to convert this data into a long form. 
+```{r}
+## Convert data into grouped format
+wtrprof_df <- rbind_df %>%
+  select(depth, temper, salinity, group) %>% ## only keep desired columns
+  gather(variable, value, -depth, -group)  ## convert data to long format
+```
+
+Use group_by() and do() to run wtr_layer() by group and variable outputting a dataframe.
+```{r}
+wl_df <- wtrprof_df %>%  
+  group_by(variable, group) %>% ## group by variable and group
+  do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
+  select(-nseg) %>% ##nseg not needed here
+  gather(Layer, value, -variable, -group) ##gather for plotting purposes
+wl_df
+```
+
+The same applies to wtr_segments()
+```{r}
+s_df <- wtrprof_df %>%  
+  group_by(variable, group) %>% ## group by variable and group
+  do(wtr_segments(depth = .$depth, measure = .$value)) ##do a water_layer calc
+s_df
+```
+
+Lastly we plot the mix layer depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse). 
+```{r, fig.show = "hold", fig.width = 8, fig.height = 6}
+wtrprof_df %>%
+  ggplot(aes(x = value,y = depth)) +
+  geom_path(colour = 'purple') +
+  geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
+  geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
+  scale_y_reverse() +
+  facet_wrap(group~variable, scales = "free", ncol = 2) +
+  labs(y = "Temperature/Salinity", x = "Depth (m)", 
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=maxbd")
+```
+
+

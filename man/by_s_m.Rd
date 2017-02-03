@@ -4,7 +4,7 @@
 \alias{by_s_m}
 \title{Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE}
 \usage{
-by_s_m(thres, z0, zmax, z, sigma)
+by_s_m(thres = thres, z0 = z0, zmax = zmax, z = z, sigma = sigma)
 }
 \arguments{
 \item{thres}{error norm;}
@@ -18,7 +18,11 @@ by_s_m(thres, z0, zmax, z, sigma)
 \item{sigma}{input y data array}
 }
 \value{
-Buncha stuff
+data.frame(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
+nimax: number of segments
+smz: final z array of segmented data
+sms: final sigma array of segmented data
+by_s_m: position of MLD = smz(2); or -99 if something is not right
 }
 \description{
 Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
