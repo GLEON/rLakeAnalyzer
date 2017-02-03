@@ -11,7 +11,7 @@
 #' @references Thomson & Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
 #' @examples
 #' wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
-#' wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=3)
+#' wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 #' 
 ## Problem! Unconstrained and nseg specify not matching.
 wtr_layer <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, nseg="unconstrained"){
