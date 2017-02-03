@@ -31,9 +31,6 @@
 
 s_mN = function(nr,x,y) {
 
-  #  #DEBUG print(c("X:",x))
-  #  #DEBUG print(c("y:",y))
-
   # Initially spread intervals uniformly out over the data
   # taking care that the last interval includes the last point,
   # which otherwise might be lost due to the rounding error.
@@ -75,7 +72,6 @@ s_mN = function(nr,x,y) {
     #         # Yes, so merge the interval we are looking at.
     #         ni <- zerge(i, ni)
     #         changed = TRUE
-    #         #DEBUG print(c("Merged at:",i," ni:",ni)) #DEBUG
     #         break # exit the for loop
     #       } else {
     #         # We are here because the last two intervals tested out to merge.
@@ -117,7 +113,6 @@ s_mN = function(nr,x,y) {
       if( ni[i+1] - ni[i] == 1 ) {
         ni[i+1] = ni[i+1] + 1
         changed = TRUE
-        #DEBUG print(c("Decoupled at:",i," ni:",ni)) #DEBUG
       }
     }
 
@@ -133,10 +128,8 @@ s_mN = function(nr,x,y) {
       kmid = ni[i]
       k2 = ni[i+1]
       epsm = max( r2b(k1,kmid,x,y), r2b(kmid,k2,x,y) )
-      #DEBUG print(c("epsm:",epsm))
 
       j1 = ni[i]
-      #DEBUG print(c("Bounds: ",k1+1,k2-2)) #DEBUG
       for( j in (k1+2):(k2-2) ) {
         epsr = max( r2b(k1,j,x,y), r2b(j,k2,x,y) )
         if( epsr < epsm ) {
@@ -148,7 +141,6 @@ s_mN = function(nr,x,y) {
       if( j1 != ni[i] ) {
         ni[i] = j1
         changed = TRUE
-        #DEBUG print(c("Ralged at:",i," ni:",ni)) #DEBUG
       }
 
       # Here in the original code stands "if (i.eq.2) epsm1=epsm"

@@ -28,10 +28,7 @@
 # of the output array.
 
 s_m_p = function(eps,x,y) {
-
-#  #DEBUG print(c("X:",x))
-#  #DEBUG print(c("y:",y))
-  # Extremely mysterious original code:
+  # This code generates Nr intervals in vector Ni
   #  Nr=2
   #      m=NINT(FLOAT(N)/FLOAT(Nr))
   #        ni(1)=1
@@ -40,13 +37,11 @@ s_m_p = function(eps,x,y) {
   #      end DO
   #      Ni(Nr+1)=N+1 !{last interval}
 
-  # Which seems to do nothing other than generate 3 elements in Ni:
+  # But N4 is fixed at two so we end up with 3 elements in Ni:
   # Ni = {1,m+1,n+1}
-  # Clearly, it once spread Nr intervals out over all the data but
-  # Nr is now fixed to 2 so we will short-circuit it instead:
-
+  # Clearly, it once spread Nr intervals out uniformly over all the data.
+  # We will short-circuit it instead:
   ni = c( 1, round(length(x)/2)+1, length(x)+1 )
-#DEBUG print(c("Initial ni:",format(ni)))
 
   # If any interval does not meet the r2b<eps test then split it into two with spl().
   # Note that ni will grow in length as this process proceeds.
@@ -60,7 +55,6 @@ s_m_p = function(eps,x,y) {
       # of the two new intervals so we don't increment i.
       ni = spl(ni,i)
       changed = TRUE
-#DEBUG print(c("Split at:",i," ni:",ni)) #DEBUG
     }
     else {
       # Prior intervals all meet eps test, go to next one.
@@ -91,7 +85,6 @@ s_m_p = function(eps,x,y) {
             # Yes, so merge the interval we are looking at.
             ni <- zerge(i, ni)
             changed = TRUE
-  #DEBUG print(c("Merged at:",i," ni:",ni)) #DEBUG
             break # exit the for loop
           } else {
             # We are here because the last two intervals tested out to merge.
@@ -133,7 +126,6 @@ s_m_p = function(eps,x,y) {
       if( ni[i+1] - ni[i] == 1 ) {
         ni[i+1] = ni[i+1] + 1
         changed = TRUE
-#DEBUG print(c("Decoupled at:",i," ni:",ni)) #DEBUG
       }
     }
 
@@ -152,12 +144,10 @@ s_m_p = function(eps,x,y) {
       k2 = ni[i+1]
       # Find the error on both intervals and take the max.
       epsm = max( r2b(k1,kmid,x,y), r2b(kmid,k2,x,y) ) # TODO: I don't think this is necessary. We'll find it below anyway.
-#DEBUG print(c("epsm:",epsm))
 
       # We are going to move the midpoint and find the split that gives the
       # best error.
       j1 = ni[i]    # Keep track of best splitpoint so far.
-#DEBUG print(c("Bounds: ",k1+1,k2-2)) #DEBUG
       # Scan all alternative splitpoints between these two enpoints.
       for( j in (k1+2):(k2-2) ) {
         epsr = max( r2b(k1,j,x,y), r2b(j,k2,x,y) )  # Calculate max error
@@ -170,7 +160,6 @@ s_m_p = function(eps,x,y) {
       if( j1 != ni[i] ) {  # Did we find a better splitpoint?
         ni[i] = j1  # Yes, change the split.
         changed = TRUE
-#DEBUG print(c("Ralged at:",i," ni:",ni)) #DEBUG
       }
 
       # Here in the original code stands "if (i.eq.2) epsm1=epsm"

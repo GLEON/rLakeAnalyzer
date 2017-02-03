@@ -19,23 +19,16 @@ getxxnorm <- function(x,y,nn,x0,dx) {
   yy <- rep(0,nn)            # Reserve space for y values.
 
   j = 1
-#print(c("j:",j)) #DEBUG
   for ( i in 1:nn ) { # Loop over output calculating yy[i]
     # j = 1 + sum(xx[i] >= x)  # Equivalent to following three lines.
     while( (xx[i] >= x[j]) && (j < length(x)) ) {
       j <- j+1
     }
-# print(c("j:",j)) #DEBUG
     if( j == 1 ) {
       yy[i] <- y[1]
     }
     else {
-      # print(c("xx[i],x[j-1],-:",xx[i],x[j-1],xx[i]-x[j-1])) #DEBUG
-      # print(c("x[j],x[j-1],-:",x[j],x[j-1],x[j]-x[j-1])) #DEBUG
-      # print(c("j,y[j],y[j-1]:",j,y[j],y[j-1],(y[j]-y[j-1]))) #DEBUG
-      yy[i] <- y[j-1]+(xx[i]-x[j-1])/(x[j]-x[j-1])*(y[j]-y[j-1]) #DEBUG
-      # print(c("yy[i]:",yy[i])) #DEBUG
-      # print("") #DEBUG
+      yy[i] <- y[j-1]+(xx[i]-x[j-1])/(x[j]-x[j-1])*(y[j]-y[j-1])
     }
   }
   anormx = xx[length(xx)] - xx[1]
