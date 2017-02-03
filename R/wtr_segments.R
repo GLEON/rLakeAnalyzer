@@ -14,8 +14,7 @@
 #' wtr_segments(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 #' 
 
-## Need to add +1 to nimax to get actual number of segments
-## Problem! Unconstrained and nseg specify not matching.
+## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
 wtr_segments <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, nseg="unconstrained"){
   
   if (nseg=="unconstrained"){
@@ -23,7 +22,7 @@ wtr_segments <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, 
     return(data.frame(nseg=sam_list[["nimax"]]+1, depth=sam_list[["smz"]], measure=sam_list[["sms"]]))
   }
   else {
-    sam_list = by_s_m3(nr=nseg,z0=z0,zmax=zmax,z=depth,sigma=measure)
+    sam_list = by_s_m3(nr=nseg-1,z0=z0,zmax=zmax,z=depth,sigma=measure)
     return(data.frame(nseg=nseg, depth=sam_list[["smz"]], measure=sam_list[["sms"]]))
   }
 }

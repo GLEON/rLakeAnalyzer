@@ -13,15 +13,15 @@
 #' wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
 #' wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 #' 
-## Problem! Unconstrained and nseg specify not matching.
+## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
 wtr_layer <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, nseg="unconstrained"){
   
   if (nseg=="unconstrained"){
     sam_list = by_s_m(thres=thres,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(nseg=sam_list[["nimax"]], mld=sam_list[["by_s_m"]], maxbd=sam_list[["maxbd"]])) ##maybe maxbd could be called "cline"
+    return(data.frame(nseg=sam_list[["nimax"]]+1, mld=sam_list[["by_s_m"]], maxbd=sam_list[["maxbd"]])) ##maybe maxbd could be called "cline"
     }
   else {
-    sam_list = by_s_m3(nr=nseg,z0=z0,zmax=zmax,z=depth,sigma=measure)
+    sam_list = by_s_m3(nr=nseg-1,z0=z0,zmax=zmax,z=depth,sigma=measure)
     return(data.frame(nseg=nseg, mld=sam_list[["by_s_m"]], maxbd=sam_list[["maxbd"]]))
   }
 }
