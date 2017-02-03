@@ -18,7 +18,7 @@ wtr_layer <- function(thres=0.1,z0=2.5,zmax=150,depth=depth,measure=measure, nse
   
   if (nseg=="unconstrained"){
     sam_list = by_s_m(thres=thres,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(nseg=sam_list[["nimax"]], mld=sam_list[["by_s_m"]], maxbd=sam_list[["maxbd"]]))
+    return(data.frame(nseg=sam_list[["nimax"]], mld=sam_list[["by_s_m"]], maxbd=sam_list[["maxbd"]])) ##maybe maxbd could be called "cline"
     }
   else {
     sam_list = by_s_m3(nr=nseg,z0=z0,zmax=zmax,z=depth,sigma=measure)
