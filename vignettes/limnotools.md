@@ -6,13 +6,15 @@ Sam Albers and Doug Collinge
 Package loading
 ---------------
 
-These packages are only need for this vignette and not for the limnotools package itself.
+tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
 
 ``` r
 library(tidyverse)
 ```
 
 ### Development version of limnotools
+
+TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 
 ``` r
 devtools::install_github("boshek/limnotools")
@@ -23,16 +25,22 @@ library(limnotools)
 Split and merge algorithm
 -------------------------
 
-Implementation of the split-and-merge algorithm result in two parts:
+Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs in two parts:
 
 -   wtr\_layer function
 -   wtr\_segments function
--   Then plotting for visual verification
 
 Simple application of the split and merge algorithm
 ---------------------------------------------------
 
-Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. Most users will only use two functions that are part of the split-and-merge algorithm. Thermocline depth and mix layer depth are calculated using the wtr\_layers() function. Segments of the water profile are calculated using wtr\_segments. The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt the convention of a minimum depth of 2.5 m, a maximum depth of 150 m and a error threshold of 0.1.
+Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. Most users will only use two functions that are part of the limnotools package. Cline depth and mix layer depth are calculated using the wtr\_layers() function. Coordinates for the segments of the water profile are calculated using wtr\_segments. For more information, type the following into R:
+
+``` r
+?wtr_layer
+?wtr_segments
+```
+
+The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1.
 
 ``` r
 wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
@@ -46,13 +54,13 @@ Note that the axes of the water column profile have been reversed and flipped to
 
 ``` r
 plot(y = latesummer$depth, x = latesummer$temper, ylim = rev(range(latesummer$depth)))
-abline(h = wldf$maxbd, col='blue')
+abline(h = wldf$cline, col='blue')
 abline(h = wldf$mld, col='red')
-text(16, wldf$maxbd+3, "Thermocline", col = 'blue')
+text(16, wldf$cline+3, "Thermocline", col = 'blue')
 text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
 ```
 
-![](limnotools_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](limnotools_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 More complicated example using many datafiles
 ---------------------------------------------
@@ -126,7 +134,7 @@ s_df
     ## 10 salinity earlyspring    20 24.858551 0.04974008
     ## # ... with 30 more rows
 
-Lastly we plot the mix layer depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
+Lastly we plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
 
 ``` r
 wtrprof_df %>%
@@ -137,7 +145,7 @@ wtrprof_df %>%
   scale_y_reverse() +
   facet_wrap(group~variable, scales = "free", ncol = 2) +
   labs(y = "Temperature/Salinity", x = "Depth (m)", 
-       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=maxbd")
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
 ```
 
-![](limnotools_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](limnotools_files/figure-markdown_github/unnamed-chunk-10-1.png)
