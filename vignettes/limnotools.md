@@ -14,8 +14,6 @@ library(tidyverse)
 
 ### Development version of limnotools
 
-Currently using sam\_exp branch
-
 ``` r
 devtools::install_github("boshek/limnotools")
 
