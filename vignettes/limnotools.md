@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-02
+2017-02-03
 
 Package loading
 ---------------
@@ -17,7 +17,7 @@ library(tidyverse)
 Currently using sam\_exp branch
 
 ``` r
-devtools::install_github("boshek/limnotools", ref = "sam_exp")
+devtools::install_github("boshek/limnotools")
 
 library(limnotools)
 ```
@@ -41,8 +41,8 @@ wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
 wldf
 ```
 
-    ##   nseg      mld    maxbd
-    ## 1    3 6.718292 16.33231
+    ##   nseg      mld    cline
+    ## 1    4 6.718292 16.33231
 
 Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays.
 
@@ -97,10 +97,10 @@ wl_df
     ## 2 salinity  latesummer   mld  2.896572
     ## 3   temper earlyspring   mld  8.073714
     ## 4   temper  latesummer   mld  6.718292
-    ## 5 salinity earlyspring maxbd 24.069020
-    ## 6 salinity  latesummer maxbd 49.175213
-    ## 7   temper earlyspring maxbd 22.636168
-    ## 8   temper  latesummer maxbd 16.332306
+    ## 5 salinity earlyspring cline 24.069020
+    ## 6 salinity  latesummer cline 49.175213
+    ## 7   temper earlyspring cline 22.636168
+    ## 8   temper  latesummer cline 16.332306
 
 The same applies to wtr\_segments()
 
