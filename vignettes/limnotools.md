@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-03
+2017-02-04
 
 Package loading
 ---------------
