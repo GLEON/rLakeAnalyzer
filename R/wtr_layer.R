@@ -34,7 +34,7 @@ wtr_layer <- function(thres=0.1,z0="auto",zmax=150,depth=depth,measure=measure, 
   
   ##z0 must have minimum of 1
   if( z0 < 1 ){
-    z0 == 1
+    z0 = 1
   } else {z0=z0}
   
   
