@@ -1,7 +1,7 @@
 #' @export
 #' @title Exploration of lake water column layers
 #' @param thres error norm; defaults to 0.1
-#' @param z0 initial depth in metres; defaults to auto whereby z0 is calculate as the first value of the longest ordered portion of the depth vector
+#' @param z0 initial depth in metres; defaults to auto whereby z0 is calculate as the first value of the longest ordered portion of the depth vector to minimum of 1. 
 #' @param zmax maximum depth in metres: defaults to 150m
 #' @param depth depth in metres; should be an increasing vector
 #' @param measure parameter measured in the water column profile
@@ -28,9 +28,15 @@ wtr_layer <- function(thres=0.1,z0="auto",zmax=150,depth=depth,measure=measure, 
   }
   
   ## For manual setting of depth vector
-  if( z0=="auto" ){
-    z0=depth[min(order_seq(depth))]
+  if( z0 == "auto" ){
+    z0 = depth[min(order_seq(depth))]
   } else {z0=z0}
+  
+  ##z0 must have minimum of 1
+  if( z0 < 1 ){
+    z0 == 1
+  } else {z0=z0}
+  
   
   if (nseg=="unconstrained"){
     sam_list = by_s_m(thres=thres,z0=z0,zmax=zmax,z=depth,sigma=measure)
