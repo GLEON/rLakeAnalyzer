@@ -38,13 +38,22 @@ wtr_layer <- function(thres=0.1,z0="auto",zmax=150,depth=depth,measure=measure, 
   
 
   
-  
   if (nseg=="unconstrained"){
-    sam_list = by_s_m(thres=thres,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(min_depth=z0,nseg=sam_list[["nimax"]]+1, mld=sam_list[["by_s_m"]], cline=sam_list[["cline"]])) 
+    sam_list = by_s_m(thres = thres, z0 = z0, zmax = zmax, z = depth,sigma = measure)
+    return(data.frame(min_depth = z0,
+                      nseg = sam_list[["nimax"]]+1, 
+                      mld = sam_list[["by_s_m"]], 
+                      cline = cline_calc(z_seg = sam_list[["smz"]], sigma_seg = sam_list[["sms"]])
+                      )
+           ) 
     }
   else {
-    sam_list = by_s_m3(nr=nseg-1,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(min_depth=z0,nseg=nseg, mld=sam_list[["by_s_m"]], cline=sam_list[["cline"]]))
+    sam_list = by_s_m3(nr = nseg-1, z0 = z0, zmax = zmax, z = depth, sigma = measure)
+    return(data.frame(min_depth = z0,
+                      nseg = nseg, 
+                      mld = sam_list[["by_s_m"]], 
+                      cline = cline_calc(z_seg = sam_list[["smz"]], sigma_seg = sam_list[["sms"]])
+                      )
+           )
   }
 }

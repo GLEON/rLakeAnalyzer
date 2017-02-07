@@ -69,8 +69,6 @@ by_s_m3 = function(nr,z0,zmax,z,sigma) {
   smz[i] = 0.5*(results$xx[k]+results$xx[k-1])*ax + z[i1]
   sms[i] = 0.5*(results$yy[k]+results$yy[k-1])*ay + sigma[i1]
   
-  ##Thermocline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope (–dT/dz). Fielder 2010
-  cline <- mean(smz[c(which.max(diff(smz)/diff(sms)),which.max(diff(smz)/diff(sms))+1)])
 
   list(eps=s_mNresults$eps, cline=cline, by_s_m=ss,smz=smz,sms=sms)
 }

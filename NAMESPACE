@@ -2,6 +2,7 @@
 
 export(by_s_m)
 export(by_s_m3)
+export(cline_calc)
 export(getxx)
 export(getxxnorm)
 export(r2b)
