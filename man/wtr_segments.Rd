@@ -4,13 +4,13 @@
 \alias{wtr_segments}
 \title{Exploration of lake water column segments}
 \usage{
-wtr_segments(thres = 0.1, z0 = 2.5, zmax = 150, depth = depth,
+wtr_segments(thres = 0.1, z0 = "auto", zmax = 150, depth = depth,
   measure = measure, nseg = "unconstrained")
 }
 \arguments{
 \item{thres}{error norm; defaults to 0.1}
 
-\item{z0}{initial depth in metres; defaults to 2.5m}
+\item{z0}{initial depth in metres; defaults to auto whereby z0 is calculate as the first value of the longest ordered portion of the depth vector to minimum of 1.}
 
 \item{zmax}{maximum depth in metres: default to 150m}
 

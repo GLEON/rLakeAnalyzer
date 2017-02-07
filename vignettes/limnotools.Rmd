@@ -20,7 +20,8 @@ library(tidyverse)
 ### Development version of limnotools
 TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 ```{r, message=FALSE}
-devtools::install_github("boshek/limnotools")
+#devtools::install_github("boshek/limnotools")
+devtools::install_github("boshek/limnotools", ref="sam_exp")
 
 library(limnotools)
 ```
