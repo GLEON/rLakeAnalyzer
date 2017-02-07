@@ -36,7 +36,8 @@
 #'
 by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
   by_s_m=-99.0 # TODO: this is for an error return, crash instead.
-  nn=800 # TODO: why?
+  ##nn=800 # TODO: why?
+  nn=length(z) 
 
   # finding initial s-level
   i1 = 1 + sum(z<z0)   # Find index of first z[] less than z0
