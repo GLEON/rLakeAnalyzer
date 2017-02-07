@@ -15,7 +15,7 @@ cline_calc(z_seg = z_seg, sigma_seg = sigma_seg)
 the depth of the cline
 }
 \description{
-Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope (–dT/dz). A cline cannot occur over a depth range of less than 1m and also cannot be the shallowest segment. Violating both conditions will thrown warnings though this function handles both differently. Used mostly with \code{wtr_layer}
+Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope. A cline cannot occur over a depth range of less than 1m and also cannot be the shallowest segment. Violating both conditions will thrown warnings though this function handles both differently. Used mostly with \code{wtr_layer}
 }
 \references{
 Fiedler, Paul C. "Comparison of objective descriptions of the thermocline." Limnology and Oceanography: Methods 8.6 (2010): 313-325.

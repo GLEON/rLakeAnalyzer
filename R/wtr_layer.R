@@ -17,6 +17,7 @@
 #' wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 #' 
 ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
+#' @seealso \code{cline_calc()}
 wtr_layer <- function(thres=0.1,z0="auto",zmax=150,depth=depth,measure=measure, nseg="unconstrained"){
   
   ## Index numbers of longest ordered portion of a vector

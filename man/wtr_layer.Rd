@@ -37,4 +37,7 @@ wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 \references{
 Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
 }
+\seealso{
+\code{cline_calc()}
+}
 
