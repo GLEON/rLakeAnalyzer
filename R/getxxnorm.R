@@ -32,9 +32,9 @@ getxxnorm <- function(x,y,nn,x0,dx) {
     }
   }
   anormx = xx[length(xx)] - xx[1]
-  anormy = yy[length(yy)] - yy[1]
+  anormy = max(yy) - min(yy)
   xx = (xx - xx[1])/anormx
-  yy = (yy - yy[1])/anormy
+  yy = (yy - min(yy))/anormy
 
   list(anormx=anormx,anormy=anormy,xx=xx,yy=yy)
 }
