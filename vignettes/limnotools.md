@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-06
+2017-02-07
 
 Package loading
 ---------------
@@ -92,6 +92,13 @@ wl_df <- wtrprof_df %>%
   do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
   select(-nseg) %>% ##nseg not needed here
   gather(Layer, value, -variable, -group) ##gather for plotting purposes
+```
+
+    ## Warning in cline_calc(z_seg = sam_list[["smz"]], sigma_seg =
+    ## sam_list[["sms"]]): Algorithm calculates cline to be in top segment. This
+    ## is likely due to surface scatter. Trying the next interval
+
+``` r
 wl_df
 ```
 
@@ -110,7 +117,7 @@ wl_df
     ## 8    temper  latesummer       mld  6.182394
     ## 9  salinity earlyspring     cline 48.307158
     ## 10 salinity  latesummer     cline 38.534828
-    ## 11   temper earlyspring     cline  2.265352
+    ## 11   temper earlyspring     cline 17.713291
     ## 12   temper  latesummer     cline 15.954893
 
 The same applies to wtr\_segments()
