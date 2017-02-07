@@ -30,12 +30,13 @@ wtr_layer <- function(thres=0.1,z0="auto",zmax=150,depth=depth,measure=measure, 
   ## For manual setting of depth vector
   if( z0 == "auto" ){
     z0 = depth[min(order_seq(depth))]
+    ##z0 must have minimum of 1 if using auto
+    if( z0 < 1 ){
+      z0 = 1
+    } 
   } else {z0=z0}
   
-  ##z0 must have minimum of 1
-  if( z0 < 1 ){
-    z0 = 1
-  } else {z0=z0}
+
   
   
   if (nseg=="unconstrained"){
