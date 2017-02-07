@@ -33,7 +33,8 @@
 
 by_s_m3 = function(nr,z0,zmax,z,sigma) {
   by_s_m=-99.0 # TODO: why?
-  nn=800 # TODO: why?
+  #nn=800 # TODO: why?
+  nn=length(z) 
 
   # finding initial s-level
   i1 = 1 + sum(z<z0)   # Find index of first z[] less than z0
