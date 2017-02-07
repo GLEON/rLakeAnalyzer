@@ -69,7 +69,7 @@ by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
   smz[i] = 0.5*(results$xx[k]+results$xx[k-1])*ax + z[i1]
   sms[i] = 0.5*(results$yy[k]+results$yy[k-1])*ay + sigma[i1]
   
-  list(nimax=nimax,by_s_m=ss, cline=cline,smz=smz,sms=sms)
+  list(nimax=nimax,by_s_m=ss, smz=smz,sms=sms)
 }
 
 # Original Fortran code follows.

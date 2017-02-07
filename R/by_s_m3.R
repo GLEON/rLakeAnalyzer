@@ -70,7 +70,7 @@ by_s_m3 = function(nr,z0,zmax,z,sigma) {
   sms[i] = 0.5*(results$yy[k]+results$yy[k-1])*ay + sigma[i1]
   
 
-  list(eps=s_mNresults$eps, cline=cline, by_s_m=ss,smz=smz,sms=sms)
+  list(eps=s_mNresults$eps, by_s_m=ss,smz=smz,sms=sms)
 }
 
 # real FUNCTION BY_s_m3(n,nimax,thres,z0,z,zmax,sigma,smz,sms)
