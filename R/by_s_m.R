@@ -51,7 +51,8 @@ by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
 
   # SUBROUTINE GET_XX_norm(anormx,anormy,N,       N1, X0,    DX, X,     Y,         XX,YY)
   # call GET_XX_norm(      ax,    ay,    i2-i1+1, nn, z(i1), dz, z(i1), sigma(i1), XX,YY)
-  results = getxxnorm(z[i1:i2],sigma[i1:i2],nn,z[i1],dz)
+  results = getxxnorm(z[i1:i2],sigma[i1:i2])
+  #results = getxxnorm(z[i1:i2],sigma[i1:i2],nn,z[i1],dz)
 
   ni = s_m_p(thres,results$xx,results$yy)
   k=ni[2]
