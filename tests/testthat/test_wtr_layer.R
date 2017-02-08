@@ -20,3 +20,10 @@ test_that("Ensures that increasing depth vectors are extracted from non-increasi
   expect_equal(z[order_seq(z)], 1:10)
 })
 
+test_that("NA's are returned when profile has less than 10 readings", {
+  # Data with less than 10 readings
+  z = 1:8; sigmavar = rnorm(z)
+  expect_warning(wtr_layer(depth=z, measure = sigmavar))
+})
+  
+
