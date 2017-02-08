@@ -14,7 +14,7 @@ wtr_layer(thres = 0.1, z0 = "auto", zmax = 150, depth = depth,
 
 \item{zmax}{maximum depth in metres: defaults to 150m}
 
-\item{depth}{depth in metres; should be an increasing vector}
+\item{depth}{depth in metres; should be an increasing vector that has more than 10 elements}
 
 \item{measure}{parameter measured in the water column profile}
 

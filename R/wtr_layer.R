@@ -3,7 +3,7 @@
 #' @param thres error norm; defaults to 0.1
 #' @param z0 initial depth in metres; defaults to auto whereby z0 is calculate as the first value of the longest ordered portion of the depth vector to minimum of 1. 
 #' @param zmax maximum depth in metres: defaults to 150m
-#' @param depth depth in metres; should be an increasing vector
+#' @param depth depth in metres; should be an increasing vector that has more than 10 elements
 #' @param measure parameter measured in the water column profile
 #' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
 #' @return a dataframe of nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures)
@@ -33,12 +33,18 @@ wtr_layer <-
       return(s[w]:(s[w + 1] - 1L))
     }
     
+    ## Always only use the longest ordered portion
+    ## Needed so that we can use an numbers rather than index for z0
+    depth=depth[order_seq(depth)]
+    measure=measure[order_seq(depth)]
+    
     ## Set a minimum depth readings
     if (length(depth) >= 10) {
       
       ## For manual setting of depth vector
       if (z0 == "auto") {
-        z0 = depth[min(order_seq(depth))]
+        ## What is the minimum depth after finding longest ordered portion?
+        z0 = min(depth)
         ##z0 must have minimum of 1 if using auto
         if (z0 < 1) {
           z0 = 1
