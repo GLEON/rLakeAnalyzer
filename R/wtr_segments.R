@@ -17,20 +17,20 @@
 ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
 wtr_segments <-
   function(thres = 0.1,
-           z0 = "auto",
+           z0 = 1.5,
            zmax = 150,
            depth = depth,
            measure = measure,
            nseg = "unconstrained") {
-    if( is.unsorted(depth[depth>z0])==TRUE){
-      warning("depth vector is unsorted")
-      return(data.frame(
-        min_depth = NA,
-        nseg = NA,
-        depth = NA,
-        measure = NA
-      ))
-    } else{
+    #if( is.unsorted(depth[depth>z0])==TRUE){
+    #  warning("depth vector is unsorted")
+    #  return(data.frame(
+    #    min_depth = NA,
+    #    nseg = NA,
+    #    depth = NA,
+    #    measure = NA
+    #  ))
+    #} else{
     ### Index numbers of longest ordered portion of a vector
     ### http://stackoverflow.com/a/42077739/5596534
     #order_seq <- function(x, run_length=10) {
@@ -105,5 +105,5 @@ wtr_segments <-
         measure = NA
       ))
     }
-    }
+    #}
   }

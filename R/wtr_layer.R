@@ -20,52 +20,87 @@
 #' @seealso \code{cline_calc()}
 wtr_layer <-
   function(thres = 0.1,
-           z0 = "auto",
+           z0 = 1.5,
            zmax = 150,
            depth = depth,
            measure = measure,
            nseg = "unconstrained") {
-    if( is.unsorted(depth[depth>z0])==TRUE){
-        warning("depth vector is unsorted")
-        return(data.frame(
-          min_depth = NA,
-          nseg = NA,
-          mld = NA,
-          cline = NA
-        ))
-      } else{
-    ### Index numbers of longest ordered portion of a vector
-    ### http://stackoverflow.com/a/42077739/5596534
-    #order_seq <- function(x, run_length=10) {
-    #  ## Resistant to slight decreases in depth
-    #  ## returns Index range between first run of increasing numbers greater 10 and the max depth
-    #  ## Index where the runs start
-    #  s = 1L + c(0L, which(x[-1L] < x[-length(x)]), length(x))
-    #  ## Index of first run of numbers greater than run_lenght (defaults to 10)
-    #  w = min(which(diff(s) > run_length))
-    #  ## Index of fIrst instance of max depth
-    #  s[w]:min(which(x %in% max(x)))
-    #}
+    ### Set a minimum depth readings
+    #if( is.unsorted(depth[depth>z0])==TRUE){
+    #  warning("depth vector is unsorted")
+    #  return(data.frame(
+    #    min_depth = NA,
+    #    nseg = NA,
+    #    depth = NA,
+    #    measure = NA
+    #  ))
+    #} else{
+    if (length(depth) >= 10) {
+      
+      #seq_rm <- function(x, run_length = 10) {
+      #  
+      #  ## Resistant to slight decreases in depth
+      #  ## returns Index range between first run of increasing numbers greater 10 and the max depth
+      #  ## Index where the runs start
+      #  s = 1L + c(0L, which(x[-1L] < x[-length(x)]), length(x))
+      #  ## Index of first run of numbers greater than run_length (defaults to 10)
+      #  w = min(which(diff(s) > run_length))
+      #  x = x[s[w]:length(x)]
+      #  
+      #  
+      #  if (is.unsorted(x)==TRUE){
+      #  
+      #  n_pre = length(x)
+      #  
+      #  while (is.unsorted(x) == TRUE) {
+      #    x <- x[which(diff(x) > 0)]
+      #  }
+      #  
+      #  n_loss = round(1 - (length(x) / n_pre), 3) * 100
+      #  
+      #  if (n_loss > 0) {
+      #    warning(
+      #      paste0(
+      #        "Possible data quality issue: ",
+      #        n_loss,
+      #        "% of data removed due to non-increasing depth vector"
+      #      )
+      #    )
+      #    
+      #  }
+      #  }
+      #  return(which(diff(x) > 0))
+      #}
+      #
+    #if( is.unsorted(depth[depth>z0])==TRUE){
+    #    warning("depth vector is unsorted")
+    #    return(data.frame(
+    #      min_depth = NA,
+    #      nseg = NA,
+    #      mld = NA,
+    #      cline = NA
+    #    ))
+    #  } else{
+   
     #
     ### Always only use the longest ordered portion
     ### Needed so that we can use an numbers rather than index for z0
-    #depth=depth[order_seq(depth)]
-    #measure=measure[order_seq(depth)]
+    #depth=depth[seq_rm(depth)]
+   # measure=measure[seq_rm(depth)]
     #
-    ### Set a minimum depth readings
-    if (length(depth) >= 10) {
-      #
-      #  ## For manual setting of depth vector
-      #  if (z0 == "auto") {
-      #    ## What is the minimum depth after finding longest ordered portion?
-      #    z0 = min(depth)
-      #    ##z0 must have minimum of 1 if using auto
-      #    if (z0 < 1) {
-      #      z0 = 1
-      #    }
-      #  } else {
-      #    z0 = z0
-      #  }
+
+      
+       # ## For manual setting of depth vector
+       # if (z0 == "auto") {
+       #   ## What is the minimum depth after finding longest ordered portion?
+       #   z0 = min(depth)
+       #   ##z0 must have minimum of 1 if using auto
+       #   if (z0 < 1) {
+       #     z0 = 1
+       #   }
+       # } else {
+       #   z0 = z0
+       # }
       
       
       
@@ -111,6 +146,7 @@ wtr_layer <-
         mld = NA,
         cline = NA
       ))
+    #}
     }
-      }
+    #}
   }
