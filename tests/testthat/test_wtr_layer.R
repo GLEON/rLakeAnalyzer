@@ -25,5 +25,10 @@ test_that("NA's are returned when profile has less than 10 readings", {
   z = 1:8; sigmavar = rnorm(z)
   expect_warning(wtr_layer(depth=z, measure = sigmavar))
 })
+
+test_that("Unsorted vector fails", {
+  z <- c(1,2,1,0.5,1,4,2,1:10,2,3); sigmavar = rnorm(z)
+  expect_warning(wtr_layer(depth = z, measure =sigmavar))
+})
   
 
