@@ -25,7 +25,7 @@ wtr_layer <-
            depth = depth,
            measure = measure,
            nseg = "unconstrained") {
-    if( is.unsorted(depth)==TRUE){
+    if( is.unsorted(depth[depth>z0])==TRUE){
         warning("depth vector is unsorted")
         return(data.frame(
           min_depth = NA,
