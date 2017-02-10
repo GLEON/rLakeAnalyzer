@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-07
+2017-02-10
 
 Package loading
 ---------------
@@ -48,8 +48,8 @@ wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
 wldf
 ```
 
-    ##   min_depth nseg      mld    cline
-    ## 1         1    4 6.182394 15.95489
+    ##   min_depth nseg   mld   cline
+    ## 1         1    4 6.251 15.9315
 
 Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays.
 
@@ -57,8 +57,10 @@ Note that the axes of the water column profile have been reversed and flipped to
 plot(y = latesummer$depth, x = latesummer$temper, ylim = rev(range(latesummer$depth)))
 abline(h = wldf$cline, col='blue')
 abline(h = wldf$mld, col='red')
+abline(h = wldf$min_depth, col='green')
 text(16, wldf$cline+3, "Thermocline", col = 'blue')
 text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
+text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
 ![](limnotools_files/figure-markdown_github/unnamed-chunk-5-1.png)
@@ -96,7 +98,7 @@ wl_df <- wtrprof_df %>%
 
     ## Warning in cline_calc(z_seg = sam_list[["smz"]], sigma_seg =
     ## sam_list[["sms"]]): Algorithm calculates cline to be in top segment. This
-    ## is likely due to surface scatter. Trying the next interval
+    ## is likely due to surface scatter. Using the next interval.
 
 ``` r
 wl_df
@@ -105,20 +107,20 @@ wl_df
     ## Source: local data frame [12 x 4]
     ## Groups: variable, group [4]
     ## 
-    ##    variable       group     Layer     value
-    ##       <chr>       <chr>     <chr>     <dbl>
-    ## 1  salinity earlyspring min_depth  1.000000
-    ## 2  salinity  latesummer min_depth  1.000000
-    ## 3    temper earlyspring min_depth  1.000000
-    ## 4    temper  latesummer min_depth  1.000000
-    ## 5  salinity earlyspring       mld  1.102604
-    ## 6  salinity  latesummer       mld  1.326494
-    ## 7    temper earlyspring       mld  3.518704
-    ## 8    temper  latesummer       mld  6.182394
-    ## 9  salinity earlyspring     cline 48.307158
-    ## 10 salinity  latesummer     cline 38.534828
-    ## 11   temper earlyspring     cline 17.713291
-    ## 12   temper  latesummer     cline 15.954893
+    ##    variable       group     Layer    value
+    ##       <chr>       <chr>     <chr>    <dbl>
+    ## 1  salinity earlyspring min_depth  1.00000
+    ## 2  salinity  latesummer min_depth  1.00000
+    ## 3    temper earlyspring min_depth  1.00000
+    ## 4    temper  latesummer min_depth  1.00000
+    ## 5  salinity earlyspring       mld  1.14750
+    ## 6  salinity  latesummer       mld  1.49850
+    ## 7    temper earlyspring       mld  3.55500
+    ## 8    temper  latesummer       mld  6.25100
+    ## 9  salinity earlyspring     cline 16.91000
+    ## 10 salinity  latesummer     cline 49.08875
+    ## 11   temper earlyspring     cline 17.68575
+    ## 12   temper  latesummer     cline 15.93150
 
 The same applies to wtr\_segments()
 
@@ -132,18 +134,18 @@ s_df
     ## Source: local data frame [42 x 6]
     ## Groups: variable, group [4]
     ## 
-    ##    variable       group min_depth  nseg     depth    measure
-    ##       <chr>       <chr>     <dbl> <dbl>     <dbl>      <dbl>
-    ## 1  salinity earlyspring         1    19  1.012000 0.05060000
-    ## 2  salinity earlyspring         1    19  1.102604 0.05056689
-    ## 3  salinity earlyspring         1    19  3.035484 0.05060042
-    ## 4  salinity earlyspring         1    19  7.686476 0.05015367
-    ## 5  salinity earlyspring         1    19  9.800564 0.05020636
-    ## 6  salinity earlyspring         1    19 10.887809 0.04994234
-    ## 7  salinity earlyspring         1    19 13.122701 0.05001027
-    ## 8  salinity earlyspring         1    19 14.874374 0.05020085
-    ## 9  salinity earlyspring         1    19 16.807254 0.04994953
-    ## 10 salinity earlyspring         1    19 18.740134 0.05002944
+    ##    variable       group min_depth  nseg   depth measure
+    ##       <chr>       <chr>     <dbl> <dbl>   <dbl>   <dbl>
+    ## 1  salinity earlyspring         1    21  1.0120 0.05060
+    ## 2  salinity earlyspring         1    21  1.1475 0.05050
+    ## 3  salinity earlyspring         1    21  3.0740 0.05085
+    ## 4  salinity earlyspring         1    21  7.7415 0.05035
+    ## 5  salinity earlyspring         1    21  9.7970 0.05020
+    ## 6  salinity earlyspring         1    21 11.2695 0.05010
+    ## 7  salinity earlyspring         1    21 13.1075 0.05005
+    ## 8  salinity earlyspring         1    21 14.8575 0.05025
+    ## 9  salinity earlyspring         1    21 16.3980 0.05015
+    ## 10 salinity earlyspring         1    21 17.4220 0.05015
     ## # ... with 32 more rows
 
 Lastly we plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
