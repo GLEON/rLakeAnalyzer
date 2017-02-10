@@ -17,11 +17,12 @@
 ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
 wtr_segments <-
   function(thres = 0.1,
-           z0 = 1.5,
+           z0 = "auto",
            zmax = 150,
            depth = depth,
            measure = measure,
            nseg = "unconstrained") {
+    ### Set a minimum depth readings
     #if( is.unsorted(depth[depth>z0])==TRUE){
     #  warning("depth vector is unsorted")
     #  return(data.frame(
@@ -31,39 +32,34 @@ wtr_segments <-
     #    measure = NA
     #  ))
     #} else{
-    ### Index numbers of longest ordered portion of a vector
-    ### http://stackoverflow.com/a/42077739/5596534
-    #order_seq <- function(x, run_length=10) {
-    #  ## Resistant to slight decreases in depth
-    #  ## returns Index range between first run of increasing numbers greater 10 and the max depth
-    #  ## Index where the runs start
-    #  s = 1L + c(0L, which(x[-1L] < x[-length(x)]), length(x))
-    #  ## Index of first run of numbers greater than run_lenght (defaults to 10)
-    #  w = min(which(diff(s) > run_length))
-    #  ## Index of fIrst instance of max depth
-    #  s[w]:min(which(x %in% max(x)))
-    #}
-    #
-    ### Always only use the longest ordered portion
-    ### Needed so that we can use an numbers rather than index for z0
-    #depth=depth[order_seq(depth)]
-    #measure=measure[order_seq(depth)]
-    #
-    ### Set a minimum depth readings
+    
+    ##REMOVES SOAK PERIOD
+    ## s are where the runs start;  tack on length(x)+1, where the next run would start if the vector continued
+    ## subsequent runs start where there is a 
+    s = 1L + c(0L, which(depth[-1L] < depth[-length(depth)]), length(depth))
+    ## Index of first run of numbers greater than run_length (defaults to 20)
+    w = min(which(diff(s) >= 20))
+    
+    ##Index from first run GTE 20
+    start = s[w] 
+    end = which.max(depth)
+    
+    depth=depth[start:end]
+    measure=measure[start:end]
+    
     if (length(depth) >= 10) {
-      #
-      #  ## For manual setting of depth vector
-      #  if (z0 == "auto") {
-      #    ## What is the minimum depth after finding longest ordered portion?
-      #    z0 = min(depth)
-      #    ##z0 must have minimum of 1 if using auto
-      #    if (z0 < 1) {
-      #      z0 = 1
-      #    }
-      #  } else {
-      #    z0 = z0
-      #  }
       
+      ## Auto detecting minimum of depth vector to a minimum of 1
+      if (z0 == "auto") {
+        ## What is the minimum depth after finding longest ordered portion?
+        z0 = min(depth)
+        ##z0 must have minimum of 1 if using auto
+        if (z0 < 1) {
+          z0 = 1
+        }
+      } else {
+        z0 = z0
+      }
       if (nseg == "unconstrained") {
         sam_list = by_s_m(
           thres = thres,
