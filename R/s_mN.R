@@ -70,7 +70,7 @@ s_mN = function(nr,x,y) {
     #     if( eps1<eps ) {
     #       if( length(ni)-1 > 2 ) { # Are there two or more intervals in the entire set?
     #         # Yes, so merge the interval we are looking at.
-    #         ni <- zerge(i, ni)
+    #         ni <- merge(i, ni)
     #         changed = TRUE
     #         break # exit the for loop
     #       } else {
