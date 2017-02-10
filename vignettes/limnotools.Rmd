@@ -50,8 +50,10 @@ Note that the axes of the water column profile have been reversed and flipped to
 plot(y = latesummer$depth, x = latesummer$temper, ylim = rev(range(latesummer$depth)))
 abline(h = wldf$cline, col='blue')
 abline(h = wldf$mld, col='red')
+abline(h = wldf$min_depth, col='green')
 text(16, wldf$cline+3, "Thermocline", col = 'blue')
 text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
+text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
 ## More complicated example using many datafiles
