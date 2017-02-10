@@ -4,7 +4,7 @@
 \alias{wtr_layer}
 \title{Exploration of lake water column layers}
 \usage{
-wtr_layer(thres = 0.1, z0 = "auto", zmax = 150, depth = depth,
+wtr_layer(thres = 0.1, z0 = 1.5, zmax = 150, depth = depth,
   measure = measure, nseg = "unconstrained")
 }
 \arguments{
