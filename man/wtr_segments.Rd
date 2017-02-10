@@ -4,7 +4,7 @@
 \alias{wtr_segments}
 \title{Exploration of lake water column segments}
 \usage{
-wtr_segments(thres = 0.1, z0 = 0.5, zmax = 150, depth = depth,
+wtr_segments(thres = 0.1, z0 = 1.5, zmax = 150, depth = depth,
   measure = measure, nseg = "unconstrained")
 }
 \arguments{
