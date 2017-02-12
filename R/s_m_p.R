@@ -44,7 +44,7 @@ s_m_p = function(eps,x,y) {
   # We will short-circuit it instead:
   ni = c( 1, round(length(x)/2)+1, length(x)+1 )
 
-  # If any interval does not meet the r2b<eps test then split it into two with spl().
+  # If any interval does not meet the r2b<eps test then split it into two with split_interval().
   # Note that ni will grow in length as this process proceeds.
   i = 1
   while( i<length(ni) ) {   # Rinse, repeat over all intervals in ni.
@@ -54,7 +54,7 @@ s_m_p = function(eps,x,y) {
       # N.B. We split an interval here so ni gets one element longer
       # N.B. If an interval is added we will have to test the first
       # of the two new intervals so we don't increment i.
-      ni = spl(ni,i)
+      ni = split_interval(ni,i)
       changed = TRUE
     }
     else {
@@ -84,7 +84,7 @@ s_m_p = function(eps,x,y) {
         if( eps1<eps ) {
           if( length(ni)-1 > 2 ) { # Are there two or more intervals in the entire set?
             # Yes, so merge the interval we are looking at.
-            ni <- merge(i, ni)
+            ni <- merge_intervals(i, ni)
             changed = TRUE
             break # exit the for loop
           } else {

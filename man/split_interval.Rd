@@ -4,7 +4,7 @@
 \alias{spl}
 \title{spliting interval i into 2 pieces}
 \usage{
-spl(ni, i)
+split_interval(ni, i)
 }
 \arguments{
 \item{ni}{[INTEGER(NR)] current array with interval start point number}
@@ -19,19 +19,19 @@ spliting interval i into 2 pieces
 ni = c(1,5,10,15,20)
 nr = 4
 ni
-ni = spl(ni,i=2)
+ni = split_interval(ni,i=2)
 ni
-ni = spl(ni,i=5)
+ni = split_interval(ni,i=5)
 ni
-ni = spl(ni,i=2)
+ni = split_interval(ni,i=2)
 ni
-ni = spl(ni,i=1)
+ni = split_interval(ni,i=1)
 ni
-ni = spl(ni,i=length(ni)-1)
+ni = split_interval(ni,i=length(ni)-1)
 ni
-ni = spl(ni,i=length(ni)-1)
+ni = split_interval(ni,i=length(ni)-1)
 ni
-ni = spl(ni,i=length(ni)-1)
+ni = split_interval(ni,i=length(ni)-1)
 ni
 }
 
