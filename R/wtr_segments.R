@@ -33,6 +33,8 @@ wtr_segments <-
     #  ))
     #} else{
     
+    if (length(depth) >= 10) {
+    
     ##REMOVES SOAK PERIOD
     ## s are where the runs start;  tack on length(x)+1, where the next run would start if the vector continued
     ## subsequent runs start where there is a 
@@ -47,7 +49,7 @@ wtr_segments <-
     depth=depth[start:end]
     measure=measure[start:end]
     
-    if (length(depth) >= 10) {
+    
       
       ## Auto detecting minimum of depth vector to a minimum of 1
       if (z0 == "auto") {
