@@ -21,7 +21,7 @@ depth_filter <- function(z0, run_length=20) {
   s = 1L + c(0L, which(z0[-1L] < z0[-length(z0)]), length(z0))
   ## Index of first run of numbers greater than run_length (defaults to 20)
   
-  if( length(s) > run_length ) {
+  #if( length(s) > run_length ) {
   w = min(which(diff(s) >= run_length))
   
   ##Index from first run GTE 20
@@ -48,7 +48,7 @@ depth_filter <- function(z0, run_length=20) {
   
   return(idx_soak[idx_heave])
   
-  } else {warning("run length less than filter depth length")}
+  #} else {warning("run length less than filter depth length")}
 
 }
 
