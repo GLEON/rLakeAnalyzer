@@ -49,7 +49,8 @@ by_s_m3 = function(nr,z0,zmax,z,sigma) {
 
   # SUBROUTINE GET_XX_norm(anormx,anormy,N,       N1, X0,    DX, X,     Y,         XX,YY)
   # call GET_XX_norm(      ax,    ay,    i2-i1+1, nn, z(i1), dz, z(i1), sigma(i1), XX,YY)
-  results = getxxnorm(z[i1:i2],sigma[i1:i2],nn,z[i1],dz)
+  #results = getxxnorm(z[i1:i2],sigma[i1:i2],nn,z[i1],dz)
+  results = getxxnorm(z[i1:i2],sigma[i1:i2])
 
   s_mNresults = s_mN(nr,results$xx,results$yy)
   ni = s_mNresults$ni
