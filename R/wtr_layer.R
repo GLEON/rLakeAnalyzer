@@ -26,7 +26,8 @@ wtr_layer <-
            nseg = "unconstrained",
            depth_filter=TRUE) {
     
-    if( length(depth) >= 10 ) {  
+    ## TODO need to be figure out a better threshold of points for algorithm
+    if( length(depth) >= 30 ) {  
       
       if( depth_filter=="TRUE" ){
       
@@ -72,7 +73,7 @@ wtr_layer <-
         ))
       }
     } else {
-      warning("Profile does not have enough readings for sm algorithm (<10)")
+      warning("Profile does not have enough readings for sm algorithm (<30)")
       return(data.frame(min_depth = NA, nseg = NA, mld = NA, cline = NA))
     }
   }
