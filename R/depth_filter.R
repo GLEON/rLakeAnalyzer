@@ -12,7 +12,7 @@
 #' @examples
 #' depth_filter(z0=latesummer$depth)
 
-depth_filter <- function(z0, run_length=15) {
+depth_filter <- function(z0, run_length=20) {
   n_start = length(z0)
   
   ##REMOVES SOAK PERIOD
