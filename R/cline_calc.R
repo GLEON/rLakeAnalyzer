@@ -15,7 +15,7 @@ cline_calc <- function(z_seg = z_seg, sigma_seg = sigma_seg) {
   
   ## The cline can not be the top segment. If this is the case, kick it down one interval
   if( top == 1){
-    warning('Algorithm calculates cline to be in top segment. This is likely due to surface scatter. Trying the next interval')
+    warning('Algorithm calculates cline to be in top segment. This is likely due to surface scatter. Using the next interval.')
     top = top + 1
   } else{top=top}
   

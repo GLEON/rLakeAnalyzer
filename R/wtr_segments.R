@@ -15,32 +15,93 @@
 #' 
 
 ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
-wtr_segments <- function(thres=0.1,z0="auto",zmax=150,depth=depth,measure=measure, nseg="unconstrained"){
-  
-  
-  ## Index numbers of longest ordered portion of a vector
-   ## http://stackoverflow.com/a/42077739/5596534
-   order_seq <- function(x) {
-     s = 1L + c(0L, which( x[-1L] < x[-length(x)] ), length(x))
-     w = which.max(diff(s))
-     return(s[w]:(s[w+1]-1L))
-   }
-   
-   ## For manual setting of depth vector
-   if( z0 == "auto" ){
-     z0 = depth[min(order_seq(depth))]
-     ##z0 must have minimum of 1 if using auto
-     if( z0 < 1 ){
-       z0 = 1
-     } 
-   } else {z0=z0}
-  
-  if( nseg=="unconstrained" ){
-    sam_list = by_s_m(thres=thres,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(min_depth=z0,nseg=sam_list[["nimax"]]+1, depth=sam_list[["smz"]], measure=sam_list[["sms"]]))
+wtr_segments <-
+  function(thres = 0.1,
+           z0 = "auto",
+           zmax = 150,
+           depth = depth,
+           measure = measure,
+           nseg = "unconstrained") {
+    ### Set a minimum depth readings
+    #if( is.unsorted(depth[depth>z0])==TRUE){
+    #  warning("depth vector is unsorted")
+    #  return(data.frame(
+    #    min_depth = NA,
+    #    nseg = NA,
+    #    depth = NA,
+    #    measure = NA
+    #  ))
+    #} else{
+    
+    if (length(depth) >= 10) {
+    
+    ##REMOVES SOAK PERIOD
+    ## s are where the runs start;  tack on length(x)+1, where the next run would start if the vector continued
+    ## subsequent runs start where there is a 
+    s = 1L + c(0L, which(depth[-1L] < depth[-length(depth)]), length(depth))
+    ## Index of first run of numbers greater than run_length (defaults to 20)
+    w = min(which(diff(s) >= 20))
+    
+    ##Index from first run GTE 20
+    start = s[w] 
+    end = which.max(depth)
+    
+    depth=depth[start:end]
+    measure=measure[start:end]
+    
+    
+      
+      ## Auto detecting minimum of depth vector to a minimum of 1
+      if (z0 == "auto") {
+        ## What is the minimum depth after finding longest ordered portion?
+        z0 = min(depth)
+        ##z0 must have minimum of 1 if using auto
+        if (z0 < 1) {
+          z0 = 1
+        }
+      } else {
+        z0 = z0
+      }
+      if (nseg == "unconstrained") {
+        sam_list = by_s_m(
+          thres = thres,
+          z0 = z0,
+          zmax = zmax,
+          z = depth,
+          sigma = measure
+        )
+        return(
+          data.frame(
+            min_depth = z0,
+            nseg = sam_list[["nimax"]] + 1,
+            depth = sam_list[["smz"]],
+            measure = sam_list[["sms"]]
+          )
+        )
+      }
+      else {
+        sam_list = by_s_m3(
+          nr = nseg - 1,
+          z0 = z0,
+          zmax = zmax,
+          z = depth,
+          sigma = measure
+        )
+        return(data.frame(
+          min_depth = z0,
+          nseg = nseg,
+          depth = sam_list[["smz"]],
+          measure = sam_list[["sms"]]
+        ))
+      }
+    } else {
+      warning("Profile does not have enough readings for sm algorithm (<10)")
+      return(data.frame(
+        min_depth = NA,
+        nseg = NA,
+        depth = NA,
+        measure = NA
+      ))
+    }
+    #}
   }
-  else {
-    sam_list = by_s_m3(nr=nseg-1,z0=z0,zmax=zmax,z=depth,sigma=measure)
-    return(data.frame(min_depth=z0,nseg=nseg, depth=sam_list[["smz"]], measure=sam_list[["sms"]]))
-  }
-}
