@@ -1,11 +1,15 @@
 Package: limnotools
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A set of tools and commands to utilize high resolution water profile data
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does, maybe more than one line.
-License: What license is it under?
+Authors@R: c(
+    person("Collinge", "Doug", , "", c("aut")),
+    person("Albers", "Sam", , "sam.albers@gmail.com", c("aut", "cre"))
+    )
+Description: In this version of limnotools, the primary function is to run the split and merge algorithm (Pavlidis and Horowitz 1974) on high resolution CTD profile data. 
+    Implementation of the SM algorithm was adapted from ForTran code written by Thomson and Fine, 2003. The SM algorithm is primarily called from the wtr_layer and the wtr_segments fucntions.
+    See the vignette for usage examples. 
+License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Suggests: testthat,

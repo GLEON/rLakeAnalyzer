@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-10
+2017-02-14
 
 Package loading
 ---------------
@@ -114,7 +114,7 @@ wl_df
     ## 3    temper earlyspring min_depth  1.00000
     ## 4    temper  latesummer min_depth  1.00000
     ## 5  salinity earlyspring       mld  1.14750
-    ## 6  salinity  latesummer       mld  1.49850
+    ## 6  salinity  latesummer       mld  1.72050
     ## 7    temper earlyspring       mld  3.55500
     ## 8    temper  latesummer       mld  6.25100
     ## 9  salinity earlyspring     cline 16.91000

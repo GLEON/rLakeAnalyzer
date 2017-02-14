@@ -29,10 +29,8 @@ a dataframe of nseg (number of segments), mld (mix layer depth), cline (the midp
 Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm. The cline is defined as the midpoint of the layer of water where the physical property change in the greatest over a small difference. The exact cline depends on the specification of measure. For example if temperature is specified,  then we can expect cline to output the thermocline.
 }
 \examples{
-Estimation using by_s_m() and an unspecified number of segments
 wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
 
-Estimation using by_s_m3() and a fixed number of segments
 wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 
 }
