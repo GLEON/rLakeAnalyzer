@@ -1,3 +1,6 @@
+library(devtools)
+load_all()
+
 ##########################################################################
 ## Original function directly from ForTran
 r2b_orig = function(k1,k2,x,y) {
@@ -133,11 +136,11 @@ identical(r2b_fast(k1, k2, y=t11$temper, x=t11$depth), r2b_orig(k1, k2, y=t11$te
 
 
 ## And what is the speed comparison?
-library(microbenchmark)
-microbenchmark(r2b_lm(k1, k2, y=t11$temper, x=t11$depth),
-               r2b_orig(k1, k2, y=t11$temper, x=t11$depth),
-               r2b_fast(k1, k2, y=t11$temper, x=t11$depth),
-               times=10000)
+##library(microbenchmark)
+##microbenchmark(r2b_lm(k1, k2, y=t11$temper, x=t11$depth),
+##               r2b_orig(k1, k2, y=t11$temper, x=t11$depth),
+##               r2b_fast(k1, k2, y=t11$temper, x=t11$depth),
+##               times=10000)
 
 
 

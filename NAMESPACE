@@ -3,6 +3,7 @@
 export(by_s_m)
 export(by_s_m3)
 export(cline_calc)
+export(depth_filter)
 export(getxx)
 export(getxxnorm)
 export(merge_intervals)

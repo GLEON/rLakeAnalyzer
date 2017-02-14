@@ -6,6 +6,7 @@
 #' @param depth depth in metres; should be an increasing vector
 #' @param measure parameter measured in the water column profile
 #' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
+#' @param depth_filter option to turn of depth_filter process.
 #' @return a dataframe of nseg (number of segments) and the x and y coordinates of the segments produced by the split and merge approach.
 #' @description  Extract water column segments of a given parameter from a profile using the split-and-merge algorithm.
 #' @references Thomson & Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
@@ -21,35 +22,20 @@ wtr_segments <-
            zmax = 150,
            depth = depth,
            measure = measure,
-           nseg = "unconstrained") {
-    ### Set a minimum depth readings
-    #if( is.unsorted(depth[depth>z0])==TRUE){
-    #  warning("depth vector is unsorted")
-    #  return(data.frame(
-    #    min_depth = NA,
-    #    nseg = NA,
-    #    depth = NA,
-    #    measure = NA
-    #  ))
-    #} else{
-    
-    if (length(depth) >= 10) {
-    
-    ##REMOVES SOAK PERIOD
-    ## s are where the runs start;  tack on length(x)+1, where the next run would start if the vector continued
-    ## subsequent runs start where there is a 
-    s = 1L + c(0L, which(depth[-1L] < depth[-length(depth)]), length(depth))
-    ## Index of first run of numbers greater than run_length (defaults to 20)
-    w = min(which(diff(s) >= 20))
-    
-    ##Index from first run GTE 20
-    start = s[w] 
-    end = which.max(depth)
-    
-    depth=depth[start:end]
-    measure=measure[start:end]
-    
-    
+           nseg = "unconstrained",
+           depth_filter="TRUE") {
+
+    if( length(depth) >= 10 ) {  
+      
+      if( depth_filter=="TRUE" ){
+        
+        ## Remove heave, soak and upcast
+        depth=depth[depth_filter(depth)]
+        measure=measure[depth_filter(depth)]
+        
+      } else { 
+        depth=depth
+        measure=measure}
       
       ## Auto detecting minimum of depth vector to a minimum of 1
       if (z0 == "auto") {
