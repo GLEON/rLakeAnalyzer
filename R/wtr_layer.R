@@ -6,6 +6,7 @@
 #' @param depth depth in metres; should be an increasing vector
 #' @param measure parameter measured in the water column profile
 #' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
+#' @param depth_filter option to turn of depth_filter process. 
 #' @return a dataframe of nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures)
 #' @description  Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm. The cline is defined as the midpoint of the layer of water where the physical property change in the greatest over a small difference. The exact cline depends on the specification of measure. For example if temperature is specified,  then we can expect cline to output the thermocline. 
 #' @references Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
@@ -17,40 +18,29 @@
 #' wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 #' 
 ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
-#' @seealso \code{cline_calc()}
+#' @seealso \code{cline_calc()}, \code{depth_filter()}
 wtr_layer <-
   function(thres = 0.1,
            z0 = "auto",
            zmax = 150,
            depth = depth,
            measure = measure,
-           nseg = "unconstrained") {
-    ### Set a minimum depth readings
-    #if( is.unsorted(depth[depth>z0])==TRUE){
-    #  warning("depth vector is unsorted")
-    #  return(data.frame(
-    #    min_depth = NA,
-    #    nseg = NA,
-    #    depth = NA,
-    #    measure = NA
-    #  ))
-    #} else{
-
-      ##REMOVES SOAK PERIOD
-      ## s are where the runs start;  tack on length(x)+1, where the next run would start if the vector continued
-      ## subsequent runs start where there is a 
-      s = 1L + c(0L, which(depth[-1L] < depth[-length(depth)]), length(depth))
-      ## Index of first run of numbers greater than run_length (defaults to 20)
-      w = min(which(diff(s) >= 20))
+           nseg = "unconstrained",
+           depth_filter=TRUE) {
+    
+    if( length(depth) >= 10 ) {  
       
-      ##Index from first run GTE 20
-      start = s[w] 
-      end = which.max(depth)
+      if( depth_filter=="TRUE" ){
       
-      depth=depth[start:end]
-      measure=measure[start:end]
+      ## Remove heave, soak and upcast
+      depth=depth[depth_filter(depth)]
+      measure=measure[depth_filter(depth)]
+      
+      } else { 
+        depth=depth
+        measure=measure}
 
-      if (length(depth) >= 10) {
+
         
       ## Auto detecting minimum of depth vector to a minimum of 1
       if (z0 == "auto") {
