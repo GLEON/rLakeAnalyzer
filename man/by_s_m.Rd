@@ -18,34 +18,29 @@ by_s_m(thres = thres, z0 = z0, zmax = zmax, z = z, sigma = sigma)
 \item{sigma}{input y data array}
 }
 \value{
-list(nimax=nimax,by_s_m=ss, cline=cline,smz=smz,sms=sms)
-\itemize{
-\item nimax: number of segments
-\item smz: final z array of segmented data
-\item sms: final sigma array of segmented data
-\item by_s_m: position of MLD = smz(2); or -99 if something is not right
-\item cline: Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope
-}
+data.frame(nimax=nimax,smz=smz,sms=sms,by_s_m=ss)
+nimax: number of segments
+smz: final z array of segmented data
+sms: final sigma array of segmented data
+by_s_m: position of MLD = smz(2); or -99 if something is not right
 }
 \description{
 Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
-}
-\note{
-ForTran description - Input
-\itemize{
-\item{N -[INTEGER] number of points}
-\item{THRES -[REAL]  error norm}
-\item{Z0 -[REAL]  initial depth: use to omit data above z0}
-\item{ZMAX  -[REAL]  maximum depth: use to omit data below zmax}
-\item{Z     -[REAL(N)] input x data array, should be increasing function of index}
-\item{SIGMA -[REAL(N)] input y data array}
-}
-ForTran description - Output
-\itemize{
-\item{NIMAX -[INTEGER] final number of segments}
-\item{SMZ   -[REAL(NIMAX)] final z array of segmented data}
-\item{SMS   -[REAL(NIMAX)] final sigma array of segmented data}
-\item{VY_S_M-[REAL] position of MLD (=SMZ(2)); return -99 if something is not right}
-}
+# c     (This subroutine calls the S_M_P subroutine)
+c       Input:
+C          N     -[INTEGER] number of points;
+C          THRES -[REAL]  error norm;
+C          Z0    -[REAL]  initial depth: use to omit data above z0
+C          ZMAX  -[REAL]  maximum depth: use to omit data below zmax
+C
+C          Z     -[REAL(N)] input x data array, should be increasing function of index
+C          SIGMA -[REAL(N)] input y data array
+C       Output:
+C          NIMAX -[INTEGER] final number of segments;
+C          SMZ   -[REAL(NIMAX)] final z array of segmented data
+C          SMS   -[REAL(NIMAX)] final sigma array of segmented data
+C          VY_S_M-[REAL] position of MLD (=SMZ(2)).
+C                      return -99 if something is not right.
+C
 }
 

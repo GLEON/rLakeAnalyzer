@@ -18,30 +18,24 @@ by_s_m3(nr, z0, zmax, z, sigma)
 \item{sigma}{input y data array}
 }
 \value{
-list(eps=s_mNresults$eps, cline=cline, by_s_m=ss,smz=smz,sms=sms)
-\itemize{
-\item eps: the maximum error over all intervals.
-\item smz: final z array of segmented data
-\item sms: final sigma array of segmented data
-\item by_s_m: position of MLD = smz(2); or -99 if something is not right
-\item cline: Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope
-}
+list(eps,smz=smz,sms=sms,by_s_m=ss)
+eps: the maximum error over all intervals.
+smz: final z array of segmented data
+sms: final sigma array of segmented data
+by_s_m: position of MLD = smz(2); or -99 if something is not right
 }
 \description{
 Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
-}
-\note{
-ForTran description - Input (Calls subroutine S_mN)
-\itemize{
-\item{N -[INTEGER] number of points}
-\item{NR  -[INTEGER] number of segments (fixed)}
-\item{X   -[REAL(N)] input x data array, should be increasing function of index}
-\item{Y   -[REAL(N)] input y data array}
-}
-
-ForTran description - Output
-\itemize{
-\item {NI  -[INTEGER] final array with segment start points}
-}
+FORTRAN comments:
+      real FUNCTION BY_s_m3(n,nimax,thres,z0,z,zmax,sigma,smz,sms)
+C     (This is the service subroutine for the case of a SPECIFIC ERROR NORM)
+c     (Calls subroutine S_mN)
+C       Input:
+C          N   -[INTEGER] number of points;
+C          NR  -[INTEGER] number of segments (fixed);
+C          X   -[REAL(N)] input x data array, should be increasing function of index
+C          Y   -[REAL(N)] input y data array
+C       Output:
+C          NI  -[INTEGER] final array with segment start points
 }
 
