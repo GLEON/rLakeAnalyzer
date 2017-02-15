@@ -17,19 +17,26 @@ library(tidyverse)
 TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 
 ``` r
-#devtools::install_github("boshek/limnotools")
-devtools::install_github("boshek/limnotools", ref="sam_exp")
-
+devtools::install_github("boshek/limnotools")
 library(limnotools)
 ```
 
 Split and merge algorithm
 -------------------------
 
-Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs in two parts:
+Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs within two functions:
 
 -   wtr\_layer function
 -   wtr\_segments function
+
+Useful dataset in limnotools
+----------------------------
+
+``` r
+data("earlyspring")
+data("latesummer")
+data("t11")
+```
 
 Simple application of the split and merge algorithm
 ---------------------------------------------------
@@ -63,7 +70,7 @@ text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
 text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
-![](limnotools_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](limnotools_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 More complicated example using many datafiles
 ---------------------------------------------
@@ -93,7 +100,8 @@ wl_df <- wtrprof_df %>%
   group_by(variable, group) %>% ## group by variable and group
   do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
   select(-nseg) %>% ##nseg not needed here
-  gather(Layer, value, -variable, -group) ##gather for plotting purposes
+  gather(Layer, value, -variable, -group) %>% ##gather for plotting purposes
+  filter(variable == "temper")
 ```
 
     ## Warning in cline_calc(z_seg = sam_list[["smz"]], sigma_seg =
@@ -104,66 +112,56 @@ wl_df <- wtrprof_df %>%
 wl_df
 ```
 
-    ## Source: local data frame [12 x 4]
-    ## Groups: variable, group [4]
+    ## Source: local data frame [6 x 4]
+    ## Groups: variable, group [2]
     ## 
-    ##    variable       group     Layer    value
-    ##       <chr>       <chr>     <chr>    <dbl>
-    ## 1  salinity earlyspring min_depth  1.00000
-    ## 2  salinity  latesummer min_depth  1.00000
-    ## 3    temper earlyspring min_depth  1.00000
-    ## 4    temper  latesummer min_depth  1.00000
-    ## 5  salinity earlyspring       mld  1.14750
-<<<<<<< HEAD
-    ## 6  salinity  latesummer       mld  1.49850
-=======
-    ## 6  salinity  latesummer       mld  1.72050
->>>>>>> sam_exp
-    ## 7    temper earlyspring       mld  3.55500
-    ## 8    temper  latesummer       mld  6.25100
-    ## 9  salinity earlyspring     cline 16.91000
-    ## 10 salinity  latesummer     cline 49.08875
-    ## 11   temper earlyspring     cline 17.68575
-    ## 12   temper  latesummer     cline 15.93150
+    ##   variable       group     Layer    value
+    ##      <chr>       <chr>     <chr>    <dbl>
+    ## 1   temper earlyspring min_depth  1.00000
+    ## 2   temper  latesummer min_depth  1.00000
+    ## 3   temper earlyspring       mld  3.55500
+    ## 4   temper  latesummer       mld  6.25100
+    ## 5   temper earlyspring     cline 17.68575
+    ## 6   temper  latesummer     cline 15.93150
 
 The same applies to wtr\_segments()
 
 ``` r
 s_df <- wtrprof_df %>%  
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_segments(depth = .$depth, measure = .$value)) ##do a water_layer calc
+  do(wtr_segments(depth = .$depth, measure = .$value)) %>% ##do a water_layer calc
+  filter(variable == "temper")
 s_df
 ```
 
-    ## Source: local data frame [42 x 6]
-    ## Groups: variable, group [4]
+    ## Source: local data frame [8 x 6]
+    ## Groups: variable, group [2]
     ## 
-    ##    variable       group min_depth  nseg   depth measure
-    ##       <chr>       <chr>     <dbl> <dbl>   <dbl>   <dbl>
-    ## 1  salinity earlyspring         1    21  1.0120 0.05060
-    ## 2  salinity earlyspring         1    21  1.1475 0.05050
-    ## 3  salinity earlyspring         1    21  3.0740 0.05085
-    ## 4  salinity earlyspring         1    21  7.7415 0.05035
-    ## 5  salinity earlyspring         1    21  9.7970 0.05020
-    ## 6  salinity earlyspring         1    21 11.2695 0.05010
-    ## 7  salinity earlyspring         1    21 13.1075 0.05005
-    ## 8  salinity earlyspring         1    21 14.8575 0.05025
-    ## 9  salinity earlyspring         1    21 16.3980 0.05015
-    ## 10 salinity earlyspring         1    21 17.4220 0.05015
-    ## # ... with 32 more rows
+    ##   variable       group min_depth  nseg   depth  measure
+    ##      <chr>       <chr>     <dbl> <dbl>   <dbl>    <dbl>
+    ## 1   temper earlyspring         1     4  1.0120  8.45310
+    ## 2   temper earlyspring         1     4  3.5550  7.97280
+    ## 3   temper earlyspring         1     4 31.8165  5.52725
+    ## 4   temper earlyspring         1     4 49.3265  4.46620
+    ## 5   temper  latesummer         1     4  1.0230 18.09700
+    ## 6   temper  latesummer         1     4  6.2510 17.47215
+    ## 7   temper  latesummer         1     4 25.6120  5.53080
+    ## 8   temper  latesummer         1     4 98.1390  4.46345
 
-Lastly we plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
+Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
 
 ``` r
 wtrprof_df %>%
+  filter(variable == "temper") %>%
   ggplot(aes(x = value,y = depth)) +
   geom_path(colour = 'purple') +
   geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
+  geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
   geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
   scale_y_reverse() +
-  facet_wrap(group~variable, scales = "free", ncol = 2) +
+  facet_wrap(~group, scales = "free", ncol = 1) +
   labs(y = "Temperature/Salinity", x = "Depth (m)", 
        caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
 ```
 
-![](limnotools_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](limnotools_files/figure-markdown_github/unnamed-chunk-11-1.png)

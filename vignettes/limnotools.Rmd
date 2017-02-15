@@ -20,17 +20,22 @@ library(tidyverse)
 ### Development version of limnotools
 TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 ```{r, message=FALSE}
-#devtools::install_github("boshek/limnotools")
-devtools::install_github("boshek/limnotools", ref="sam_exp")
-
+devtools::install_github("boshek/limnotools")
 library(limnotools)
 ```
 
 ## Split and merge algorithm
-Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs in two parts:
+Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs within two functions:
 
 - wtr_layer function 
 - wtr_segments function
+
+## Useful dataset in limnotools 
+```{r, eval=FALSE}
+data("earlyspring")
+data("latesummer")
+data("t11")
+```
 
 ## Simple application of the split and merge algorithm
 Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. Most users will only use two functions that are part of the limnotools package. Cline depth and mix layer depth are calculated using the wtr_layers() function. Coordinates for the segments of the water profile are calculated using wtr_segments. For more information, type the following into R:
@@ -79,7 +84,8 @@ wl_df <- wtrprof_df %>%
   group_by(variable, group) %>% ## group by variable and group
   do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
   select(-nseg) %>% ##nseg not needed here
-  gather(Layer, value, -variable, -group) ##gather for plotting purposes
+  gather(Layer, value, -variable, -group) %>% ##gather for plotting purposes
+  filter(variable == "temper")
 wl_df
 ```
 
@@ -87,19 +93,22 @@ The same applies to wtr_segments()
 ```{r}
 s_df <- wtrprof_df %>%  
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_segments(depth = .$depth, measure = .$value)) ##do a water_layer calc
+  do(wtr_segments(depth = .$depth, measure = .$value)) %>% ##do a water_layer calc
+  filter(variable == "temper")
 s_df
 ```
 
-Lastly we plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse). 
+Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse). 
 ```{r, fig.show = "hold", fig.width = 8, fig.height = 6}
 wtrprof_df %>%
+  filter(variable == "temper") %>%
   ggplot(aes(x = value,y = depth)) +
   geom_path(colour = 'purple') +
   geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
+  geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
   geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
   scale_y_reverse() +
-  facet_wrap(group~variable, scales = "free", ncol = 2) +
+  facet_wrap(~group, scales = "free", ncol = 1) +
   labs(y = "Temperature/Salinity", x = "Depth (m)", 
        caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
 ```

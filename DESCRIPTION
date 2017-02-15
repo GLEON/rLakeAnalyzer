@@ -1,9 +1,9 @@
 Package: limnotools
 Type: Package
 Title: A set of tools and commands to utilize high resolution water profile data
-Version: 0.1.0
+Version: 0.9.0
 Authors@R: c(
-    person("Collinge", "Doug", , "", c("aut")),
+    person("Collinge", "Doug", , "doug.collinge@gmail.com", c("aut")),
     person("Albers", "Sam", , "sam.albers@gmail.com", c("aut", "cre"))
     )
 Description: In this version of limnotools, the primary function is to run the split and merge algorithm (Pavlidis and Horowitz 1974) on high resolution CTD profile data. 
