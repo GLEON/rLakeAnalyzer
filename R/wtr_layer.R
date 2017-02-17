@@ -32,18 +32,18 @@ wtr_layer <-
       if( depth_filter=="TRUE" ){
       
       ## Remove heave, soak and upcast
-      depth=depth[depth_filter(depth)]
-      measure=measure[depth_filter(depth)]
+      depth2=depth[depth_filter(depth)]
+      measure2=measure[depth_filter(depth)]
       
       } else { 
-        depth=depth
-        measure=measure}
+        depth2=depth
+        measure2=measure}
 
         
       ## Auto detecting minimum of depth vector to a minimum of 1
       if (z0 == "auto") {
         ## What is the minimum depth after finding longest ordered portion?
-        z0 = min(depth)
+        z0 = min(depth2)
         ##z0 must have minimum of 1 if using auto
         if (z0 < 1) {
           z0 = 1
@@ -54,7 +54,7 @@ wtr_layer <-
       
       
       if (nseg == "unconstrained") {
-        sam_list = by_s_m(thres = thres, z0 = z0, zmax = zmax, z = depth, sigma = measure )
+        sam_list = by_s_m(thres = thres, z0 = z0, zmax = zmax, z = depth2, sigma = measure2 )
         return(data.frame(
           min_depth = z0,
           nseg = sam_list[["nimax"]] + 1,
@@ -64,7 +64,7 @@ wtr_layer <-
         )
       }
       else {
-        sam_list = by_s_m3(nr = nseg - 1, z0 = z0, zmax = zmax, z = depth, sigma = measure)
+        sam_list = by_s_m3(nr = nseg - 1, z0 = z0, zmax = zmax, z = depth2, sigma = measure2)
         return(data.frame(
           min_depth = z0,
           nseg = nseg,
