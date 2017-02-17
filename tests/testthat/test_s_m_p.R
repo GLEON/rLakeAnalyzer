@@ -26,9 +26,9 @@ test_that("s_m_p gets the same answers as the Fortran.", {
   # print("No longer testing smp.")
 })
 
-test_that("s_m_p fails when x is not an increasing vector", {
-  eps = .005
-  x1 <- c(0.0,1.5,2.5,4.5,6.0,5.0,7.1,9.7,10.1,12.0) ## Non increasing vector
-  y = c(2.0,7.0,3.0,4.0,5.0,7.0,7.1,8.3,9.1,10.0)
-  expect_error(s_m_p(eps,x1,y), "x is not an increasing vector")
-})
+#test_that("s_m_p fails when x is not an increasing vector", {
+#  eps = .005
+#  x1 <- c(0.0,1.5,2.5,4.5,6.0,5.0,7.1,9.7,10.1,12.0) ## Non increasing vector
+#  y = c(2.0,7.0,3.0,4.0,5.0,7.0,7.1,8.3,9.1,10.0)
+#  expect_error(s_m_p(eps,x1,y), "x is not an increasing vector")
+#})

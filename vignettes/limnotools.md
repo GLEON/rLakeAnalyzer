@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-14
+2017-02-17
 
 Package loading
 ---------------
@@ -17,7 +17,7 @@ library(tidyverse)
 TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 
 ``` r
-devtools::install_github("boshek/limnotools")
+devtools::install_github("boshek/limnotools", ref="sam_exp")
 library(limnotools)
 ```
 
@@ -146,7 +146,7 @@ s_df
     ## 5   temper  latesummer         1     4  1.0230 18.09700
     ## 6   temper  latesummer         1     4  6.2510 17.47215
     ## 7   temper  latesummer         1     4 25.6120  5.53080
-    ## 8   temper  latesummer         1     4 98.1390  4.46345
+    ## 8   temper  latesummer         1     4 98.1390  4.46375
 
 Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
 
