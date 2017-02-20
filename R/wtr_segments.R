@@ -49,6 +49,13 @@ wtr_segments <-
       } else {
         z0 = z0
       }
+      
+      ##Max z0 needs to be 2.5
+      if (z0 > 2.5){
+        z0 = 2.5
+      }
+      
+      
       if (nseg == "unconstrained") {
         sam_list = by_s_m(
           thres = thres,

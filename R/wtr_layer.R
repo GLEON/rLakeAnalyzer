@@ -52,6 +52,11 @@ wtr_layer <-
         z0 = z0
       }
       
+      ##Max z0 needs to be 2.5
+      if (z0 > 2.5){
+        z0 = 2.5
+      }
+      
       
       if (nseg == "unconstrained") {
         sam_list = by_s_m(thres = thres, z0 = z0, zmax = zmax, z = depth2, sigma = measure2 )
