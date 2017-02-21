@@ -34,6 +34,7 @@ Water column identification is provided by the split-and-merge algorithm. Implem
 ```{r, eval=FALSE}
 data("earlyspring")
 data("latesummer")
+data("latefall")
 data("t11")
 ```
 
@@ -62,12 +63,13 @@ text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
 ## More complicated example using many datafiles
-Many users will face situations where they have multiple profiles and would like to evaluate layers and/or segments on many files. There are several approaches to this type of 'grouping' problem in R. We will use the most popular approach - dplyr - which is part of the [tidyverse](https://CRAN.R-project.org/package=tidyverse). To generate data for this example we first need to combine all the internal dataframes from limnotools to illustrate mix layer estimation for many casts. To simplify and decrease runtime we will only do this for temperature and salinity. 
+Many users will face situations where they have multiple profiles and would like to evaluate layers and/or segments on many files. There are several approaches to this type of 'grouping' problem in R. We will use the most popular approach - dplyr - and the functionla programming tool - purrr - which is part of the [tidyverse](https://CRAN.R-project.org/package=tidyverse). To generate data for this example we first need to combine all the internal dataframes from limnotools to illustrate mix layer estimation for many casts. To simplify and decrease runtime we will only do this for temperature and salinity. 
 ```{r}
 ## rbind all the dataframes together
 earlyspring$group <- 'earlyspring'
 latesummer$group <- 'latesummer'
-rbind_df <- rbind(earlyspring, latesummer)
+latefall$group <- 'latefall'
+rbind_df <- dplyr::bind_rows(earlyspring, latesummer, latefall)
 ```
 
 We can utilize the power of a dplyr pipe (%>%) and gather to convert this data into a long form. 
@@ -108,8 +110,8 @@ wtrprof_df %>%
   geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
   geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
   scale_y_reverse() +
-  facet_wrap(~group, scales = "free", ncol = 1) +
-  labs(y = "Temperature/Salinity", x = "Depth (m)", 
+  facet_wrap(~group, scales = "free_y", ncol = 1) +
+  labs(y = "Temperature", x = "Depth (m)", 
        caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
 ```
 
