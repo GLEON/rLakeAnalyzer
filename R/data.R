@@ -6,8 +6,6 @@
 ## earlyspring <- read.table("Z:/OneDrive/R_Package_Development/MixLayerPackage/Data_prep/Early_Spring_Profile.t11", col.names = c("depth","temper","salinity","oxygen.sat","oxygen","density"))
 ## latesummer <- read.table("Z:/OneDrive/R_Package_Development/MixLayerPackage/Data_prep/Late_Summer_Profile.t11", col.names = c("depth","temper","salinity","oxygen.sat","oxygen","density"))
 
-## devtools::use_data(small_df)
-## devtools::use_data(large_df)
 ## devtools::use_data(t11, overwrite=TRUE)
 ## devtools::use_data(earlyspring)
 ## devtools::use_data(latesummer)
@@ -40,33 +38,18 @@
 #' @source Supplied 
 "latesummer"
 
-
-#' Small df
+#' Late Fall Profile
 #'
-#' A small dataset to simulate short cast
-#'
-#' @format A data frame with 4 rows and 2 variables:
 #' \describe{
-#'   \item{x}{depth}
-#'   \item{y}{var}
+#'   \item{depth}{depth}
+#'   \item{temper}{temperature}
+#'   \item{salinity}{salinity}
+#'   \item{oxygen}{oxygen}
+#'   \item{oxygen.sat}{oxygen saturation}
 #'   ...
 #' }
-#' @source Generated
-"small_df"
-
-
-#' Large df
-#'
-#' A larger dataset to simulate longer cast cast
-#'
-#' @format A data frame with 20 rows and 2 variables:
-#' \describe{
-#'   \item{x}{depth}
-#'   \item{y}{var}
-#'   ...
-#' }
-#' @source Generated
-"large_df"
+#' @source Supplied 
+"latesummer"
 
 
 #' 97130187.t11

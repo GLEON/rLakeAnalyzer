@@ -7,8 +7,12 @@
 \format{An object of class \code{data.frame} with 881 rows and 6 columns.}
 \source{
 Supplied
+
+Supplied
 }
 \usage{
+latesummer
+
 latesummer
 }
 \description{
@@ -19,6 +23,15 @@ latesummer
   \item{oxygen}{oxygen}
   \item{oxygen.sat}{oxygen saturation}
   \item{density}{Density}
+  ...
+}
+
+\describe{
+  \item{depth}{depth}
+  \item{temper}{temperature}
+  \item{salinity}{salinity}
+  \item{oxygen}{oxygen}
+  \item{oxygen.sat}{oxygen saturation}
   ...
 }
 }
