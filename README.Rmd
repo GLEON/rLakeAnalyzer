@@ -11,6 +11,9 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
+[![Travis-CI Build Status](https://travis-ci.org/boshek/limnotools.svg?branch=master)](https://travis-ci.org/boshek/limnotools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/boshek/limnotools?branch=master&svg=true)](https://ci.appveyor.com/project/boshek/limnotools)
+
+
 ## limnotools package 
 limnotools is an R package that implements the split and merge algorithm to high resolution water column profile to identify water column structure, stratification and mixing patterns. 
 
