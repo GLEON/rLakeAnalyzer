@@ -28,5 +28,4 @@ vignettes/*.pdf
 # vi at work
 *.swp
 inst/doc
-# Extra random stuff
-extra_tests/
+
