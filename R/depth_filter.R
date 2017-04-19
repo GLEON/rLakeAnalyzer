@@ -43,7 +43,7 @@ depth_filter <- function(z0, run_length=20) {
   p_loss = 100-(length(z0[idx_heave])/n_start)*100
   
   if (p_loss>10){
-  warning(paste0("Soak, heave and bottom data filter removed ",round(p_loss,2),"% of the data"))
+  message(paste0("Soak, heave and bottom data filter removed ",round(p_loss,2),"% of the data"))
   }
   
   return(idx_soak[idx_heave])
