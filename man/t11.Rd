@@ -24,4 +24,3 @@ t11
 Data supplied with original FORTRAN code
 }
 \keyword{datasets}
-

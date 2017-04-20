@@ -44,4 +44,3 @@ ForTran description - Output
 \item {NI  -[INTEGER] final array with segment start points}
 }
 }
-

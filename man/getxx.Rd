@@ -19,4 +19,3 @@ Interpolation of both x and y
 \description{
 Linear interpolation of the Input Data Series
 }
-

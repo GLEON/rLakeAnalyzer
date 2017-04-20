@@ -24,4 +24,3 @@ index values of z0 of filtered data. Will return a warning if the function remov
 \examples{
 depth_filter(z0=latesummer$depth)
 }
-

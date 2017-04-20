@@ -23,4 +23,3 @@ Fiedler, Paul C. Comparison of objective descriptions of the thermocline. Limnol
 \seealso{
 \code{wtr_layer()}
 }
-

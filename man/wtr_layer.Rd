@@ -40,4 +40,3 @@ Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile
 \seealso{
 \code{cline_calc()}, \code{depth_filter()}
 }
-

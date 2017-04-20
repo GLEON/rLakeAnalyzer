@@ -38,4 +38,3 @@ C          NI  -[INTEGER] final array with segment start points
 INTEGER NR, NI(n)
 REAL X(n),Y(n)
 }
-
