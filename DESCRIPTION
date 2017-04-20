@@ -4,7 +4,7 @@ Title: A set of tools and commands to utilize high resolution water profile data
 Version: 0.9.0
 Authors@R: c(
     person("Sam", "Albers", email = "sam.albers@gmail.com", role = c("aut", "cre")),
-    person("Doug","Collinge", email = "doug.collinge@gmail.com", c("aut"))
+    person("Doug","Collinge", email = "doug.collinge@gmail.com", role = c("aut"))
     )
 Description: In this version of limnotools, the primary function is to run the split and merge algorithm (Pavlidis and Horowitz 1974) on high resolution CTD profile data. 
     Implementation of the SM algorithm was adapted from ForTran code written by Thomson and Fine, 2003. The SM algorithm is primarily called from the wtr_layer and the wtr_segments fucntions.
