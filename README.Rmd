@@ -31,4 +31,4 @@ devtools::install_github("boshek/limnotools")
 
 ## Releases
 - 0.9.0 Initial release
-- 0.9.1 Fixed a fatal bug in wtr_layer and wtr_segment that fed incorrect measurement values to by_s_m and by_s_m3
+- 0.9.1 Fixed a fatal bug in wtr_layer and wtr_segment that fed incorrect measurement values in the call to by_s_m and by_s_m3
