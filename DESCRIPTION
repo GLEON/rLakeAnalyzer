@@ -19,6 +19,7 @@ Suggests: testthat,
     rmarkdown,
     dplyr,
     tidyr,
+    purrr,
     ggplot2,
     devtools
 VignetteBuilder: knitr

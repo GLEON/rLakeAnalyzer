@@ -16,7 +16,9 @@ tidyverse is only needed for this vignette and not for the limnotools package it
 ```{r, message=FALSE}
 library(dplyr)
 library(tidyr)
+library(purrr)
 library(ggplot2)
+library(knitr)
 ```
 
 ### Development version of limnotools
@@ -50,7 +52,7 @@ Below is a simple one profile example of determining key water column parameters
 The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1. 
 ```{r}
 wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
-wldf
+knitr::kable(wldf)
 ```
 
 Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays. 
@@ -84,21 +86,33 @@ wtrprof_df <- rbind_df %>%
 
 Use group_by() and do() to run wtr_layer() by group and variable outputting a dataframe.
 ```{r}
+safe_wtr_layer <- purrr::safely(wtr_layer)
+
 wl_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
-  select(-nseg) %>% ##nseg not needed here
-  gather(Layer, value, -variable, -group) %>% ##gather for plotting purposes
-  filter(variable == "temper")
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_layer(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
 wl_df
 ```
 
 The same applies to wtr_segments()
 ```{r}
+safe_wtr_segments <-purrr::safely(wtr_segments)
+
 s_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_segments(depth = .$depth, measure = .$value)) %>% ##do a water_layer calc
-  filter(variable == "temper")
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_segments(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
 s_df
 ```
 
@@ -110,11 +124,11 @@ wtrprof_df %>%
   geom_path(colour = 'purple') +
   geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
   geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
-  geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
+  geom_hline(data = wl_df, aes(yintercept = mld, colour = group)) +
   scale_y_reverse() +
   facet_wrap(~group, scales = "free_y", ncol = 1) +
   labs(y = "Temperature", x = "Depth (m)", 
-       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld")
 ```
 
 
