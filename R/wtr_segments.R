@@ -1,12 +1,11 @@
 #' @export
 #' @title Exploration of lake water column segments
 #' @param thres error norm; defaults to 0.1
-#' @param z0 initial depth in metres; defaults to auto whereby z0 is calculate as the first value of the longest ordered portion of the depth vector to minimum of 1. 
+#' @param z0 initial depth in metres; defaults to 2.5
 #' @param zmax maximum depth in metres: default to 150m
 #' @param depth depth in metres; should be an increasing vector
 #' @param measure parameter measured in the water column profile
 #' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
-#' @param depth_filter option to turn of depth_filter process.
 #' @return a dataframe of nseg (number of segments) and the x and y coordinates of the segments produced by the split and merge approach.
 #' @description  Extract water column segments of a given parameter from a profile using the split-and-merge algorithm.
 #' @references Thomson & Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
@@ -22,80 +21,45 @@ wtr_segments <-
            zmax = 150,
            depth = depth,
            measure = measure,
-           nseg = "unconstrained",
-           depth_filter="TRUE") {
+           nseg = "unconstrained") {
 
     ## TODO need to be figure out a better threshold of points for algorithm
-    if( length(depth) >= 30 ) {  
+    if( length(depth) <= 30 ) {  
+      warning("Profile does not have enough readings for sm algorithm (<30): returning NA")
+      return(data.frame(min_depth = NA, nseg = NA, mld = NA, cline = NA))
+    } 
       
-      if( depth_filter=="TRUE" ){
-        
-        ## Remove heave, soak and upcast
-        depth2=depth[depth_filter(depth)]
-        measure2=measure[depth_filter(depth)]
-        
-      } else { 
-        depth2=depth
-        measure2=measure}
-      
-      ## Auto detecting minimum of depth vector to a minimum of 1
-      if (z0 == "auto") {
-        ## What is the minimum depth after finding longest ordered portion?
-        z0 = min(depth2)
-        ##z0 must have minimum of 1 if using auto
-        if (z0 < 1) {
-          z0 = 1
-        }
-      } else {
-        z0 = z0
-      }
-      
-      ##Max z0 needs to be 2.5
-      if (z0 > 2.5){
-        z0 = 2.5
-      }
-      
-      
-      if (nseg == "unconstrained") {
-        sam_list = by_s_m(
-          thres = thres,
-          z0 = z0,
-          zmax = zmax,
-          z = depth2,
-          sigma = measure2
-        )
-        return(
-          data.frame(
-            min_depth = z0,
-            nseg = sam_list[["nimax"]] + 1,
-            depth = sam_list[["smz"]],
-            measure = sam_list[["sms"]]
-          )
-        )
-      }
-      else {
-        sam_list = by_s_m3(
-          nr = nseg - 1,
-          z0 = z0,
-          zmax = zmax,
-          z = depth2,
-          sigma = measure2
-        )
-        return(data.frame(
+    if (nseg == "unconstrained") {
+      sam_list = by_s_m(
+        thres = thres,
+        z0 = z0,
+        zmax = zmax,
+        z = depth,
+        sigma = measure
+      )
+      return(
+        data.frame(
           min_depth = z0,
-          nseg = nseg,
+          nseg = sam_list[["nimax"]] + 1,
           depth = sam_list[["smz"]],
           measure = sam_list[["sms"]]
-        ))
-      }
-    } else {
-      warning("Profile does not have enough readings for sm algorithm (<30)")
+        )
+      )
+    }
+    else {
+      sam_list = by_s_m3(
+        nr = nseg - 1,
+        z0 = z0,
+        zmax = zmax,
+        z = depth,
+        sigma = measure
+      )
       return(data.frame(
-        min_depth = NA,
-        nseg = NA,
-        depth = NA,
-        measure = NA
+        min_depth = z0,
+        nseg = nseg,
+        depth = sam_list[["smz"]],
+        measure = sam_list[["sms"]]
       ))
     }
-    #}
+
   }

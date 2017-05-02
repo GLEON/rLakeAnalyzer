@@ -5,12 +5,12 @@
 \title{Exploration of lake water column segments}
 \usage{
 wtr_segments(thres = 0.1, z0 = "auto", zmax = 150, depth = depth,
-  measure = measure, nseg = "unconstrained", depth_filter = "TRUE")
+  measure = measure, nseg = "unconstrained")
 }
 \arguments{
 \item{thres}{error norm; defaults to 0.1}
 
-\item{z0}{initial depth in metres; defaults to auto whereby z0 is calculate as the first value of the longest ordered portion of the depth vector to minimum of 1.}
+\item{z0}{initial depth in metres; defaults to 2.5}
 
 \item{zmax}{maximum depth in metres: default to 150m}
 
@@ -19,8 +19,6 @@ wtr_segments(thres = 0.1, z0 = "auto", zmax = 150, depth = depth,
 \item{measure}{parameter measured in the water column profile}
 
 \item{nseg}{optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
-
-\item{depth_filter}{option to turn of depth_filter process.}
 }
 \value{
 a dataframe of nseg (number of segments) and the x and y coordinates of the segments produced by the split and merge approach.
