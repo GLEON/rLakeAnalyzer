@@ -4,12 +4,14 @@
 \alias{depth_filter}
 \title{Data filter to remove soak, heave and upcast}
 \usage{
-depth_filter(z0, run_length = 20)
+depth_filter(z0, run_length = 20, index = FALSE)
 }
 \arguments{
 \item{z0}{depth vector}
 
 \item{run_length}{Length of run upon which to start the soak removal}
+
+\item{index}{Logical: Should the function return an index value or actual value?}
 }
 \value{
 index values of z0 of filtered data. Will return a warning if the function removed more than 10% of the data
