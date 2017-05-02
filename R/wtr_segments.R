@@ -17,7 +17,7 @@
 ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
 wtr_segments <-
   function(thres = 0.1,
-           z0 = "auto",
+           z0 = 2.5,
            zmax = 150,
            depth = depth,
            measure = measure,
