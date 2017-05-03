@@ -9,6 +9,6 @@ test_that("Ensure that unconstrained and specified segment approach result in th
 
 test_that("NA's are returned when profile has less than 10 readings", {
   # Data with less than 10 readings
-  z = 1:8; sigmavar = rnorm(z)
+  z = 1:28; sigmavar = rnorm(z)
   expect_warning(wtr_segments(depth=z, measure = sigmavar))
 })

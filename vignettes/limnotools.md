@@ -1,7 +1,7 @@
 Limnotools Usage
 ================
 Sam Albers and Doug Collinge
-2017-02-20
+2017-05-02
 
 Package loading
 ---------------
@@ -9,7 +9,11 @@ Package loading
 tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
 
 ``` r
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(ggplot2)
+library(knitr)
 ```
 
 ### Development version of limnotools
@@ -53,11 +57,12 @@ The default behaviour for both functions is to run the algorithm *without* speci
 
 ``` r
 wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
-wldf
+knitr::kable(wldf)
 ```
 
-    ##   min_depth nseg   mld   cline
-    ## 1         1    4 6.251 15.9315
+|  min\_depth|  nseg|     mld|     cline|
+|-----------:|-----:|-------:|---------:|
+|         2.5|     4|  7.0565|  16.39025|
 
 Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays.
 
@@ -71,7 +76,7 @@ text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
 text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
-![](limnotools_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](C:\Users\tills\AppData\Local\Temp\RtmpgZ6SvA\preview-247834fd46b2.dir\limnotools_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 More complicated example using many datafiles
 ---------------------------------------------
@@ -98,91 +103,60 @@ wtrprof_df <- rbind_df %>%
 Use group\_by() and do() to run wtr\_layer() by group and variable outputting a dataframe.
 
 ``` r
+safe_wtr_layer <- purrr::safely(wtr_layer)
+
 wl_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
-  select(-nseg) %>% ##nseg not needed here
-  gather(Layer, value, -variable, -group) %>% ##gather for plotting purposes
-  filter(variable == "temper")
-```
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-    ## Warning in cline_calc(z_seg = sam_list[["smz"]], sigma_seg =
-    ## sam_list[["sms"]]): Algorithm calculates cline to be in top segment. This
-    ## is likely due to surface scatter. Using the next interval.
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-``` r
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_layer(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
 wl_df
 ```
 
-    ## Source: local data frame [9 x 4]
-    ## Groups: variable, group [3]
-    ## 
-    ##   variable       group     Layer    value
-    ##      <chr>       <chr>     <chr>    <dbl>
-    ## 1   temper earlyspring min_depth  1.00000
-    ## 2   temper    latefall min_depth  1.68500
-    ## 3   temper  latesummer min_depth  1.00000
-    ## 4   temper earlyspring       mld  3.55500
-    ## 5   temper    latefall       mld 10.43350
-    ## 6   temper  latesummer       mld  6.25100
-    ## 7   temper earlyspring     cline 17.68575
-    ## 8   temper    latefall     cline 32.16900
-    ## 9   temper  latesummer     cline 15.93150
+    ## # A tibble: 3 × 8
+    ##   variable       group                 data    err min_depth  nseg     mld
+    ##      <chr>       <chr>               <list> <list>     <dbl> <dbl>   <dbl>
+    ## 1   temper earlyspring   <tibble [604 × 2]> <NULL>       2.5     4  8.1410
+    ## 2   temper  latesummer   <tibble [881 × 2]> <NULL>       2.5     4  7.0565
+    ## 3   temper    latefall <tibble [2,281 × 2]> <NULL>       2.5     4 10.4335
+    ## # ... with 1 more variables: cline <dbl>
 
 The same applies to wtr\_segments()
 
 ``` r
+safe_wtr_segments <-purrr::safely(wtr_segments)
+
 s_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_segments(depth = .$depth, measure = .$value)) %>% ##do a water_layer calc
-  filter(variable == "temper")
-```
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-    ## Warning in depth_filter(depth): Soak, heave and bottom data filter removed
-    ## 11% of the data
-
-``` r
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_segments(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
 s_df
 ```
 
-    ## Source: local data frame [12 x 6]
-    ## Groups: variable, group [3]
-    ## 
+    ## # A tibble: 12 × 6
     ##    variable       group min_depth  nseg    depth  measure
     ##       <chr>       <chr>     <dbl> <dbl>    <dbl>    <dbl>
-    ## 1    temper earlyspring     1.000     4   1.0120  8.45310
-    ## 2    temper earlyspring     1.000     4   3.5550  7.97280
-    ## 3    temper earlyspring     1.000     4  31.8165  5.52725
-    ## 4    temper earlyspring     1.000     4  49.3265  4.46620
-    ## 5    temper    latefall     1.685     4   1.6850  8.40780
-    ## 6    temper    latefall     1.685     4  10.4335  8.32810
-    ## 7    temper    latefall     1.685     4  53.9045  4.33720
-    ## 8    temper    latefall     1.685     4 149.8985  3.65640
-    ## 9    temper  latesummer     1.000     4   1.0230 18.09700
-    ## 10   temper  latesummer     1.000     4   6.2510 17.47215
-    ## 11   temper  latesummer     1.000     4  25.6120  5.53080
-    ## 12   temper  latesummer     1.000     4  98.1390  4.46375
+    ## 1    temper earlyspring       2.5     4   2.5470  8.07520
+    ## 2    temper earlyspring       2.5     4   8.1410  7.70020
+    ## 3    temper earlyspring       2.5     4  37.2030  4.92325
+    ## 4    temper earlyspring       2.5     4  49.3265  4.46620
+    ## 5    temper  latesummer       2.5     4   2.5980 17.94060
+    ## 6    temper  latesummer       2.5     4   7.0565 17.38405
+    ## 7    temper  latesummer       2.5     4  25.7240  5.51445
+    ## 8    temper  latesummer       2.5     4  98.1390  4.46375
+    ## 9    temper    latefall       2.5     4   2.5070  8.38980
+    ## 10   temper    latefall       2.5     4  10.4335  8.32810
+    ## 11   temper    latefall       2.5     4  53.9045  4.33720
+    ## 12   temper    latefall       2.5     4 149.8985  3.65640
 
 Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse).
 
@@ -193,11 +167,11 @@ wtrprof_df %>%
   geom_path(colour = 'purple') +
   geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
   geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
-  geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
+  geom_hline(data = wl_df, aes(yintercept = mld, colour = group)) +
   scale_y_reverse() +
   facet_wrap(~group, scales = "free_y", ncol = 1) +
   labs(y = "Temperature", x = "Depth (m)", 
-       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld")
 ```
 
-![](limnotools_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](C:\Users\tills\AppData\Local\Temp\RtmpgZ6SvA\preview-247834fd46b2.dir\limnotools_files/figure-markdown_github/unnamed-chunk-11-1.png)
