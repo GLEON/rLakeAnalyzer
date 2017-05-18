@@ -58,11 +58,16 @@ s_m_p = function(eps,x,y) {
     # Scan for such interval pairs and merge them.
 
     # Loop i over all possible "middle" intervals, which we may remove.
+    # I am not sure at this point why the last interval is not considered for merging,
+    # as it would be if i<=length(ni)-1 , which seems more natural to me.
+
     # Note that ni potentially changes inside the loop.
-    if( 2 <= length(ni)-2 ) {
-      # This branch had to be added because the Fortran DO loop will not execute
-      # if the start value is greater than the limit value but R runs backward.
-      for( i in 2:(length(ni)-2) ) {
+    i = 2
+    while(i <= length(ni)-2) {
+    # if( 2 <= length(ni)-2 ) {
+    #   # This branch had to be added because the Fortran DO loop will not execute
+    #   # if the start value is greater than the limit value but R runs backward.
+    #   for( i in 2:(length(ni)-2) ) {
         k1=ni[i-1]
         k2=ni[i+1]
         eps1=r2b( k1=k1, k2=k2, x=x, y=y )
@@ -71,7 +76,7 @@ s_m_p = function(eps,x,y) {
             # Yes, so merge the interval we are looking at.
             ni <- merge_intervals(i, ni)
             changed = TRUE
-            break # exit the for loop
+            # break # exit the loop
           } else {
             # We are here because the last two intervals tested out to merge.
             # So we can just adjust the intervals and bail out entirely because,
@@ -81,11 +86,12 @@ s_m_p = function(eps,x,y) {
             # taken in actual operation. Obviously the data set is invalid if it lies
             # entirely on a straight line, right?
 
-            ni[1]=1  # TODO: Original code, but this should already be the case.
+#            ni[1]=1  # TODO: Original code, but this should already be the case.
             return(ni)
           }
         }
-      }
+      # }
+        i = i+1
     }
 
     # If a merge was done then changed==TRUE. In this circumstance, the original
