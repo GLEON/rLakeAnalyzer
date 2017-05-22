@@ -17,28 +17,18 @@
 #'
 #' @export
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
-#'
-#' @note ForTran description - Input (Calls subroutine S_mN)
-##' \itemize{
-##' \item{N -[INTEGER] number of points}
-##' \item{NR  -[INTEGER] number of segments (fixed)}
-##' \item{X   -[REAL(N)] input x data array, should be increasing function of index}
-##' \item{Y   -[REAL(N)] input y data array}
-##' }
-#' @note ForTran description - Output
-##' \itemize{
-##' \item {NI  -[INTEGER] final array with segment start points}
-##' }
-
 
 by_s_m3 = function(nr,z0,zmax,z,sigma) {
-  by_s_m=-99.0 # TODO: why?
+  # by_s_m=-99.0 # TODONE: why?
   nn=800 # TODO: why?
   #nn=length(z)
 
   # finding initial s-level
   i1 = 1 + sum(z<z0)   # Find index of first z[] less than z0
-  if(i1==length(z)) return()  # TODO: probably should crash here
+  if(i1==length(z)) {
+    stop("Initial depth, z0, excludes all depths in data, z!")
+    # return()  # TODO: probably should crash here
+  }
   sigma0 = sigma[i1]
 
   # finding second s-level

@@ -19,13 +19,18 @@
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
-  by_s_m=-99.0 # TODO: this is for an error return, crash instead.
+  # by_s_m=-99.0 # TODONE: this is for an error return, crash instead.
   nn=800 # TODO: why?
   #nn=length(z)
 
   # finding initial s-level
   i1 = 1 + sum(z<z0)   # Find index of first z[] less than z0
-  if(i1==length(z)) return()  # TODO: probably should crash here
+  # if(i1==length(z)) return()  # TODONE: probably should crash here
+  if(i1==length(z)) {
+    stop("Initial depth, z0, excludes all depths in data, z!")
+    # return()  # TODONE: probably should crash here
+  }
+
   sigma0 = sigma[i1]
 
   # finding second s-level
