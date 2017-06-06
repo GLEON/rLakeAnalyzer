@@ -83,7 +83,7 @@ schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
   layerA = approx(bthD, bthA, layerD)$y
   
   Zcv <- layerD %*% layerA / sum(layerA)
-  St <- layerP %*% ((layerD - Zcv) * layerA) * dz * g / Ao
+  St <- layerP %*% ((layerD - as.vector(Zcv)) * layerA) * dz * g / Ao
   
   return(St)
 
