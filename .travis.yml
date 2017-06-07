@@ -1,23 +1,14 @@
 # Sample .travis.yml for R projects.
 #
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-#   https://github.com/craigcitro/r-travis/wiki
+# Using standard travis R build env now
+# from here: https://docs.travis-ci.com/user/languages/r/
 
-language: c
+language: r
+cache: packages
 
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-install:
-  - ./travis-tool.sh install_deps
-script: ./travis-tool.sh run_tests
+r:
+  - oldrel
+  - release
+  - devel
 
-after_failure:
-  - ./travis-tool.sh dump_logs
 
-notifications:
-  email:
-    on_success: change
-    on_failure: change
