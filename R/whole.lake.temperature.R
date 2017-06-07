@@ -1,6 +1,6 @@
 #' @title Get volumetrically averaged whole lake temperature
 #'
-#' @details Calculates volumetrically weighted average whole lake temperature using
+#' @description Calculates volumetrically weighted average whole lake temperature using
 #' the supplied water temperature timeseries.
 #'
 #' @param wtr a numeric vector of water temperature in degrees C.
@@ -10,7 +10,8 @@
 #'
 #' @import rLakeAnalyzer
 #'
-#' @seealso \code{\link{sim_metrics}}, \code{\link{compare_to_field}}, \code{\link{validate_sim}}
+#' @seealso \code{\link{hypo.temperature}}, \code{\link{epi.temperature}}
+#' 
 #' @export
 whole.lake.temperature <- function(wtr, depths, bthA, bthD){
 	
