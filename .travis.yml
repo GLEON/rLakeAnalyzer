@@ -12,5 +12,9 @@ r:
   - devel
 
 before_install:
-  - tlmgr install gensymb
+  - tlmgr install index
   
+env:
+  global:
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual --no-resave-data"
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual"
