@@ -11,10 +11,6 @@ r:
   - release
   - devel
 
-#before_install:
-#  - tlmgr install index
+r_build_args: --no-build-vignettes --no-manual
+r_check_args: --no-build-vignettes --no-manual --as-cran
   
-env:
-  global:
-    - R_BUILD_ARGS="--no-build-vignettes --no-manual --no-resave-data"
-    - R_CHECK_ARGS="--no-build-vignettes --no-manual"
