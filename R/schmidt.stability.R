@@ -11,7 +11,7 @@
 #zm = max. depth
 #zp = mean density - uses Richard's function water.density.R
 #pz = observed denisty at depth z
-#Az = area at depth z
+#Az = area at depth z 
 
 schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
 
