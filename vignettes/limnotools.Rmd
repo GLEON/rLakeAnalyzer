@@ -2,14 +2,13 @@
 title: "Limnotools Usage"
 author: "Sam Albers and Doug Collinge"
 date: "`r Sys.Date()`"
-#output: rmarkdown::html_vignette
-output: github_document
-
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Limnotools Usage}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 
 ## Package loading
 tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
@@ -24,7 +23,6 @@ library(knitr)
 ### Development version of limnotools
 TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 ```{r, message=FALSE}
-## rmarkdown::render('./vignettes/limnotools.Rmd')
 devtools::install_github("boshek/limnotools", ref="sam_exp")
 library(limnotools)
 ```
@@ -85,43 +83,49 @@ wtrprof_df <- rbind_df %>%
   gather(variable, value, -depth, -group)  ## convert data to long format
 ```
 
-Use dplyr::group_by() and purrr::map() to run wtr_layer() and wtr_segment by group and variable. This outputs a list column. 
+Use group_by() and do() to run wtr_layer() by group and variable outputting a dataframe.
 ```{r}
 safe_wtr_layer <- purrr::safely(wtr_layer)
-safe_wtr_segments <-purrr::safely(wtr_segments)
 
 wl_df <- wtrprof_df %>%  
   filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
   nest() %>% ## create list col
   mutate(wl = map2(data, variable, ~safe_wtr_layer(depth = .$depth, measure = .$value))) %>%
-  mutate(err_layer = map(wl, 'error'),
-         layer_result = map(wl, 'result')) %>%
-  mutate(seg = map2(data, variable, ~safe_wtr_segments(depth = .$depth, measure = .$value))) %>%
-  mutate(err_seg = map(seg, 'error'),
-         seg_result = map(seg, 'result')) %>%
-  select(-wl, -seg) 
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
+wl_df
 ```
 
+The same applies to wtr_segments()
+```{r}
+safe_wtr_segments <-purrr::safely(wtr_segments)
 
-Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse). This example is slightly trivial but illustrate one of the ways that list-cols can be used in this context.
+s_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
+  group_by(variable, group) %>% ## group by variable and group
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_segments(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
+s_df
+```
+
+Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse). 
 ```{r, fig.show = "hold", fig.width = 8, fig.height = 6}
-wl_df %>%
-  select(-err_layer, -layer_result, -err_seg, -seg_result) %>%
-  unnest() %>%
+wtrprof_df %>%
+  filter(variable == "temper") %>%
   ggplot(aes(x = value,y = depth)) +
   geom_path(colour = 'purple') +
-  geom_path(data = unnest(select(wl_df, group, seg_result)), 
-            aes(x = measure, y = depth), colour = 'black') +
-  geom_point(data = unnest(select(wl_df, group, seg_result)), 
-            aes(x = measure, y = depth), colour = 'black') +
-  #geom_hline(data = unnest(select(wl_df, group, layer_result)), aes(yintercept = mld, colour = group)) +
+  geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
+  geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
+  geom_hline(data = wl_df, aes(yintercept = mld, colour = group)) +
   scale_y_reverse() +
   facet_wrap(~group, scales = "free_y", ncol = 1) +
   labs(y = "Temperature", x = "Depth (m)", 
-       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld") +
-  theme_minimal()
-
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld")
 ```
-
-
