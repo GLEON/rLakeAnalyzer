@@ -10,7 +10,7 @@ vignette: >
 ---
 
 
-## Package loading
+## Packages needing loading
 tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
 ```{r, message=FALSE}
 library(dplyr)
