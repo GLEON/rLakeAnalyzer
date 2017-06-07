@@ -2,9 +2,44 @@
 
 datetime.pattern = "(datetime|timestamp|time|date)"
 
+
+#' @title Gets depths from data frame containing profile info.
+#' 
+#' @description 
+#' Extracts the depth information from a data frame containing multi-depth observation data.
+#' Relies on the format of the header to get information and may fail if your file format is incorrect.
+#' Please follow 'VAR_##.#' format, where ##.# is the depth of data for that column. VAR is typically
+#' 'wtr' to indicate water temperature. 
+#' 
+#' @param data Data frame returned from \code{\link{load.ts}}.
+#' 
+#' 
+#' @return 
+#' A numeric vector of depth values. Should be the \code{ncol(data) - 1} 
+#' in length as the first column contains date/time data.
+#' 
+#' 
+#' @seealso \code{\link{load.ts}}
+#' 
+#' @examples 
+#' 
+#' #Get the path for the package example file included
+#' exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+#' 
+#' #Load
+#' sparkling.temp = load.ts(exampleFilePath)
+#' 
+#' #get the lake depths associated with each column
+#' depths = get.offsets(sparkling.temp)
+#' 
+#' print(depths)
+#' 
+#' @keywords manip
+#' 
+#' @export
 get.offsets <- function(data){
   
-  header = names(data)
+  header = names(drop.datetime(data))
   
   #check for existence of datetime header and drop if there
   dt_indx = grep(pattern= "datetime", x= header, ignore.case= TRUE)
@@ -20,6 +55,11 @@ get.offsets <- function(data){
   
   for(i in 1:length(matches)){
     offsets[i] = as.numeric(substr(header[i], matches[i]+1, matches[i] + lengths[i]))
+  }
+  
+  if(any(is.na(offsets))){
+    warning('Problem determining variable depths from column names.
+Please use the \'var_#.#\' format for your data.frame header.' )
   }
   
   return(offsets)
