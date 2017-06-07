@@ -15,12 +15,12 @@ hypo.temperature(wtr, depths, bthA, bthD)
 
 \item{bthD}{a numeric vector of depths (m) which correspond to areal measures in bthA}
 }
-\details{
+\description{
 Calculates volumetrically weighted average hypolimnetic temperature using
 the supplied water temperature timeseries. If the lake is not stratified, an NA
 value is returned.
 }
 \seealso{
-\code{\link{sim_metrics}}, \code{\link{compare_to_field}}, \code{\link{validate_sim}}
+\code{\link{epi.temperature}}, \code{\link{whole.lake.temperature}}
 }
 

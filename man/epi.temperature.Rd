@@ -15,12 +15,12 @@ epi.temperature(wtr, depths, bthA, bthD)
 
 \item{bthD}{a numeric vector of depths (m) which correspond to areal measures in bthA}
 }
-\details{
+\description{
 Calculates volumetrically weighted average epilimnetic temperature using
 the supplied water temperature timeseries. If the lake is not stratified, the bottom 
 of the epilimnion is calculated as the full depth of the lake.
 }
 \seealso{
-\code{\link{hyp.temperature}}, \code{\link{whole.lake.temperature}}
+\code{\link{hypo.temperature}}, \code{\link{whole.lake.temperature}}
 }
 

@@ -1,5 +1,6 @@
 #' @title Get volumetrically averaged epilimnion temp
-#' @details Calculates volumetrically weighted average epilimnetic temperature using
+#' 
+#' @description Calculates volumetrically weighted average epilimnetic temperature using
 #' the supplied water temperature timeseries. If the lake is not stratified, the bottom 
 #' of the epilimnion is calculated as the full depth of the lake. 
 #' 
@@ -9,7 +10,7 @@
 #' @param bthD a numeric vector of depths (m) which correspond to areal measures in bthA
 #' 
 #' 
-#' @seealso \code{\link{hyp.temperature}}, \code{\link{whole.lake.temperature}}
+#' @seealso \code{\link{hypo.temperature}}, \code{\link{whole.lake.temperature}}
 #' 
 #' @export
 epi.temperature <- function(wtr, depths, bthA, bthD){
