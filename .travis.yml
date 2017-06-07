@@ -11,8 +11,8 @@ r:
   - release
   - devel
 
-before_install:
-  - tlmgr install index
+#before_install:
+#  - tlmgr install index
   
 env:
   global:
