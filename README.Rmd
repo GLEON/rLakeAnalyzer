@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ## limnotools package 
 limnotools is an R package that implements the split and merge algorithm to high resolution water column profile to identify water column structure, stratification and mixing patterns. 
 
-See: [limnotools vignette](https://github.com/boshek/limnotools/blob/master/vignettes/limnotools.md)
+See: [limnotools vignette](https://github.com/boshek/limnotools/blob/master/vignettes/limnotools.Rmd)
 
 You can install the development version of limnotools from github with:
 ```{r, eval=FALSE}

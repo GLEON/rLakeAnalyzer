@@ -30,21 +30,3 @@ list(nimax=nimax,by_s_m=ss, cline=cline,smz=smz,sms=sms)
 \description{
 Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 }
-\note{
-ForTran description - Input
-\itemize{
-\item{N -[INTEGER] number of points}
-\item{THRES -[REAL]  error norm}
-\item{Z0 -[REAL]  initial depth: use to omit data above z0}
-\item{ZMAX  -[REAL]  maximum depth: use to omit data below zmax}
-\item{Z     -[REAL(N)] input x data array, should be increasing function of index}
-\item{SIGMA -[REAL(N)] input y data array}
-}
-ForTran description - Output
-\itemize{
-\item{NIMAX -[INTEGER] final number of segments}
-\item{SMZ   -[REAL(NIMAX)] final z array of segmented data}
-\item{SMS   -[REAL(NIMAX)] final sigma array of segmented data}
-\item{VY_S_M-[REAL] position of MLD (=SMZ(2)); return -99 if something is not right}
-}
-}
