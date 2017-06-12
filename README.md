@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/boshek/limnotools.svg?branch=master)](https://travis-ci.org/boshek/limnotools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/boshek/limnotools?branch=master&svg=true)](https://ci.appveyor.com/project/boshek/limnotools) [![Coverage Status](https://img.shields.io/codecov/c/github/boshek/limnotools/master.svg)](https://codecov.io/gh/boshek/limntools?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/boshek/limnotools.svg?branch=master)](https://travis-ci.org/boshek/limnotools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/boshek/limnotools?branch=master&svg=true)](https://ci.appveyor.com/project/boshek/limnotools) [![Coverage Status](https://img.shields.io/codecov/c/github/boshek/limnotools/master.svg)](https://codecov.io/gh/boshek/limnotools?branch=master)
 
 limnotools package
 ------------------
