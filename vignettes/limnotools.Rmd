@@ -2,16 +2,15 @@
 title: "Limnotools Usage"
 author: "Sam Albers and Doug Collinge"
 date: "`r Sys.Date()`"
-#output: rmarkdown::html_vignette
-output: github_document
-
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Limnotools Usage}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-## Package loading
+
+## Packages needing loading
 tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
 ```{r, message=FALSE}
 library(dplyr)
@@ -130,5 +129,3 @@ wtrprof_df %>%
   labs(y = "Temperature", x = "Depth (m)", 
        caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld")
 ```
-
-
