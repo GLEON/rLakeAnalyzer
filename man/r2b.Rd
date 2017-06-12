@@ -30,4 +30,3 @@ k2 <- ni[i+1]
 
 r2b(k1, k2, y=t11$temper, x=t11$depth)
 }
-

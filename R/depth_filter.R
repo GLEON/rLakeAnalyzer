@@ -2,6 +2,7 @@
 #' @title Data filter to remove soak, heave and upcast
 #' @param z0 depth vector
 #' @param run_length Length of run upon which to start the soak removal
+#' @param index Logical: Should the function return an index value or actual value?
 #' @return index values of z0 of filtered data. Will return a warning if the function removed more than 10% of the data
 #' @description  
 #' \itemize{
@@ -12,7 +13,7 @@
 #' @examples
 #' depth_filter(z0=latesummer$depth)
 
-depth_filter <- function(z0, run_length=20) {
+depth_filter <- function(z0, run_length=20, index = FALSE) {
   n_start = length(z0)
   
   ##REMOVES SOAK PERIOD
@@ -43,15 +44,35 @@ depth_filter <- function(z0, run_length=20) {
   p_loss = 100-(length(z0[idx_heave])/n_start)*100
   
   if (p_loss>10){
-  warning(paste0("Soak, heave and bottom data filter removed ",round(p_loss,2),"% of the data"))
+  message(paste0("Soak, heave and bottom data filter removed ",round(p_loss,2),"% of the data"))
   }
   
-  return(idx_soak[idx_heave])
+  idx = idx_soak[idx_heave]
   
-  #} else {warning("run length less than filter depth length")}
-
+  if( index == TRUE ){
+    return(idx)
+    } else{
+      return(z0[idx])
+    }
+  
 }
 
 
+### Auto detecting minimum of depth vector to a minimum of 1
+#if (z0 == "auto") {
+#  ## What is the minimum depth after finding longest ordered portion?
+#  z0 = min(depth2)
+#  ##z0 must have minimum of 1 if using auto
+#  if (z0 < 1) {
+#    z0 = 1
+#  }
+#} else {
+#  z0 = z0
+#}
+
+##Max z0 needs to be 2.5
+#if (z0 > 2.5){
+#  z0 = 2.5
+#}
 
 

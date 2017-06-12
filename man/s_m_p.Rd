@@ -36,4 +36,3 @@ C
 INTEGER NR, NI(n)
 REAL X(n),Y(n)
 }
-

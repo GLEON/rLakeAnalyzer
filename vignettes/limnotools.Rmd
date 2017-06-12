@@ -2,25 +2,28 @@
 title: "Limnotools Usage"
 author: "Sam Albers and Doug Collinge"
 date: "`r Sys.Date()`"
-#output: rmarkdown::html_vignette
-output: github_document
-
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Limnotools Usage}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-## Package loading
+
+## Packages needing loading
 tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
 ```{r, message=FALSE}
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(ggplot2)
+library(knitr)
 ```
 
 ### Development version of limnotools
 TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
 ```{r, message=FALSE}
-devtools::install_github("boshek/limnotools", ref="sam_exp")
+devtools::install_github("boshek/limnotools", ref="devel")
 library(limnotools)
 ```
 
@@ -34,6 +37,7 @@ Water column identification is provided by the split-and-merge algorithm. Implem
 ```{r, eval=FALSE}
 data("earlyspring")
 data("latesummer")
+data("latefall")
 data("t11")
 ```
 
@@ -47,7 +51,7 @@ Below is a simple one profile example of determining key water column parameters
 The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1. 
 ```{r}
 wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
-wldf
+knitr::kable(wldf)
 ```
 
 Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays. 
@@ -62,12 +66,13 @@ text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
 ## More complicated example using many datafiles
-Many users will face situations where they have multiple profiles and would like to evaluate layers and/or segments on many files. There are several approaches to this type of 'grouping' problem in R. We will use the most popular approach - dplyr - which is part of the [tidyverse](https://CRAN.R-project.org/package=tidyverse). To generate data for this example we first need to combine all the internal dataframes from limnotools to illustrate mix layer estimation for many casts. To simplify and decrease runtime we will only do this for temperature and salinity. 
+Many users will face situations where they have multiple profiles and would like to evaluate layers and/or segments on many files. There are several approaches to this type of 'grouping' problem in R. We will use the most popular approach - dplyr - and the functionla programming tool - purrr - which is part of the [tidyverse](https://CRAN.R-project.org/package=tidyverse). To generate data for this example we first need to combine all the internal dataframes from limnotools to illustrate mix layer estimation for many casts. To simplify and decrease runtime we will only do this for temperature and salinity. 
 ```{r}
 ## rbind all the dataframes together
 earlyspring$group <- 'earlyspring'
 latesummer$group <- 'latesummer'
-rbind_df <- rbind(earlyspring, latesummer)
+latefall$group <- 'latefall'
+rbind_df <- dplyr::bind_rows(earlyspring, latesummer, latefall)
 ```
 
 We can utilize the power of a dplyr pipe (%>%) and gather to convert this data into a long form. 
@@ -80,21 +85,33 @@ wtrprof_df <- rbind_df %>%
 
 Use group_by() and do() to run wtr_layer() by group and variable outputting a dataframe.
 ```{r}
+safe_wtr_layer <- purrr::safely(wtr_layer)
+
 wl_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_layer(depth=.$depth,measure=.$value)) %>% ##do a water_layer calc
-  select(-nseg) %>% ##nseg not needed here
-  gather(Layer, value, -variable, -group) %>% ##gather for plotting purposes
-  filter(variable == "temper")
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_layer(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
 wl_df
 ```
 
 The same applies to wtr_segments()
 ```{r}
+safe_wtr_segments <-purrr::safely(wtr_segments)
+
 s_df <- wtrprof_df %>%  
+  filter(variable == "temper") %>%
   group_by(variable, group) %>% ## group by variable and group
-  do(wtr_segments(depth = .$depth, measure = .$value)) %>% ##do a water_layer calc
-  filter(variable == "temper")
+  nest() %>% ## create list col
+  mutate(wl = map2(data, variable, ~safe_wtr_segments(depth = .$depth, measure = .$value))) %>%
+  mutate(err = map(wl, 'error'),
+         layer_l = map(wl, 'result')) %>%
+  select(-wl) %>%
+  unnest(layer_l)
 s_df
 ```
 
@@ -106,11 +123,9 @@ wtrprof_df %>%
   geom_path(colour = 'purple') +
   geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
   geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
-  geom_hline(data = wl_df, aes(yintercept = value, colour = Layer)) +
+  geom_hline(data = wl_df, aes(yintercept = mld, colour = group)) +
   scale_y_reverse() +
-  facet_wrap(~group, scales = "free", ncol = 1) +
-  labs(y = "Temperature/Salinity", x = "Depth (m)", 
-       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld \n  Thermocline depth=cline")
+  facet_wrap(~group, scales = "free_y", ncol = 1) +
+  labs(y = "Temperature", x = "Depth (m)", 
+       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld")
 ```
-
-

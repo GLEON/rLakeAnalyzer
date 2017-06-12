@@ -20,4 +20,3 @@ xx,yy  vectors of x,y values interpolated to be the same length as x0.
 \description{
 Normalize a vector of samples. X and Y  will be normalized so that the first point is (0,0) and the last point is (1,1). Vector x are the input x values, must be in ascending order.
 }
-

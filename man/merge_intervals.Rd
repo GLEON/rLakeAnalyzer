@@ -14,4 +14,3 @@ merge_intervals(i, ni)
 \description{
 merge interval i and i+1
 }
-

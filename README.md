@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/boshek/limnotools.svg?branch=master)](https://travis-ci.org/boshek/limnotools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/boshek/limnotools?branch=master&svg=true)](https://ci.appveyor.com/project/boshek/limnotools)
+[![Travis-CI Build Status](https://travis-ci.org/boshek/limnotools.svg?branch=devel)](https://travis-ci.org/boshek/limnotools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/boshek/limnotools?branch=devel&svg=true)](https://ci.appveyor.com/project/boshek/limnotools)
 
 limnotools package
 ------------------
@@ -26,4 +26,4 @@ Releases
 --------
 
 -   0.9.0 Initial release
--   0.9.1 Fixed a fatal bug in wtr\_layer and wtr\_segment that fed incorrect measurement values to by\_s\_m and by\_s\_m3
+-   0.9.1 Fixed a fatal bug in wtr\_layer and wtr\_segment that fed incorrect measurement values in the call to by\_s\_m and by\_s\_m3
