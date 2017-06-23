@@ -106,7 +106,7 @@ drop.datetime = function(data, error=FALSE){
 		stop('datetime column ambiguity. You can only have one column of datetime.')
 	}
 	
-	return(data[,-dt_indx])
+	return(data[,-dt_indx, drop=FALSE])
 }
 
 #@title Search for and return the datetime column from a ts data.frame
