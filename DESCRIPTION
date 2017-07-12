@@ -1,7 +1,7 @@
 Package: rLakeAnalyzer
 Title: Lake Physics Tools
 Maintainer: Luke Winslow <lawinslow@gmail.com>
-Version: 1.8.6
+Version: 1.8.8
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Taylor
     Leach, Jake Zwart
 Description: Standardized methods for calculating common important derived

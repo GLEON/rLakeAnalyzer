@@ -70,7 +70,7 @@ ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, na.rm=FALSE, ...){
     attr(n2, 'depths') = attr(tmp, 'depths')
     n2 = as.data.frame(n2)
     names(n2) = paste('N2_', as.character(attr(tmp,'depth')), sep='')
-    n2 = rbind(data.frame(datetime=get.datetime(wtr)), n2)
+    n2 = cbind(data.frame(datetime=get.datetime(wtr)), n2)
   }
   
   return(n2)
