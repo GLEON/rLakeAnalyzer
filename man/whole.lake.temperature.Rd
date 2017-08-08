@@ -22,4 +22,3 @@ the supplied water temperature timeseries.
 \seealso{
 \code{\link{hypo.temperature}}, \code{\link{epi.temperature}}
 }
-

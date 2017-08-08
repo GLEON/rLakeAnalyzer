@@ -37,4 +37,3 @@ print(depths)
 \code{\link{load.ts}}
 }
 \keyword{manip}
-
