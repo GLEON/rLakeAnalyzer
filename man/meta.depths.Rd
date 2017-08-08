@@ -45,14 +45,13 @@ cat('The top depth of the metalimnion is:', m.d[1])
 cat('The bottom depth of the metalimnion is:', m.d[2])
 
 }
-\author{
-Jennifer Brentrup, Luke Winslow
-}
 \references{
 Wetzel, R. G. 2001. Limnology: Lake and River Ecosystems, 3rd ed. Academic Press.
 }
 \seealso{
 \code{\link{ts.meta.depths}}, \code{\link{thermo.depth}}
 }
+\author{
+Jennifer Brentrup, Luke Winslow
+}
 \keyword{manip}
-

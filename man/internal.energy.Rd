@@ -39,4 +39,3 @@ cat(internal.energy(wtr, depths, bthA, bthD))
 \author{
 Jordan S. Read
 }
-

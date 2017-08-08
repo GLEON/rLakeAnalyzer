@@ -23,4 +23,3 @@ value is returned.
 \seealso{
 \code{\link{epi.temperature}}, \code{\link{whole.lake.temperature}}
 }
-
