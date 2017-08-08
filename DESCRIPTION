@@ -1,7 +1,7 @@
 Package: rLakeAnalyzer
 Title: Lake Physics Tools
 Maintainer: Luke Winslow <lawinslow@gmail.com>
-Version: 1.8.8
+Version: 1.9.0
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Taylor
     Leach, Jake Zwart
 Description: Standardized methods for calculating common important derived
@@ -16,4 +16,4 @@ License: GPL (>= 2)
 Packaged: 2014-07-06 09:09:24 UTC; Luke
 Repository: https://github.com/GLEON/rLakeAnalyzer
 Date/Publication: 2015-04-02 12:00:00
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

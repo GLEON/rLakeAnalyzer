@@ -28,11 +28,10 @@ wtr.plot.temp(wtr)
 }
 
 }
-\author{
-Jennifer Brentrup, Taylor Leach, Luke Winslow
-}
 \seealso{
 \code{\link{load.ts}} and \code{\link{wtr.lineseries}}
 }
+\author{
+Jennifer Brentrup, Taylor Leach, Luke Winslow
+}
 \keyword{hplot}
-

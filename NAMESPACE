@@ -5,7 +5,8 @@ export(wedderburn.number, layer.density, lake.number, uStar, water.density,
 	   ts.wedderburn.number, ts.buoyancy.freq, buoyancy.freq, layer.temperature, 
 	   wtr.heat.map, wtr.lineseries, wtr.heatmap.layers, wtr.plot.temp, lake.number.plot, 
 	   schmidt.plot, center.buoyancy, ts.center.buoyancy, internal.energy, 
-			 ts.internal.energy, epi.temperature, hypo.temperature, whole.lake.temperature)
+			 ts.internal.energy, epi.temperature, hypo.temperature, whole.lake.temperature, 
+     approx.bathy)
 
 import("plyr")
 importFrom("grDevices", "colorRampPalette")

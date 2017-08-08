@@ -23,4 +23,3 @@ of the epilimnion is calculated as the full depth of the lake.
 \seealso{
 \code{\link{hypo.temperature}}, \code{\link{whole.lake.temperature}}
 }
-
