@@ -5,6 +5,6 @@ rLakeAnalyzer
 [![DOI](https://zenodo.org/badge/23404/GLEON/rLakeAnalyzer.svg)](https://zenodo.org/badge/latestdoi/23404/GLEON/rLakeAnalyzer)
 
 
-An R version of Lake Analyzer
+An R version of [Lake Analyzer](http://gleon.org/research/projects/lake-analyzer)
 
 Contributors: Luke Winslow, Richard Woolway, Jordan Read, Jennie Brentrup, Jake Zwart, Craig Snortheim, Taylor Leach
