@@ -145,8 +145,9 @@ get.datetime = function(data, error=FALSE){
 #' @examples \dontrun{
 #' approx.hypso(zMax = 25, lkeArea = 39400000, numZ = 15)
 #' }
-approx.hypso <- function(zMax, lkeArea, numZ){
-  depth	<-	seq(0, zMax, length.out = numZ)
-  area	<-	approx(c(0, zMax), c(lkeArea, 0), depth)$y
+approx.hypso <- function(zMax, lkeArea, numZ){ 
+  depth	<- seq(0, zMax, length.out = numZ)
+  area  <- approx(c(0, zMax), c(lkeArea, 0), depth)$y
+  
   data.frame(depths = depth, areas = area)
 }
