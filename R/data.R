@@ -1,15 +1,3 @@
-## Original creation of .RDA files
-## Load in the data
-## small_df <- read.csv("./data/testdata1.txt", header=FALSE, col.names = c("x","y"))
-## large_df <- read.csv("./data/testdata2.txt", header=FALSE, col.names = c("x","y"))
-## t11 <- read.table("Z:/GitHub_Repos/alt_get_mixed/data/97130187.t11", col.names = c("depth","temper","salinity","oxygen.sat","oxygen","density"))
-## earlyspring <- read.table("Z:/OneDrive/R_Package_Development/MixLayerPackage/Data_prep/Early_Spring_Profile.t11", col.names = c("depth","temper","salinity","oxygen.sat","oxygen","density"))
-## latesummer <- read.table("Z:/OneDrive/R_Package_Development/MixLayerPackage/Data_prep/Late_Summer_Profile.t11", col.names = c("depth","temper","salinity","oxygen.sat","oxygen","density"))
-
-## devtools::use_data(t11, overwrite=TRUE)
-## devtools::use_data(earlyspring)
-## devtools::use_data(latesummer)
-
 #' Early Spring Profile
 #'
 #' \describe{

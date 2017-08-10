@@ -7,17 +7,21 @@
 getxxnorm(x, y)
 }
 \arguments{
-\item{x}{[REAL(N)] input x-axis array (should be in "chronological" order)}
+\item{x}{input x-axis array (should be in "chronological" order)}
 
-\item{y}{[REAL(N)] input y-axis array}
+\item{y}{input y-axis array}
 }
 \value{
-Output is a list with:
-anormx, the normalization value used to make the last x == 1.
-anormy, the normalization value used to make the last y == 1.
-xx,yy  vectors of x,y values interpolated to be the same length as x0.
+Output is a list with: 
+\itemize{
+ \item anormx, the normalization value used to make the last x == 1.
+ \item anormy, the normalization value used to make the last y == 1.
+ \item xx,yy  vectors of x,y values interpolated to be the same length as x0.
+ }
 }
 \description{
 Normalize a vector of samples. X and Y  will be normalized so that the first point is (0,0) and the last point is (1,1). Vector x are the input x values, must be in ascending order.
 }
-\keyword{internal}
+\details{
+A function to normalize a vector of samples
+}

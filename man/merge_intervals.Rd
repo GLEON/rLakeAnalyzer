@@ -7,11 +7,13 @@
 merge_intervals(i, ni)
 }
 \arguments{
-\item{i}{[INTEGER] interval number of the first segment to merge}
+\item{i}{interval number of the first segment to merge}
 
-\item{ni}{[INTEGER(NR)] current array with interval start point numbers}
+\item{ni}{current array with interval start point numbers}
 }
 \description{
 merge interval i and i+1
 }
-\keyword{internal}
+\details{
+Intervals to be merged
+}

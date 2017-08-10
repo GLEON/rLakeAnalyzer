@@ -15,15 +15,15 @@ s_mN(nr, x, y)
 }
 \value{
 [list(eps=eps,ni=ni)] where:
-eps [real] is the maximum error over all intervals,
-ni is a [vector of integer, length nr+1] vector Ni of indices giving data segments
-Ni[i] start of interval; Ni[i+1] end of interval, for any i<length(Ni)
+\itemize{
+ \item eps [real] is the maximum error over all intervals,
+ \item ni is a [vector of integer, length nr+1] vector Ni of indices giving data segments
+ \item Ni[i] start of interval; Ni[i+1] end of interval, for any i<length(Ni)
+ }
 }
 \description{
 Subroutine to determine the Linear SEGMENTS for a PREDEFINED NUMBER OF SEGMENTS (NR)
 (Use this program when you want to predefine the number of segments you want to fit
-to the data)
-Segments the data in x,y into the intervals given in the output array A.
+to the data) Segments the data in x,y into the intervals given in the output array A.
 The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
 }
-\keyword{internal}

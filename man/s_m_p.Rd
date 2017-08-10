@@ -21,4 +21,3 @@ A[i] start of interval; A[i+1] end of interval, for any i<length(A)
 Segments the data in x,y into the intervals given in the output array A.
 The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
 }
-\keyword{internal}

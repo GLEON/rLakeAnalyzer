@@ -15,7 +15,6 @@
 #' \item cline: Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope
 #' }
 #'
-#' @export
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
@@ -77,7 +76,7 @@ by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
 #' \item cline: Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope
 #' }
 #'
-#' @export
+
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 
 by_s_m3 = function(nr,z0,zmax,z,sigma) {

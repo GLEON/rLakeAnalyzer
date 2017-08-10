@@ -1,14 +1,13 @@
-## All these functions are export for use but hidden from basica documentation so as not to clutter up the package documentation. 
-#' @export
 #' @title spliting interval i into 2 pieces
 #' @param i [INTEGER] interval number, should be less than NR+1
 #' @param ni [INTEGER(NR)] current array with interval start point number
 #' 
-#' @keywords internal
 #'
 #' @return new array with interval start point number
 #' @description spliting interval i into 2 pieces
-# @examples
+#' 
+#' 
+#' @examples
 #' ni = c(1,5,10,15,20)
 #' nr = 4
 #' ni
@@ -43,13 +42,15 @@ split_interval <- function(ni,i) {
   c( ni[1:i], jsplit, ni[(i+1):length(ni)] )
 }
 
-#' @export
+
+#' 
 #' @title merge_intervals
 #' @description merge interval i and i+1
-#' @param i [INTEGER] interval number of the first segment to merge
-#' @param ni [INTEGER(NR)] current array with interval start point numbers
+#' @param i interval number of the first segment to merge
+#' @param ni current array with interval start point numbers
 #' 
-#' @keywords internal
+#' @details Intervals to be merged
+
 
 merge_intervals = function(i,ni) {
   stopifnot(i > 1) # Can't merge the first interval
@@ -59,37 +60,24 @@ merge_intervals = function(i,ni) {
 }
 
 
-#' @export
+#' 
 #' @description Normalize a vector of samples. X and Y  will be normalized so that the first point is (0,0) and the last point is (1,1). Vector x are the input x values, must be in ascending order.
 #'
 #' @title Normalize a vector of samples.
-#' @param x [REAL(N)] input x-axis array (should be in "chronological" order)
-#' @param y [REAL(N)] input y-axis array
-#' @return Output is a list with:
-#' anormx, the normalization value used to make the last x == 1.
-#' anormy, the normalization value used to make the last y == 1.
-#' xx,yy  vectors of x,y values interpolated to be the same length as x0.
+#' @param x input x-axis array (should be in "chronological" order)
+#' @param y input y-axis array
+#' @return Output is a list with: 
+#' \itemize{
+#'  \item anormx, the normalization value used to make the last x == 1.
+#'  \item anormy, the normalization value used to make the last y == 1.
+#'  \item xx,yy  vectors of x,y values interpolated to be the same length as x0.
+#'  }
 #' 
-#' @keywords internal
+#' @details A function to normalize a vector of samples
 #'
 
 getxxnorm <- function(x,y) {
-  #xx = x0 + dx*(0:(nn-1))    # Spread xx out linearly.
-  #yy <- rep(0,nn)            # Reserve space for y values.
   
-  #j = 1
-  #for ( i in 1:nn ) { # Loop over output calculating yy[i]
-  #  # j = 1 + sum(xx[i] >= x)  # Equivalent to following three lines.
-  #  while( (xx[i] >= x[j]) && (j < length(x)) ) {
-  #    j <- j+1
-  #  }
-  #  if( j == 1 ) {
-  #    yy[i] <- y[1]
-  #  }
-  #  else {
-  #    yy[i] <- y[j-1]+(xx[i]-x[j-1])/(x[j]-x[j-1])*(y[j]-y[j-1])
-  #  }
-  #}
   anormx = x[length(x)] - x[1]
   anormy = y[length(y)] - y[1]
   xx = (x - x[1])/anormx
@@ -99,17 +87,14 @@ getxxnorm <- function(x,y) {
 }
 
 
-#' @export
+
 #' @title computing a norm value for the segment from point k1 to k2-1
 #' @param k1 [INTEGER] start point
 #' @param k2 [INTEGER] end point+1
-#' @param x [REAL(?)] input x-axis array (predictor)
-#' @param y [REAL(?)] input y-axis array (response)
-#' @return A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REAL] coefficient of linear regression, R2B -[REAL] norm of the segment (maximum "distance" measured perpendicular to the regression line)
-#' @description  A -[REAL] coefficient of linear regression (will zero if K1=0) (y=Ax+B), B -[REAL] coefficient of linear regression, R2B -[REAL] norm of the segment (maximum "distance" measured perpendicular to the regression line)
-#' 
-#' @keywords internal
-#' 
+#' @param x [REAL] input x-axis array (predictor)
+#' @param y [REAL] input y-axis array (response)
+#' @return norm value
+#' @description  Computes the norm value for the segment from the point k1 to k2-1
 #' @examples
 #' ni <- c( 1, 201, 402 )
 #' i <- 1
@@ -119,10 +104,6 @@ getxxnorm <- function(x,y) {
 #'
 #' r2b(k1, k2, y=t11$temper, x=t11$depth)
 
-# Doug could not find anywhere in the original code where outputs a and b are actually used
-# he has taken then out to avoid having to return a data.frame.
-
-## Sam has replaced r2b (again)
 
 r2b = function(k1,k2,x,y) {
   
@@ -152,7 +133,8 @@ r2b = function(k1,k2,x,y) {
 }
 
 
-#' @export
+
+
 #' @title Computing linear segments for a specified error norm value.
 #' @param eps [real] error norm
 #' @param x [real] input x-axis array, should be an increasing function of index
@@ -162,7 +144,6 @@ r2b = function(k1,k2,x,y) {
 #' @description Segments the data in x,y into the intervals given in the output array A.
 #' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
 #' 
-#' @keywords internal
 
 # The dynamic arrays in R remove the need to know the number of data points, n, which is just
 # the length of x and y. Similarly Nr is no longer needed and is length(Ni)-1, one less than the length
@@ -327,23 +308,21 @@ s_m_p = function(eps,x,y) {
 }
 
 
-#' @export
 #' @title Computing linear segments for a specified error norm value.
 #' @param nr [integer] number of segments, fixed.
 #' @param x [real] input x-axis array, should be an increasing function of index
 #' @param y [real] input y-axis array
 #' @return [list(eps=eps,ni=ni)] where:
-#' eps [real] is the maximum error over all intervals,
-#' ni is a [vector of integer, length nr+1] vector Ni of indices giving data segments
-#' Ni[i] start of interval; Ni[i+1] end of interval, for any i<length(Ni)
-#' @description
-#' Subroutine to determine the Linear SEGMENTS for a PREDEFINED NUMBER OF SEGMENTS (NR)
+#' \itemize{
+#'  \item eps [real] is the maximum error over all intervals,
+#'  \item ni is a [vector of integer, length nr+1] vector Ni of indices giving data segments
+#'  \item Ni[i] start of interval; Ni[i+1] end of interval, for any i<length(Ni)
+#'  }
+#' @description Subroutine to determine the Linear SEGMENTS for a PREDEFINED NUMBER OF SEGMENTS (NR)
 #' (Use this program when you want to predefine the number of segments you want to fit
-#' to the data)
-#' Segments the data in x,y into the intervals given in the output array A.
+#' to the data) Segments the data in x,y into the intervals given in the output array A.
 #' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
 #' 
-#' @keywords internal
 
 # The dynamic arrays in R remove the need to know the number of data points, n, which is just
 # the length of x and y.

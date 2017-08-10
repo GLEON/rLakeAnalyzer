@@ -1,9 +1,9 @@
 context("Testing wtr_layer")
 
 test_that("Ensure that unconstrained and specified layer approach result in the same answer", {
-  expect_equal( wtr_layer(depth=latesummer$depth, measure = latesummer$temper), 
+  expect_equal( wtr_layer(depth=latesummer$depth, measure = latesummer$temper)[,1:4], 
                 wtr_layer(depth=latesummer$depth, measure = latesummer$temper, 
-                          nseg=wtr_layer(depth=latesummer$depth, measure = latesummer$temper)$nseg))
+                          nseg=wtr_layer(depth=latesummer$depth, measure = latesummer$temper)$nseg)[,1:4])
 })
 
 
