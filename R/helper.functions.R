@@ -132,23 +132,3 @@ get.datetime = function(data, error=FALSE){
 	return(data[,dt_indx])
 }
 
-#' Approximate Bathymetry
-#'
-#' Approximate bathymetry from max depth and lake area.
-#'
-#' @param zMax numeric max depth in meters
-#' @param numZ integer number of depth layers
-#' @param lkeArea numeric lake area in meters squared.
-#'
-#' @export
-#'
-#' @examples \dontrun{
-#' approx.bathy(zMax = 25, lkeArea = 39400000, numZ = 15)
-#' }
-approx.bathy <- function(zMax, lkeArea, numZ){ 
-  depth	<- seq(0, zMax, length.out = numZ)
-  area  <- approx(c(0, zMax), c(lkeArea, 0), depth)$y
-  
-  data.frame(depths = depth, areas = area)
-}
-
