@@ -28,10 +28,10 @@ a dataframe which defines the lake area for each depth. Columns are depths (m) a
 Estimates a depth-area curve for a lake using lake surface area, 
 maximum depth and mean depth. Two methods for estimating the curve are available;
 'cone' assumes the lake is shaped as a cone and requires only surface area and 
-maximum depth; "voldev" uses the volume development (Vd) parameter from Håkanson (1981) 
+maximum depth; "voldev" uses the volume development (Vd) parameter from Hakanson (1981) 
 and Johansson et al. (2007). Vd is a dimensionless parameter that describes 
 lake basin shape in relation to the volume of cone whose base area and height 
-equal the surface area and maximum lake depth, it is estimated as Vd = Zmean/Zmax (Håkanson et al. 2000). 
+equal the surface area and maximum lake depth, it is estimated as Vd = Zmean/Zmax (Hakanson et al. 2000). 
 Method "voldev' requires lake surface area, mean and maximum depth. Depths at 
 which the area is estimated can be set by as a numeric vector or as a regularly spaced sequence.
 }
@@ -49,6 +49,6 @@ Cone.ex = approx.bathy(Zmax = 25, lkeArea = 39400000, method = "cone")
 
 }
 \references{
-Håkanson, L. (1981). On lake bottom dynamics – the energy– topography factor. Canadian Journal of Earth Sciences, 18, 899–909.
-Johansson, H., A. A. Brolin, and L. Håkanson. 2007. New approaches to the modelling of lake basin morphometry. Environ. Model. Assess. 12: 213–228.
+Hakanson, L. (1981). On lake bottom dynamics - the energy- topography factor. Canadian Journal of Earth Sciences, 18, 899-909.
+Johansson, H., A. A. Brolin, and L. Hakanson. 2007. New approaches to the modelling of lake basin morphometry. Environ. Model. Assess. 12: 213-228.
 }
