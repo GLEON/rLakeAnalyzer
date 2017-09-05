@@ -1,10 +1,11 @@
 #' @title spliting interval i into 2 pieces
+#' @description spliting interval i into 2 pieces
+#' 
 #' @param i [INTEGER] interval number, should be less than NR+1
 #' @param ni [INTEGER(NR)] current array with interval start point number
 #' 
-#'
+#' @noRd
 #' @return new array with interval start point number
-#' @description spliting interval i into 2 pieces
 #' 
 #' 
 #' @examples
@@ -49,6 +50,7 @@ split_interval <- function(ni,i) {
 #' @param i interval number of the first segment to merge
 #' @param ni current array with interval start point numbers
 #' 
+#' @noRd
 #' @details Intervals to be merged
 
 
@@ -73,6 +75,7 @@ merge_intervals = function(i,ni) {
 #'  \item xx,yy  vectors of x,y values interpolated to be the same length as x0.
 #'  }
 #' 
+#' @noRd
 #' @details A function to normalize a vector of samples
 #'
 
@@ -89,12 +92,14 @@ getxxnorm <- function(x,y) {
 
 
 #' @title computing a norm value for the segment from point k1 to k2-1
+#' @description  Computes the norm value for the segment from the point k1 to k2-1
 #' @param k1 [INTEGER] start point
 #' @param k2 [INTEGER] end point+1
 #' @param x [REAL] input x-axis array (predictor)
 #' @param y [REAL] input y-axis array (response)
+#' @noRd
 #' @return norm value
-#' @description  Computes the norm value for the segment from the point k1 to k2-1
+
 #' @examples
 #' ni <- c( 1, 201, 402 )
 #' i <- 1
@@ -102,7 +107,7 @@ getxxnorm <- function(x,y) {
 #' k2 <- ni[i+1]
 #'
 #'
-#' r2b(k1, k2, y=t11$temper, x=t11$depth)
+#' r2b(k1, k2, y=latesummer$temper, x=latesummer$depth)
 
 
 r2b = function(k1,k2,x,y) {
@@ -128,7 +133,6 @@ r2b = function(k1,k2,x,y) {
     r2b = max( abs( y[is] - a*x[is] - b )/sqrt(a^2 + 1) )
   }
   
-  #return(data.frame(r2b=r2b,a=a,b=b))
   return(r2b)
 }
 
@@ -136,18 +140,18 @@ r2b = function(k1,k2,x,y) {
 
 
 #' @title Computing linear segments for a specified error norm value.
+#' @description Segments the data in x,y into the intervals given in the output array A.
+#' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
+#' The dynamic arrays in R remove the need to know the number of data points, n, which is just
+#' the length of x and y. Similarly Nr is no longer needed and is length(Ni)-1, one less than the length
+#' of the output array.
+#' 
 #' @param eps [real] error norm
 #' @param x [real] input x-axis array, should be an increasing function of index
 #' @param y [real] input y-axis array
+#' @noRd
 #' @return [integer] array A of indices giving data segments.
 #' A[i] start of interval; A[i+1] end of interval, for any i<length(A)
-#' @description Segments the data in x,y into the intervals given in the output array A.
-#' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
-#' 
-
-# The dynamic arrays in R remove the need to know the number of data points, n, which is just
-# the length of x and y. Similarly Nr is no longer needed and is length(Ni)-1, one less than the length
-# of the output array.
 
 s_m_p = function(eps,x,y) {
   # This code generates Nr intervals in vector Ni
@@ -309,19 +313,20 @@ s_m_p = function(eps,x,y) {
 
 
 #' @title Computing linear segments for a specified error norm value.
+#' @description Subroutine to determine the Linear SEGMENTS for a PREDEFINED NUMBER OF SEGMENTS (NR)
+#' (Use this program when you want to predefine the number of segments you want to fit
+#' to the data) Segments the data in x,y into the intervals given in the output array A.
+#' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
 #' @param nr [integer] number of segments, fixed.
 #' @param x [real] input x-axis array, should be an increasing function of index
 #' @param y [real] input y-axis array
+#' @noRd
 #' @return [list(eps=eps,ni=ni)] where:
 #' \itemize{
 #'  \item eps [real] is the maximum error over all intervals,
 #'  \item ni is a [vector of integer, length nr+1] vector Ni of indices giving data segments
 #'  \item Ni[i] start of interval; Ni[i+1] end of interval, for any i<length(Ni)
 #'  }
-#' @description Subroutine to determine the Linear SEGMENTS for a PREDEFINED NUMBER OF SEGMENTS (NR)
-#' (Use this program when you want to predefine the number of segments you want to fit
-#' to the data) Segments the data in x,y into the intervals given in the output array A.
-#' The data in each interval can be linearly fitted within an error, given by r2b(), less than eps.
 #' 
 
 # The dynamic arrays in R remove the need to know the number of data points, n, which is just

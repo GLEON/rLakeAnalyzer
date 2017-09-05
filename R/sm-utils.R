@@ -1,10 +1,13 @@
 #' Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
-#'
+#' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
+#' 
 #' @param thres error norm;
 #' @param z0 initial depth: use to omit data above z0
 #' @param zmax maximum depth: use to omit data below zmax
 #' @param z input x data array, should be increasing function of index
 #' @param sigma input y data array
+#' 
+#' @noRd
 #'
 #' @return list(nimax=nimax,by_s_m=ss, cline=cline,smz=smz,sms=sms)
 #' \itemize{
@@ -12,10 +15,9 @@
 #' \item smz: final z array of segmented data
 #' \item sms: final sigma array of segmented data
 #' \item by_s_m: position of MLD = smz(2); or -99 if something is not right
-#' \item cline: Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope
 #' }
 #'
-#' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
+
 #'
 by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
   # by_s_m=-99.0 # TODONE: this is for an error return, crash instead.
@@ -60,12 +62,15 @@ by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
 
 
 #' Service subroutine for determining Mixed Layer Depth for a SPECIFIED NUMBER OF SEGMENTS
+#' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 #' @param nr fixed number of segments
 #' @param z0 initial depth: use to omit data above z0
 #' @param zmax maximum depth: use to omit data below zmax
 #' @param z input x data array, should be increasing function of index
 #' @param sigma input y data array
+#' 
+#' @noRd
 #'
 #' @return list(eps=s_mNresults$eps, cline=cline, by_s_m=ss,smz=smz,sms=sms)
 #' \itemize{
@@ -77,7 +82,7 @@ by_s_m = function(thres=thres,z0=z0,zmax=zmax,z=z,sigma=sigma) {
 #' }
 #'
 
-#' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
+
 
 by_s_m3 = function(nr,z0,zmax,z,sigma) {
   # by_s_m=-99.0 # TODONE: why?
