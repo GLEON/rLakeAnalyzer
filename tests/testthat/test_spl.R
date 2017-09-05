@@ -31,8 +31,5 @@ test_that("interval number is less than length(ni)", {
 })
 
 
-# The following test does not work though an error is thrown.
-#test_that("Should fail on too-narrow intervals.", {
-#  expect_error(split_interval(c(1,3,4,10),2))
-#})
+
 
