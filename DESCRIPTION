@@ -14,11 +14,12 @@ LazyData: TRUE
 RoxygenNote: 6.0.1
 Depends:
     R (>= 3.3.0)
+Imports:
+    tidyr
 Suggests: testthat,
     knitr,
     rmarkdown,
     dplyr,
-    tidyr,
     purrr,
     ggplot2,
     devtools

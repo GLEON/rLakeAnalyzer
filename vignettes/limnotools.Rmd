@@ -11,44 +11,23 @@ vignette: >
 
 
 ## Packages needing loading
-tidyverse is only needed for this vignette and not for the limnotools package itself though it is obviously a very useful tool.
 ```{r, message=FALSE}
-library(dplyr)
-library(tidyr)
-library(purrr)
-library(ggplot2)
+library(limnotools)
 library(knitr)
 ```
 
-### Development version of limnotools
-TO install limnotools, you need the devtools package installed. Then you can install limntools in R from github like this:
-```{r, message=FALSE}
-devtools::install_github("boshek/limnotools", ref="devel")
-library(limnotools)
+### Development version of rLakeAnalyzer
+At this time the split and merge algorithm is only available with the development version of `rLakeAnalyzer`. To install `rLakeAnalyzer`, you need the devtools package installed. Then you can install `rLakeAnalyzer` in R from github like this:
+```{r, message=FALSE, eval=FALSE}
+devtools::install_github("GLEON/rLakeAnalyzer", ref="devel")
+library(rLakeAnalyzer)
 ```
 
 ## Split and merge algorithm
-Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs within two functions:
-
-- wtr_layer function 
-- wtr_segments function
-
-## Useful dataset in limnotools 
-```{r, eval=FALSE}
-data("earlyspring")
-data("latesummer")
-data("latefall")
-data("t11")
-```
+Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs within the `water_layer()` function:
 
 ## Simple application of the split and merge algorithm
-Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. Most users will only use two functions that are part of the limnotools package. Cline depth and mix layer depth are calculated using the wtr_layers() function. Coordinates for the segments of the water profile are calculated using wtr_segments. For more information, type the following into R:
-```{r, eval=FALSE}
-?wtr_layer
-?wtr_segments
-```
-
-The default behaviour for both functions is to run the algorithm *without* specifying the number of segments. Moreover, both functions adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1. 
+Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. The default behaviour for `water_layer` is to run the algorithm *without* specifying the number of segments. `water_layer()` adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1. 
 ```{r}
 wldf <- wtr_layer(depth = latesummer$depth, measure = latesummer$temper)
 knitr::kable(wldf)
@@ -65,67 +44,3 @@ text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
 text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
 ```
 
-## More complicated example using many datafiles
-Many users will face situations where they have multiple profiles and would like to evaluate layers and/or segments on many files. There are several approaches to this type of 'grouping' problem in R. We will use the most popular approach - dplyr - and the functionla programming tool - purrr - which is part of the [tidyverse](https://CRAN.R-project.org/package=tidyverse). To generate data for this example we first need to combine all the internal dataframes from limnotools to illustrate mix layer estimation for many casts. To simplify and decrease runtime we will only do this for temperature and salinity. 
-```{r}
-## rbind all the dataframes together
-earlyspring$group <- 'earlyspring'
-latesummer$group <- 'latesummer'
-latefall$group <- 'latefall'
-rbind_df <- dplyr::bind_rows(earlyspring, latesummer, latefall)
-```
-
-We can utilize the power of a dplyr pipe (%>%) and gather to convert this data into a long form. 
-```{r}
-## Convert data into grouped format
-wtrprof_df <- rbind_df %>%
-  select(depth, temper, salinity, group) %>% ## only keep desired columns
-  gather(variable, value, -depth, -group)  ## convert data to long format
-```
-
-Use group_by() and do() to run wtr_layer() by group and variable outputting a dataframe.
-```{r}
-safe_wtr_layer <- purrr::safely(wtr_layer)
-
-wl_df <- wtrprof_df %>%  
-  filter(variable == "temper") %>%
-  group_by(variable, group) %>% ## group by variable and group
-  nest() %>% ## create list col
-  mutate(wl = map2(data, variable, ~safe_wtr_layer(depth = .$depth, measure = .$value))) %>%
-  mutate(err = map(wl, 'error'),
-         layer_l = map(wl, 'result')) %>%
-  select(-wl) %>%
-  unnest(layer_l)
-wl_df
-```
-
-The same applies to wtr_segments()
-```{r}
-safe_wtr_segments <-purrr::safely(wtr_segments)
-
-s_df <- wtrprof_df %>%  
-  filter(variable == "temper") %>%
-  group_by(variable, group) %>% ## group by variable and group
-  nest() %>% ## create list col
-  mutate(wl = map2(data, variable, ~safe_wtr_segments(depth = .$depth, measure = .$value))) %>%
-  mutate(err = map(wl, 'error'),
-         layer_l = map(wl, 'result')) %>%
-  select(-wl) %>%
-  unnest(layer_l)
-s_df
-```
-
-Lastly we can plot the mix layer and cline depths and segments over the water profiles using the same limnological visualization convention described above and using ggplot2 (part of the tidyverse). 
-```{r, fig.show = "hold", fig.width = 8, fig.height = 6}
-wtrprof_df %>%
-  filter(variable == "temper") %>%
-  ggplot(aes(x = value,y = depth)) +
-  geom_path(colour = 'purple') +
-  geom_path(data = s_df, aes(x = measure, y = depth), colour = 'black') +
-  geom_point(data = s_df, aes(x = measure, y = depth), colour = 'black') +
-  geom_hline(data = wl_df, aes(yintercept = mld, colour = group)) +
-  scale_y_reverse() +
-  facet_wrap(~group, scales = "free_y", ncol = 1) +
-  labs(y = "Temperature", x = "Depth (m)", 
-       caption = "Black lines represent split-and-merge segments \n Mix layer depth =mld")
-```

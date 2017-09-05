@@ -4,19 +4,19 @@
 \alias{wtr_layer}
 \title{Exploration of lake water column layers}
 \usage{
-wtr_layer(thres = 0.1, z0 = 2.5, zmax = 150, depth = depth,
-  measure = measure, nseg = "unconstrained")
+wtr_layer(depth = depth, measure = measure, thres = 0.1, z0 = 2.5,
+  zmax = 150, nseg = "unconstrained")
 }
 \arguments{
+\item{depth}{depth in metres; should be an increasing vector}
+
+\item{measure}{parameter measured in the water column profile}
+
 \item{thres}{error norm; defaults to 0.1}
 
 \item{z0}{initial depth in metres. Defaults to 2.5m}
 
 \item{zmax}{maximum depth in metres: defaults to 150m}
-
-\item{depth}{depth in metres; should be an increasing vector}
-
-\item{measure}{parameter measured in the water column profile}
 
 \item{nseg}{optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
 }
