@@ -7,15 +7,17 @@
 #' @param depth depth in metres; should be an increasing vector
 #' @param measure parameter measured in the water column profile
 #' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
-#' @return a dataframe of nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures), and the segments calculated by the sm algorithm.
+#' @return a list of two dataframes. layers: nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures) and segments calculated by the sm algorithm.
 
 #' @references Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
 #' @examples
-#' wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
+#' df1 <- wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
+#' df1$layers
+#' df1$segments
 #' 
 #' wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 #' 
-## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
+
 
 wtr_layer <-
   function(depth = depth,
@@ -29,39 +31,39 @@ wtr_layer <-
     if( length(depth) <= 30 ) {  
         warning("Profile does not have enough readings for sm algorithm (<30): returning NA")
         return(data.frame(min_depth = NA, nseg = NA, mld = NA, cline = NA))
-      } 
+    } 
+    ## Note accounting for difference between interval (nimax=neg-1) and segments (nseg=nimax+1)  
 
       
       if (nseg == "unconstrained") {
         sam_list = by_s_m(thres = thres, z0 = z0, zmax = zmax, z = depth, sigma = measure)
-        res_df = data.frame(
-          min_depth = z0,
-          nseg = sam_list[["nimax"]] + 1,
-          mld = sam_list[["by_s_m"]],
-          cline = cline_calc(z_seg = sam_list[["smz"]], sigma_seg = sam_list[["sms"]]),
-          seg_depth = sam_list[["smz"]],
-          seg_measure = sam_list[["sms"]]
-          )
-        res_df = tidyr::nest_(res_df, nest_col=c("seg_depth", "seg_measure"), key_col="segments")
-        return(res_df)
+        list(
+          layers = data.frame(
+            min_depth = z0,
+            nseg = sam_list[["nimax"]] + 1,
+            mld = sam_list[["by_s_m"]],
+            cline = cline_calc(z_seg = sam_list[["smz"]], sigma_seg = sam_list[["sms"]])
+          ),
+          segments = data.frame(segment_depth = sam_list[["smz"]],
+                                segment_measure = sam_list[["sms"]])
+        )
       }
       else {
         sam_list = by_s_m3(nr = nseg - 1, z0 = z0, zmax = zmax, z = depth, sigma = measure)
-        res_df = data.frame(
-          min_depth = z0,
-          nseg = nseg,
-          mld = sam_list[["by_s_m"]],
-          cline = cline_calc(z_seg = sam_list[["smz"]], sigma_seg = sam_list[["sms"]]),
-          seg_depth = sam_list[["smz"]],
-          seg_measure = sam_list[["sms"]]
+        list(
+          layers = data.frame(
+            min_depth = z0,
+            nseg = nseg,
+            mld = sam_list[["by_s_m"]],
+            cline = cline_calc(z_seg = sam_list[["smz"]], sigma_seg = sam_list[["sms"]])
+          ),
+          segments = data.frame(segment_depth = sam_list[["smz"]],
+                                segment_measure = sam_list[["sms"]])
         )
-        res_df = tidyr::nest_(res_df, nest_col=c("seg_depth", "seg_measure"), key_col="segments")
-        return(res_df)
       }
   }
 
 
-#' @export
 #' @title Calculate cline of series of segments
 #' @param z_seg depth in metres; should be an increasing vector
 #' @param sigma_seg parameter measured in the water column profile

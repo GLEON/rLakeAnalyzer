@@ -21,13 +21,15 @@ wtr_layer(depth = depth, measure = measure, thres = 0.1, z0 = 2.5,
 \item{nseg}{optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment}
 }
 \value{
-a dataframe of nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures), and the segments calculated by the sm algorithm.
+a list of two dataframes. layers: nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures) and segments calculated by the sm algorithm.
 }
 \description{
 Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm. The cline is defined as the midpoint of the layer of water where the physical property change in the greatest over a small difference. The exact cline depends on the specification of measure. For example if temperature is specified,  then we can expect cline to output the thermocline.
 }
 \examples{
-wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
+df1 <- wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
+df1$layers
+df1$segments
 
 wtr_layer(depth=latesummer$depth, measure = latesummer$temper, nseg=4)
 
