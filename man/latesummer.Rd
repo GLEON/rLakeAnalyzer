@@ -5,9 +5,6 @@
 \alias{latesummer}
 \title{Late Summer Profile}
 \format{An object of class \code{data.frame} with 881 rows and 6 columns.}
-\source{
-Supplied
-}
 \usage{
 latesummer
 }
