@@ -1,4 +1,5 @@
 context("Testing wtr_layer")
+data("latesummer")
 
 test_that("Ensure that unconstrained and specified layer approach result in the same answer", {
   expect_equal(
