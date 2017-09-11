@@ -12,6 +12,7 @@
 
 #' @references Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
 #' @examples
+#' data("latesummer")
 #' df1 <- wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
 #' df1$mld
 #' df1$segments
