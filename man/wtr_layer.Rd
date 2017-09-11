@@ -10,9 +10,9 @@ wtr_layer(data, depth, measure, thres = 0.1, z0 = 2.5, zmax = 150,
 \arguments{
 \item{data}{data supplied as a bare (unquoted) value}
 
-\item{depth}{depth in metres; should be an increasing vector}
+\item{depth}{depth in metres; should be an increasing vector; supplied as a bare (unquoted) value}
 
-\item{measure}{parameter measured in the water column profile}
+\item{measure}{parameter measured in the water column profile; supplied as a bare (unquoted) value}
 
 \item{thres}{error norm; defaults to 0.1}
 
