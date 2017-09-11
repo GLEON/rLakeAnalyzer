@@ -11,7 +11,9 @@ Description: Standardized methods for calculating common important derived
 Imports:
     plyr
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 License: GPL (>= 2)
 Packaged: 2014-07-06 09:09:24 UTC; Luke
 Repository: https://github.com/GLEON/rLakeAnalyzer
