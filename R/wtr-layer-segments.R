@@ -99,8 +99,7 @@ wtr.layer <-
 #'  enough that you get small data groupings where the decreases a little while the boat heaves then go down. The overall
 #'  trend is still down but those slight upticks in depth cause problems for our algorithm.
 #' }
-#' @example
-#' depth.filter(z0=latesummer$depth)
+
 
 depth.filter <- function(z0, run_length=20, index = FALSE) {
   n_start <- length(z0)
