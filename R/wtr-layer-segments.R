@@ -1,16 +1,23 @@
 #' @export
 #' @title Exploration of lake water column layers
-#' @description  Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm. The cline is defined as the midpoint of the layer of water where the physical property change in the greatest over a small difference. The exact cline depends on the specification of measure. For example if temperature is specified,  then we can expect cline to output the thermocline.
+#' @description  Extract water column parameters of a given parameter from a profile using the split-and-merge algorithm.
+#'   The cline is defined as the midpoint of the layer of water where the physical property change in the greatest over a
+#'   small difference. The exact cline depends on the specification of measure. For example if temperature is specified,
+#'   then we can expect cline to output the thermocline.
 #' @param data data supplied as a bare (unquoted) value
 #' @param depth depth in metres; should be an increasing vector; supplied as a bare (unquoted) value
 #' @param measure parameter measured in the water column profile; supplied as a bare (unquoted) value
 #' @param thres error norm; defaults to 0.1
 #' @param z0 initial depth in metres. Defaults to 2.5m
 #' @param zmax maximum depth in metres: defaults to 150m
-#' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby the algorithm determines segmentations by minimzing the error norm over each segment
-#' @return a dataframes with a list column. This includes: nseg (number of segments), mld (mix layer depth), cline (the midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures) and segments calculated by the sm algorithm.
+#' @param nseg optional parameter to define the number of segments a priori; defaults to an unconstrained approach whereby
+#'   the algorithm determines segmentations by minimzing the error norm over each segment
+#' @return a dataframes with a list column. This includes: nseg (number of segments), mld (mix layer depth), cline (the
+#'   midpoint of the segment connecting inflection points that has the maximum slope; thermocline for temperature measures)
+#'   and segments calculated by the sm algorithm.
 
-#' @references Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
+#' @references Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of 
+#'   Atmospheric and Oceanic Technology. 20(2), 319-329.
 #' @examples
 #' data("latesummer")
 #' df1 <- wtr.layer(depth=latesummer$depth, measure = latesummer$temper)
@@ -82,12 +89,17 @@ wtr.layer <-
 #' @return index values of z0 of filtered data. Will return a warning if the function removed more than 10% of the data
 #' @description
 #' \itemize{
-#'  \item Soak period: water profiling instruments typically require a soak period where you let the instrument rest submerged at the surface. While it is "soaking" it is collecting data. We don't want that data
-#'  \item Upcast versus downcast: typically instruments are turned on before you put them in the water and turn them off once you pull them out. The data consequence of that is that you collect both the "downcast" and the "upcast". In some case the upcast is of interest but usually it isn't. And because we would prefer increasing depth data it is better to remove an upcast if it is present.
-#'  \item Heave: when lowering the instrument in rough weather a boat will heave side to side. Sometimes it will heave enough that you get small data groupings where the decreases a little while the boat heaves then go down. The overall trend is still down but those slight upticks in depth cause problems for our algorithm.
+#'  \item Soak period: water profiling instruments typically require a soak period where you let the instrument rest
+#'  submerged at the surface. While it is "soaking" it is collecting data. We don't want that data
+#'  \item Upcast versus downcast: typically instruments are turned on before you put them in the water and turn them off
+#'  once you pull them out. The data consequence of that is that you collect both the "downcast" and the "upcast". In some
+#'  case the upcast is of interest but usually it isn't. And because we would prefer increasing depth data it is better to
+#'  remove an upcast if it is present.
+#'  \item Heave: when lowering the instrument in rough weather a boat will heave side to side. Sometimes it will heave
+#'  enough that you get small data groupings where the decreases a little while the boat heaves then go down. The overall
+#'  trend is still down but those slight upticks in depth cause problems for our algorithm.
 #' }
 #'
-#' @keywords internal
 #' depth.filter(z0=latesummer$depth)
 
 depth.filter <- function(z0, run_length=20, index = FALSE) {
