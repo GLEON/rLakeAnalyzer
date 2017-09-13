@@ -1,17 +1,20 @@
 Package: rLakeAnalyzer
 Title: Lake Physics Tools
 Maintainer: Luke Winslow <lawinslow@gmail.com>
-Version: 1.9.1
+Version: 1.10.0
 Author: Luke Winslow, Jordan Read, Richard Woolway, Jennifer Brentrup, Taylor
-    Leach, Jake Zwart
+    Leach, Jake Zwart, Sam Albers, Doug Collinge
 Description: Standardized methods for calculating common important derived
     physical features of lakes including water density based based on
     temperature, thermal layers, thermocline depth, lake number, Wedderburn
     number, Schmidt stability and others.
+Depends: R (>= 2.10)    
 Imports:
     plyr
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 License: GPL (>= 2)
 Packaged: 2014-07-06 09:09:24 UTC; Luke
 Repository: https://github.com/GLEON/rLakeAnalyzer

@@ -7,6 +7,8 @@ export(wedderburn.number, layer.density, lake.number, uStar, water.density,
 	   schmidt.plot, center.buoyancy, ts.center.buoyancy, internal.energy, 
 			 ts.internal.energy, epi.temperature, hypo.temperature, whole.lake.temperature, 
 			 approx.bathy)
+export(depth.filter)
+export(wtr.layer)
 
 import("plyr")
 importFrom("grDevices", "colorRampPalette")
@@ -14,3 +16,6 @@ importFrom("graphics", "abline", "axis", "filled.contour", "legend",
            "lines", "plot", "segments", "title")
 importFrom("stats", "approx")
 importFrom("utils", "read.table")
+
+
+
