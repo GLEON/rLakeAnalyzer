@@ -29,5 +29,3 @@ index values of z0 of filtered data. Will return a warning if the function remov
  trend is still down but those slight upticks in depth cause problems for our algorithm.
 }
 }
-\keyword{depth.filter(z0=latesummer$depth)}
-\keyword{internal}
