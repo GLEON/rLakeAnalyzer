@@ -13,15 +13,15 @@
 #' @references Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
 #' @examples
 #' data("latesummer")
-#' df1 <- wtr_layer(depth=latesummer$depth, measure = latesummer$temper)
+#' df1 <- wtr.layer(depth=latesummer$depth, measure = latesummer$temper)
 #' df1$mld
 #' df1$segments
 #'
-#' wtr_layer(data = latesummer, depth=depth, measure = temper, nseg=4)
+#' wtr.layer(data = latesummer, depth=depth, measure = temper, nseg=4)
 #'
 
 
-wtr_layer <-
+wtr.layer <-
   function(data,
            depth,
            measure,
@@ -88,9 +88,9 @@ wtr_layer <-
 #' }
 #'
 #' @keywords internal
-#' depth_filter(z0=latesummer$depth)
+#' depth.filter(z0=latesummer$depth)
 
-depth_filter <- function(z0, run_length=20, index = FALSE) {
+depth.filter <- function(z0, run_length=20, index = FALSE) {
   n_start <- length(z0)
 
   ## REMOVES SOAK PERIOD
