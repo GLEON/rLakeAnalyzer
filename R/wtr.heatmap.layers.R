@@ -1,4 +1,39 @@
 #heat map with lines for thermocline, meta top and bottom depths
+
+
+#' Plots water temperature heatmap with major limnetic layers indicated
+#' 
+#' This creates a heat map of water temperature similar to
+#' \code{\link{wtr.heat.map}} with additional lines drawn to denote the
+#' thermocline, and the top and bottom of the metalimnion as calculated using
+#' \code{\link{ts.meta.depths}} and \code{\link{thermo.depth}}.
+#' 
+#' 
+#' @param wtr Data frame of water temperature loaded with
+#' \code{\link{load.ts}}.
+#' @param \dots Additional parameters supplied to \code{\link{filled.contour}}
+#' to modify defaults.  Common examples include \code{zlim} and
+#' \code{plot.title}.
+#' @note This plot cannot be used in customized multi-panel figures
+#' using\code{\link{layout}} as layout is already used in the filled.contour
+#' plotting function.
+#' @author Jennifer Brentrup, Luke Winslow and Taylor Leach
+#' @seealso \code{\link{wtr.heat.map}} \code{\link{load.ts}}
+#' \code{\link{ts.meta.depths}} \code{\link{ts.thermo.depth}}
+#' @keywords hplot
+#' @examples
+#' 
+#'   #Get the path for the package example file included 
+#'   wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+#' 
+#'   #Load data for example lake, Sparkilng Lake, Wisconsin.
+#'   wtr = load.ts(wtr.path)
+#'   
+#'   # generate default plot
+#'   \dontrun{
+#'   wtr.heatmap.layers(wtr)
+#'   }
+#' @export
 wtr.heatmap.layers <- function(wtr, ...){
   
   td = ts.thermo.depth(wtr)

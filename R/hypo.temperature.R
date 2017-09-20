@@ -1,17 +1,18 @@
-#' @title Get volumetrically averaged hypolimnion temp
+#' Get volumetrically averaged hypolimnion temp
 #' 
-#' @description Calculates volumetrically weighted average hypolimnetic temperature using
-#' the supplied water temperature timeseries. If the lake is not stratified, an NA
-#' value is returned. 
-#'
+#' Calculates volumetrically weighted average hypolimnetic temperature using
+#' the supplied water temperature timeseries. If the lake is not stratified, an
+#' NA value is returned.
+#' 
+#' 
 #' @param wtr a numeric vector of water temperature in degrees C.
-#' @param depths a numeric vector corresponding to the depths (in m) of the wtr measurements
-#' @param bthA a numeric vector of cross sectional areas (m^2) corresponding to bthD depths
-#' @param bthD a numeric vector of depths (m) which correspond to areal measures in bthA
-#'
-#'
+#' @param depths a numeric vector corresponding to the depths (in m) of the wtr
+#' measurements
+#' @param bthA a numeric vector of cross sectional areas (m^2) corresponding to
+#' bthD depths
+#' @param bthD a numeric vector of depths (m) which correspond to areal
+#' measures in bthA
 #' @seealso \code{\link{epi.temperature}}, \code{\link{whole.lake.temperature}}
-#'
 #' @export
 hypo.temperature <- function(wtr, depths, bthA, bthD){
 	

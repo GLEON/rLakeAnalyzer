@@ -1,4 +1,3 @@
-
 #' @title Estimate hypsography curve
 #' 
 #' @description Estimates a depth-area curve for a lake using lake surface area, 

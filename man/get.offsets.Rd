@@ -10,16 +10,18 @@ get.offsets(data)
 \item{data}{Data frame returned from \code{\link{load.ts}}.}
 }
 \value{
-A numeric vector of depth values. Should be the \code{ncol(data) - 1} 
-in length as the first column contains date/time data.
+A numeric vector of depth values. Should be the \code{ncol(data) -
+1} in length as the first column contains date/time data.
 }
 \description{
-Extracts the depth information from a data frame containing multi-depth observation data.
-Relies on the format of the header to get information and may fail if your file format is incorrect.
-Please follow 'VAR_##.#' format, where ##.# is the depth of data for that column. VAR is typically
-'wtr' to indicate water temperature.
+Extracts the depth information from a data frame containing multi-depth
+observation data. Relies on the format of the header to get information and
+may fail if your file format is incorrect. Please follow 'VAR_##.#' format,
+where ##.# is the depth of data for that column. VAR is typically 'wtr' to
+indicate water temperature.
 }
 \examples{
+
 
 #Get the path for the package example file included
 exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
@@ -31,7 +33,6 @@ sparkling.temp = load.ts(exampleFilePath)
 depths = get.offsets(sparkling.temp)
 
 print(depths)
-
 }
 \seealso{
 \code{\link{load.ts}}
