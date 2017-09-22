@@ -7,8 +7,4 @@
 #' @docType package
 #' @name tidyhydat
 #' 
-#' @importFrom grDevices colorRampPalette
-#' @importFrom graphics abline axis filled.contour legend lines plot segments title
-#' @importFrom stats approx
-#' @importFrom utils read.table
 NULL

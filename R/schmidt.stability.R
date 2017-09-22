@@ -91,7 +91,7 @@ schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
   		depT = c(0, bthD[useI])
   	}
   	
-  	bthA = approx(bthD, bthA, depT)$y
+  	bthA = stats::approx(bthD, bthA, depT)$y
   	bthD = depT
   }
   
@@ -124,8 +124,8 @@ schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
   
   #The approx (interp1 in matlab) just does linear interpolation
   layerD = seq(min(depths), max(depths), by=dz)
-  layerP = approx(depths, rhoL, layerD)$y
-  layerA = approx(bthD, bthA, layerD)$y
+  layerP = stats::approx(depths, rhoL, layerD)$y
+  layerA = stats::approx(bthD, bthA, layerD)$y
   
   Zcv <- layerD %*% layerA / sum(layerA)
   St <- layerP %*% ((layerD - as.vector(Zcv)) * layerA) * dz * g / Ao

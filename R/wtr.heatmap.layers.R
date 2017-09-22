@@ -82,7 +82,7 @@ wtr.heatmap.layers <- function(wtr, ...){
   }
   
   df = list(wtr,td,md) ##Create list of data frame to join
-  wtr.all = join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
+  wtr.all = plyr::join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
   nn = ncol(wtr.all) -3
   depths = get.offsets(wtr.all[,2:nn])
   
@@ -95,22 +95,24 @@ wtr.heatmap.layers <- function(wtr, ...){
   
   y = depths
   
-  filled.contour(wtr.dates
+  graphics::filled.contour(wtr.dates
                  , y
                  , wtr.mat
                  , ylim=c(max(depths),0)
                  , zlim=c(min(wtr.mat,na.rm=TRUE) , max(wtr.mat,na.rm=TRUE))
                  , nlevels=100
-                 , color.palette=colorRampPalette(c("violet","blue","cyan", "green3", "yellow", "orange", "red")
+                 , color.palette = grDevices::colorRampPalette(c("violet","blue","cyan", "green3", "yellow", "orange", "red")
                                                   , bias = 1
                                                   , space = "rgb")
                  , ylab="Depth (m)"
-                 , key.title=title((main="Temperature (\u00B0C)")
+                 , key.title=graphics::title((main="Temperature (\u00B0C)")
                                    ,adj=0.2, cex.main=1)
-                 ,plot.axes = {lines(x=wtr.dates,y=wtr.all$thermo.depth,col="black",lwd = 2)
-                               lines(x=wtr.dates,y=wtr.all$top, col="gray50", lwd = 2)
-                               lines(x=wtr.dates,y=wtr.all$bottom,col="gray80", lwd = 2)
-                               axis(side = 2)
-                               axis(side = 3, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(depths)), tck = -0.03)})
+                 ,plot.axes = {graphics::lines(x=wtr.dates,y=wtr.all$thermo.depth,col="black",lwd = 2)
+                               graphics::lines(x=wtr.dates,y=wtr.all$top, col="gray50", lwd = 2)
+                               graphics::lines(x=wtr.dates,y=wtr.all$bottom,col="gray80", lwd = 2)
+                               graphics::axis(side = 2)
+                               graphics::axis(side = 3, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(depths)), tck = -0.03)})
+  
+  
   
 }

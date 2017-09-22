@@ -80,7 +80,7 @@ schmidt.plot = function(wtr,bth){
     xxlab <- " "
   }
   
-  plot(ss[,2]~ss[,1],
+  graphics::plot(ss[,2]~ss[,1],
        type='l',
        lwd = 2,
        col="black",
@@ -92,11 +92,11 @@ schmidt.plot = function(wtr,bth){
   )
   
   # x axis
-  axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(ss[,2],na.rm=TRUE)), tck = -0.03)
-  segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(endtime),c(min(ss[,2],na.rm=TRUE)), col = "black", lty = 1)
+  graphics::axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(ss[,2],na.rm=TRUE)), tck = -0.03)
+  graphics::segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(endtime),c(min(ss[,2],na.rm=TRUE)), col = "black", lty = 1)
   
   # y axis
-  axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
-  segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(starttime),c(max(ss[,2],na.rm=TRUE)), col = "black")
+  graphics::axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
+  graphics::segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(starttime),c(max(ss[,2],na.rm=TRUE)), col = "black")
   
 }

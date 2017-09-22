@@ -85,7 +85,7 @@ lake.number.plot = function(wtr,wnd,wh,bth){
     xxlab <- " "
   }
   
-  plot(ln[,2]~ln[,1],
+  graphics::plot(ln[,2]~ln[,1],
        type='l',
        lwd = 2,
        col="black",
@@ -97,12 +97,12 @@ lake.number.plot = function(wtr,wnd,wh,bth){
   )
   
   # x axis
-  axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(ln[,2],na.rm=TRUE)), tck = -0.03)
+  graphics::axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(ln[,2],na.rm=TRUE)), tck = -0.03)
   segments(c(starttime),c(min(ln[,2],na.rm=TRUE)),c(endtime),c(min(ln[,2],na.rm=TRUE)), col = "black", lty = 1)
   
   
   # y axis
-  axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
+  graphics::axis(side  = 2, pos = c(starttime), at = NULL, las = 1)
   segments(c(starttime),c(min(ln[,2],na.rm=TRUE)),c(starttime),c(max(ln[,2],na.rm=TRUE)), col = "black")
   
 }

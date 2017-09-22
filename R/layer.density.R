@@ -69,7 +69,7 @@ layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
     }else{
       depT <- bthD[useI]
     }
-    bthA <- approx(bthD,bthA,depT)$y
+    bthA <- stats::approx(bthD,bthA,depT)$y
     bthD <- depT
   }
   
@@ -98,9 +98,9 @@ layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
   
   # iterpolate the bathymetry data 
   layerD <- seq(top,bottom,dz)
-  layerT <- approx(depths,wtr,layerD)$y
-  layerS <- approx(depths,sal,layerD)$y
-  layerA <- approx(bthD,bthA,layerD)$y
+  layerT <- stats::approx(depths,wtr,layerD)$y
+  layerS <- stats::approx(depths,sal,layerD)$y
+  layerA <- stats::approx(bthD,bthA,layerD)$y
   layerP <- water.density(layerT,layerS)
   
   mass <- layerA*layerP*dz
