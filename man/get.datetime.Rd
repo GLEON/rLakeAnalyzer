@@ -2,9 +2,7 @@
 % Please edit documentation in R/helper.functions.R
 \name{get.datetime}
 \alias{get.datetime}
-\title{Search for and return the datetime column from a ts data.frame
-
-Warns if unavailable then returns NULL.}
+\title{Search for and return the datetime column from a ts data.frame}
 \usage{
 get.datetime(data, error = FALSE)
 }
@@ -12,4 +10,7 @@ get.datetime(data, error = FALSE)
 \item{data}{data arg}
 
 \item{error}{defaults to FALSE}
+}
+\description{
+Warns if unavailable then returns NULL.
 }

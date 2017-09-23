@@ -109,7 +109,7 @@ drop.datetime = function(data, error=FALSE){
 
 #' @title Search for and return the datetime column from a ts data.frame
 #'
-#' Warns if unavailable then returns NULL.
+#' @description Warns if unavailable then returns NULL.
 #' 
 #' @inheritParams drop.datetime
 #'
