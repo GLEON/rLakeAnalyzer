@@ -5,6 +5,6 @@
 #' temperature, thermal layers, thermocline depth, lake number, Wedderburn
 #' number, Schmidt stability and others.
 #' @docType package
-#' @name tidyhydat
+#' @name rLakeAnalyzer
 #' 
 NULL
