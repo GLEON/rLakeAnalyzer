@@ -32,27 +32,6 @@ These are wrapper functions that accept a timeseries of data and call the
 core physical metric functions (like \code{\link{schmidt.stability}}) on
 each timestep.
 }
-\examples{
-
-	#Get the path for the package example file included
-	exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
-	
-	#Load
-	sparkling.temp = load.ts(exampleFilePath)
-	
-	#calculate and plot the metalimnion depths
-	m.d = ts.meta.depths(sparkling.temp)
-	
-	plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
-	lines(m.d$datetime, m.d$bottom, col='red')
-  
-  
-  #calculate and plot the thermocline depth
-	t.d = ts.thermo.depth(sparkling.temp)
-	
-	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-  
-}
 \seealso{
 For loading input data \code{\link{load.ts}},
 \code{\link{load.bathy}}.

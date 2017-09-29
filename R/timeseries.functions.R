@@ -46,12 +46,8 @@
 #' 	lines(m.d$datetime, m.d$bottom, col='red')
 #'   
 #'   
-#'   #calculate and plot the thermocline depth
-#' 	t.d = ts.thermo.depth(sparkling.temp)
-#' 	
-#' 	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-#'   
 #' @export
+
 ts.meta.depths <- function(wtr, slope=0.1, na.rm=FALSE, ...){
   
   depths = get.offsets(wtr)
@@ -191,26 +187,6 @@ ts.thermo.depth <- function(wtr, Smin = 0.1, na.rm=FALSE, ...){
 #' \code{\link{schmidt.stability}}, \code{\link{lake.number}},
 #' \code{\link{internal.energy}}.
 #' @keywords manip
-#' @examples
-#' 
-#' 	#Get the path for the package example file included
-#' 	exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
-#' 	
-#' 	#Load
-#' 	sparkling.temp = load.ts(exampleFilePath)
-#' 	
-#' 	#calculate and plot the metalimnion depths
-#' 	m.d = ts.meta.depths(sparkling.temp)
-#' 	
-#' 	plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
-#' 	lines(m.d$datetime, m.d$bottom, col='red')
-#'   
-#'   
-#'   #calculate and plot the thermocline depth
-#' 	t.d = ts.thermo.depth(sparkling.temp)
-#' 	
-#' 	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-#'   
 #' @export
 ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
 	
@@ -281,26 +257,6 @@ ts.schmidt.stability <- function(wtr, bathy, na.rm=FALSE){
 #' \code{\link{schmidt.stability}}, \code{\link{lake.number}},
 #' \code{\link{internal.energy}}.
 #' @keywords manip
-#' @examples
-#' 
-#' 	#Get the path for the package example file included
-#' 	exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
-#' 	
-#' 	#Load
-#' 	sparkling.temp = load.ts(exampleFilePath)
-#' 	
-#' 	#calculate and plot the metalimnion depths
-#' 	m.d = ts.meta.depths(sparkling.temp)
-#' 	
-#' 	plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
-#' 	lines(m.d$datetime, m.d$bottom, col='red')
-#'   
-#'   
-#'   #calculate and plot the thermocline depth
-#' 	t.d = ts.thermo.depth(sparkling.temp)
-#' 	
-#' 	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-#'   
 #' @export
 #' 
 
@@ -383,26 +339,6 @@ ts.lake.number <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 #' \code{\link{schmidt.stability}}, \code{\link{lake.number}},
 #' \code{\link{internal.energy}}.
 #' @keywords manip
-#' @examples
-#' 
-#' 	#Get the path for the package example file included
-#' 	exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
-#' 	
-#' 	#Load
-#' 	sparkling.temp = load.ts(exampleFilePath)
-#' 	
-#' 	#calculate and plot the metalimnion depths
-#' 	m.d = ts.meta.depths(sparkling.temp)
-#' 	
-#' 	plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
-#' 	lines(m.d$datetime, m.d$bottom, col='red')
-#'   
-#'   
-#'   #calculate and plot the thermocline depth
-#' 	t.d = ts.thermo.depth(sparkling.temp)
-#' 	
-#' 	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-#'   
 #' @export
 ts.uStar <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 	
@@ -668,26 +604,6 @@ ts.layer.temperature <- function(wtr, top, bottom, bathy, na.rm=FALSE){
 #' \code{\link{schmidt.stability}}, \code{\link{lake.number}},
 #' \code{\link{internal.energy}}.
 #' @keywords manip
-#' @examples
-#' 
-#' 	#Get the path for the package example file included
-#' 	exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
-#' 	
-#' 	#Load
-#' 	sparkling.temp = load.ts(exampleFilePath)
-#' 	
-#' 	#calculate and plot the metalimnion depths
-#' 	m.d = ts.meta.depths(sparkling.temp)
-#' 	
-#' 	plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
-#' 	lines(m.d$datetime, m.d$bottom, col='red')
-#'   
-#'   
-#'   #calculate and plot the thermocline depth
-#' 	t.d = ts.thermo.depth(sparkling.temp)
-#' 	
-#' 	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-#'   
 #' @export
 ts.internal.energy <- function(wtr, bathy, na.rm=FALSE){
 	

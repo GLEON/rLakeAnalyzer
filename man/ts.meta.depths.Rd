@@ -50,11 +50,6 @@ each timestep.
 	lines(m.d$datetime, m.d$bottom, col='red')
   
   
-  #calculate and plot the thermocline depth
-	t.d = ts.thermo.depth(sparkling.temp)
-	
-	plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
-  
 }
 \seealso{
 For loading input data \code{\link{load.ts}},
