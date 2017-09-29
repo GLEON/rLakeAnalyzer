@@ -1,13 +1,6 @@
-## Helper functions for Lake Analyzer R
-
-datetime.pattern = "(datetime|timestamp|time|date)"
-
-
-
-
-#' Gets depths from data frame containing profile info.
+#' @title Gets depths from data frame containing profile info.
 #' 
-#' Extracts the depth information from a data frame containing multi-depth
+#' @description Extracts the depth information from a data frame containing multi-depth
 #' observation data. Relies on the format of the header to get information and
 #' may fail if your file format is incorrect. Please follow 'VAR_##.#' format,
 #' where ##.# is the depth of data for that column. VAR is typically 'wtr' to
@@ -88,6 +81,7 @@ get.drho_dz <- function(wtr, depths){
 #' @return A data.frame with only the data, after datetime has been dropped
 
 drop.datetime = function(data, error=FALSE){
+  datetime.pattern = "(datetime|timestamp|time|date)"
 	
 	header = names(data)
 	dt_indx = grep(datetime.pattern, header, ignore.case=TRUE)
@@ -114,6 +108,7 @@ drop.datetime = function(data, error=FALSE){
 #' @inheritParams drop.datetime
 #'
 get.datetime = function(data, error=FALSE){
+  datetime.pattern = "(datetime|timestamp|time|date)"
 	
 	header = names(data)
 	dt_indx = grep(datetime.pattern, header, ignore.case=TRUE)

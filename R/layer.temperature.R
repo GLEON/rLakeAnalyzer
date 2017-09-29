@@ -1,18 +1,3 @@
-# ---Author: Jordan Read, 2013-07-26 ---
-# translated from Matlab Script - Author Jordan Read, 2013 
-## from layertemperature.m in https://github.com/GLEON/Lake-Analyzer/
-#
-# top: surface to top of layer
-# bottom: surface to bottom of layer
-# wtr: water temperature in celsius  
-# depths: water depth values in meters 
-# bthA: bathymetry area in meters squared 
-# bthD: bathymetry depths in meters 
-#
-# OUTPUT: returns the average average water density of lake layer (i.e. average epilimnion density)
-
-
-
 #' Returns the average temperature of a layer between two depths.
 #' 
 #' This function calculates the average temperature of a layer of water between
@@ -31,7 +16,6 @@
 #' @param bthD Numeric vector of water body bathymetric depths (m)
 #' corresponding to areal bthA values
 #' @return Numeric value of average water temperature
-#' @author Jordan Read
 #' @seealso \code{layer.density}
 #' @keywords manip
 #' @examples

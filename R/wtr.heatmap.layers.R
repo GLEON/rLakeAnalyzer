@@ -1,9 +1,6 @@
-#heat map with lines for thermocline, meta top and bottom depths
-
-
-#' Plots water temperature heatmap with major limnetic layers indicated
+#' @title Plots water temperature heatmap with major limnetic layers indicated
 #' 
-#' This creates a heat map of water temperature similar to
+#' @description This creates a heat map of water temperature similar to
 #' \code{\link{wtr.heat.map}} with additional lines drawn to denote the
 #' thermocline, and the top and bottom of the metalimnion as calculated using
 #' \code{\link{ts.meta.depths}} and \code{\link{thermo.depth}}.
@@ -17,7 +14,6 @@
 #' @note This plot cannot be used in customized multi-panel figures
 #' using\code{\link{layout}} as layout is already used in the filled.contour
 #' plotting function.
-#' @author Jennifer Brentrup, Luke Winslow and Taylor Leach
 #' @seealso \code{\link{wtr.heat.map}} \code{\link{load.ts}}
 #' \code{\link{ts.meta.depths}} \code{\link{ts.thermo.depth}}
 #' @keywords hplot

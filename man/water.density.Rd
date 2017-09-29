@@ -32,7 +32,4 @@ Millero, F.J., Poisson, A., 1981. \emph{International one-atmosphere
 equation of state of seawater.} UNESCO Technical Papers in Marine Science.
 No. 36.
 }
-\author{
-R. Iestyn. Woolway, Luke Winslow
-}
 \keyword{arith}

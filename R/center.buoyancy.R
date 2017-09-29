@@ -1,12 +1,6 @@
-#
-# Center of Buoyancy Frequency
-# Author: Jordan S Read <jread@usgs.gov>
-#
-
-
-#' Calculates the center of buoyancy.
+#' @title Calculates the center of buoyancy.
 #' 
-#' Calculate the center of buoyancy using buoyancy frequency with a center of
+#' @description Calculate the center of buoyancy using buoyancy frequency with a center of
 #' mass analysis. Brunt-Vaisala frequency is used for a temperature profile.
 #' Negative values for N2 are set to 0 (as they represent transient
 #' instabilities or sensor calibration issues) for this calculation.
@@ -16,7 +10,6 @@
 #' @param depths a numeric vector corresponding to the depths (in m) of the wtr
 #' measurements
 #' @return Returns a value for the center of buoyancy.
-#' @author Jordan S Read
 #' @seealso \code{buoyancy.freq}, \code{ts.buoyancy.freq},
 #' \code{center.buoyancy}
 #' @keywords arith
@@ -57,9 +50,9 @@ center.buoyancy <- function(wtr, depths){
 
 
 
-#' Calculates the center of buoyancy for multiple temperature profiles.
+#' @title Calculates the center of buoyancy for multiple temperature profiles.
 #' 
-#' Function for simplifying the calculation of the center of buoyancy. Can
+#' @description Function for simplifying the calculation of the center of buoyancy. Can
 #' usually be called directly on data loaded directly using
 #' \code{\link{load.ts}} and \code{\link{load.bathy}}.
 #' 
@@ -71,7 +64,6 @@ center.buoyancy <- function(wtr, depths){
 #' true, best effort will be made to calculate indices despite NA values.
 #' @return Returns a data frame with the timeseries of the center of buoyancy
 #' frequency. Includes a \sQuote{datetime} column.
-#' @author Jordan S Read
 #' @seealso \code{center.buoyancy}, \code{load.bathy}, \code{load.ts}
 #' @references Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}.
 #' Advances in Applied Mechanics 27, 353-370.

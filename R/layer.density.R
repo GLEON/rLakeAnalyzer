@@ -1,22 +1,6 @@
-# ---Author: Jake Zwart, 2013-04-21 ---
-# translated from Matlab Script - Author Jordan Read, 2009 
-## from layerDensity.m in https://github.com/jread-usgs/Lake-Analyzer/
-#
-# top: surface to top of layer
-# bottom: surface to bottom of layer
-# wtr: water temperature in celsius  
-# depths: water depth values in meters 
-# bthA: bathymetry area in meters squared 
-# bthD: bathymetry depths in meters 
-# sal: salinity in Pratical Salinity Scale units (dimensionless)
-#
-# OUTPUT: returns the average average water density of lake layer (i.e. average epilimnion density)
-
-
-
-#' Returns the average density of a layer between two depths.
+#' @title Returns the average density of a layer between two depths.
 #' 
-#' This function calculates the average density of a layer of water between two
+#' @description This function calculates the average density of a layer of water between two
 #' depths.
 #' 
 #' 
@@ -35,7 +19,6 @@
 #' corresponding to water temperature vector. If left blank, salinity is set to
 #' be zero
 #' @return Numeric value of average water density for bounded layer in kg/m^3
-#' @author Jake Zwart
 #' @seealso \code{water.density}
 #' @keywords manip
 #' @examples

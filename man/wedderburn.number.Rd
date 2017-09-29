@@ -53,7 +53,4 @@ Advances in Applied Mechanics 27, 353-370.
 \seealso{
 \code{\link{ts.wedderburn.number}} \code{\link{lake.number}}
 }
-\author{
-Jake Zwart
-}
 \keyword{arith}

@@ -402,7 +402,6 @@ ts.uStar <- function(wtr, wnd, wnd.height, bathy, seasonal=TRUE){
 #' calculation.
 #' @return Returns a data frame with the timeseries of Wedderburn number.
 #' Includes a \sQuote{datetime} column.
-#' @author Luke Winslow
 #' @seealso \code{wedderburn.number},\code{ts.lake.number}
 #' @references Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}.
 #' Advances in Applied Mechanics 27, 353-370.
@@ -504,7 +503,6 @@ ts.wedderburn.number <- function(wtr, wnd, wnd.height, bathy, Ao, seasonal=TRUE)
 #' true, best effort will be made to calculate indices despite NA values.
 #' @return Returns a data frame with the timeseries of the average layer
 #' temperature. Includes \sQuote{datetime} and \sQuote{layer.temp} columns.
-#' @author Luke Winslow
 #' @seealso \code{layer.temperature}
 #' @keywords arith
 #' @examples

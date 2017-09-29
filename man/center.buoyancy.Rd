@@ -39,7 +39,4 @@ instabilities or sensor calibration issues) for this calculation.
 \code{buoyancy.freq}, \code{ts.buoyancy.freq},
 \code{center.buoyancy}
 }
-\author{
-Jordan S Read
-}
 \keyword{arith}

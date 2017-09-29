@@ -30,7 +30,4 @@ wtr.lineseries(wtr, ylab = "Temperature C")
 \seealso{
 See \code{\link{load.ts}} and \code{\link{wtr.heat.map}}
 }
-\author{
-Taylor Leach, Luke Winslow
-}
 \keyword{hplot}

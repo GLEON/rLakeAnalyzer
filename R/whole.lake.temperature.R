@@ -1,6 +1,6 @@
-#' Get volumetrically averaged whole lake temperature
+#' @title Get volumetrically averaged whole lake temperature
 #' 
-#' Calculates volumetrically weighted average whole lake temperature using the
+#' @description Calculates volumetrically weighted average whole lake temperature using the
 #' supplied water temperature timeseries.
 #' 
 #' 

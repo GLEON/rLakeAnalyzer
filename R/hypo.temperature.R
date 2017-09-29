@@ -1,6 +1,6 @@
-#' Get volumetrically averaged hypolimnion temp
+#' @title Get volumetrically averaged hypolimnion temp
 #' 
-#' Calculates volumetrically weighted average hypolimnetic temperature using
+#' @description Calculates volumetrically weighted average hypolimnetic temperature using
 #' the supplied water temperature timeseries. If the lake is not stratified, an
 #' NA value is returned.
 #' 

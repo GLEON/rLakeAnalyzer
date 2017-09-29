@@ -24,8 +24,7 @@ internal energy in Joules m-2. (Currently not vectorized..)
 \description{
 Calculates the internal energy of the water column with temperature and
 hypsography
-}
-\details{
+
 Internal energy is the thermal energy in the water column, which is
 calculated by multiplying the specific heat of water (J kg-1 K-1) by the
 temperature and mass of the water in the lake.
@@ -40,7 +39,4 @@ depths	<-	c(0,1,2,3,4,5,6)
 
 cat('Internal Energy for input is: ')
 cat(internal.energy(wtr, depths, bthA, bthD))
-}
-\author{
-Jordan S. Read
 }

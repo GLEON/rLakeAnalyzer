@@ -60,7 +60,4 @@ Advances in Applied Mechanics 27, 353-370.
 \seealso{
 \code{wedderburn.number},\code{ts.lake.number}
 }
-\author{
-Luke Winslow
-}
 \keyword{arith}

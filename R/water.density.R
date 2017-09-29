@@ -1,22 +1,11 @@
-# T is in ?C
-# S is in Pratical Salinity Scale units (dimensionless)
-# water.density is in grams/Liter
-
-# <<--- Effective range of function: 0-40?C, 0.5-43 Salinity--->>
-
-# -- Author: R. Iestyn. Woolway ----
-
-
-
-#' Estimate Water Density
+#' @title Estimate Water Density
 #' 
-#' Density of water from temperature and salinity
+#' @description Density of water from temperature and salinity
 #' 
 #' 
 #' @param wtr a numeric vector of water temperature in degrees Celsius
 #' @param sal a numeric vector of salinity in Practical Salinity Scale units
 #' @return A numeric vector of water densities in kg/m^3.
-#' @author R. Iestyn. Woolway, Luke Winslow
 #' @references Martin, J.L., McCutcheon, S.C., 1999. \emph{Hydrodynamics and
 #' Transport for Water Quality Modeling.} Lewis Publications, Boca Raton, FL,
 #' 794pp.

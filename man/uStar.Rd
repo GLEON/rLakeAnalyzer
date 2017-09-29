@@ -51,7 +51,4 @@ Oceanography 30: 737-770.
 \seealso{
 \code{\link{ts.uStar}} \code{\link{layer.density}}
 }
-\author{
-R. Iestyn. Woolway
-}
 \keyword{manip}

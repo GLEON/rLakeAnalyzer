@@ -1,6 +1,6 @@
-#' Creates a line based plot of temperature profile time series
+#' @title Creates a line based plot of temperature profile time series
 #' 
-#' A non-heat map approach to visualizing a water temperature profile useful
+#' @description A non-heat map approach to visualizing a water temperature profile useful
 #' for identify temperature trends over time at discrete depths and diagnosing
 #' issues with data.
 #' 
@@ -9,7 +9,6 @@
 #' \code{\link{load.ts}}.
 #' @param ylab y axis title
 #' @param \dots Additional parameters supplied to the plot function
-#' @author Taylor Leach, Luke Winslow
 #' @seealso See \code{\link{load.ts}} and \code{\link{wtr.heat.map}}
 #' @keywords hplot
 #' @examples

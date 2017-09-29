@@ -1,17 +1,12 @@
-## Data load functions
-
-
-
-#' Import lake bathymetry data.
+#' @title Import lake bathymetry data.
 #' 
-#' Imports lake bathymetry data. Bathymetric data file must be a 2 column array
+#' @description Imports lake bathymetry data. Bathymetric data file must be a 2 column array
 #' where depth (in meters) and area (in meters^2) information are provided in
 #' columns with headers containing the words "depths" and "areas" respectively.
 #' 
 #' 
 #' @param fPath File path to the bathymetry file.
 #' @return data.frame of depth and area for given lake.
-#' @author Luke Winslow
 #' @seealso \code{\link{load.ts}}
 #' @keywords file
 #' @examples
@@ -57,9 +52,9 @@ load.bathy <- function(fPath){
 
 
 
-#' Load timeseries from properly formatted text file.
+#' @title Load timeseries from properly formatted text file.
 #' 
-#' A convenience function to load timeseries data into R based on the
+#' @description A convenience function to load timeseries data into R based on the
 #' standardized format used by Lake Analyzer.
 #' 
 #' Timeseries files must follow a common format. The first column must have the
@@ -73,7 +68,6 @@ load.bathy <- function(fPath){
 #' timezone support is specifically required.
 #' @return A data frame in the required format for use with other rLakeAnalyzer
 #' timeseries functions.
-#' @author Luke Winslow
 #' @seealso For dataloading \code{\link{ts.meta.depths}}, \cr For analyzing
 #' timeseries data, see \code{\link{ts.meta.depths}},
 #' \code{\link{ts.thermo.depth}}, \code{\link{ts.schmidt.stability}},

@@ -54,7 +54,4 @@ Advances in Applied Mechanics 27, 353-370.
 \seealso{
 \code{buoyancy.freq}
 }
-\author{
-Luke Winslow
-}
 \keyword{arith}

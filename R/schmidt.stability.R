@@ -1,23 +1,6 @@
-### R Lake Analyzer
-# Author: J. Brentrup May 2013
-# Sources: Iso, S.B. 1973. On the concept of lake stability. Limnol. and Oceanogr. 18: 683-681.
-# J.S. Read - Matlab code 2009 (Adapted)
-
-### Equation: St = (g/A0)*[Integral from 0 to zm:(z-zp)*pz*Az*dz]
-#St = Schmidt stability
-#g = gravity (9.81 m/s2)
-#A0 = surface area
-#z = depth
-#zm = max. depth
-#zp = mean density - uses Richard's function water.density.R
-#pz = observed denisty at depth z
-#Az = area at depth z
-
-
-
-#' Calculate the Schmidt stability
+#' @title Calculate the Schmidt stability
 #' 
-#' Schmidt stability, or the resistance to mechanical mixing due to the
+#' @description Schmidt stability, or the resistance to mechanical mixing due to the
 #' potential energy inherent in the stratification of the water column.
 #' 
 #' Schmidt stability was first defined by Schmidt (1928) and later modified by
@@ -34,7 +17,6 @@
 #' measures in bthA
 #' @param sal a numeric vector of salinity in Practical Salinity Scale units
 #' @return a numeric vector of Schmidt stability (J/m^2)
-#' @author Luke Winslow
 #' @seealso \code{\link{ts.schmidt.stability}} \code{\link{lake.number}}
 #' \code{\link{wedderburn.number}}
 #' @references Schmidt, W., 1928. \emph{Ueber Temperatur and

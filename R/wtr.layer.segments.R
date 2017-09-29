@@ -1,6 +1,6 @@
-#' Exploration of lake water column layers
+#' @title Exploration of lake water column layers
 #' 
-#' Extract water column parameters of a given parameter from a profile using
+#' @description Extract water column parameters of a given parameter from a profile using
 #' the split-and-merge algorithm.  The cline is defined as the midpoint of the
 #' layer of water where the physical property change in the greatest over a
 #' small difference. The exact cline depends on the specification of measure.
@@ -90,9 +90,9 @@ wtr.layer <-
   }
 
 
-#' Data filter to remove soak, heave and upcast
+#' @title Data filter to remove soak, heave and upcast
 #' 
-#' \itemize{ \item Soak period: water profiling instruments typically require a
+#' @description \itemize{ \item Soak period: water profiling instruments typically require a
 #' soak period where you let the instrument rest submerged at the surface.
 #' While it is "soaking" it is collecting data. We don't want that data \item
 #' Upcast versus downcast: typically instruments are turned on before you put

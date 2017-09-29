@@ -56,7 +56,4 @@ wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42,
 \seealso{
 \code{\link{ts.thermo.depth}}, \code{water.density}
 }
-\author{
-Luke Winslow
-}
 \keyword{manip}

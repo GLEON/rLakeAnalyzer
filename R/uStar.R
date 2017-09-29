@@ -1,14 +1,6 @@
-# wndSpeed: wind speed in m/s
-# wndHeight: height of wind measurement in m
-# averageEpiDense: average epilimnion density in kg m-3
-
-#----Author: R. Iestyn. Woolway ----
-  
-
-
-#' Calculates the water friction velocity, uStar
+#' @title Calculates the water friction velocity, uStar
 #' 
-#' uStar is the water friction velocity due to wind stress at the lake surface,
+#' @description uStar is the water friction velocity due to wind stress at the lake surface,
 #' it is calculated following the methods of Imberger (1985) as a function of
 #' the shear stress of air (Fischer et al., 1979), drag coefficient for
 #' momentum (Hicks, 1972), and a dimensionless constant (von Karman constant)
@@ -19,7 +11,6 @@
 #' @param wndHeight a numeric vector of wind measurement height in m
 #' @param averageEpiDense a numeric vector of epilimnion density in kg m-3
 #' @return a numeric vector of uStar
-#' @author R. Iestyn. Woolway
 #' @seealso \code{\link{ts.uStar}} \code{\link{layer.density}}
 #' @references
 #' 

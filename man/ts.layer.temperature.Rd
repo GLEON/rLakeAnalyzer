@@ -57,7 +57,4 @@ be called directly on data loaded directly using \code{\link{load.ts}} and
 \seealso{
 \code{layer.temperature}
 }
-\author{
-Luke Winslow
-}
 \keyword{arith}

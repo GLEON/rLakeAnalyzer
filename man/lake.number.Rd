@@ -38,8 +38,7 @@ forcings. Lower values of Lake Number represent a higher potential for
 increased diapycnal mixing, which increases the vertical flux of mass and
 energy across the metalimnion through the action of non-linear internal
 waves. Lake Number is a dimensionless index.
-}
-\details{
+
 Lake Number has been used, for example, to estimate the flux of oxygen
 across the thermocline in a small lake (Robertson and Imberger, 1994), and
 to explain the magnitude of the vertical flux of ammonium in a lake (Romero
@@ -67,8 +66,5 @@ Oceanography 18, 681-683.
 }
 \seealso{
 \code{\link{ts.lake.number}} \code{\link{wedderburn.number}}
-}
-\author{
-Jordan S. Read, Luke Winslow
 }
 \keyword{manip}

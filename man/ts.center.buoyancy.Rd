@@ -52,7 +52,4 @@ Advances in Applied Mechanics 27, 353-370.
 \seealso{
 \code{center.buoyancy}, \code{load.bathy}, \code{load.ts}
 }
-\author{
-Jordan S Read
-}
 \keyword{arith}

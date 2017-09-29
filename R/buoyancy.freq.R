@@ -1,12 +1,6 @@
-#
-# Buoyancy Frequency
-# Author: Luke Winslow <lawinslow@gmail.com>
-#
-
-
-#' Calculates buoyancy frequency.
+#' @title Calculates buoyancy frequency.
 #' 
-#' Calculate the buoyancy frequency (Brunt-Vaisala frequency) for a temperature
+#' @description Calculate the buoyancy frequency (Brunt-Vaisala frequency) for a temperature
 #' profile.
 #' 
 #' 
@@ -16,7 +10,6 @@
 #' @return Returns a vector of buoyancy frequency in units \code{sec^-2}.
 #' Return value has attribute "depths" which define buoyancy frequency depths
 #' (which differ from supplied depths).
-#' @author Luke Winslow
 #' @seealso \code{thermo.depth}, \code{ts.buoyancy.freq}
 #' @keywords arith
 #' @examples
@@ -58,9 +51,9 @@ buoyancy.freq <- function(wtr, depths){
 
 
 
-#' Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile.
+#' @title Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile.
 #' 
-#' Function for simplifying the calculation of buoyancy frequency. Can usually
+#' @description Function for simplifying the calculation of buoyancy frequency. Can usually
 #' be called directly on data loaded directly using \code{\link{load.ts}} and
 #' \code{\link{load.bathy}}.
 #' 
@@ -78,7 +71,6 @@ buoyancy.freq <- function(wtr, depths){
 #' parameters to supply would be \code{seasonal} and \code{slope}.
 #' @return Returns a data frame with the timeseries of buoyancy frequency in
 #' units \code{sec^-2}. Includes a \sQuote{datetime} column.
-#' @author Luke Winslow
 #' @seealso \code{buoyancy.freq}
 #' @references Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}.
 #' Advances in Applied Mechanics 27, 353-370.

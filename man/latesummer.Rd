@@ -11,8 +11,7 @@ latesummer
 \description{
 Late summer water profile taken from Quesnel Lake, British Columbia, Canada. Profile taken with Sea-Bird
   SBE19plus.
-}
-\details{
+
 \describe{
   \item{depth}{Depth, m}
   \item{temper}{Temperature, degC}

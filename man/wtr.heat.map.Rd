@@ -34,7 +34,4 @@ This creates a simple, default heatmap of water temperature.
 \seealso{
 \code{\link{load.ts}}
 }
-\author{
-Jennifer Brentrup, Luke Winslow
-}
 \keyword{hplot}

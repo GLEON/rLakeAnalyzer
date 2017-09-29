@@ -20,8 +20,7 @@ timeseries functions.
 \description{
 A convenience function to load timeseries data into R based on the
 standardized format used by Lake Analyzer.
-}
-\details{
+
 Timeseries files must follow a common format. The first column must have the
 label 'datetime' and be of the format \emph{yyyy-mm-dd HH:MM:SS} (ISO 8601
 without the "T" delimiter). The second can be skipped if not using
@@ -45,8 +44,5 @@ For dataloading \code{\link{ts.meta.depths}}, \cr For analyzing
 timeseries data, see \code{\link{ts.meta.depths}},
 \code{\link{ts.thermo.depth}}, \code{\link{ts.schmidt.stability}},
 \code{\link{ts.lake.number}}.
-}
-\author{
-Luke Winslow
 }
 \keyword{file}

@@ -1,6 +1,6 @@
-#' Plots a heat-map of water temperature.
+#' @title Plots a heat-map of water temperature.
 #' 
-#' This creates a simple, default heatmap of water temperature.
+#' @description This creates a simple, default heatmap of water temperature.
 #' 
 #' 
 #' @param wtr Data frame of water temperature loaded with
@@ -8,7 +8,6 @@
 #' @param ...  Additional parameters supplied to \code{\link{filled.contour}}
 #' to modify defaults. Common examples include \code{zlim} and
 #' \code{plot.title}.
-#' @author Jennifer Brentrup, Luke Winslow
 #' @seealso \code{\link{load.ts}}
 #' @keywords hplot
 #' @examples

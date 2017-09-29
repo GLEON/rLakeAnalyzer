@@ -1,6 +1,6 @@
-#' Calculate the Top and Bottom Depths of the Metalimnion
+#' @title Calculate the Top and Bottom Depths of the Metalimnion
 #' 
-#' Calculates the top and bottom depths of the metalimnion in a stratified
+#' @description Calculates the top and bottom depths of the metalimnion in a stratified
 #' lake. The metalimnion is defined as the water stratum in a stratified lake
 #' with the steepest thermal gradient and is demarcated by the bottom of the
 #' epilimnion and top of the hypolimnion.
@@ -20,7 +20,6 @@
 #' to 1 deg C.
 #' @return A numeric vector of the top and bottom metalimnion depths in meters.
 #' Returns the bottom depth if no distinct metalimion top and bottom found.
-#' @author Jennifer Brentrup, Luke Winslow
 #' @seealso \code{\link{ts.meta.depths}}, \code{\link{thermo.depth}}
 #' @references Wetzel, R. G. 2001. Limnology: Lake and River Ecosystems, 3rd
 #' ed. Academic Press.

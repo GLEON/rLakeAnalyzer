@@ -33,7 +33,4 @@ columns with headers containing the words "depths" and "areas" respectively.
 \seealso{
 \code{\link{load.ts}}
 }
-\author{
-Luke Winslow
-}
 \keyword{file}

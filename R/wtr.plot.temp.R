@@ -1,7 +1,7 @@
-#' Creates a time series plot of the thermocline and top and bottom of the
+#' @title Creates a time series plot of the thermocline and top and bottom of the
 #' metalimnion
 #' 
-#' A line based plot of calculated depths of the thermocline, and top and
+#' @description A line based plot of calculated depths of the thermocline, and top and
 #' bottom of the metalimnion from a temperature profile time series.
 #' 
 #' 
@@ -9,7 +9,6 @@
 #' \code{\link{load.ts}}.
 #' @param ... Additional paramters supplied to \code{\link{ts.meta.depths}} and
 #' \code{\link{ts.thermo.depth}}
-#' @author Jennifer Brentrup, Taylor Leach, Luke Winslow
 #' @seealso \code{\link{load.ts}} and \code{\link{wtr.lineseries}}
 #' @keywords hplot
 #' @examples

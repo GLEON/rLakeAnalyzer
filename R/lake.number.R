@@ -1,11 +1,6 @@
-#----Author: Jordan S Read 2009 ----
-#----converted to R 2013-04-21 ----
-
-
-
-#' Calculate Lake Number
+#' @title Calculate Lake Number
 #' 
-#' The Lake Number, defined by Imberger and Patterson (1990), has been used to
+#' @description The Lake Number, defined by Imberger and Patterson (1990), has been used to
 #' describe processes relevant to the internal mixing of lakes induced by wind
 #' forcings. Lower values of Lake Number represent a higher potential for
 #' increased diapycnal mixing, which increases the vertical flux of mass and
@@ -32,7 +27,6 @@
 #' @param averageHypoDense a numeric array of the average density of the
 #' hypolimnion (kg/m3)
 #' @return A numeric vector of Lake Number [dimensionless]
-#' @author Jordan S. Read, Luke Winslow
 #' @seealso \code{\link{ts.lake.number}} \code{\link{wedderburn.number}}
 #' @references Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}.
 #' Advances in Applied Mechanics 27, 303-475.

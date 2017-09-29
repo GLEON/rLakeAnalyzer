@@ -34,7 +34,4 @@ wtr.plot.temp(wtr)
 \seealso{
 \code{\link{load.ts}} and \code{\link{wtr.lineseries}}
 }
-\author{
-Jennifer Brentrup, Taylor Leach, Luke Winslow
-}
 \keyword{hplot}

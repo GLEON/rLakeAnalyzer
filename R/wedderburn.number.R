@@ -1,12 +1,6 @@
-# ---Author: Jake Zwart, 2013-04-21 --- 
-#translated from Matlab Script - Author Jordan Read, 2009 
-## from wedderburnNumber.m in https://github.com/jread-usgs/Lake-Analyzer/
-
-
-
-#' Calculates Wedderburn Number for a lake.
+#' @title Calculates Wedderburn Number for a lake.
 #' 
-#' Wedderburn Number (Wn) is a dimensionless parameter measuring the balance
+#' @description Wedderburn Number (Wn) is a dimensionless parameter measuring the balance
 #' between wind stress and bouyancy force and is used to estimate the amount of
 #' upwelling occuring in a lake.  When Wn is much greater than 1, the bouyancy
 #' force is much greater than the wind stress and therefore there is a strong
@@ -28,7 +22,6 @@
 #' @param AvHyp_rho Numeric value for the average water density of the
 #' hypolimnion layer (kg/m^3)
 #' @return The dimensionless numeric value of Wedderburn Number
-#' @author Jake Zwart
 #' @seealso \code{\link{ts.wedderburn.number}} \code{\link{lake.number}}
 #' @references Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}.
 #' Advances in Applied Mechanics 27, 353-370.

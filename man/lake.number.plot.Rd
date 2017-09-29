@@ -43,7 +43,4 @@ reference.
 \seealso{
 \code{\link{wtr.lineseries}}
 }
-\author{
-Jennifer Brentrup, Taylor Leach
-}
 \keyword{hplot}

@@ -1,4 +1,4 @@
-#' Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
+#' @title Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 #' @param thres error norm;
@@ -61,7 +61,7 @@ by_s_m <- function(thres=thres, z0=z0, zmax=zmax, z=z, sigma=sigma) {
 }
 
 
-#' Service subroutine for determining Mixed Layer Depth for a SPECIFIED NUMBER OF SEGMENTS
+#' @title Service subroutine for determining Mixed Layer Depth for a SPECIFIED NUMBER OF SEGMENTS
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 #' @param nr fixed number of segments
@@ -129,9 +129,9 @@ by_s_m3 <- function(nr, z0, zmax, z, sigma) {
 
 
 
-#' Calculate cline of series of segments
+#' @title Calculate cline of series of segments
 #' 
-#' Cline depth is defined as the midpoint of the segment connecting inflection
+#' @description Cline depth is defined as the midpoint of the segment connecting inflection
 #' points that has the maximum slope. A cline cannot occur over a depth range
 #' of less than 1m and also cannot be the shallowest segment. Violating both
 #' conditions will thrown warnings though this function handles both

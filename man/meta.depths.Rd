@@ -54,7 +54,4 @@ ed. Academic Press.
 \seealso{
 \code{\link{ts.meta.depths}}, \code{\link{thermo.depth}}
 }
-\author{
-Jennifer Brentrup, Luke Winslow
-}
 \keyword{manip}

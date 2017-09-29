@@ -47,7 +47,4 @@ two depths.
 \seealso{
 \code{layer.density}
 }
-\author{
-Jordan Read
-}
 \keyword{manip}

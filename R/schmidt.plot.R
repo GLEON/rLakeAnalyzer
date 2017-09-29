@@ -1,9 +1,6 @@
-# time series plot of Schmidt's stability
-
-
-#' Creates a time series plot of Schmidt's stability
+#' @title Creates a time series plot of Schmidt's stability
 #' 
-#' Generates a time series of Schmidt's stability where each value represents
+#' @description Generates a time series of Schmidt's stability where each value represents
 #' water column stability for each time step of data. See
 #' \code{\link{schmidt.stability}} for more details and reference.
 #' 
@@ -11,7 +8,6 @@
 #' @param wtr Data frame of water temperature loaded with \code{\link{load.ts}}
 #' @param bth A data frame containing hypsometric data. Loaded using
 #' \code{\link{load.bathy}}
-#' @author Taylor Leach, Jennifer Brentrup
 #' @seealso \code{\link{schmidt.stability}}
 #' @references See \code{\link{schmidt.stability}}
 #' @keywords hplot

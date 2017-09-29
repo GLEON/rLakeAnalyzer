@@ -42,7 +42,4 @@ plotting function.
 \code{\link{wtr.heat.map}} \code{\link{load.ts}}
 \code{\link{ts.meta.depths}} \code{\link{ts.thermo.depth}}
 }
-\author{
-Jennifer Brentrup, Luke Winslow and Taylor Leach
-}
 \keyword{hplot}

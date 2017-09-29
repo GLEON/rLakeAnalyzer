@@ -41,7 +41,4 @@ profile.
 \seealso{
 \code{thermo.depth}, \code{ts.buoyancy.freq}
 }
-\author{
-Luke Winslow
-}
 \keyword{arith}

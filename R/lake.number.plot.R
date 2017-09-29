@@ -1,9 +1,6 @@
-# time series of lake number
-
-
-#' Plots time series of Lake Number
+#' @title Plots time series of Lake Number
 #' 
-#' Generates a time series plot of Lake Number for appropriately formatted
+#' @description Generates a time series plot of Lake Number for appropriately formatted
 #' data.  See \code{\link{lake.number}} for more details on Lake Number and
 #' reference.
 #' 
@@ -15,7 +12,6 @@
 #' in meters.  This value must be specified, there is no default.
 #' @param bth A data frame containing hypsometric data. Loaded using
 #' \code{\link{load.bathy}}
-#' @author Jennifer Brentrup, Taylor Leach
 #' @seealso \code{\link{wtr.lineseries}}
 #' @keywords hplot
 #' @examples

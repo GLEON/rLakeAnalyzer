@@ -1,6 +1,6 @@
-#' Internal energy function (Joules)
+#' @title Internal energy function (Joules)
 #' 
-#' Calculates the internal energy of the water column with temperature and
+#' @description Calculates the internal energy of the water column with temperature and
 #' hypsography
 #' 
 #' Internal energy is the thermal energy in the water column, which is
@@ -15,7 +15,6 @@
 #' @param bthD a numeric vector of depths (m) which correspond to areal
 #' measures in bthA
 #' @return internal energy in Joules m-2. (Currently not vectorized..)
-#' @author Jordan S. Read
 #' @examples
 #' 
 #' bthA  <-	c(1000,900,864,820,200,10)

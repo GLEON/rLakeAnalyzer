@@ -24,6 +24,5 @@ supplied water temperature timeseries. If the lake is not stratified, the
 bottom of the epilimnion is calculated as the full depth of the lake.
 }
 \seealso{
-\code{\link{hypo.temperature}},
-\code{\link{whole.lake.temperature}}
+\code{\link{hypo.temperature}} \code{\link{whole.lake.temperature}}
 }

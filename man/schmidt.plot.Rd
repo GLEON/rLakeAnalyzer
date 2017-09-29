@@ -38,7 +38,4 @@ See \code{\link{schmidt.stability}}
 \seealso{
 \code{\link{schmidt.stability}}
 }
-\author{
-Taylor Leach, Jennifer Brentrup
-}
 \keyword{hplot}

@@ -48,7 +48,4 @@ layer.density(top,bottom,wtr,depths,bthA,bthD)
 \seealso{
 \code{water.density}
 }
-\author{
-Jake Zwart
-}
 \keyword{manip}
