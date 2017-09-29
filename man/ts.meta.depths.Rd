@@ -2,11 +2,6 @@
 % Please edit documentation in R/timeseries.functions.R
 \name{ts.meta.depths}
 \alias{ts.meta.depths}
-\alias{ts.thermo.depth}
-\alias{ts.schmidt.stability}
-\alias{ts.lake.number}
-\alias{ts.uStar}
-\alias{ts.internal.energy}
 \title{Calculate physical indices for a timeseries.}
 \usage{
 ts.meta.depths(wtr, slope = 0.1, na.rm = FALSE, ...)
@@ -25,20 +20,6 @@ true, best effort will be made to calculate indices despite NA values.}
 
 \item{...}{Additional parameters passed to underlying base function (e.g.,
 index=TRUE for thermo.depth)}
-
-\item{Smin}{The minimum density gradient cutoff (kg/m^3/m) defining the
-metalimion}
-
-\item{bathy}{A data frame containing hypsometric data. Loaded using
-\code{\link{load.bathy}}}
-
-\item{wnd}{A data frame of wind speeds (in m/s). Loaded using
-\code{\link{load.ts}}}
-
-\item{wnd.height}{Height of the anemometer above the lake surface in meters}
-
-\item{seasonal}{Boolean indicating if seasonal thermocline should be used in
-calculation.}
 }
 \value{
 Returns a data frame with the timeseries of calculated derivatives.
@@ -49,8 +30,7 @@ between functions.
 Functions for simplifying the calculation of physical indices for a
 timeseries of observation data.  Can usually be called directly on data
 loaded directly using \code{\link{load.ts}} and \code{\link{load.bathy}}.
-}
-\details{
+
 These are wrapper functions that accept a timeseries of data and call the
 core physical metric functions (like \code{\link{schmidt.stability}}) on
 each timestep.
@@ -84,8 +64,10 @@ For the underlying functions operating at each timestep
 \code{\link{meta.depths}}, \code{\link{thermo.depth}},
 \code{\link{schmidt.stability}}, \code{\link{lake.number}},
 \code{\link{internal.energy}}.
-}
-\author{
-Luke Winslow
+
+Other Timeseries functions for r Lake Analyzer: \code{\link{ts.internal.energy}},
+  \code{\link{ts.lake.number}},
+  \code{\link{ts.schmidt.stability}},
+  \code{\link{ts.thermo.depth}}, \code{\link{ts.uStar}}
 }
 \keyword{manip}
