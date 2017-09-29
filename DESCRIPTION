@@ -10,7 +10,11 @@ Description: Standardized methods for calculating common important derived
     number, Schmidt stability and others.
 Depends: R (>= 2.10)    
 Imports:
-    plyr
+    plyr,
+    stats,
+    graphics,
+    utils,
+    grDevices
 Suggests:
     testthat,
     knitr,
