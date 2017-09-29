@@ -1,18 +1,45 @@
-### R Lake Analyzer
-# Author: J. Brentrup May 2013
-# Sources: Iso, S.B. 1973. On the concept of lake stability. Limnol. and Oceanogr. 18: 683-681.
-# J.S. Read - Matlab code 2009 (Adapted)
-
-### Equation: St = (g/A0)*[Integral from 0 to zm:(z-zp)*pz*Az*dz]
-#St = Schmidt stability
-#g = gravity (9.81 m/s2)
-#A0 = surface area
-#z = depth
-#zm = max. depth
-#zp = mean density - uses Richard's function water.density.R
-#pz = observed denisty at depth z
-#Az = area at depth z
-
+#' @title Calculate the Schmidt stability
+#' 
+#' @description Schmidt stability, or the resistance to mechanical mixing due to the
+#' potential energy inherent in the stratification of the water column.
+#' 
+#' Schmidt stability was first defined by Schmidt (1928) and later modified by
+#' Hutchinson (1957). This stability index was formalized by Idso (1973) to
+#' reduce the effects of lake volume on the calculation (resulting in a mixing
+#' energy requirement per unit area).
+#' 
+#' @param wtr a numeric vector of water temperature in degrees C
+#' @param depths a numeric vector corresponding to the depths (in m) of the wtr
+#' measurements
+#' @param bthA a numeric vector of cross sectional areas (m^2) corresponding to
+#' bthD depths
+#' @param bthD a numeric vector of depths (m) which correspond to areal
+#' measures in bthA
+#' @param sal a numeric vector of salinity in Practical Salinity Scale units
+#' @return a numeric vector of Schmidt stability (J/m^2)
+#' @seealso \code{\link{ts.schmidt.stability}} \code{\link{lake.number}}
+#' \code{\link{wedderburn.number}}
+#' @references Schmidt, W., 1928. \emph{Ueber Temperatur and
+#' Stabilitaetsverhaltnisse von Seen}. Geo- graphiska Annaler 10, 145-177.
+#' 
+#' Hutchinson, G.E., 1957. \emph{A Treatise on Limnology}, vol. 1. John Wiley &
+#' Sons, Inc., New York.
+#' 
+#' Idso, S.B., 1973. \emph{On the concept of lake stability}. Limnology and
+#' Oceanography 18, 681-683.
+#' @keywords arith
+#' @examples
+#' 
+#' 
+#' 	bthA	<-	c(1000,900,864,820,200,10)
+#' 	bthD	<-	c(0,2.3,2.5,4.2,5.8,7)
+#' 	
+#' 	wtr	<-	c(28,27,26.4,26,25.4,24,23.3)
+#' 	depths	<-	c(0,1,2,3,4,5,6)
+#' 	
+#' 	cat('Schmidt stability for input is: ')
+#' 	cat(schmidt.stability(wtr, depths, bthA, bthD))
+#' @export
 schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
 
   if(length(wtr) != length(depths)){
@@ -46,7 +73,7 @@ schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
   		depT = c(0, bthD[useI])
   	}
   	
-  	bthA = approx(bthD, bthA, depT)$y
+  	bthA = stats::approx(bthD, bthA, depT)$y
   	bthD = depT
   }
   
@@ -79,8 +106,8 @@ schmidt.stability = function(wtr, depths, bthA, bthD, sal = 0){
   
   #The approx (interp1 in matlab) just does linear interpolation
   layerD = seq(min(depths), max(depths), by=dz)
-  layerP = approx(depths, rhoL, layerD)$y
-  layerA = approx(bthD, bthA, layerD)$y
+  layerP = stats::approx(depths, rhoL, layerD)$y
+  layerA = stats::approx(bthD, bthA, layerD)$y
   
   Zcv <- layerD %*% layerA / sum(layerA)
   St <- layerP %*% ((layerD - as.vector(Zcv)) * layerA) * dz * g / Ao

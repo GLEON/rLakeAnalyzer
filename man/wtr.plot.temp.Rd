@@ -2,21 +2,24 @@
 % Please edit documentation in R/wtr.plot.temp.R
 \name{wtr.plot.temp}
 \alias{wtr.plot.temp}
-\title{Creates a time series plot of the thermocline and top and 
-bottom of the metalimnion}
+\title{Creates a time series plot of the thermocline and top and bottom of the
+metalimnion}
 \usage{
 wtr.plot.temp(wtr, ...)
 }
 \arguments{
-\item{wtr}{Data frame of water temperature loaded with \code{\link{load.ts}}.}
+\item{wtr}{Data frame of water temperature loaded with
+\code{\link{load.ts}}.}
 
-\item{...}{Additional paramters supplied to \code{\link{ts.meta.depths}} and \code{\link{ts.thermo.depth}}}
+\item{...}{Additional paramters supplied to \code{\link{ts.meta.depths}} and
+\code{\link{ts.thermo.depth}}}
 }
 \description{
-A line based plot of calculated depths of the thermocline, and 
-top and bottom of the metalimnion from a temperature profile time series.
+A line based plot of calculated depths of the thermocline, and top and
+bottom of the metalimnion from a temperature profile time series.
 }
 \examples{
+
 
 wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
 
@@ -30,8 +33,5 @@ wtr.plot.temp(wtr)
 }
 \seealso{
 \code{\link{load.ts}} and \code{\link{wtr.lineseries}}
-}
-\author{
-Jennifer Brentrup, Taylor Leach, Luke Winslow
 }
 \keyword{hplot}

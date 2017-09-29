@@ -5,3 +5,5 @@ changelog.txt
 ^\.Rproj\.user$
 README.md
 
+^README\.Rmd$
+^README-.*\.png$

@@ -1,17 +1,36 @@
-# ---Author: Jake Zwart, 2013-04-21 ---
-# translated from Matlab Script - Author Jordan Read, 2009 
-## from layerDensity.m in https://github.com/jread-usgs/Lake-Analyzer/
-#
-# top: surface to top of layer
-# bottom: surface to bottom of layer
-# wtr: water temperature in celsius  
-# depths: water depth values in meters 
-# bthA: bathymetry area in meters squared 
-# bthD: bathymetry depths in meters 
-# sal: salinity in Pratical Salinity Scale units (dimensionless)
-#
-# OUTPUT: returns the average average water density of lake layer (i.e. average epilimnion density)
-
+#' @title Returns the average density of a layer between two depths.
+#' 
+#' @description This function calculates the average density of a layer of water between two
+#' depths.
+#' 
+#' 
+#' @param top Numeric value of the depth (m) of the top of the layer from the
+#' water surface
+#' @param bottom Numeric value of the depth (m) of the bottom of the layer from
+#' the water surface
+#' @param wtr Numeric vector of water temperature in degrees C
+#' @param depths Numeric vector of depths (m) corresponding to water
+#' temperature vector
+#' @param bthA Numeric vector of water body cross sectional area (m2)
+#' corresponding to bthD depths
+#' @param bthD Numeric vector of water body bathymetric depths (m)
+#' corresponding to areal bthA values
+#' @param sal Optional numeric vector of salinity in Practical Salinity Units
+#' corresponding to water temperature vector. If left blank, salinity is set to
+#' be zero
+#' @return Numeric value of average water density for bounded layer in kg/m^3
+#' @seealso \code{water.density}
+#' @keywords manip
+#' @examples
+#' 
+#' top     <- 2
+#' bottom  <- 6
+#' wtr     <- c(25.2,25.1,24.1,22.0,19.8,15.3,12.0,11.1)
+#' depths  <- c(0,1,2,3,4,5,6,7) 
+#' bthA    <- c(10000,8900,5000,3500,2000,1000,300,10)
+#' bthD    <- c(0,1,2,3,4,5,6,7)
+#' layer.density(top,bottom,wtr,depths,bthA,bthD)
+#' @export
 layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
   
   # checking input quality 
@@ -33,7 +52,7 @@ layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
     }else{
       depT <- bthD[useI]
     }
-    bthA <- approx(bthD,bthA,depT)$y
+    bthA <- stats::approx(bthD,bthA,depT)$y
     bthD <- depT
   }
   
@@ -62,9 +81,9 @@ layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
   
   # iterpolate the bathymetry data 
   layerD <- seq(top,bottom,dz)
-  layerT <- approx(depths,wtr,layerD)$y
-  layerS <- approx(depths,sal,layerD)$y
-  layerA <- approx(bthD,bthA,layerD)$y
+  layerT <- stats::approx(depths,wtr,layerD)$y
+  layerS <- stats::approx(depths,sal,layerD)$y
+  layerA <- stats::approx(bthD,bthA,layerD)$y
   layerP <- water.density(layerT,layerS)
   
   mass <- layerA*layerP*dz

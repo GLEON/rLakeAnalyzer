@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Sam Albers and Doug Collinge" />
+
+<meta name="date" content="2017-09-29" />
+
+<title>Split and Merge Algorithm Usage</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Split and Merge Algorithm Usage</h1>
+<h4 class="author"><em>Sam Albers and Doug Collinge</em></h4>
+<h4 class="date"><em>2017-09-29</em></h4>
+
+
+
+<div id="packages-needing-loading" class="section level2">
+<h2>Packages needing loading</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rLakeAnalyzer)
+<span class="kw">library</span>(knitr)</code></pre></div>
+</div>
+<div id="split-and-merge-algorithm" class="section level2">
+<h2>Split and merge algorithm</h2>
+<p>Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs within the <code>wtr.layer()</code> function:</p>
+</div>
+<div id="simple-application-of-the-split-and-merge-algorithm" class="section level2">
+<h2>Simple application of the split and merge algorithm</h2>
+<p>Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. The default behaviour for <code>wtr.layer</code> is to run the algorithm <em>without</em> specifying the number of segments. <code>wtr.layer()</code> adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;latesummer&quot;</span>)
+wldf &lt;-<span class="st"> </span><span class="kw">wtr.layer</span>(<span class="dt">depth =</span> latesummer<span class="op">$</span>depth, <span class="dt">measure =</span> latesummer<span class="op">$</span>temper)
+knitr<span class="op">::</span><span class="kw">kable</span>(wldf)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">min_depth</th>
+<th align="right">nseg</th>
+<th align="right">mld</th>
+<th align="right">cline</th>
+<th align="left">segments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2.5</td>
+<td align="right">4</td>
+<td align="right">7.0565</td>
+<td align="right">16.39025</td>
+<td align="left">2.59800, 7.05650, 25.72400, 98.13900, 17.94060, 17.38405, 5.51445, 4.46375</td>
+</tr>
+</tbody>
+</table>
+<p>In this example, you’ll note that <code>wldf$cline</code> is formatted as a list-column. A thorough demonstration of a list column can be found <a href="https://jennybc.github.io/purrr-tutorial/ls13_list-columns.html">here</a>. This type of data format has been included here to consolidate split and merge results and align the output to work well with <a href="https://www.tidyverse.org/">tidyverse</a> tools. If you are interested in working with the segments data from <code>wtr.layer()</code>, use this approach:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wldf<span class="op">$</span>segments</code></pre></div>
+<pre><code>## [[1]]
+##   segment_depth segment_measure
+## 1        2.5980        17.94060
+## 2        7.0565        17.38405
+## 3       25.7240         5.51445
+## 4       98.1390         4.46375</code></pre>
+<p>Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dt">y =</span> latesummer<span class="op">$</span>depth, <span class="dt">x =</span> latesummer<span class="op">$</span>temper, <span class="dt">ylim =</span> <span class="kw">rev</span>(<span class="kw">range</span>(latesummer<span class="op">$</span>depth)))
+<span class="kw">abline</span>(<span class="dt">h =</span> wldf<span class="op">$</span>cline, <span class="dt">col=</span><span class="st">'blue'</span>)
+<span class="kw">abline</span>(<span class="dt">h =</span> wldf<span class="op">$</span>mld, <span class="dt">col=</span><span class="st">'red'</span>)
+<span class="kw">abline</span>(<span class="dt">h =</span> wldf<span class="op">$</span>min_depth, <span class="dt">col=</span><span class="st">'green'</span>)
+<span class="kw">text</span>(<span class="dv">16</span>, wldf<span class="op">$</span>cline<span class="op">+</span><span class="dv">3</span>, <span class="st">&quot;Thermocline&quot;</span>, <span class="dt">col =</span> <span class="st">'blue'</span>)
+<span class="kw">text</span>(<span class="dv">16</span>, wldf<span class="op">$</span>mld<span class="op">+</span><span class="dv">3</span>, <span class="st">&quot;Mix Layer Depth&quot;</span>, <span class="dt">col =</span> <span class="st">'red'</span>)
+<span class="kw">text</span>(<span class="dv">16</span>, wldf<span class="op">$</span>min_depth<span class="op">+</span><span class="dv">3</span>, <span class="st">&quot;Minimum Depth&quot;</span>, <span class="dt">col =</span> <span class="st">'green'</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="important-references" class="section level2">
+<h2>Important references</h2>
+<ul>
+<li>Pavlidis, T., and S. L. Horowitz, 1974: Segmentation of plan curves.IEEE Trans. Comput., C-23, 860–870.</li>
+<li>Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.</li>
+<li>Fiedler, Paul C. “Comparison of objective descriptions of the thermocline. Limnology and Oceanography: Methods 8.6 (2010): 313-325.</li>
+</ul>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

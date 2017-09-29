@@ -1,4 +1,31 @@
-# time series plot of Schmidt's stability
+#' @title Creates a time series plot of Schmidt's stability
+#' 
+#' @description Generates a time series of Schmidt's stability where each value represents
+#' water column stability for each time step of data. See
+#' \code{\link{schmidt.stability}} for more details and reference.
+#' 
+#' 
+#' @param wtr Data frame of water temperature loaded with \code{\link{load.ts}}
+#' @param bth A data frame containing hypsometric data. Loaded using
+#' \code{\link{load.bathy}}
+#' @seealso \code{\link{schmidt.stability}}
+#' @references See \code{\link{schmidt.stability}}
+#' @keywords hplot
+#' @examples
+#' 
+#' 	# Get system data file paths 
+#'   wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+#' 	bth.path <- system.file('extdata', 'Sparkling.bth', package="rLakeAnalyzer")
+#' 
+#' 	# Load data for example lake, Sparkilng Lake, Wisconsin.
+#' 	wtr = load.ts(wtr.path)
+#' 	bth = load.bathy(bth.path)
+#' 	
+#' 	\dontrun{
+#'   # Generate default plot
+#'   schmidt.plot(wtr,bth)
+#'   }
+#' @export
 schmidt.plot = function(wtr,bth){
 
   ss = ts.schmidt.stability(wtr,bth)
@@ -49,7 +76,7 @@ schmidt.plot = function(wtr,bth){
     xxlab <- " "
   }
   
-  plot(ss[,2]~ss[,1],
+  graphics::plot(ss[,2]~ss[,1],
        type='l',
        lwd = 2,
        col="black",
@@ -61,11 +88,11 @@ schmidt.plot = function(wtr,bth){
   )
   
   # x axis
-  axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(ss[,2],na.rm=TRUE)), tck = -0.03)
-  segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(endtime),c(min(ss[,2],na.rm=TRUE)), col = "black", lty = 1)
+  graphics::axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(ss[,2],na.rm=TRUE)), tck = -0.03)
+  graphics::segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(endtime),c(min(ss[,2],na.rm=TRUE)), col = "black", lty = 1)
   
   # y axis
-  axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
-  segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(starttime),c(max(ss[,2],na.rm=TRUE)), col = "black")
+  graphics::axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
+  graphics::segments(c(starttime),c(min(ss[,2],na.rm=TRUE)),c(starttime),c(max(ss[,2],na.rm=TRUE)), col = "black")
   
 }

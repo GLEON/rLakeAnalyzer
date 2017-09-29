@@ -10,30 +10,36 @@ thermo.depth(wtr, depths, Smin = 0.1, seasonal = TRUE, index = FALSE,
 \arguments{
 \item{wtr}{a numeric vector of water temperature in degrees C}
 
-\item{depths}{a numeric vector corresponding to the depths (in m) of the wtr measurements}
+\item{depths}{a numeric vector corresponding to the depths (in m) of the wtr
+measurements}
 
-\item{Smin}{Optional paramter defining minimum density gradient for thermocline}
+\item{Smin}{Optional paramter defining minimum density gradient for
+thermocline}
 
-\item{seasonal}{a logical value indicating whether the seasonal thermocline should be 
-returned. This is fed to thermo.depth, which is used as the starting point. 
-The seasonal thermocline is defined as the deepest density gradient found 
-in the profile. If \code{FALSE}, the depth of the maximum density gradient is used 
-as the starting point.}
+\item{seasonal}{a logical value indicating whether the seasonal thermocline
+should be returned. This is fed to thermo.depth, which is used as the
+starting point.  The seasonal thermocline is defined as the deepest density
+gradient found in the profile. If \code{FALSE}, the depth of the maximum
+density gradient is used as the starting point.}
 
-\item{index}{Boolean value indicated if index of the thermocline depth, instead of the depth value, should be returned.}
+\item{index}{Boolean value indicated if index of the thermocline depth,
+instead of the depth value, should be returned.}
 
-\item{mixed.cutoff}{A cutoff (deg C) where below this threshold, thermo.depth and meta.depths 
-are not calculated (NaN is returned). Defaults to 1 deg C.}
+\item{mixed.cutoff}{A cutoff (deg C) where below this threshold,
+thermo.depth and meta.depths are not calculated (NaN is returned). Defaults
+to 1 deg C.}
 }
 \value{
 Depth of thermocline. If no thermocline found, value is NaN.
 }
 \description{
-This function calculates the location of the thermocline from a temperature profile. 
-It uses a special technique to estimate where the thermocline lies even between two 
-temperature measurement depths, giving a potentially finer-scale estimate than usual techniques.
+This function calculates the location of the thermocline from a temperature
+profile.  It uses a special technique to estimate where the thermocline lies
+even between two temperature measurement depths, giving a potentially
+finer-scale estimate than usual techniques.
 }
 \examples{
+
 # A vector of water temperatures
 wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
 		15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
@@ -49,8 +55,5 @@ wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42,
 }
 \seealso{
 \code{\link{ts.thermo.depth}}, \code{water.density}
-}
-\author{
-Luke Winslow
 }
 \keyword{manip}

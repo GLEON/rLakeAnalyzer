@@ -1,3 +1,25 @@
+#' @title Creates a line based plot of temperature profile time series
+#' 
+#' @description A non-heat map approach to visualizing a water temperature profile useful
+#' for identify temperature trends over time at discrete depths and diagnosing
+#' issues with data.
+#' 
+#' 
+#' @param wtr Data frame of water temperature loaded with
+#' \code{\link{load.ts}}.
+#' @param ylab y axis title
+#' @param \dots Additional parameters supplied to the plot function
+#' @seealso See \code{\link{load.ts}} and \code{\link{wtr.heat.map}}
+#' @keywords hplot
+#' @examples
+#' 
+#' exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+#' wtr= load.ts(exampleFilePath)
+#' \dontrun{
+#' wtr.lineseries(wtr, ylab = "Temperature C")
+#' }
+#' @export
+#' 
 wtr.lineseries = function(wtr, ylab = "Temperature C",...){
   
   nn = ncol(wtr) # number of columns in data set
@@ -6,7 +28,7 @@ wtr.lineseries = function(wtr, ylab = "Temperature C",...){
   starttime = min(wtr[,1]) #earliest date
   endtime = max(wtr[,1]) #latest date
   
-  colors1 = colorRampPalette(c("red"
+  colors1 = grDevices::colorRampPalette(c("red"
                                ,"orange"
                                ,"yellow"
                                ,"green3"
@@ -61,7 +83,7 @@ wtr.lineseries = function(wtr, ylab = "Temperature C",...){
   }
   #tiff('wtf2.tiff',width=1600, height=900, res=300, compression='lzw')
   #plot temp over time; each depth as a unique line
-  plot(wtr[,1], 
+  graphics::plot(wtr[,1], 
        wtr[,2] 
        ,type='l' 
        ,col=colors[1]
@@ -75,19 +97,19 @@ wtr.lineseries = function(wtr, ylab = "Temperature C",...){
        , ...
       )
   for( i in 3:ncol(wtr)){
-    lines(wtr[,1], wtr[,i], type='l', col=colors[i])
+    graphics::lines(wtr[,1], wtr[,i], type='l', col=colors[i])
   }
   
   # x axis
-  axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(mmin), tck = -0.03)
-  abline(h = mmin, col = "black", lty = 1)
+  graphics::axis(side = 1, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(mmin), tck = -0.03)
+  graphics::abline(h = mmin, col = "black", lty = 1)
   
   # y axis
-  axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
-  abline(v = starttime, col = "black")
+  graphics::axis (side  = 2, pos = c(starttime), at = NULL, las = 1)
+  graphics::abline(v = starttime, col = "black")
   
   # generate and place legend
-  legend( "top"
+  graphics::legend( "top"
           , col = colors[c(1, nn)]
           , lty = 1, bty = "n"
           , legend = c("Surface", "Bottom")

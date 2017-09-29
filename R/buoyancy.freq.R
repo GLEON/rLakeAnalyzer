@@ -1,7 +1,34 @@
-#
-# Buoyancy Frequency
-# Author: Luke Winslow <lawinslow@gmail.com>
-#
+#' @title Calculates buoyancy frequency.
+#' 
+#' @description Calculate the buoyancy frequency (Brunt-Vaisala frequency) for a temperature
+#' profile.
+#' 
+#' 
+#' @param wtr a numeric vector of water temperature in degrees C
+#' @param depths a numeric vector corresponding to the depths (in m) of the wtr
+#' measurements
+#' @return Returns a vector of buoyancy frequency in units \code{sec^-2}.
+#' Return value has attribute "depths" which define buoyancy frequency depths
+#' (which differ from supplied depths).
+#' @seealso \code{thermo.depth}, \code{ts.buoyancy.freq}
+#' @keywords arith
+#' @examples
+#' 
+#' 
+#' 	# A vector of water temperatures
+#' 	wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+#' 		15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+#' 
+#' 	#A vector defining the depths
+#' 	depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+#' 		17, 18, 19, 20)
+#' 	
+#' 	b.f = buoyancy.freq(wtr, depths)
+#' 	
+#' 	plot(b.f, attr(b.f, 'depths'), type='b', 
+#' 		ylab='Depth', xlab='Buoyancy Frequency', ylim=c(max(depths), min(depths)))
+#' 
+#' @export
 buoyancy.freq <- function(wtr, depths){
   
   rhoVar = water.density(wtr)
@@ -22,6 +49,48 @@ buoyancy.freq <- function(wtr, depths){
   
 }
 
+
+
+#' @title Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile.
+#' 
+#' @description Function for simplifying the calculation of buoyancy frequency. Can usually
+#' be called directly on data loaded directly using \code{\link{load.ts}} and
+#' \code{\link{load.bathy}}.
+#' 
+#' 
+#' @param wtr A data frame of water temperatures (in Celsius). Loaded using
+#' \code{\link{load.ts}}
+#' @param at.thermo Boolean indicating if only buoyancy frequency at the
+#' thermocline should be returned. If false, full profile is returned.
+#' @param na.rm Boolean indicated if step-by-step removal of NA's should be
+#' tried. If false, a timestep with any NA values will likely return an NA
+#' value. If true, best effort will be made to calculate indices despite NA
+#' values.
+#' @param ...  Additional parameters will be passed on to \code{thermo.depth}
+#' function when extracting buoyancy frequency at only the thermocline.  Common
+#' parameters to supply would be \code{seasonal} and \code{slope}.
+#' @return Returns a data frame with the timeseries of buoyancy frequency in
+#' units \code{sec^-2}. Includes a \sQuote{datetime} column.
+#' @seealso \code{buoyancy.freq}
+#' @references Imberger, J., Patterson, J.C., 1990. \emph{Physical limnology}.
+#' Advances in Applied Mechanics 27, 353-370.
+#' @keywords arith
+#' @examples
+#' 
+#' 
+#' 	#Get the path for the package example file included
+#' 	wtr.path <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+#' 	
+#' 	#Load data for example lake, Sparkilng Lake, Wisconsin.
+#' 	sp.wtr = load.ts(wtr.path)
+#' 	
+#' 	N2 = ts.buoyancy.freq(sp.wtr, seasonal=FALSE)
+#' 	SN2 = ts.buoyancy.freq(sp.wtr, seasonal=TRUE)
+#' 	
+#' 	plot(N2, type='l', ylab='Buoyancy Frequency', xlab='Date')
+#' 	lines(SN2, col='red')
+#' 	
+#' @export
 ts.buoyancy.freq <- function(wtr, at.thermo=TRUE, na.rm=FALSE, ...){
 
   depths = get.offsets(wtr)

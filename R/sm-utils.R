@@ -1,4 +1,4 @@
-#' Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
+#' @title Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 #' @param thres error norm;
@@ -61,7 +61,7 @@ by_s_m <- function(thres=thres, z0=z0, zmax=zmax, z=z, sigma=sigma) {
 }
 
 
-#' Service subroutine for determining Mixed Layer Depth for a SPECIFIED NUMBER OF SEGMENTS
+#' @title Service subroutine for determining Mixed Layer Depth for a SPECIFIED NUMBER OF SEGMENTS
 #' @description Service subroutine for determining Mixed Layer Depth for a SPECIFIED ERROR NORM VALUE
 #'
 #' @param nr fixed number of segments
@@ -127,18 +127,24 @@ by_s_m3 <- function(nr, z0, zmax, z, sigma) {
   list(eps = s_mNresults$eps, by_s_m = ss, smz = smz, sms = sms)
 }
 
+
+
 #' @title Calculate cline of series of segments
+#' 
+#' @description Cline depth is defined as the midpoint of the segment connecting inflection
+#' points that has the maximum slope. A cline cannot occur over a depth range
+#' of less than 1m and also cannot be the shallowest segment. Violating both
+#' conditions will thrown warnings though this function handles both
+#' differently. Used mostly with \code{wtr_layer}
+#' 
+#' 
 #' @param z_seg depth in metres; should be an increasing vector
 #' @param sigma_seg parameter measured in the water column profile
 #' @return the depth of the cline
-#' @description  Cline depth is defined as the midpoint of the segment connecting inflection points that has the maximum slope. A cline cannot occur over a depth range of less than 1m and also cannot be the shallowest segment. Violating both conditions will thrown warnings though this function handles both differently. Used mostly with \code{wtr_layer}
-#' @references Fiedler, Paul C. Comparison of objective descriptions of the thermocline. Limnology and Oceanography: Methods 8.6 (2010): 313-325.
+#' @seealso \code{wtr_layer()}
+#' @references Fiedler, Paul C. Comparison of objective descriptions of the
+#' thermocline. Limnology and Oceanography: Methods 8.6 (2010): 313-325.
 #' @keywords internal
-#'
-#' @seealso
-#' \code{wtr_layer()}
-#'
-#'
 cline_calc <- function(z_seg = z_seg, sigma_seg = sigma_seg) {
   ## index top of segment with greatest change of measure (sigma) over depth (z) - metalimnion
   top <- which.max(diff(z_seg) / diff(sigma_seg))

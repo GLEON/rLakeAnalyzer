@@ -1,27 +1,19 @@
-## Helper functions for Lake Analyzer R
-
-datetime.pattern = "(datetime|timestamp|time|date)"
-
-
 #' @title Gets depths from data frame containing profile info.
 #' 
-#' @description 
-#' Extracts the depth information from a data frame containing multi-depth observation data.
-#' Relies on the format of the header to get information and may fail if your file format is incorrect.
-#' Please follow 'VAR_##.#' format, where ##.# is the depth of data for that column. VAR is typically
-#' 'wtr' to indicate water temperature. 
+#' @description Extracts the depth information from a data frame containing multi-depth
+#' observation data. Relies on the format of the header to get information and
+#' may fail if your file format is incorrect. Please follow 'VAR_##.#' format,
+#' where ##.# is the depth of data for that column. VAR is typically 'wtr' to
+#' indicate water temperature.
+#' 
 #' 
 #' @param data Data frame returned from \code{\link{load.ts}}.
-#' 
-#' 
-#' @return 
-#' A numeric vector of depth values. Should be the \code{ncol(data) - 1} 
-#' in length as the first column contains date/time data.
-#' 
-#' 
+#' @return A numeric vector of depth values. Should be the \code{ncol(data) -
+#' 1} in length as the first column contains date/time data.
 #' @seealso \code{\link{load.ts}}
+#' @keywords manip
+#' @examples
 #' 
-#' @examples 
 #' 
 #' #Get the path for the package example file included
 #' exampleFilePath <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
@@ -33,9 +25,6 @@ datetime.pattern = "(datetime|timestamp|time|date)"
 #' depths = get.offsets(sparkling.temp)
 #' 
 #' print(depths)
-#' 
-#' @keywords manip
-#' 
 #' @export
 get.offsets <- function(data){
   
@@ -81,15 +70,18 @@ get.drho_dz <- function(wtr, depths){
 }
 
 
-#@title Find and drop the datetime column from the datatable
-#
-#description Liberally looks for a datetime column and drops it, 
-#returning a data.frame with only water temperature. Errors if datetime column is 
-#ambiguous. Warns if there is no match.
-#
-#@return A data.frame with only the data, after datetime has been dropped
-#
+#' @title Find and drop the datetime column from the datatable
+#'
+#' @description Liberally looks for a datetime column and drops it, 
+#'  returning a data.frame with only water temperature. Errors if datetime column is 
+#'  ambiguous. Warns if there is no match.
+#' @param data data arg
+#' @param error defaults to FALSE
+#'
+#' @return A data.frame with only the data, after datetime has been dropped
+
 drop.datetime = function(data, error=FALSE){
+  datetime.pattern = "(datetime|timestamp|time|date)"
 	
 	header = names(data)
 	dt_indx = grep(datetime.pattern, header, ignore.case=TRUE)
@@ -109,11 +101,14 @@ drop.datetime = function(data, error=FALSE){
 	return(data[,-dt_indx, drop=FALSE])
 }
 
-#@title Search for and return the datetime column from a ts data.frame
-#
-#Warns if unavailable then returns NULL.
-#
+#' @title Search for and return the datetime column from a ts data.frame
+#'
+#' @description Warns if unavailable then returns NULL.
+#' 
+#' @inheritParams drop.datetime
+#'
 get.datetime = function(data, error=FALSE){
+  datetime.pattern = "(datetime|timestamp|time|date)"
 	
 	header = names(data)
 	dt_indx = grep(datetime.pattern, header, ignore.case=TRUE)

@@ -1,0 +1,51 @@
+---
+title: "Split and Merge Algorithm Usage"
+author: "Sam Albers and Doug Collinge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## Packages needing loading
+```{r, message=FALSE}
+library(rLakeAnalyzer)
+library(knitr)
+```
+
+
+## Split and merge algorithm
+Water column identification is provided by the split-and-merge algorithm. Implementation of the split-and-merge algorithm for a water profile occurs within the `wtr.layer()` function:
+
+## Simple application of the split and merge algorithm
+Below is a simple one profile example of determining key water column parameters using the split-and-merge algorithm. The default behaviour for `wtr.layer` is to run the algorithm *without* specifying the number of segments. `wtr.layer()` adopt as defaults the convention of a minimum depth (z0) of 2.5 m, a maximum depth (zmax) of 150 m and a error threshold (thres) of 0.1.
+```{r}
+data("latesummer")
+wldf <- wtr.layer(depth = latesummer$depth, measure = latesummer$temper)
+knitr::kable(wldf)
+```
+
+In this example, you'll note that `wldf$cline` is formatted as a list-column. A thorough demonstration of a list column can be found [here](https://jennybc.github.io/purrr-tutorial/ls13_list-columns.html). This type of data format has been included here to consolidate split and merge results and align the output to work well with [tidyverse](https://www.tidyverse.org/) tools. If you are interested in working with the segments data from `wtr.layer()`, use this approach:
+```{r, eval = TRUE, echo=TRUE}
+wldf$segments
+```
+
+Note that the axes of the water column profile have been reversed and flipped to better visualize the water column and conform to standard limnological displays. 
+```{r, fig.show = "hold", fig.width = 8, fig.height = 6}
+plot(y = latesummer$depth, x = latesummer$temper, ylim = rev(range(latesummer$depth)))
+abline(h = wldf$cline, col='blue')
+abline(h = wldf$mld, col='red')
+abline(h = wldf$min_depth, col='green')
+text(16, wldf$cline+3, "Thermocline", col = 'blue')
+text(16, wldf$mld+3, "Mix Layer Depth", col = 'red')
+text(16, wldf$min_depth+3, "Minimum Depth", col = 'green')
+```
+
+## Important references
+- Pavlidis, T., and S. L. Horowitz, 1974: Segmentation of plan curves.IEEE Trans. Comput., C-23, 860–870.
+- Thomson, R. and I. Fine. 2003. Estimating Mixed Layer Depth from Oceanic Profile Data. Journal of Atmospheric and Oceanic Technology. 20(2), 319-329.
+- Fiedler, Paul C. "Comparison of objective descriptions of the thermocline. Limnology and Oceanography: Methods 8.6 (2010): 313-325.
+

@@ -1,6 +1,6 @@
-#' Late Summer Profile
+#' @title Late Summer Profile
 #' 
-#' Late summer water profile taken from Quesnel Lake, British Columbia, Canada. Profile taken with Sea-Bird
+#' @description Late summer water profile taken from Quesnel Lake, British Columbia, Canada. Profile taken with Sea-Bird
 #'   SBE19plus.
 #'
 #' \describe{

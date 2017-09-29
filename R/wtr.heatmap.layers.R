@@ -1,4 +1,35 @@
-#heat map with lines for thermocline, meta top and bottom depths
+#' @title Plots water temperature heatmap with major limnetic layers indicated
+#' 
+#' @description This creates a heat map of water temperature similar to
+#' \code{\link{wtr.heat.map}} with additional lines drawn to denote the
+#' thermocline, and the top and bottom of the metalimnion as calculated using
+#' \code{\link{ts.meta.depths}} and \code{\link{thermo.depth}}.
+#' 
+#' 
+#' @param wtr Data frame of water temperature loaded with
+#' \code{\link{load.ts}}.
+#' @param \dots Additional parameters supplied to \code{\link{filled.contour}}
+#' to modify defaults.  Common examples include \code{zlim} and
+#' \code{plot.title}.
+#' @note This plot cannot be used in customized multi-panel figures
+#' using\code{\link{layout}} as layout is already used in the filled.contour
+#' plotting function.
+#' @seealso \code{\link{wtr.heat.map}} \code{\link{load.ts}}
+#' \code{\link{ts.meta.depths}} \code{\link{ts.thermo.depth}}
+#' @keywords hplot
+#' @examples
+#' 
+#'   #Get the path for the package example file included 
+#'   wtr.path <- system.file('extdata', 'Sparkling.wtr', package="rLakeAnalyzer")
+#' 
+#'   #Load data for example lake, Sparkilng Lake, Wisconsin.
+#'   wtr = load.ts(wtr.path)
+#'   
+#'   # generate default plot
+#'   \dontrun{
+#'   wtr.heatmap.layers(wtr)
+#'   }
+#' @export
 wtr.heatmap.layers <- function(wtr, ...){
   
   td = ts.thermo.depth(wtr)
@@ -47,7 +78,7 @@ wtr.heatmap.layers <- function(wtr, ...){
   }
   
   df = list(wtr,td,md) ##Create list of data frame to join
-  wtr.all = join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
+  wtr.all = plyr::join_all(df, by="datetime") ##Joins thermodepths, metadepths with temp data
   nn = ncol(wtr.all) -3
   depths = get.offsets(wtr.all[,2:nn])
   
@@ -60,22 +91,24 @@ wtr.heatmap.layers <- function(wtr, ...){
   
   y = depths
   
-  filled.contour(wtr.dates
+  graphics::filled.contour(wtr.dates
                  , y
                  , wtr.mat
                  , ylim=c(max(depths),0)
                  , zlim=c(min(wtr.mat,na.rm=TRUE) , max(wtr.mat,na.rm=TRUE))
                  , nlevels=100
-                 , color.palette=colorRampPalette(c("violet","blue","cyan", "green3", "yellow", "orange", "red")
+                 , color.palette = grDevices::colorRampPalette(c("violet","blue","cyan", "green3", "yellow", "orange", "red")
                                                   , bias = 1
                                                   , space = "rgb")
                  , ylab="Depth (m)"
-                 , key.title=title((main="Temperature (\u00B0C)")
+                 , key.title=graphics::title((main="Temperature (\u00B0C)")
                                    ,adj=0.2, cex.main=1)
-                 ,plot.axes = {lines(x=wtr.dates,y=wtr.all$thermo.depth,col="black",lwd = 2)
-                               lines(x=wtr.dates,y=wtr.all$top, col="gray50", lwd = 2)
-                               lines(x=wtr.dates,y=wtr.all$bottom,col="gray80", lwd = 2)
-                               axis(side = 2)
-                               axis(side = 3, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(depths)), tck = -0.03)})
+                 ,plot.axes = {graphics::lines(x=wtr.dates,y=wtr.all$thermo.depth,col="black",lwd = 2)
+                               graphics::lines(x=wtr.dates,y=wtr.all$top, col="gray50", lwd = 2)
+                               graphics::lines(x=wtr.dates,y=wtr.all$bottom,col="gray80", lwd = 2)
+                               graphics::axis(side = 2)
+                               graphics::axis(side = 3, labels=format(datestoshow, ttformat), at = datestoshow, pos = c(min(depths)), tck = -0.03)})
+  
+  
   
 }

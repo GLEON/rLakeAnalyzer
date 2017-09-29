@@ -1,29 +1,31 @@
-#'@title Internal energy function (Joules)
-#'@description Calculates the internal energy of the water column with temperature and hypsography
-#'
-#'@details Internal energy is the thermal energy in the water column, which is calculated by 
-#'multiplying the specific heat of water (J kg-1 K-1) by the temperature and mass of the water 
-#'in the lake. 
-#'
-#'@param wtr a numeric vector of water temperature in degrees C
-#'@param depths a numeric vector corresponding to the depths (in m) of the wtr measurements
-#'@param bthA a numeric vector of cross sectional areas (m^2) corresponding to bthD depths
-#'@param bthD a numeric vector of depths (m) which correspond to areal measures in bthA
-#'
-#'@return internal energy in Joules m-2. (Currently not vectorized..)
-#'@author Jordan S. Read
-#'
-#'@examples
-#'bthA  <-	c(1000,900,864,820,200,10)
-#'bthD	<-	c(0,2.3,2.5,4.2,5.8,7)
-#'
-#'wtr	<-	c(28,27,26.4,26,25.4,24,23.3)
-#'depths	<-	c(0,1,2,3,4,5,6)
-#'
-#'cat('Internal Energy for input is: ')
-#'cat(internal.energy(wtr, depths, bthA, bthD))
-#'@export
-
+#' @title Internal energy function (Joules)
+#' 
+#' @description Calculates the internal energy of the water column with temperature and
+#' hypsography
+#' 
+#' Internal energy is the thermal energy in the water column, which is
+#' calculated by multiplying the specific heat of water (J kg-1 K-1) by the
+#' temperature and mass of the water in the lake.
+#' 
+#' @param wtr a numeric vector of water temperature in degrees C
+#' @param depths a numeric vector corresponding to the depths (in m) of the wtr
+#' measurements
+#' @param bthA a numeric vector of cross sectional areas (m^2) corresponding to
+#' bthD depths
+#' @param bthD a numeric vector of depths (m) which correspond to areal
+#' measures in bthA
+#' @return internal energy in Joules m-2. (Currently not vectorized..)
+#' @examples
+#' 
+#' bthA  <-	c(1000,900,864,820,200,10)
+#' bthD	<-	c(0,2.3,2.5,4.2,5.8,7)
+#' 
+#' wtr	<-	c(28,27,26.4,26,25.4,24,23.3)
+#' depths	<-	c(0,1,2,3,4,5,6)
+#' 
+#' cat('Internal Energy for input is: ')
+#' cat(internal.energy(wtr, depths, bthA, bthD))
+#' @export
 internal.energy = function(wtr, depths, bthA, bthD){
   
   
@@ -41,7 +43,7 @@ internal.energy = function(wtr, depths, bthA, bthD){
       depT = c(0, bthD[useI])
     }
     
-    bthA = approx(bthD, bthA, depT)$y
+    bthA = stats::approx(bthD, bthA, depT)$y
     bthD = depT
   }
   
@@ -72,9 +74,9 @@ internal.energy = function(wtr, depths, bthA, bthD){
   
   #The approx (interp1 in matlab) just does linear interpolation
   layerD = seq(min(depths), max(depths), by=dz)
-  layerP = approx(depths, rhoL, layerD)$y
-  layerT = approx(depths,wtr, layerD)$y
-  layerA = approx(bthD, bthA, layerD)$y
+  layerP = stats::approx(depths, rhoL, layerD)$y
+  layerT = stats::approx(depths,wtr, layerD)$y
+  layerA = stats::approx(bthD, bthA, layerD)$y
   
   v_i = layerA*dz
   # -- calculate mass of water in each dz layer --
