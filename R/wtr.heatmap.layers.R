@@ -84,7 +84,7 @@ wtr.heatmap.layers <- function(wtr, ...){
   
   #n = nrow(wtr.all)
   
-  wtr.dates = wtr.all$datetime
+  wtr.dates = get.datetime(wtr.all, error=TRUE)
   datestoshow = pretty(wtr.dates)
   wtr.mat = as.matrix(wtr.all[,2:nn]) ##Makes matrix of only temp data even though
   ##meta depths and thermo depths in dataframe too

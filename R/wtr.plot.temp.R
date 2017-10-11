@@ -26,7 +26,7 @@
 #' @export
 wtr.plot.temp = function(wtr, ...){
   
-  depths = get.offsets(wtr[,-1])
+  depths = get.offsets(wtr)
   td = ts.thermo.depth(wtr, ...)
   md = ts.meta.depths(wtr, ...)
   
@@ -38,7 +38,7 @@ wtr.plot.temp = function(wtr, ...){
   endtime = max(wtr[,1]) #latest date
   
   # defining units and labels for x axis
-  wtr.dates = wtr$datetime # turn datetime into vector
+  wtr.dates = get.datetime(wtr, error=TRUE)  # turn datetime into vector
   datestoshow = pretty(wtr.dates) # pretty vector to specify tick mark location 
   sec.endtime = as.numeric(endtime) # show time as seconds
   sec.starttime = as.numeric(starttime) # show time as seconds

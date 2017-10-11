@@ -30,7 +30,7 @@ wtr.heat.map <- function(wtr, ...){
   
   n = nrow(wtr)
   
-  wtr.dates = wtr$datetime
+  wtr.dates = get.datetime(wtr, error=TRUE)
   
   wtr.mat = as.matrix(wtr[,-1])
   y = depths
