@@ -20,7 +20,7 @@ You can install the development version rLakeAnalyzer from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("boshek/rLakeAnalyzer")
+devtools::install_github("GLEON/rLakeAnalyzer")
 ```
 
 Usage
