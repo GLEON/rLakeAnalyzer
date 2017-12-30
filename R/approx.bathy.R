@@ -39,8 +39,9 @@
 approx.bathy <- function(Zmax, lkeArea, Zmean = NULL, method = "cone", zinterval = 1, depths = seq(0, Zmax, by = zinterval)){
   Area = c()
   if(method == "cone"){
-      area <- stats::approx(c(0, Zmax), c(lkeArea, 0), depths)$y
-    Area = data.frame(depths = depths, Area.at.z = area)
+    radius = sqrt(lkeArea/pi)
+    radii = stats::approx(c(0, Zmax), c(radius, 0), depths)$y
+    Area = data.frame(depths = depths, Area.at.z = pi*radii^2)
   } #end of "cone"
   
   if(method == "voldev"){

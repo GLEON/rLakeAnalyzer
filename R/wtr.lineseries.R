@@ -40,7 +40,7 @@ wtr.lineseries = function(wtr, ylab = "Temperature C",...){
   colors = colors1(n = ncol(wtr))                           
   
   # defining units and labels for x axis
-  wtr.dates = wtr$datetime # turn datetime into vector
+  wtr.dates = get.datetime(wtr, error=TRUE) # turn datetime into vector
   datestoshow = pretty(wtr.dates) # pretty vector to specify tick mark location 
   sec.endtime = as.numeric(endtime) # show time as seconds
   sec.starttime = as.numeric(starttime) # show time as seconds

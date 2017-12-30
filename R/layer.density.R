@@ -33,6 +33,8 @@
 #' @export
 layer.density <- function(top, bottom, wtr, depths, bthA, bthD, sal = wtr*0){
   
+  force(sal) #for evaluation of promise for salinity
+  
   # checking input quality 
   if(top>bottom){
     stop('bottom depth must be greater than top')
