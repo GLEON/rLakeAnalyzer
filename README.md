@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/GLEON/rLakeAnalyzer.svg?branch=master)](https://travis-ci.org/GLEON/rLakeAnalyzer) [![Download Count](http://cranlogs.r-pkg.org/badges/rLakeAnalyzer)](https://cran.r-project.org/web/packages/rLakeAnalyzer/index.html) [![DOI](https://zenodo.org/badge/23404/GLEON/rLakeAnalyzer.svg)](https://zenodo.org/badge/latestdoi/23404/GLEON/rLakeAnalyzer)
+[![Build Status](https://travis-ci.org/GLEON/rLakeAnalyzer.svg?branch=master)](https://travis-ci.org/GLEON/rLakeAnalyzer) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rLakeAnalyzer)](https://cran.r-project.org/package=rLakeAnalyzer) [![Download Count](http://cranlogs.r-pkg.org/badges/rLakeAnalyzer)](https://cran.r-project.org/web/packages/rLakeAnalyzer/index.html) [![DOI](https://zenodo.org/badge/23404/GLEON/rLakeAnalyzer.svg)](https://zenodo.org/badge/latestdoi/23404/GLEON/rLakeAnalyzer)
 
 rLakeAnalyzer
 =============
@@ -30,6 +30,7 @@ First the package must be loaded into R:
 
 ``` r
 library(rLakeAnalyzer)
+#> Warning: package 'rLakeAnalyzer' was built under R version 3.4.3
 ```
 
 You can view a list of functions available in rLakeAnalyzer with:
@@ -51,7 +52,7 @@ sp.wtr = load.ts(wtr.path)
 wtr.heat.map(sp.wtr)
 ```
 
-![](README-example-1.png)
+![](tools/readme/README-example-1.png)
 
 ``` r
 
@@ -59,7 +60,7 @@ wtr.heat.map(sp.wtr)
 wtr.heat.map(sp.wtr, zlim=c(0,15), plot.title="Sparkling Water Temp (C)")
 ```
 
-![](README-example-2.png)
+![](tools/readme/README-example-2.png)
 
 Getting Help or Reporting an Issue
 ----------------------------------

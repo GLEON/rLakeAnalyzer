@@ -6,8 +6,6 @@
 * Add split and merge vignette
 
 # rLakeAnalyzer 1.10.0
-
-
 * Added split and merge algorithm to package which enable auto detection of clines (e.g thermoclines)
 
 
