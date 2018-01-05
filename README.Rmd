@@ -8,11 +8,12 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "tools/readme/README-"
 )
 ```
 
 [![Build Status](https://travis-ci.org/GLEON/rLakeAnalyzer.svg?branch=master)](https://travis-ci.org/GLEON/rLakeAnalyzer)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rLakeAnalyzer)](https://cran.r-project.org/package=rLakeAnalyzer) 
 [![Download Count](http://cranlogs.r-pkg.org/badges/rLakeAnalyzer)]( https://cran.r-project.org/web/packages/rLakeAnalyzer/index.html)
 [![DOI](https://zenodo.org/badge/23404/GLEON/rLakeAnalyzer.svg)](https://zenodo.org/badge/latestdoi/23404/GLEON/rLakeAnalyzer)
 
