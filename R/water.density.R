@@ -65,7 +65,7 @@ water.density <- function(wtr, sal = wtr*0){
     C <- 4.8314*10^(-4)
     
     # -- equation 5:
-    rho <- rho_0 + A*sal + B*sal^(3/2) + C*sal
+    rho <- rho_0 + A*sal + B*sal^(3/2) + C*sal^2
   } 
   
   # if there is a combination of fresh and saline water we need to use a combination of MM and UN
