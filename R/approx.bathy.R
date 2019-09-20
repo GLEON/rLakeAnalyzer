@@ -12,10 +12,10 @@
 #' 
 #' @param Zmax a single value of the maxiumum depth of the lake (in m)
 #' @param Zmean a single value of the mean depth of the lake (in m)
-#' @param lkeArea a sinlge value of the surface area of the lake (in m^2)
+#' @param lkeArea a single value of the surface area of the lake (in m^2)
 #' @param depths a numeric vector of depths (in m) at which areas are estimated. 
 #' If not specified depths is regularly spaced sequence of values with the interval set by zinterval. 
-#' @param zinterval  a sinlge value defining the depth interval at which volumes should be calculated, default is 1 m.
+#' @param zinterval  a single value defining the depth interval at which volumes should be calculated, default is 1 m.
 #' @param method specifies the method used to estimate depth-area relationship, can be "cone"(default) or "voldev". Method "voldev" requires Zmean. See notes for details.
 #' 
 #' @return a dataframe which defines the lake area for each depth. Columns are depths (m) and Area.at.z (m^2). Area at 0 m should equal the user entered lkeArea.
