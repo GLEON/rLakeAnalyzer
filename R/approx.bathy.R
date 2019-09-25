@@ -29,9 +29,12 @@
 #' Cone.ex = approx.bathy(Zmax = 25, lkeArea = 39400000, method = "cone")
 #' 
 #'# plot depth-area curves
-#'   plot(Cone.ex$depths ~ Cone.ex$Area.at.z, xlab = "Area (m^3)", ylab = "Depth (m)")
-#'   points(Voldev.ex$depths ~ Voldev.ex$Area.at.z, col = "red")
-#'   points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue")
+#'   plot(Cone.ex$depths ~ Cone.ex$Area.at.z, xlab = "Area (m^3)", ylab = "Depth (m)", 
+#'    ylim = rev(range(Cone.ex$depths)))
+#'   points(Voldev.ex$depths ~ Voldev.ex$Area.at.z, col = "red", 
+#'    ylim = rev(range(Voldev.ex$depths)))
+#'   points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue", 
+#'    ylim = rev(range(Voldevshallow.ex$depths)))
 #'  
 #' 
 #' @export
