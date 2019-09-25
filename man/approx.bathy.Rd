@@ -4,8 +4,8 @@
 \alias{approx.bathy}
 \title{Estimate hypsography curve}
 \usage{
-approx.bathy(Zmax, lkeArea, Zmean = NULL, method = "cone", zinterval = 1,
-  depths = seq(0, Zmax, by = zinterval))
+approx.bathy(Zmax, lkeArea, Zmean = NULL, method = "cone",
+  zinterval = 1, depths = seq(0, Zmax, by = zinterval))
 }
 \arguments{
 \item{Zmax}{a single value of the maxiumum depth of the lake (in m)}
@@ -42,9 +42,12 @@ Voldevshallow.ex = approx.bathy(Zmax = 25, Zmean = 6, lkeArea = 39400000, method
 Cone.ex = approx.bathy(Zmax = 25, lkeArea = 39400000, method = "cone")
 
 # plot depth-area curves
-  plot(Cone.ex$depths ~ Cone.ex$Area.at.z, xlab = "Area (m^3)", ylab = "Depth (m)")
-  points(Voldev.ex$depths ~ Voldev.ex$Area.at.z, col = "red")
-  points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue")
+  plot(Cone.ex$depths ~ Cone.ex$Area.at.z, xlab = "Area (m^3)", ylab = "Depth (m)", 
+   ylim = rev(range(Cone.ex$depths)))
+  points(Voldev.ex$depths ~ Voldev.ex$Area.at.z, col = "red", 
+   ylim = rev(range(Voldev.ex$depths)))
+  points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue", 
+   ylim = rev(range(Voldevshallow.ex$depths)))
  
 
 }
