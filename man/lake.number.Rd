@@ -43,6 +43,21 @@ Lake Number has been used, for example, to estimate the flux of oxygen
 across the thermocline in a small lake (Robertson and Imberger, 1994), and
 to explain the magnitude of the vertical flux of ammonium in a lake (Romero
 et al., 1998).
+In Imberger and Patterson (1990), Lake Number was defined as
+Ln = (g * St * (zm - zT)) / (rho_0 * u*^2 * A0^3/2 * (zm - zg))
+with all values referenced from the lake bottom, e.g.,
+zm being the height of the water level, zT the height of metalimnion
+and zg the height of center volume.
+Our calculations assume that the reference is at the lake surface, therefore:
+height of metalimnion becomes metalimnion depth (average of meta top and bot): 
+(zm - zT) --> (metaT + metaB)/2 
+height of center of volume depth becomes center of volume depth Zcv:
+(zm - zg) --> Zcv
+Further, we note that in that original work St was defined as
+St = int (z - zg) A(z) rho(z) dz
+and rLakeAnalyzer defines St as
+St = g/A0 int (z - zg) rho(z) dz
+Therefore, we calculate St_uC = St * Ao / g
 }
 \examples{
 
